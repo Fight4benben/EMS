@@ -49,14 +49,19 @@
   <ItemGroup>
     <Compile Include="Entities\BuildInfo.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
+    <Compile Include="Entities\Users.cs" />
+    <Compile Include="IRepository\IUserContext.cs" />
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryImp\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

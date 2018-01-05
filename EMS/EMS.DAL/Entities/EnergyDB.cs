@@ -14,10 +14,13 @@ namespace EMS.DAL.Entities
         }
 
         public virtual DbSet<BuildInfo> BuildInfo { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BuildInfo>().Property(e => e.BuildId).IsUnicode(false);
+
+            modelBuilder.Entity<User>().Property(e => e.UserId);
         }
     }
 }
