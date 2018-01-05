@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>基于bootstrup的jQuery多级列表树插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link href="http://libs.useso.com/js/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.htmleaf-header{margin-bottom: 15px;font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
+		.htmleaf-icon{color: #fff;}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="htmleaf-container">
+			<header class="htmleaf-header bgcolor-12">
+				<h1>基于bootstrup的jQuery多级列表树插件 <span>Bootstrap Tree View</span></h1>
+				<div class="htmleaf-links">
+					<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+					<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Menu-Navigation/201502141379.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+				</div>
+			</header>
+			<div class="container">
+				<h1>Bootstrap Tree View</h1>
+				<br>
+
+
+				<div class="row">
+					<hr>
+					<h2>Checkable Tree</h2>
+					<div class="col-sm-4">
+						<h2>Input</h2>
+						<div class="form-group">
+							<label for="input-check-node" class="sr-only">Search Tree:</label>
+							<input type="input" class="form-control" id="input-check-node" placeholder="Identify node..." value="Parent 1">
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" class="checkbox" id="chk-check-silent" value="false">
+								Silent (No events)
+							</label>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<button type="button" class="btn btn-success check-node" id="btn-check-node">Check Node</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-danger check-node" id="btn-uncheck-node">Uncheck Node</button>
+						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-primary check-node" id="btn-toggle-checked">Toggle Node</button>
+						</div>
+						<hr>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<button type="button" class="btn btn-success" id="btn-check-all">Check All</button>
+							</div>
+						</div>
+						<button type="button" class="btn btn-danger" id="btn-uncheck-all">Uncheck All</button>
+					</div>
+					<div class="col-sm-4">
+						<h2>Tree</h2>
+						
+							<div id="treeview-checkable" class=""></div>
+						</div>
+						<div class="col-sm-4">
+							<h2>Events</h2>
+							<div id="checkable-output"></div>
+						</div>
+					</div>
+
+
+					<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
+					<script src="js/bootstrap-treeview.js"></script>
+					<script type="text/javascript">
+
+						$(function() {
+
+							var defaultData = [
+							{
+								text: 'Parent 1',
+								href: '#parent1',
+								tags: ['4'],
+								nodes: [
+								{
+									text: 'Child 1',
+									href: '#child1',
+									tags: ['2'],
+									nodes: [
+									{
+										text: 'Grandchild 1',
+										href: '#grandchild1',
+										tags: ['0']
+									},
+									{
+										text: 'Grandchild 2',
+										href: '#grandchild2',
+										tags: ['0']
+									}
+									]
+								},
+								{
+									text: 'Child 2',
+									href: '#child2',
+									tags: ['0']
+								}
+								]
+							},
+							{
+								text: 'Parent 2',
+								href: '#parent2',
+								tags: ['0']
+							},
+							{
+								text: 'Parent 3',
+								href: '#parent3',
+								tags: ['0']
+							},
+							{
+								text: 'Parent 4',
+								href: '#parent4',
+								tags: ['0']
+							},
+							{
+								text: 'Parent 5',
+								href: '#parent5'  ,
+								tags: ['0']
+							}
+							];
+
+							var alternateData = [
+							{
+								text: 'Parent 1',
+								tags: ['2'],
+								nodes: [
+								{
+									text: 'Child 1',
+									tags: ['3'],
+									nodes: [
+									{
+										text: 'Grandchild 1',
+										tags: ['6']
+									},
+									{
+										text: 'Grandchild 2',
+										tags: ['3']
+									}
+									]
+								},
+								{
+									text: 'Child 2',
+									tags: ['3']
+								}
+								]
+							},
+							{
+								text: 'Parent 2',
+								tags: ['7']
+							},
+							{
+								text: 'Parent 3',
+								icon: 'glyphicon glyphicon-earphone',
+								href: '#demo',
+								tags: ['11']
+							},
+							{
+								text: 'Parent 4',
+								icon: 'glyphicon glyphicon-cloud-download',
+								href: '/demo.html',
+								tags: ['19'],
+								selected: true
+							},
+							{
+								text: 'Parent 5',
+								icon: 'glyphicon glyphicon-certificate',
+								color: 'pink',
+								backColor: 'red',
+								href: 'http://www.tesco.com',
+								tags: ['available','0']
+							}
+							];
+
+							var json = '[' +
+							'{' +
+							'"text": "Parent 1",' +
+							'"nodes": [' +
+							'{' +
+							'"text": "Child 1",' +
+							'"nodes": [' +
+							'{' +
+							'"text": "Grandchild 1"' +
+							'},' +
+							'{' +
+							'"text": "Grandchild 2"' +
+							'}' +
+							']' +
+							'},' +
+							'{' +
+							'"text": "Child 2"' +
+							'}' +
+							']' +
+							'},' +
+							'{' +
+							'"text": "Parent 2"' +
+							'},' +
+							'{' +
+							'"text": "Parent 3"' +
+							'},' +
+							'{' +
+							'"text": "Parent 4"' +
+							'},' +
+							'{' +
+							'"text": "Parent 5"' +
+							'}' +
+							']';
+
+
+							var $checkableTree = $('#treeview-checkable').treeview({
+								data: defaultData,
+								showIcon: false,
+								showCheckbox: true,
+								onNodeChecked: function(event, node) {
+						
+									$('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
+								},
+								onNodeUnchecked: function (event, node) {
+									$('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+								}
+							});
+
+							var findCheckableNodess = function() {
+								return $checkableTree.treeview('search', [ $('#input-check-node').val(), { ignoreCase: false, exactMatch: false } ]);
+							};
+							var checkableNodes = findCheckableNodess();
+
+        // Check/uncheck/toggle nodes
+
+
+
+
+
+
+
+        // Expand/collapse/toggle nodes
+
+
+
+
+    });
+</script>
+</body>
+</html>
