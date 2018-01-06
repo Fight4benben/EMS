@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 using EMS.DAL.Entities;
 using EMS.DAL.IRepository;
 
-namespace EMS.DAL.RepositoryImp
+namespace EMS.DAL.RepositoryImpl
 {
     public class UserContext : IUserContext
     {
         private readonly EnergyDB _db = new EnergyDB();
         public bool MatchUser(string userName, string password)
         {
+            //当密码为空的情况下，默认转化为空字符串
+            if (string.IsNullOrEmpty(password))
+                password = "";
+
             bool result = false;
             byte[] raw = Encoding.Default.GetBytes(password.Trim());
             MD5 md5 = new MD5CryptoServiceProvider();

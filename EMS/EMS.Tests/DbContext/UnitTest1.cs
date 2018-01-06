@@ -26,5 +26,17 @@ namespace EMS.Tests.DbContext
             BuildInfo build = context.GetBuildById("000001G001");
             Assert.AreEqual(build.BuildId, "000001G001");
         }
+
+        [TestMethod]
+        public void TestUserMatch()
+        {
+            IUserContext userContext = new UserContext();
+            //数据库中用户名admin,密码：空字符串的MD5
+            //1."":验证通过，返回true； userContext.MatchUser("admin","");
+            //2.错误密码：测试通过，返回false；userContext.MatchUser("admin","error");
+            //3.null：执行不通过，需要在测试代码中增加判断或者将null转化为空
+            bool result = userContext.MatchUser("admin",null);
+            Assert.AreEqual(true,result);
+        }
     }
 }

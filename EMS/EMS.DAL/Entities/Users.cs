@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Entities
 {
+    [Table("T_SYS_Users")]
     public class User
     {
         [Key]

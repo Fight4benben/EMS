@@ -1,4 +1,5 @@
-﻿using EMS.UI.Models;
+﻿using EMS.DAL.RepositoryImpl;
+using EMS.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,6 @@ namespace EMS.UI.Controllers
         {
             if (model.Password == null)
                 model.Password = "";
-            byte[] raw = Encoding.Default.GetBytes(model.Password.Trim());
-            MD5 md5 = new MD5CryptoServiceProvider();
-            string mdText = BitConverter.ToString(md5.ComputeHash(raw)).Replace("-", "").ToLower();
 
             if (!ModelState.IsValid)
             {
@@ -39,11 +37,7 @@ namespace EMS.UI.Controllers
             }
             var result = false;
 
-            //EMS db = new EMS();
-            //int count = db.T_SYS_Users.Where(user => user.F_UserName == model.UserName && user.F_Password == mdText).Count();
-
-            //if (count == 1)
-            //    result = true;
+            result = new UserContext().MatchUser(model.UserName,model.Password);
 
             //var result = FormsAuthentication.Authenticate(model.UserName,model.Password);
             //var result = _authProvider.Auth(model.UserName, model.Password);
