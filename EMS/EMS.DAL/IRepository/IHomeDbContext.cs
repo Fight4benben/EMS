@@ -12,5 +12,7 @@ namespace EMS.DAL.IRepository
         IQueryable<BuildInfo> GetBuilds();
 
         BuildInfo GetBuildById(string buildId);
+
+        List<EnergyClassify> GetEnergyClassifyValues(string buildId,string date);
     }
 }

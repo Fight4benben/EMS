@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BuildInfo.cs" />
+    <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
+    <Compile Include="StaticResources\HomeResources.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
