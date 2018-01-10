@@ -8,6 +8,9 @@ namespace EMS.DAL.StaticResources
 {
     public class HomeResources
     {
+        /// <summary>
+        /// 查询分类能耗数据（当月数据，当年数据）
+        /// </summary>
          public static string EnergyClassifySQL = @"SELECT MonthTable.EnergyItemName,MonthTable.Value AS MonthValue,YearTable.Value YearValue,
                                                 MonthTable.Unit ,CAST(EnergyRate AS decimal(8,4)) EnergyRate
                                                 FROM (SELECT MAX(EnergyItem.F_EnergyItemName) EnergyItemName,SUM(F_Value) Value,
@@ -32,6 +35,46 @@ namespace EMS.DAL.StaticResources
                                                 AND ParamInfo.F_IsEnergyValue = 1
                                                 AND F_StartDay BETWEEN DATEADD(YY,DATEDIFF(YY,0,@EndDate),0) AND @EndDate
                                                 GROUP BY EnergyItem.F_EnergyItemCode)YearTable ON MonthTable.EnergyItemName = YearTable.EnergyItemName";
+
+        /// <summary>
+        /// 查询当月分项用能数据
+        /// </summary>
+        public static string EnergyItemSQL = @"SELECT Formula.F_BuildID BuildID,Formula.F_EnergyItemCode EnergyItemCode,
+                                                MAX(EnergyItem.F_EnergyItemName) EnergyItemName,SUM(DayResult.F_Value) Value
+                                                FROM T_ST_CalcFormula Formula
+                                                INNER JOIN T_ST_CalcFormulaMeter FormulaMeter ON Formula.F_FormulaID = FormulaMeter.F_FormulaID
+                                                INNER JOIN T_ST_MeterUseInfo Meter ON Meter.F_MeterID = FormulaMeter.F_MeterID
+                                                INNER JOIN T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID = Meter.F_MeterID
+                                                INNER JOIN T_DT_EnergyItemDict EnergyItem ON Formula.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                                INNER JOIN T_MC_MeterDayResult DayResult ON Meter.F_MeterID = DayResult.F_MeterID
+                                                INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+                                                WHERE Formula.F_BuildID = @BuildId
+                                                AND ParamInfo.F_IsEnergyValue = 1
+                                                AND Right(EnergyItem.F_EnergyItemCode,3)<>'000'
+                                                AND F_StartDay BETWEEN DATEADD(DD,-DAY(@EndDate)+1,@EndDate) AND @EndDate
+                                                GROUP BY Formula.F_EnergyItemCode,Formula.F_BuildID,Circuit.F_EnergyItemCode
+                                                ORDER BY Formula.F_EnergyItemCode ASC";
+        /// <summary>
+        /// 查询某一天用能报表，小时为分组；传入参数EndDate格式为“yyyy-MM-dd HH:mm:ss”
+        /// </summary>
+        public static string HourValueSQL = @"SELECT EnergyItem.F_EnergyItemCode EnergyItemCode,F_StartHour ValueTime,
+                                            SUM(F_Value) Value
+                                            FROM T_ST_CircuitMeterInfo Circuit
+                                            INNER JOIN T_ST_MeterUseInfo Meter ON Circuit.F_MeterID = Meter.F_MeterID
+                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                            INNER JOIN T_MC_MeterHourResult HourResult ON Circuit.F_MeterID = HourResult.F_MeterID
+                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
+                                            WHERE Circuit.F_MainCircuit = 1
+                                            AND Circuit.F_BuildID = @BuildId
+                                            AND ParamInfo.F_IsEnergyValue =1 
+                                            AND F_StartHour BETWEEN CONVERT(VARCHAR(10),@EndDate,120)+' 00:00:00' AND  @EndDate
+                                            GROUP BY EnergyItem.F_EnergyItemCode,F_StartHour
+                                            ORDER BY EnergyItemCode ASC,ValueTime ASC";
+
+        public static string BuildListSQL = @"SELECT DISTINCT(Build.F_BuildID) BuildID,F_BuildName BuildName FROM T_BD_BuildBaseInfo Build 
+                                            INNER JOIN T_SYS_User_Buildings UserBuildings  ON Build.F_BuildID = UserBuildings.F_BuildID
+                                            WHERE F_UserName = @UserName
+                                            ORDER BY Build.F_BuildID ASC";
 
     }
 }

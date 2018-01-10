@@ -50,5 +50,19 @@ namespace EMS.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void Get()
+        {
+            // Arrange
+            HomePageController controller = new HomePageController();
+
+            // Act
+           // ViewResult result = controller.GetHome().ToString();
+
+
+            // Assert
+            //Assert.IsNotNull(result);
+        }
     }
 }

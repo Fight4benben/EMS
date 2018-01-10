@@ -33,11 +33,11 @@ namespace EMS.DAL.Entities
         [Column("F_TransCount")]
         public int? TransCount { get; set; }
 
-        [Column("F_InstallCapacity", TypeName = "numeric")]
-        public decimal? InstallCapacity { get; set; }
+        [Column("F_InstallCapacity")]
+        public int? InstallCapacity { get; set; }
 
-        [Column("F_OperateCapacity", TypeName = "numeric")]
-        public decimal? OperateCapacity { get; set; }
+        [Column("F_OperateCapacity")]
+        public int? OperateCapacity { get; set; }
 
         [Column("F_DesignMeters")]
         public int? DesignMeters { get; set; }

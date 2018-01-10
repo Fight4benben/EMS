@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EMS.DAL.Entities;
+using EMS.DAL.ViewModels;
 
 namespace EMS.DAL.IRepository
 {
@@ -13,6 +14,12 @@ namespace EMS.DAL.IRepository
 
         BuildInfo GetBuildById(string buildId);
 
+        List<BuildViewModel> GetBuildsByUserName(string userName);
+
         List<EnergyClassify> GetEnergyClassifyValues(string buildId,string date);
+
+        List<EnergyItem> GetEnergyItemValues(string buildId,string date);
+
+        List<HourValue> GetHourValues(string buildId,string date);
     }
 }
