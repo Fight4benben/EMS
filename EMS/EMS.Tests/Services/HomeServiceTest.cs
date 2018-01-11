@@ -21,7 +21,7 @@ namespace EMS.Tests.Services
         {
             HomeServices homeServices = new HomeServices();
 
-            HomeViewModel homeViewModel = homeServices.GetHomeViewModel("admin");
+            HomeViewModel homeViewModel = homeServices.GetHomeViewModel("000001G001","2018-01-06");
 
             Console.WriteLine(homeViewModel);
         }

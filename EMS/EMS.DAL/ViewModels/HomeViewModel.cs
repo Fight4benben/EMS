@@ -45,13 +45,15 @@ namespace EMS.DAL.ViewModels
         public CompareViewModel()
         {}
 
-        public CompareViewModel(string energyItemCode, decimal? todayValue, decimal? yesterdayValue)
+        public CompareViewModel(string energyItemCode, string energyItemName,decimal? todayValue, decimal? yesterdayValue)
         {
             this.EnergyItemCode = energyItemCode;
+            this.EnergyItemName = energyItemName;
             this.TodayValue = todayValue;
             this.YesterdayValue = yesterdayValue;
         }
         public string EnergyItemCode { get; set; }
+        public string EnergyItemName { get; set; }
         public decimal? TodayValue { get; set; }
         public decimal? YesterdayValue { get; set; }
     }
@@ -70,7 +72,7 @@ namespace EMS.DAL.ViewModels
         public HomeViewModel(BuildInfo buildInfo, List<BuildViewModel> builds, List<EnergyClassifyViewModel> energyClassify,
             List<EnergyItem> energyItems, HourValueViewModel hourValues, List<CompareViewModel> compareValues)
         {
-            this.Bulids = builds;
+            this.Builds = builds;
             this.CurrentBuild = buildInfo;
             this.EnergyClassify = energyClassify;
             this.EnergyItems = energyItems;
@@ -78,7 +80,7 @@ namespace EMS.DAL.ViewModels
             this.CompareValues = compareValues;
         }
         public BuildInfo CurrentBuild { get; set; }
-        public List<BuildViewModel> Bulids{ get; set; }
+        public List<BuildViewModel> Builds{ get; set; }
         public List<EnergyClassifyViewModel> EnergyClassify { get; set; }
         public List<EnergyItem> EnergyItems { get; set; }
         public HourValueViewModel HourValues { get; set; }

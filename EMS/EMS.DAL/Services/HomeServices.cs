@@ -63,8 +63,8 @@ namespace EMS.DAL.Services
         HomeViewModel GetCommonViewModel(string buildId,DateTime date)
         {
             BuildInfo currentBuild = context.GetBuildById(buildId);
-            List<EnergyClassify> energyClassifyList = context.GetEnergyClassifyValues(buildId, DateTime.Now.ToShortDateString());
-            List<EnergyItem> energyItemList = context.GetEnergyItemValues(buildId, DateTime.Now.ToShortDateString());
+            List<EnergyClassify> energyClassifyList = context.GetEnergyClassifyValues(buildId, date.ToShortDateString());
+            List<EnergyItem> energyItemList = context.GetEnergyItemValues(buildId, date.ToShortDateString());
             List<HourValue> todayValues = context.GetHourValues(buildId, date.ToString("yyyy-MM-dd HH:00:00"));
             List<HourValue> yesterdayValues = context.GetHourValues(buildId, date.AddDays(-1).ToString("yyyy-MM-dd 23:00:00"));
 
@@ -116,7 +116,9 @@ namespace EMS.DAL.Services
                 HourValue yesterdayValue = yesterdayList.Find(delegate (HourValue hour) { return hour.EnergyItemCode == item.EnergyItemCode && hour.ValueTime.Hour == item.ValueTime.Hour; });
                 if (compareViewModel == null)
                 {
-                    compareViewModels.Add(new CompareViewModel(item.EnergyItemCode, item.Value, yesterdayValue == null ? 0 : yesterdayValue.Value));
+
+                    compareViewModels.Add(new CompareViewModel(item.EnergyItemCode, context.GetEnergyItemByCode(item.EnergyItemCode).EnergyItemName,
+                        item.Value, yesterdayValue == null ? 0 : yesterdayValue.Value));
                 }
                 else
                 {

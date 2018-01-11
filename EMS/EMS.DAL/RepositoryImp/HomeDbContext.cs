@@ -59,6 +59,11 @@ namespace EMS.DAL.RepositoryImpl
             return _db.Database.SqlQuery<EnergyClassify>(HomeResources.EnergyClassifySQL,sqlParameters).ToList();
         }
 
+        public EnergyItemDict GetEnergyItemByCode(string energyItemCode)
+        {
+            return _db.EnergyItemDict.Find(energyItemCode); 
+        }
+
         /// <summary>
         /// 返回当月分项数据列表
         /// </summary>

@@ -259,7 +259,9 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
+    <Content Include="app\js\tools.js" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />
     <Content Include="Assets\css\bootstrap-datetimepicker.css" />
@@ -415,6 +417,7 @@
     <Content Include="Assets\plugins\jQuery-loading\dist\loading.gif" />
     <Content Include="Assets\plugins\jQuery-loading\dist\showLoading.css" />
     <Content Include="Assets\plugins\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Assets\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Assets\plugins\jquery.blockui.min.js" />
     <Content Include="Assets\plugins\jquery.cokie.min.js" />
     <Content Include="Assets\plugins\respond.min.js" />
@@ -536,6 +539,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

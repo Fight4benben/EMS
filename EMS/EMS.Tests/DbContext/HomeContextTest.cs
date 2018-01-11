@@ -57,5 +57,14 @@ namespace EMS.Tests.DbContext
                 Console.WriteLine("建筑ID:{0},建筑名称：{1}", item.BuildID, item.BuildName);
             }
         }
+
+        [TestMethod]
+        public void TestGetNameByCode()
+        {
+            HomeDbContext context = new HomeDbContext();
+            EnergyItemDict energy = context.GetEnergyItemByCode("01000");
+
+            Console.WriteLine(energy.EnergyItemName+":"+energy.EnergyItemCode);
+        }
     }
 }

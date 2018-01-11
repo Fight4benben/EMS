@@ -1,8 +1,8 @@
 ﻿<!--弹出导航提示框关闭-->
-<div id="indexheadpopup">
+<!-- <div id="indexheadpopup">
     <div class="dh"></div>
     <b>导航栏</b>
-</div>
+</div> -->
 
 <div class="container-fluid main-top">
     <div class="col-lg-4 col-xs-12">
@@ -18,13 +18,13 @@
                     </div>
                 </div>
                 <div class="col-xs-6 form-group">
-                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input id="calendar" class="form-control" size="16" type="text" value="" readonly>
+                    <div id="calendar" class="input-group date form_date data-switch" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="box" class="form-control" size="16" type="text" value="" readonly>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                 </div>
             </form>
-            <div id="buildinginfo" class="col-xs-12 acr-address">
+            <div id="buildinginfo" class="col-xs-12 acr-address"">
                 <h4></h4>
                 <img src="/app/img/address.png" /><span></span><br />
                 <img src="/app/img/area.png" /><span></span>
@@ -76,12 +76,10 @@
         <div class="build-info build-info-main">
             <div class="main-menu">
                 <hr>
-                <i class="fa fa-pie-chart"></i>分项用能占比情况
+                <i class="fa fa-pie-chart"></i>当月分项用能占比情况
             </div>
             <div id="main_pie">
             </div>
-            <button id="btn_month" class="btn btn-year" type="button">月</button>
-            <button id="btn_year" class="btn btn-month btn-month-selected" type="button">年</button>
         </div>
     </div>
     <div class="col-xs-12">
@@ -125,3 +123,5 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="/app/js/home.js"></script>

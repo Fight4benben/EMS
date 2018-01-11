@@ -51,6 +51,7 @@
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
+    <Compile Include="Entities\EnergyItemDict.cs" />
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\IUserContext.cs" />

@@ -19,7 +19,7 @@ namespace EMS.DAL.Entities
         public string BuildName { get; set; }
 
         [Column("F_BuildAddr")]
-        public string F_BuildAddr { get; set; }
+        public string BuildAddr { get; set; }
 
         [Column("F_BuildLong",TypeName ="numeric")]
         public decimal? BuildLong { get; set; }
