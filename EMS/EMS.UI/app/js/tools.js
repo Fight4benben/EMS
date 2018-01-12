@@ -73,6 +73,7 @@ var EMS = {
 		}
 	},
 	Chart:{
+		//绘制echarts饼图
 		showPie:function(charts,$Pie,names,values,seriesName){
 
 			option = {
@@ -105,6 +106,38 @@ var EMS = {
 			};
 
 			charts.init($Pie.get(0),'macarons').setOption(option);
+		},
+		showLine:function(charts,$Line,legendData,xData,series){
+			var option = {
+			            tooltip: {
+			                trigger: 'axis'
+			            },
+			            legend: {
+			                data: legendData,
+			                bottom:'bottom'
+			            },
+			            grid: {
+			                left: 50,
+			                right: 10,
+			                top:5,
+			                bottom:'20%'
+			            },
+			            xAxis: {
+			                type: 'category',
+			                boundaryGap: false,
+			                data: xData
+			            },
+			            yAxis: {
+			                type: 'value',
+			                axisLabel: {
+			                formatter: '{value}'
+			            }
+			        },
+		            series: series,
+            	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+        	};
+
+        	charts.init($Line.get(0),'macarons').setOption(option);
 		}
 	}
 
