@@ -56,8 +56,7 @@ namespace EMS.DAL.RepositoryImpl
                 new SqlParameter("@BuildId",buildId),
                 new SqlParameter("@EndDate",date)
             };
-            List<EnergyClassify> list =  _db.Database.SqlQuery<EnergyClassify>(HomeResources.EnergyClassifySQL,sqlParameters).ToList();
-            return list;
+            return _db.Database.SqlQuery<EnergyClassify>(HomeResources.EnergyClassifySQL, sqlParameters).ToList();
         }
 
         public EnergyItemDict GetEnergyItemByCode(string energyItemCode)
