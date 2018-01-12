@@ -23,7 +23,7 @@ var Home = (function(){
 			$("#box").change(function(event) {
 				var params = 'buildId='+$("#buildinglist").val()+'&date='+$("#box").val();
 
-				getDataFromServer("api/homepage/home",params);
+				getDataFromServer("/api/homepage/home",params);
 			});
 		};
 
@@ -32,7 +32,7 @@ var Home = (function(){
 				var buildId = $(this).val();
 				var date = $("#box").val();
 
-				getDataFromServer("api/homepage/home","buildId="+buildId+"&date="+date);
+				getDataFromServer("/api/homepage/home","buildId="+buildId+"&date="+date);
 			});
 		}
 
@@ -305,8 +305,6 @@ jQuery(document).ready(function($) {
 	
 	var home = new Home();
 	home.initDom();
-	home.showHome("api/homepage/home","");
-
-	
+	home.showHome("/api/homepage/home","");
 
 });
