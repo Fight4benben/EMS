@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using EMS.DAL.Entities;
-using EMS.DAL.RepositoryImpl;
+using EMS.DAL.RepositoryImp;
 using EMS.DAL.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

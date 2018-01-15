@@ -75,10 +75,5 @@ namespace EMS.DAL.StaticResources
                                             GROUP BY EnergyItem.F_EnergyItemCode,F_StartHour
                                             ORDER BY EnergyItemCode ASC,ValueTime ASC";
 
-        public static string BuildListSQL = @"SELECT DISTINCT(Build.F_BuildID) BuildID,F_BuildName BuildName FROM T_BD_BuildBaseInfo Build 
-                                            INNER JOIN T_SYS_User_Buildings UserBuildings  ON Build.F_BuildID = UserBuildings.F_BuildID
-                                            WHERE F_UserName = @UserName
-                                            ORDER BY Build.F_BuildID ASC";
-
     }
 }

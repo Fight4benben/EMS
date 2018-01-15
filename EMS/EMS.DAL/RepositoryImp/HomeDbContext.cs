@@ -9,7 +9,7 @@ using EMS.DAL.IRepository;
 using EMS.DAL.StaticResources;
 using EMS.DAL.ViewModels;
 
-namespace EMS.DAL.RepositoryImpl
+namespace EMS.DAL.RepositoryImp
 {
     public class HomeDbContext:IHomeDbContext
     {
@@ -41,7 +41,7 @@ namespace EMS.DAL.RepositoryImpl
         /// <returns>建筑列表</returns>
         public List<BuildViewModel> GetBuildsByUserName(string userName)
         {
-            return _db.Database.SqlQuery<BuildViewModel>(HomeResources.BuildListSQL,new SqlParameter("@UserName",userName)).ToList();
+            return _db.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL,new SqlParameter("@UserName",userName)).ToList();
         }
 
         /// <summary>

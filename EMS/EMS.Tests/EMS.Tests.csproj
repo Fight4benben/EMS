@@ -95,10 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbContext\CircuitDbContextTest.cs" />
     <Compile Include="DbContext\UnitTest1.cs" />
     <Compile Include="DbContext\HomeContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\CircuitServiceTest.cs" />
     <Compile Include="Services\HomeServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>

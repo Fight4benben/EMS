@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using EMS.DAL.Entities;
 using EMS.DAL.IRepository;
 
-namespace EMS.DAL.RepositoryImpl
+namespace EMS.DAL.RepositoryImp
 {
     public class UserContext : IUserContext
     {

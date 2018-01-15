@@ -1,6 +1,6 @@
 ﻿using EMS.DAL.Entities;
 using EMS.DAL.IRepository;
-using EMS.DAL.RepositoryImpl;
+using EMS.DAL.RepositoryImp;
 using EMS.DAL.Utils;
 using EMS.DAL.ViewModels;
 using System;

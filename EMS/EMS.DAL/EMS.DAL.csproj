@@ -48,21 +48,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BuildInfo.cs" />
+    <Compile Include="Entities\Circuit.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
     <Compile Include="Entities\EnergyItemDict.cs" />
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\Users.cs" />
+    <Compile Include="IRepository\ICircuitDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
+    <Compile Include="RepositoryImp\CircuitDbContext.cs" />
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
+    <Compile Include="Services\CircuitService.cs" />
     <Compile Include="Services\HomeServices.cs" />
+    <Compile Include="StaticResources\CircuitResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
+    <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

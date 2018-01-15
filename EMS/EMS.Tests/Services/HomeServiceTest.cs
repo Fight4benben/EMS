@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EMS.DAL.Services;
 using EMS.DAL.Entities;
 using EMS.DAL.IRepository;
-using EMS.DAL.RepositoryImpl;
+using EMS.DAL.RepositoryImp;
 using EMS.DAL.ViewModels;
 
 namespace EMS.Tests.Services
