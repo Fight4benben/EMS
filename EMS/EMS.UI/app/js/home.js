@@ -251,6 +251,8 @@ var Home = (function(){
 
 		function showCompareValue(data){
 
+			$("#updown").html("");
+
 			var tValue;
 			var yValue;
 			if(data.compareValues.today==undefined){
@@ -276,6 +278,12 @@ var Home = (function(){
 				$("#hb_rate p:last").html("");
 			}else{
 				$("#hb_rate p:last").html(((tValue-yValue)*100/yValue).toFixed(1)+'%');
+			}
+
+			if(tValue-yValue>0){
+				$("#updown").append('<img src="/app/img/up.png" />');
+			}else{
+				$("#updown").append('<img src="/app/img/down.png" />');
 			}
 
 			switch(data.code){
