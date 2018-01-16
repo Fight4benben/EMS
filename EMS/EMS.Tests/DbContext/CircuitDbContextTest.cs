@@ -37,5 +37,25 @@ namespace EMS.Tests.DbContext
             }
 
         }
+
+        [TestMethod]
+        public void TestGetCircuitHourValue()
+        {
+            ICircuitDbContext context = new CircuitDbContext();
+
+            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001", "01000");
+
+            List<string> circuitList = new List<string>();
+
+            foreach (var circuit in circuits)
+            {
+                circuitList.Add(circuit.CircuitId);
+            }
+
+            List<ReportValue> list = context.GetReportValueList(circuitList.ToArray(),"2018-01-16");
+
+            Console.WriteLine(list.Count);
+
+        }
     }
 }

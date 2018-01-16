@@ -11,6 +11,8 @@ namespace EMS.DAL.IRepository
     {
         List<Circuit> GetCircuitListByBIdAndEItemCode(string buildId, string energyItemCode);
 
-        List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId); 
+        List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId);
+
+        List<ReportValue> GetReportValueList(string[] circuits,string date);
     }
 }

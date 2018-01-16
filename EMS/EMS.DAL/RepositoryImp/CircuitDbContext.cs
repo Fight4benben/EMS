@@ -27,5 +27,12 @@ namespace EMS.DAL.RepositoryImp
         {
             return _db.Database.SqlQuery<EnergyItemDict>(SharedResources.EnergyItemDictSQL,new SqlParameter("@BuildId",buildId)).ToList();
         }
+
+        public List<ReportValue> GetReportValueList(string[] circuits,string date)
+        {
+            string sql = string.Format(CircuitResources.CircuitsHourValueSQL, "'" + string.Join("','",circuits)+"'");
+
+            return _db.Database.SqlQuery<ReportValue>(sql,new SqlParameter("@EndDate",date)).ToList();
+        }
     }
 }

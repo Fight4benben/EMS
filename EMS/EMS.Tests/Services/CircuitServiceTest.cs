@@ -32,5 +32,13 @@ namespace EMS.Tests.Services
             //CircuitService service = new CircuitService();
             //service.
         }
+
+        [TestMethod]
+        public void TestGetCircuitView()
+        {
+            CircuitService service = new CircuitService();
+            CircuitReportViewModel view = service.GetViewModel("admin");
+            Console.WriteLine(view);
+        }
     }
 }

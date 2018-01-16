@@ -54,6 +54,7 @@
     <Compile Include="Entities\EnergyItem.cs" />
     <Compile Include="Entities\EnergyItemDict.cs" />
     <Compile Include="Entities\HourValue.cs" />
+    <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\ICircuitDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>

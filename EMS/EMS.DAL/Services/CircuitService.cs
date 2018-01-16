@@ -19,6 +19,38 @@ namespace EMS.DAL.Services
             context = new CircuitDbContext();
         }
 
+        public CircuitReportViewModel GetViewModel(string userName)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            string buildId = builds.First().BuildID;
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode = energys.First().EnergyItemCode;
+            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyCode);
+
+            string[] circuitIds = GetCircuitIds(circuits);
+
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId,energyCode);
+
+            List<ReportValue> data = context.GetReportValueList(circuitIds,today.ToShortDateString());
+
+            CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
+            circuitReportView.Builds = builds;
+            circuitReportView.Energys = energys;
+            circuitReportView.TreeView = treeView;
+            circuitReportView.Data = data;
+
+            return circuitReportView;
+        }
+
+        //public CircuitReportViewModel GetViewModel(string buildId,string date,string type)
+        //{
+        //    DateTime today = Utils.Util.ConvertString2DateTime(date,"yyyy-MM-dd");
+        //}
+
         public List<TreeViewModel> GetTreeListViewModel(string buildId, string energyItemCode)
         {
             List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyItemCode);
@@ -57,6 +89,17 @@ namespace EMS.DAL.Services
             }
 
             return circuitList;
+        }
+
+        string[] GetCircuitIds(List<Circuit> circuits)
+        {
+            List<string> list = new List<string>();
+            foreach (var circuit in circuits)
+            {
+                list.Add(circuit.CircuitId);
+            }
+
+            return list.ToArray();
         }
     }
 }
