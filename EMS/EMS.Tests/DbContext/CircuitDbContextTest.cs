@@ -13,7 +13,7 @@ namespace EMS.Tests.DbContext
         [TestMethod]
         public void TestGetCircuits()
         {
-            ICircuitDbContext context = new CircuitDbContext();
+            ICircuitReportDbContext context = new CircuitReportDbContext();
 
             List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001","01000");
 
@@ -27,7 +27,7 @@ namespace EMS.Tests.DbContext
         [TestMethod]
         public void TestGetEnergyItemDict()
         {
-            ICircuitDbContext context = new CircuitDbContext();
+            ICircuitReportDbContext context = new CircuitReportDbContext();
 
             List<EnergyItemDict> items = context.GetEnergyItemDictByBuild("000001G001");
 
@@ -41,7 +41,7 @@ namespace EMS.Tests.DbContext
         [TestMethod]
         public void TestGetCircuitHourValue()
         {
-            ICircuitDbContext context = new CircuitDbContext();
+            ICircuitReportDbContext context = new CircuitReportDbContext();
 
             List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001", "01000");
 
@@ -52,10 +52,35 @@ namespace EMS.Tests.DbContext
                 circuitList.Add(circuit.CircuitId);
             }
 
-            List<ReportValue> list = context.GetReportValueList(circuitList.ToArray(),"2018-01-16");
+            List<ReportValue> list = context.GetReportValueList(circuitList.ToArray(),"2018-01-16","DD");
 
             Console.WriteLine(list.Count);
+        }
 
+        [TestMethod]
+        public void TestGetMonthReport()
+        {
+            ICircuitReportDbContext context = new CircuitReportDbContext();
+            List<string> circuits = new List<string>();
+            circuits.Add("000001G0010001");
+            circuits.Add("000001G0010002");
+
+            List<ReportValue> list = context.GetReportValueList(circuits.ToArray(),"2018-01-16" ,"MM");
+
+            Console.WriteLine(list.Count);
+        }
+
+        [TestMethod]
+        public void TestGetYearReport()
+        {
+            ICircuitReportDbContext context = new CircuitReportDbContext();
+            List<string> circuits = new List<string>();
+            circuits.Add("000001G0010001");
+            circuits.Add("000001G0010002");
+
+            List<ReportValue> list = context.GetReportValueList(circuits.ToArray(), "2018-01-16", "YY");
+
+            Console.WriteLine(list.Count);
         }
     }
 }

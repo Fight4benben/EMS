@@ -17,7 +17,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestGetChildrenCircuit()
         {
-            CircuitService service = new CircuitService();
+            CircuitReportService service = new CircuitReportService();
             List<TreeViewModel> treeView = service.GetTreeListViewModel("000001G001", "01000");
 
             Console.WriteLine(treeView);
@@ -36,7 +36,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestGetCircuitView()
         {
-            CircuitService service = new CircuitService();
+            CircuitReportService service = new CircuitReportService();
             CircuitReportViewModel view = service.GetViewModel("admin");
             Console.WriteLine(view);
         }

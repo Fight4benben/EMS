@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.IRepository
 {
-    public interface ICircuitDbContext
+    public interface ICircuitReportDbContext
     {
         List<Circuit> GetCircuitListByBIdAndEItemCode(string buildId, string energyItemCode);
 
         List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId);
 
-        List<ReportValue> GetReportValueList(string[] circuits,string date);
+        List<ReportValue> GetReportValueList(string[] circuits,string date, string type);
     }
 }

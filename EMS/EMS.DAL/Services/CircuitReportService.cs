@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Services
 {
-    public class CircuitService
+    public class CircuitReportService
     {
-        private ICircuitDbContext context;
+        private ICircuitReportDbContext context;
 
-        public CircuitService()
+        public CircuitReportService()
         {
-            context = new CircuitDbContext();
+            context = new CircuitReportDbContext();
         }
 
+        /// <summary>
+        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的回路，所有回路的日报表（时间是当日）
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
         public CircuitReportViewModel GetViewModel(string userName)
         {
             DateTime today = DateTime.Now;
@@ -35,12 +40,67 @@ namespace EMS.DAL.Services
 
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId,energyCode);
 
-            List<ReportValue> data = context.GetReportValueList(circuitIds,today.ToShortDateString());
+            List<ReportValue> data = context.GetReportValueList(circuitIds,today.ToShortDateString(),"DD");
 
             CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
             circuitReportView.Builds = builds;
             circuitReportView.Energys = energys;
             circuitReportView.TreeView = treeView;
+            circuitReportView.Data = data;
+
+            return circuitReportView;
+        }
+
+        public CircuitReportViewModel GetViewModel(string buildId,string type,string date)
+        {
+            DateTime now = Utils.Util.ConvertString2DateTime(date,"yyyy-MM-dd");
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode = energys.First().EnergyItemCode;
+            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string[] circuitIds = GetCircuitIds(circuits);
+
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
+
+            List<ReportValue> data = context.GetReportValueList(circuitIds, now.ToShortDateString(), type);
+
+            CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
+            circuitReportView.Energys = energys;
+            circuitReportView.TreeView = treeView;
+            circuitReportView.Data = data;
+
+            return circuitReportView;
+        }
+
+        public CircuitReportViewModel GetViewModel(string buildId,string energyCode, string type, string date)
+        {
+            DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
+           
+            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string[] circuitIds = GetCircuitIds(circuits);
+
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
+
+            List<ReportValue> data = context.GetReportValueList(circuitIds, now.ToShortDateString(), type);
+
+            CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
+            circuitReportView.TreeView = treeView;
+            circuitReportView.Data = data;
+
+            return circuitReportView;
+        }
+
+        public CircuitReportViewModel GetViewModel(string buildId, string energyCode, string circuits,string type, string date)
+        {
+            DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
+
+            string[] circuitIds = circuits.Split(',');
+
+            List<ReportValue> data = context.GetReportValueList(circuitIds, now.ToShortDateString(), type);
+
+            CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
             circuitReportView.Data = data;
 
             return circuitReportView;
