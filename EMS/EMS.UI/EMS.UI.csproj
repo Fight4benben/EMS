@@ -160,6 +160,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CircuitController.cs" />
+    <Compile Include="Controllers\CircuitReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -387,6 +388,10 @@
     <Content Include="Assets\plugins\bootstrap-scroll\bootstrap-scrollspy.js" />
     <Content Include="Assets\plugins\bootstrap-scroll\bootstrap-transition.js" />
     <Content Include="Assets\plugins\bootstrap-table-develop\dist\bootstrap-table.css" />
+    <Content Include="Assets\plugins\bootstrap-table\bootstrap-table-sticky-header.min.js" />
+    <Content Include="Assets\plugins\bootstrap-table\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Assets\plugins\bootstrap-table\bootstrap-table.js" />
+    <Content Include="Assets\plugins\bootstrap-table\bootstrap-table.min.js" />
     <Content Include="Assets\plugins\bootstrap-treeview\css\bootstrap-treeview.css" />
     <Content Include="Assets\plugins\bootstrap-treeview\css\bootstrap-treeview.min.css" />
     <Content Include="Assets\plugins\bootstrap-treeview\css\default.css" />
@@ -476,6 +481,7 @@
     <Content Include="Assets\scripts\ui-nouisliders.js" />
     <Content Include="Assets\scripts\ui-toastr.js" />
     <Content Include="Assets\scripts\ui-tree.js" />
+    <Content Include="app\js\CircuitReport.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

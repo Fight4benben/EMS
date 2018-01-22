@@ -70,6 +70,18 @@ var EMS = {
 				$select.append("<option value="+val[value]+">"+val[displayName]+"</option>");
 			});
 			return this;//允许使用连缀方式对多个select标签进行填充
+		},
+		initTreeview:function(data,$treeview,option){
+			var treedata = new Array();
+			var pattern = new RegExp('\\,\\"nodes\\"\\:\\[\\]',"g");
+			for (var i = 0; i < data.length; i++) {
+				var tempStr = JSON.stringify(data[i]);
+				treedata.push(JSON.parse(tempStr.replace(pattern,"")));
+			};
+
+			option.data = treedata;
+
+			$treeview.treeview(option);
 		}
 	},
 	Chart:{
