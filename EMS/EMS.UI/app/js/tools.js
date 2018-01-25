@@ -13,13 +13,20 @@ var EMS = {
 				dayOfMonth="0"+dayOfMonth;
 
 			return (year+"-"+month+"-"+dayOfMonth);
+		},
+		appendZero:function(num){
+			if(num<10)
+				return "0"+num;
+
+			return num;
 		}
 	},
 
 	DOM :{
 
 		//type:日期类型，date：日期时间,$calendar：日期空间,$box:日期时间显示框
-		initDateTimePicker:function(type,date,$calendar,$box){
+		initDateTimePicker:function(type,date,$calendar,$box,option){
+			$calendar.datetimepicker('remove');
 			var dayOfWeek=date.getDay();//0~6 :周日到周六（本周表示周一到周日）
 			var dateOfMonth=date.getDate();//1~31:
 			var month=date.getMonth();//0~11:1月到12月
@@ -44,23 +51,35 @@ var EMS = {
 				case "THREEDAYAGO":
 					getTypeDate=EMS.Tool.dateFormat(new Date(year,month,dateOfMonth-2));
 				break;
+				case "YEARMONTH":
+					getTypeDate =year +"-"+(month+1);
+				break;
+				case "YEAR":
+					getTypeDate = year;
+				break;
 			}
 
 			$box.val(getTypeDate);
 
-			$calendar.datetimepicker({
-				format:'yyyy-mm-dd',
-		        language: 'zh-CN',
-		        weekStart: 1,
-		        todayBtn: 1,
-		 		todayHighlight: 1,
-		        autoclose: 1,
-		        startView: 2,
-		        minView: 2,
-		        endDate:date,
-		        forceParse: 0,
-		        pickerPosition: "bottom-left"
-			});
+			if(option!=undefined){
+				//option.endDate = date;
+				$calendar.datetimepicker(option);
+			}else{
+				$calendar.datetimepicker({
+					format:'yyyy-mm-dd',
+			        language: 'zh-CN',
+			        weekStart: 1,
+			        todayBtn: 1,
+			 		todayHighlight: 1,
+			        autoclose: 1,
+			        startView: 2,
+			        minView: 2,
+			        endDate:date,
+			        forceParse: 0,
+			        pickerPosition: "bottom-left"
+				});
+			}
+			
 
 			return this;
 		},
@@ -82,6 +101,11 @@ var EMS = {
 			option.data = treedata;
 
 			$treeview.treeview(option);
+		},
+		showTable:function($table,columns,rows,options){
+			options.columns = columns;
+			options.data=rows;
+			$table.bootstrapTable(options);
 		}
 	},
 	Chart:{

@@ -47,6 +47,7 @@ namespace EMS.DAL.Services
             circuitReportView.Energys = energys;
             circuitReportView.TreeView = treeView;
             circuitReportView.Data = data;
+            circuitReportView.ReportType = "DD";
 
             return circuitReportView;
         }
@@ -69,6 +70,7 @@ namespace EMS.DAL.Services
             circuitReportView.Energys = energys;
             circuitReportView.TreeView = treeView;
             circuitReportView.Data = data;
+            circuitReportView.ReportType = type;
 
             return circuitReportView;
         }
@@ -88,6 +90,7 @@ namespace EMS.DAL.Services
             CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
             circuitReportView.TreeView = treeView;
             circuitReportView.Data = data;
+            circuitReportView.ReportType = type;
 
             return circuitReportView;
         }
@@ -102,6 +105,7 @@ namespace EMS.DAL.Services
 
             CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
             circuitReportView.Data = data;
+            circuitReportView.ReportType = type;
 
             return circuitReportView;
         }

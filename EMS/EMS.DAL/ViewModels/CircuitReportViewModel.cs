@@ -13,5 +13,6 @@ namespace EMS.DAL.ViewModels
         public List<EnergyItemDict> Energys { get; set; }
         public List<TreeViewModel> TreeView { get; set; }
         public List<ReportValue> Data { get; set; }
+        public string ReportType { get; set; }
     }
 }

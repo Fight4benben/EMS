@@ -391,6 +391,7 @@
     <Content Include="Assets\plugins\bootstrap-table\bootstrap-table-sticky-header.min.js" />
     <Content Include="Assets\plugins\bootstrap-table\bootstrap-table-zh-CN.min.js" />
     <Content Include="Assets\plugins\bootstrap-table\bootstrap-table.js" />
+    <Content Include="Assets\plugins\bootstrap-table\bootstrap-table.min.css" />
     <Content Include="Assets\plugins\bootstrap-table\bootstrap-table.min.js" />
     <Content Include="Assets\plugins\bootstrap-treeview\css\bootstrap-treeview.css" />
     <Content Include="Assets\plugins\bootstrap-treeview\css\bootstrap-treeview.min.css" />

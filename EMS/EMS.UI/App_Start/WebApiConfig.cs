@@ -29,7 +29,7 @@ namespace EMS.UI
                     NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
                 };
             json.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Local;
-            json.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            json.SerializerSettings.DateFormatString = "yyyy/MM/dd HH:mm:ss";
             json.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.MicrosoftDateFormat;
             json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }

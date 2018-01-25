@@ -18,18 +18,12 @@
             <div class="row">
                 <div class="select-width" style="margin-top: 5px;">分类能耗：</div>
                 <div id="te_countBtns" class="filter-calc">
-                    <acronym title="电">
-                        <button class="btn btn-elc"
-                                style="width: 20px; height: 20px;" type="button"></button>
-                    </acronym> <acronym title="水">
-                        <button class="btn btn-water"
-                                style="width: 20px; height: 20px;" type="button"></button>
-                    </acronym> <acronym title="光伏"><button class="btn btn-solar" type="button"></button></acronym>
+                    
                 </div>
             </div>
             <div class="row dis-tree">
                 <div class="count-list" style="margin-top: 7px;">
-                    <p>
+                    <p class="row">
                         <img src="/app/img/count3.png"><span class="count-select">支路选择：</span>
                         <label>
                             <input id="related" type="checkbox" value=""><span style="padding-left:5px;cursor:pointer;">级联选择</span>
@@ -40,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="count-info-te-calc">
+    <div class="count-info-te-calc" style="border:1px solid #B4B4B5;">
         <div id="biaoqian" class="bq-cp">
             <ul>
                 <li id="dayReportClick" style="background-color: #F08500;">日报</li>
@@ -48,8 +42,7 @@
                 <li id="yearReportClick" style="background-color: #0076D0;">年报</li>
             </ul>
         </div>
-        <div id="content">
-            <div class="cp-tab" style="display: block;">
+        <div @*id="content"*@>
                 <div class="count-control">
                     <form role="form">
                         <div class="form-group">
@@ -63,54 +56,11 @@
                         </div>
                     </form>
                 </div>
-                <div style="height:703px;width: 100%; overflow: auto;">
+                <div id="dayReport" >
 
-                    <table id="dayReport" class="table table-striped table-bordered table-hover count-table"></table>
+                    @*<table  class="table table-striped table-bordered table-hover count-table"></table>*@
 
                 </div>
-            </div>
-            <div class="cp-tab" style="display: none;">
-                <div class="count-control">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>日期：</label>
-                            <div id="monthCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-format="yyyy-mm-dd">
-                                <input id="monthcalendarBox" class="form-control" size="16" type="text" value="" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <button id="monthSearch" type="button" class="btn-count3"><span>查询</span></button>
-                            <button id="monthExport" type="button" class="btn-count4"><span>导出</span></button>
-                        </div>
-                    </form>
-                </div>
-                <div data-spy="scroll" data-target="#navbarExample" data-offset="0"
-                     class="scrollspy-example" style="height:711px;width: 100%;overflow-x: auto;">
-                    <table id="monthReport"
-                           class="table table-striped table-bordered table-hover count-table"></table>
-                </div>
-            </div>
-            <div class="cp-tab" style="display: none;">
-                <div class="count-control">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>日期：</label>
-                            <div id="yearCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                <input id="yearcalendarBox" class="form-control" size="16" type="text" value="" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <button id="yearSearch" type="button" class="btn-count5"><span>查询</span></button>
-                            <button id="yearExport" type="button" class="btn-count6"><span>导出</span></button>
-                        </div>
-                    </form>
-                </div>
-
-                <div data-spy="scroll" data-target="#navbarExample" data-offset="0"
-                     class="scrollspy-example" style="height:690px;width: 100%; overflow-x: auto;">
-                    <table id="yearReport"
-                           class="table table-bordered table-hover count-table table-fixed-header"></table>
-                </div>
-
-            </div>
         </div>
     </div>
 </div>

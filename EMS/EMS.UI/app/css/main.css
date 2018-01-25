@@ -375,7 +375,7 @@ to {top:-7px;}
     @media (max-width:1260px){.count-info-te-calc{width:68%;}}
     @media (max-width:1205px){.count-info-te-calc{width:63%;}}
 }
-@media (max-width:1024px){.count-info-te{width: 100%;}.count-info-te-calc{width: 100%;} }
+@media (max-width:1024px){.count-info-te{width: 100%; height:auto!important;}.count-info-te-calc{width: 100%;} }
 .count-data{
     width: 250px;
     float: left;
@@ -418,7 +418,7 @@ to {top:-7px;}
 }
 }
 .count-list{
-    padding: 15px;
+    padding: 15px 15px 0px 15px;
 }
 .count-list {marg-left: 50px;}
 @media(max-width:1920px){
@@ -440,6 +440,7 @@ to {top:-7px;}
 .count-list p img{
     margin-top: -2px;
     margin-right: 10px;
+    margin-left: 10px;
 }
 .count-control label{
     float: left;
@@ -519,6 +520,7 @@ to {top:-7px;}
     border: 1px solid #0076D0;
     color: #0076D0;
 }
+
 
 .select-width{
     width: 77px;
