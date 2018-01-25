@@ -26,5 +26,10 @@ namespace EMS.UI.Controllers
         {
             return service.GetViewModel(buildId,type,date);
         }
+
+        public object GetReport(string buildId, string energyCode,string type, string date)
+        {
+            return service.GetViewModel(buildId, energyCode, type, date);
+        }
     }
 }

@@ -115,15 +115,28 @@ var CircuitReport = (function(){
 
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
-				var type;
-				switch($(".current")[0].id){
-					case "dayReportClick":
-						type="DD";
-					break;
-				};
-				getDataFromServer("/api/CircuitReport/report","buildId="+buildId+"&type="+$(".current"));
+				
+				 //console.log($("#daycalendarBox").val());
+				getDataFromServer("/api/CircuitReport/report","buildId="+buildId+"&type="+getTypeByReportSelected+"&date="+$("#daycalendarBox").val());
 			});
 		};
+
+		//获取选中的报表类型：返回DD/MM/YY
+		function getTypeByReportSelected(){
+			var type;
+			switch($(".current")[0].id){
+				case "dayReportClick":
+					type="DD";
+				break;
+				case "monthReportClick":
+					type="MM";
+				break;
+				case "yearReportClick":
+					type="YY";
+				break;
+			};
+			return type;
+		}
 
 		function showEnergys(data){
 			
@@ -136,13 +149,13 @@ var CircuitReport = (function(){
 
 				switch(val.energyItemCode){
 					case "01000":
-						$("#te_countBtns").append('<acronym title="电"><button id="elec" class="btn btn-elc" tyle="width: 20px; height: 20px;" type="button"></button></acronym>')
+						$("#te_countBtns").append('<acronym title="电"><button id="elec" class="btn btn-elc" value="01000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
 					case "02000":
-						$("#te_countBtns").append('<acronym title="水"><button id="water" class="btn btn-water" tyle="width: 20px; height: 20px;" type="button"></button></acronym>')
+						$("#te_countBtns").append('<acronym title="水"><button id="water" class="btn btn-water" value="02000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
 					case "13000":
-						$("#te_countBtns").append('<acronym title="光伏"><button id="solar" class="btn btn-solar" tyle="width: 20px; height: 20px;" type="button"></button></acronym>')
+						$("#te_countBtns").append('<acronym title="光伏"><button id="solar" class="btn btn-solar" value="13000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
 				}
 			});
@@ -156,6 +169,8 @@ var CircuitReport = (function(){
 
 				if(isNotRepeat){
 					//发送请求
+					getDataFromServer("/api/CircuitReport/report","buildId="+$("#buildinglist").val()+"&energyCode="+
+						$current.attr('value')+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 				}
 			});
 		};
@@ -195,9 +210,11 @@ var CircuitReport = (function(){
 			}
 			else if(data.reportType=="MM"){
 				report="日";
+				color = '#74B000';
 			}
 			else {
 				report ="月";
+				color = '#0076D0';
 			}
 
 			$.each(data.data, function(index, val) {

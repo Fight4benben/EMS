@@ -54,6 +54,14 @@ namespace EMS.DAL.Services
 
         public CircuitReportViewModel GetViewModel(string buildId,string type,string date)
         {
+            if (type == "MM")
+            {
+                date += "-01";
+            }
+            else if(type=="YY")
+            {
+                date += "-01-01";
+            }
             DateTime now = Utils.Util.ConvertString2DateTime(date,"yyyy-MM-dd");
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
 
@@ -77,6 +85,14 @@ namespace EMS.DAL.Services
 
         public CircuitReportViewModel GetViewModel(string buildId,string energyCode, string type, string date)
         {
+            if (type == "MM")
+            {
+                date += "-01";
+            }
+            else if (type == "YY")
+            {
+                date += "-01-01";
+            }
             DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
            
             List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
@@ -97,6 +113,14 @@ namespace EMS.DAL.Services
 
         public CircuitReportViewModel GetViewModel(string buildId, string energyCode, string circuits,string type, string date)
         {
+            if (type == "MM")
+            {
+                date += "-01";
+            }
+            else if (type == "YY")
+            {
+                date += "-01-01";
+            }
             DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
 
             string[] circuitIds = circuits.Split(',');
