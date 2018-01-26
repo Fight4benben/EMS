@@ -74,22 +74,63 @@ namespace EMS.DAL.RepositoryImp
         /// <returns></returns>
         public List<CircuitValue> GetCircuit48HoursValueList(string buildId, string circuitId, string date)
         {
-            throw new NotImplementedException();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildId",buildId),
+                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<CircuitValue>(CircuitOverviewResources.Circuit48HoursSQL, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 支路最近31天用能数据
+        /// </summary>
+        /// <param name="buildId">建筑编码</param>
+        /// <param name="circuitId">支路编码</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
+        /// <returns></returns>
         public List<CircuitValue> GetCircuit31DaysValueList(string buildId, string circuitId, string date)
         {
-            throw new NotImplementedException();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildId",buildId),
+                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<CircuitValue>(CircuitOverviewResources.Circuit31DaysSQL, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 支路最近12个月用能数据
+        /// </summary>
+        /// <param name="buildId">建筑编码</param>
+        /// <param name="circuitId">支路编码</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
+        /// <returns></returns>
         public List<CircuitValue> GetCircuit12MonthValueList(string buildId, string circuitId, string date)
         {
-            throw new NotImplementedException();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildId",buildId),
+                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<CircuitValue>(CircuitOverviewResources.Circuit12MonthSQL, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 支路最近3年用能数据
+        /// </summary>
+        /// <param name="buildId">建筑编码</param>
+        /// <param name="circuitId">支路编码</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
+        /// <returns></returns>
         public List<CircuitValue> GetCircuit3YearValueList(string buildId, string circuitId, string date)
         {
-            throw new NotImplementedException();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildId",buildId),
+                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<CircuitValue>(CircuitOverviewResources.Circuit3YearSQL, sqlParameters).ToList();
         }
     }
 }
