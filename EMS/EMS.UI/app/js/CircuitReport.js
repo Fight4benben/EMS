@@ -11,19 +11,36 @@ var CircuitReport = (function(){
 			EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 		}
 
+		function initSearchButton(){
+			$("#daySearch").click(function(event) {
+				getDataFromServer("/api/CircuitReport/report",
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.current').attr('value')+
+						"&circuits="+getCheckedTreeIdArray().join(',')+
+						"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
+			});
+		}
+
+		//初始化页面时，先加载
 		function initChange(){
 			$("#dayReportClick").click(function(){
 				var $current = $(this);
 				var isContinue = setSelectStyle($current);
-				if(isContinue)
+				if(isContinue){
+
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
+					//发送请求
+					getDataFromServer("/api/CircuitReport/report",
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=DD"+"&date="+$("#daycalendarBox").val());
+				}
 
 			});
 
 			$("#monthReportClick").click(function() {
 				var $current = $(this);
 				var isContinue = setSelectStyle($current);
-				if(isContinue)
+				if(isContinue){
+
 					EMS.DOM.initDateTimePicker('YEARMONTH',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy-mm',
 									        language: 'zh-CN',
 									        autoclose: 1,
@@ -31,12 +48,19 @@ var CircuitReport = (function(){
 									        minView: 3,
 									        forceParse: false,
 									        pickerPosition: "bottom-left"});
+
+					//发送请求
+					getDataFromServer("/api/CircuitReport/report",
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=MM"+"&date="+$("#daycalendarBox").val());
+				}
 			});
 
 			$("#yearReportClick").click(function() {
 				var $current = $(this);
 				var isContinue = setSelectStyle($current);
-				if(isContinue)
+				if(isContinue){
+
 					EMS.DOM.initDateTimePicker('YEAR',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy',
 									        language: 'zh-CN',
 									        autoclose: 1,
@@ -44,6 +68,12 @@ var CircuitReport = (function(){
 									        minView: 4,
 									        forceParse: false,
 									        pickerPosition: "bottom-left"});
+
+					//发送请求
+					getDataFromServer("/api/CircuitReport/report",
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=YY"+"&date="+$("#daycalendarBox").val());
+				}
 			});
 		}
 
@@ -61,6 +91,7 @@ var CircuitReport = (function(){
 			return true;
 		}
 
+		//选中分类能耗按钮后添加选中样式或判断如果再次点击本分类，则不重新加载数据
 		function setEnergyBtnStyle($current){
 			var id = $("#te_countBtns .btn-solar-selected")[0].id;
 
@@ -75,6 +106,7 @@ var CircuitReport = (function(){
 			return true;
 		}
 
+		//获取选中的回路
 		function getCheckedTreeIdArray(){
 			var idArray = [];
 			var treeArray = $("#treeview").treeview('getChecked');
@@ -85,21 +117,21 @@ var CircuitReport = (function(){
 
 			return idArray;
 		}
-
+		//公开暴露的方法:初始化页面
 		this.initDom = function(){
 			initDateTime();
 			initChange();
+			initSearchButton();
 		};
-
+		//公开暴露的方法：页面加载后生成默认数据
 		this.showReport = function(url,params){
 			getDataFromServer(url,params);
 		};
 
-
-
+		//从服务器获取json数据
 		function getDataFromServer(url,params){
 			jQuery.getJSON(url,params, function(data) {
-			  console.log(data);
+			  //console.log(data);
 			  showBuilds(data);
 			  showEnergys(data);
 			  showTreeview(data);
@@ -107,6 +139,7 @@ var CircuitReport = (function(){
 			});
 		};
 
+		//生成建筑列表，追加到select中
 		function showBuilds(data){
 			if(!data.hasOwnProperty('builds'))
 				return;
@@ -138,6 +171,7 @@ var CircuitReport = (function(){
 			return type;
 		}
 
+		//生成不同能源类型的按钮
 		function showEnergys(data){
 			
 			if(!data.hasOwnProperty('energys'))
@@ -162,7 +196,7 @@ var CircuitReport = (function(){
 
 			$("#te_countBtns button").eq(0).addClass('btn-solar-selected')
 
-			$("#te_countBtns button").click(function(event) {
+			$("#te_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
 				var $current = $(this);
 
 				var isNotRepeat = setEnergyBtnStyle($current);
@@ -175,15 +209,16 @@ var CircuitReport = (function(){
 			});
 		};
 
+		//根据数据显示树状结构，如果不包含树状结构数据则不更新数据。
 		function showTreeview(data){
 			if(!data.hasOwnProperty('treeView'))
 				return;
 
-			$("#treeview").html("");
+			$("#treeview").html("");//更新树状结构之前先将该区域清空
 			$("#treeview").parent('div').css('overflow','auto');
 			$("#treeview").width(350);
 			$(".count-info-te").height($("#main-content").height());
-			console.log($("#main-content").height());
+			//console.log($("#main-content").height());
 			$("#treeview").height($(".count-info-te").height() - 258);
 			//$("#treeview").parent('div').height(800);
 
@@ -196,6 +231,7 @@ var CircuitReport = (function(){
 			$("#treeview").treeview('checkAll',{silent:true});
 		};
 
+		//根据数据显示表格内容
 		function showTable(data){
 			var times=[];
 			var names=[];
