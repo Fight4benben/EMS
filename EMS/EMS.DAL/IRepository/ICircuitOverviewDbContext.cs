@@ -10,7 +10,8 @@ namespace EMS.DAL.IRepository
     public interface ICircuitOverviewDbContext
     {
         List<CircuitValue> GetCircuitLoadValueList(string buildId, string circuitId, string date);
-        List<CircuitValue> GetCircuitMomValueList(string buildId, string circuitId, string date);
+        List<CircuitValue> GetCircuitMomDayValueList(string buildId, string circuitId, string date);
+        List<CircuitValue> GetCircuitMomMonthValueList(string buildId, string circuitId, string date);
         List<CircuitValue> GetCircuit48HoursValueList(string buildId, string circuitId, string date);
         List<CircuitValue> GetCircuit31DaysValueList(string buildId, string circuitId, string date);
         List<CircuitValue> GetCircuit12MonthValueList(string buildId, string circuitId, string date);
