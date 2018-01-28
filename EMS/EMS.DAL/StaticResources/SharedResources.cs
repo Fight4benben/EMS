@@ -18,7 +18,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 根据建筑ID获取当前建筑下的分类能耗
         /// </summary>
-        public static string EnergyItemDictSQL = @"SELECT EnergyItemDict.F_EnergyItemCode EnergyItemCode,MAX(EnergyItemDict.F_EnergyItemName) EnergyItemName
+        public static string EnergyItemDictSQL = @"SELECT EnergyItemDict.F_EnergyItemCode EnergyItemCode,MAX(EnergyItemDict.F_EnergyItemName) EnergyItemName,
+                                                MAX(EnergyItemDict.F_EnergyItemUnit) EnergyItemUnit
                                                 FROM T_ST_CircuitMeterInfo Circuit
                                                 INNER JOIN T_DT_EnergyItemDict EnergyItemDict ON Circuit.F_EnergyItemCode = EnergyItemDict.F_EnergyItemCode
                                                 WHERE F_BuildID=@BuildId

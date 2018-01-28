@@ -12,11 +12,20 @@ var CircuitReport = (function(){
 		}
 
 		function initSearchButton(){
+			//查询数据
 			$("#daySearch").click(function(event) {
 				getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.current').attr('value')+
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&circuits="+getCheckedTreeIdArray().join(',')+
 						"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
+			});
+
+			//导出的Excel
+			$("#dayExport").click(function(event) {
+				window.location = "/Circuit/GetExcel?buildId="+$("#buildinglist").val()+
+				"&energyCode="+$('.btn-solar-selected').attr('value')+
+				"&circuits="+getCheckedTreeIdArray().join(',')+
+				"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val()
 			});
 		}
 

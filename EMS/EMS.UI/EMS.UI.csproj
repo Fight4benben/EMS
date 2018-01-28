@@ -516,6 +516,9 @@
     <Content Include="Assets\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Assets\plugins\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Assets\plugins\uniform\README.textile" />
+    <Content Include="App_Data\DayReportTemplate.xls" />
+    <Content Include="App_Data\MonthReportTemplate.xls" />
+    <Content Include="App_Data\YearReportTemplate.xls" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -547,7 +550,6 @@
     <Content Include="Views\Circuit\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>

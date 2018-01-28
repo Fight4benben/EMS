@@ -17,5 +17,8 @@ namespace EMS.DAL.Entities
 
         [Column("F_EnergyItemName")]
         public string  EnergyItemName { get; set; }
+
+        [Column("F_EnergyItemUnit")]
+        public string EnergyItemUnit { get; set; }
     }
 }
