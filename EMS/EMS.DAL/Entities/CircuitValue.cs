@@ -9,7 +9,7 @@ namespace EMS.DAL.Entities
     public class CircuitValue
     {
         public string CircuitId { get; set; }
-        public string EnergyItemCode { get; set; }
+        public string Name { get; set; }
         public DateTime Time { get; set; }
         public decimal? Value { get; set; }
     }

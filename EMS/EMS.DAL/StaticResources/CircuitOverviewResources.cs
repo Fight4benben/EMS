@@ -11,8 +11,10 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 支路当日负荷曲线图
         /// </summary>
-        public static string CircuitLoadSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID, MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode,
-                                                FifteenResult.F_StartTime AS 'Time', FifteenResult.F_Value *4 AS Value
+        public static string CircuitLoadSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
+                                                ,MAX(Circuit.F_CircuitName) AS Name
+                                                ,FifteenResult.F_StartTime AS 'Time'
+                                                ,FifteenResult.F_Value *4 AS Value
                                                 FROM T_MC_MeterFifteenResult AS FifteenResult
                                                 INNER JOIN T_ST_CircuitMeterInfo AS Circuit ON FifteenResult.F_MeterID = Circuit.F_MeterID
                                                 INNER JOIN T_DT_EnergyItemDict AS EnergyItemDict ON EnergyItemDict.F_EnergyItemCode = Circuit.F_EnergyItemCode
@@ -22,13 +24,14 @@ namespace EMS.DAL.StaticResources
                                                 AND ParamInfo.F_IsEnergyValue = 1
                                                 AND FifteenResult.F_StartTime BETWEEN CONVERT(VARCHAR(10),@EndTime,120)+' 00:00:00' AND @EndTime
                                                 GROUP BY FifteenResult.F_StartTime ,FifteenResult.F_Value
-                                                ORDER BY  FifteenResult.F_StartTime ASC";
+                                                ORDER BY  FifteenResult.F_StartTime ASC
+                                                ";
 
         /// <summary>
         /// 今日环比数据
         /// </summary>
         public static string CircuitMomDaySQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,MAX (HourResult.F_StartHour) AS 'Time'
                                                 ,SUM (HourResult.F_Value) AS Value
                                                 FROM T_MC_MeterHourResult AS HourResult
@@ -41,7 +44,7 @@ namespace EMS.DAL.StaticResources
                                                 AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10),@EndTime,120)+' 00:00:00' AND  @EndTime 
                                                 UNION
                                                 SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,MAX (HourResult.F_StartHour) AS 'Time'
                                                 ,SUM (HourResult.F_Value) AS Value
                                                 FROM T_MC_MeterHourResult AS HourResult
@@ -51,13 +54,14 @@ namespace EMS.DAL.StaticResources
                                                 WHERE Circuit.F_BuildID=@BuildID
                                                 AND Circuit.F_CircuitID=@CircuitID
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10),DATEADD(DD,-1,@EndTime),120)+' 00:00:00' AND DATEADD(DD,-1,@EndTime)";
+                                                AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10),DATEADD(DD,-1,@EndTime),120)+' 00:00:00' AND DATEADD(DD,-1,@EndTime)
+                                                ";
 
         /// <summary>
         /// 当月环比数据
         /// </summary>
         public static string CircuitMomMonthSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,MAX (DayResult.F_StartDay) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult AS DayResult
@@ -70,7 +74,7 @@ namespace EMS.DAL.StaticResources
                                                 AND DayResult.F_StartDay BETWEEN DATEADD(MONTH, DATEDIFF(MONTH, 0, @EndTime), 0) AND  @EndTime
                                                 UNION
                                                 SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,MAX (DayResult.F_StartDay) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult AS DayResult
@@ -87,7 +91,7 @@ namespace EMS.DAL.StaticResources
         /// 最近48小时用能数据
         /// </summary>
         public static string Circuit48HoursSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,MAX (HourResult.F_StartHour) AS 'Time'
                                                 ,HourResult.F_Value AS Value
                                                 FROM T_MC_MeterHourResult AS HourResult
@@ -106,7 +110,7 @@ namespace EMS.DAL.StaticResources
         /// 最近31天用能数据
         /// </summary>
         public static string Circuit31DaysSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,DayResult.F_StartDay AS 'Time'
                                                 ,DayResult.F_Value AS Value
                                                 FROM T_MC_MeterDayResult AS DayResult
@@ -125,7 +129,7 @@ namespace EMS.DAL.StaticResources
         /// 最近12个月天用能数据
         /// </summary>
         public static string Circuit12MonthSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult DayResult
@@ -144,7 +148,7 @@ namespace EMS.DAL.StaticResources
         /// 最近3年用能数据
         /// </summary>
         public static string Circuit3YearSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID
-                                                ,MAX(EnergyItemDict.F_EnergyItemCode) AS EnergyItemCode 
+                                                ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,DATEADD(YY,DATEDIFF(YY,0,DayResult.F_StartDay),0) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult DayResult

@@ -25,7 +25,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuitLoadValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -41,7 +41,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuitMomDayValueList("000001G001", "000001G0010001", today.ToString("yyyy-MM-dd HH:mm:ss"));
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -57,7 +57,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuitMomMonthValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -73,7 +73,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuit48HoursValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -89,7 +89,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuit31DaysValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -105,7 +105,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuit12MonthValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
 
@@ -122,7 +122,7 @@ namespace EMS.Tests.DbContext
             List<CircuitValue> circuitValues = context.GetCircuit3YearValueList("000001G001", "000001G0010001", today.ToString());
             foreach (var circuit in circuitValues)
             {
-                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.EnergyItemCode, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
+                Console.WriteLine("支路编码：{0}, 能耗编码：{1}, 时间：{2}, 数值：{3}；", circuit.CircuitId, circuit.Name, circuit.Time.ToString("yyyy-MM-dd HH:mm:ss"), circuit.Value);
             }
         }
     }
