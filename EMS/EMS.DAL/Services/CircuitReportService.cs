@@ -220,6 +220,10 @@ namespace EMS.DAL.Services
             HSSFWorkbook book = new HSSFWorkbook(file);
             HSSFSheet sheet = (HSSFSheet)book.GetSheet("Sheet1");
 
+            ICellStyle style = book.CreateCellStyle();
+            style.DataFormat = HSSFDataFormat.GetBuiltinFormat("0.00");
+
+
             //获取当前建筑名
             IHomeDbContext homeContext = new HomeDbContext();
             BuildInfo build = homeContext.GetBuildById(buildId);
@@ -240,12 +244,13 @@ namespace EMS.DAL.Services
             sheet.GetRow(1).GetCell(5).SetCellValue(energyItem.EnergyItemUnit);
 
             //根据传入circuitIds填充excel
+            int rowId = 0;
             for (int i = 0; i < circuitIds.Length; i++)
             {
                 List<ReportValue> current = data.FindAll(p=>p.Id==circuitIds[i]);
                 if (current.Count > 0)
                 {
-                    IRow row = sheet.CreateRow(i + 3);
+                    IRow row = sheet.CreateRow(rowId + 3);
                     row.CreateCell(0).SetCellValue(current[0].Name);
                     decimal total = 0;
                     switch (type)
@@ -253,29 +258,36 @@ namespace EMS.DAL.Services
                         case "DD":
                             foreach (var item in current)
                             {
-                                row.CreateCell(item.Time.Hour + 1).SetCellValue(item.Value.ToString("#0.00"));
+                                row.CreateCell(item.Time.Hour + 1).SetCellValue((double)item.Value);
+                                row.GetCell(item.Time.Hour+1).CellStyle = style;
                                 total += item.Value;
                             }
-                            row.CreateCell(25).SetCellValue(total.ToString("#0.00"));
+                            row.CreateCell(25).SetCellValue((double)total);
+                            row.GetCell(25).CellStyle = style;
                             break;
                         case "MM":
                             foreach (var item in current)
                             {
-                                row.CreateCell(item.Time.Day).SetCellValue(item.Value.ToString("#0.00"));
+                                row.CreateCell(item.Time.Day).SetCellValue((double)item.Value);
+                                row.GetCell(item.Time.Day).CellStyle = style;
                                 total += item.Value;
                             }
-                            row.CreateCell(32).SetCellValue(total.ToString("#0.00"));
+                            row.CreateCell(32).SetCellValue((double)total);
+                            row.GetCell(32).CellStyle = style;
                             break;
                         case "YY":
                             foreach (var item in current)
                             {
-                                row.CreateCell(item.Time.Month).SetCellValue(item.Value.ToString("#0.00"));
+                                row.CreateCell(item.Time.Month).SetCellValue((double)item.Value);
+                                row.GetCell(item.Time.Month).CellStyle = style;
                                 total += item.Value;
                             }
-                            row.CreateCell(13).SetCellValue(total.ToString("#0.00"));
+                            row.CreateCell(13).SetCellValue((double)total);
+                            row.GetCell(13).CellStyle = style;
                             break;
                     }
-                    
+
+                    rowId++;
                 }
             }
 
