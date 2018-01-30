@@ -333,6 +333,9 @@ var CircuitReport = (function(){
 })();
 
 jQuery(document).ready(function($) {
+
+	$("body").addClass('page-header-fixed page-sidebar-fixed page-footer-fixed');
+	$('.header').addClass('navbar-fixed-top');
 	
 	var circuitReport = new CircuitReport();
 

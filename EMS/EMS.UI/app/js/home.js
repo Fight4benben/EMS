@@ -31,7 +31,7 @@ var Home = (function(){
 			$("#buildinglist").change(function(){
 				var buildId = $(this).val();
 				var date = $("#box").val();
-
+				initChartLine();
 				getDataFromServer("/api/homepage/home","buildId="+buildId+"&date="+date);
 			});
 		}
@@ -310,6 +310,9 @@ var Home = (function(){
 	return _home;
 })();
 jQuery(document).ready(function($) {
+
+	$("body").addClass('page-header-fixed page-sidebar-fixed page-footer-fixed');
+	$('.header').addClass('navbar-fixed-top');
 	
 	var home = new Home();
 	home.initDom();
