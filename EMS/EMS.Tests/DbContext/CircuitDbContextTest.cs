@@ -19,7 +19,7 @@ namespace EMS.Tests.DbContext
 
             foreach (var circuit in circuits)
             {
-                Console.WriteLine("支路编号：{0}；支路名称：{1}；仪表编号：{2}；上级支路代码：{3}；",circuit.CircuitId,circuit.CircuitName,circuit.MeterId,circuit.ParentId);
+                Console.WriteLine("支路编号：{0}；支路名称：{1}；仪表编号：{2}；上级支路编码：{3}；",circuit.CircuitId,circuit.CircuitName,circuit.MeterId,circuit.ParentId);
             }
 
         }

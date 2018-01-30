@@ -17,7 +17,7 @@ namespace EMS.UI.Controllers
         {
             string userName = User.Identity.Name;
 
-            return service.GetViewModel(userName);
+            return service.GetCircuitOverviewViewModel(userName);
         }
 
         

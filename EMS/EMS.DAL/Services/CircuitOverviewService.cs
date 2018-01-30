@@ -20,36 +20,118 @@ namespace EMS.DAL.Services
             context = new CircuitOverviewDbContext();
         }
 
-        public CircuitOverviewViewModel GetViewModel(string userName)
+
+        /// <summary>
+        /// 当日的用能概况
+        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的回路当日的用能概况
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
+        public CircuitOverviewViewModel GetCircuitOverviewViewModel(string userName)
         {
             DateTime today = DateTime.Now;
             IHomeDbContext homeContext = new HomeDbContext();
-            
             List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
-
             string buildId = builds.First().BuildID;
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
-
             string energyCode = energys.First().EnergyItemCode;
             List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
-
-            string[] circuitIds = GetCircuitIds(circuits);
-
-            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
-
-            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitIds[0], today.ToString());
-            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitIds[0], today.ToString());
+            string circuitId = circuits.First().CircuitId;
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, today.ToString());
 
             CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
             circuitOverviewView.Builds = builds;
             circuitOverviewView.Energys = energys;
-            circuitOverviewView.TreeView = treeView;
+            circuitOverviewView.Circuits = circuits;
+            circuitOverviewView.LoadData = loadData;
+            circuitOverviewView.MomDayData = dayData;
+            circuitOverviewView.MomMonthData = monthData;
+            circuitOverviewView.Last48HoursData = last48HoursData;
+            circuitOverviewView.Last31DaysData = last31DayData;
+            circuitOverviewView.Last12MonthData = last12MonthData;
+            circuitOverviewView.Last3YearData = last3YearData;
+
+            return circuitOverviewView;
+        }
+
+
+        /// <summary>
+        /// 支路用能概况：
+        /// 根据用户传入的建筑ID，查找该建筑包含的分类能耗，所有支路以及第一支路的用能数据
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="buildId">建筑ID</param>
+        /// <returns></returns>
+        public CircuitOverviewViewModel GetCircuitOverviewViewModel(string userName, string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            string energyCode = energys.First().EnergyItemCode;
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string circuitId = circuits.First().CircuitId;
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, today.ToString());
+
+            CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
+            circuitOverviewView.Builds = builds;
+            circuitOverviewView.Energys = energys;
+            circuitOverviewView.Circuits = circuits;
+            circuitOverviewView.LoadData = loadData;
+            circuitOverviewView.MomDayData = dayData;
+            circuitOverviewView.MomMonthData = monthData;
+            circuitOverviewView.Last48HoursData = last48HoursData;
+            circuitOverviewView.Last31DaysData = last31DayData;
+            circuitOverviewView.Last12MonthData = last12MonthData;
+            circuitOverviewView.Last3YearData = last3YearData;
+
+            return circuitOverviewView;
+        }
+
+
+        /// <summary>
+        /// 根据用户传入的建筑ID和分类能耗代码，
+        /// 获取该建筑的分类能耗包含的所有支路以及第一支路的用能数据
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="energyCode">分类能耗代码</param>
+        /// <returns></returns>
+        public CircuitOverviewViewModel GetCircuitOverviewViewModel(string userName, string buildId, string energyCode)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string circuitId = circuits.First().CircuitId;
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, today.ToString());
+
+            CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
+            circuitOverviewView.Builds = builds;
+            circuitOverviewView.Energys = energys;
+            circuitOverviewView.Circuits = circuits;
             circuitOverviewView.LoadData = loadData;
             circuitOverviewView.MomDayData = dayData;
             circuitOverviewView.MomMonthData = monthData;
@@ -63,73 +145,86 @@ namespace EMS.DAL.Services
 
 
 
-
-
-
-
         /// <summary>
-        /// 根据建筑ID，和能源类型获取树状结构
+        /// 根据用户传入的建筑ID，分类能耗代码，支路编码
+        /// 获取传入支路的用能数据
         /// </summary>
+        /// <param name="userName">用户名</param>
         /// <param name="buildId">建筑ID</param>
-        /// <param name="energyItemCode">能源类型</param>
-        /// <returns>树状结构</returns>
-        public List<TreeViewModel> GetTreeListViewModel(string buildId, string energyItemCode)
+        /// <param name="energyCode">分类能耗代码</param>
+        /// <param name="circuitId">支路编码</param>
+        /// <returns></returns>
+        public CircuitOverviewViewModel GetCircuitOverviewViewModel(string userName, string buildId, string energyCode, string circuitId)
         {
-            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyItemCode);
-            var parentCircuits = circuits.Where(c => (c.ParentId == "-1" || string.IsNullOrEmpty(c.ParentId)));
-            List<TreeViewModel> treeList = new List<TreeViewModel>();
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
-            foreach (var item in parentCircuits)
-            {
-                TreeViewModel parentNode = new TreeViewModel();
-                List<TreeViewModel> children = GetChildrenNodes(circuits, item);
-                parentNode.Id = item.CircuitId;
-                parentNode.Text = item.CircuitName;
-                if (children.Count != 0)
-                    parentNode.Nodes = children;
-                treeList.Add(parentNode);
-            }
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, today.ToString());
 
-            return treeList;
+            CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
+            circuitOverviewView.Builds = builds;
+            circuitOverviewView.Energys = energys;
+            circuitOverviewView.Circuits = circuits;
+            circuitOverviewView.LoadData = loadData;
+            circuitOverviewView.MomDayData = dayData;
+            circuitOverviewView.MomMonthData = monthData;
+            circuitOverviewView.Last48HoursData = last48HoursData;
+            circuitOverviewView.Last31DaysData = last31DayData;
+            circuitOverviewView.Last12MonthData = last12MonthData;
+            circuitOverviewView.Last3YearData = last3YearData;
+
+            return circuitOverviewView;
         }
+
 
         /// <summary>
-        /// 递归调用方式填充树状结构的子节点
+        /// 根据用户传入的建筑ID，分类能耗代码，支路编码，时间
+        /// 获取传入支路指定截止时间内的用能数据
         /// </summary>
-        /// <param name="circuits"></param>
-        /// <param name="circuit"></param>
+        /// <param name="userName">用户名</param>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="energyCode">分类能耗代码</param>
+        /// <param name="circuitId">支路编码</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns></returns>
-        List<TreeViewModel> GetChildrenNodes(List<Circuit> circuits, Circuit circuit)
+        public CircuitOverviewViewModel GetCircuitOverviewViewModel(string userName, string buildId, string energyCode, string circuitId, string date)
         {
-            string parentId = circuit.CircuitId;
-            List<TreeViewModel> circuitList = new List<TreeViewModel>();
-            var children = circuits.Where(c => c.ParentId == parentId);
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
-            foreach (var item in children)
-            {
-                TreeViewModel node = new TreeViewModel();
-                node.Id = item.CircuitId;
-                node.Text = item.CircuitName;
-                if (GetChildrenNodes(circuits, item).Count != 0)
-                    node.Nodes = GetChildrenNodes(circuits, item);
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, date);
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, date);
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, date);
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, date);
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, date);
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, date);
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, date);
 
-                circuitList.Add(node);
-            }
+            CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
+            circuitOverviewView.Builds = builds;
+            circuitOverviewView.Energys = energys;
+            circuitOverviewView.Circuits = circuits;
+            circuitOverviewView.LoadData = loadData;
+            circuitOverviewView.MomDayData = dayData;
+            circuitOverviewView.MomMonthData = monthData;
+            circuitOverviewView.Last48HoursData = last48HoursData;
+            circuitOverviewView.Last31DaysData = last31DayData;
+            circuitOverviewView.Last12MonthData = last12MonthData;
+            circuitOverviewView.Last3YearData = last3YearData;
 
-            return circuitList;
+            return circuitOverviewView;
         }
-
-        string[] GetCircuitIds(List<Circuit> circuits)
-        {
-            List<string> list = new List<string>();
-            foreach (var circuit in circuits)
-            {
-                list.Add(circuit.CircuitId);
-            }
-
-            return list.ToArray();
-        }
-
 
     }
 }
