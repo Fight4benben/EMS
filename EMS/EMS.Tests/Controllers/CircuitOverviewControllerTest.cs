@@ -19,7 +19,7 @@ namespace EMS.Tests.Controllers
             CircuitOverviewController controller = new CircuitOverviewController();
 
             // Act
-            object result = controller.GetCircuitOverview() ;
+            object result = controller.Get() ;
 
             // Assert
             Assert.IsNotNull(result);
