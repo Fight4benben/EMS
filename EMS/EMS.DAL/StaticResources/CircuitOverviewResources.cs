@@ -11,7 +11,7 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 支路当日负荷曲线图
         /// </summary>
-        public static string CircuitLoadSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID 
+        public static string CircuitLoadSQL = @"SELECT Circuit.F_CircuitID AS CircuitID 
                                                 ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,FifteenResult.F_StartTime AS 'Time'
                                                 ,FifteenResult.F_Value *4 AS Value
@@ -22,7 +22,7 @@ namespace EMS.DAL.StaticResources
                                                 AND Circuit.F_CircuitID=@CircuitID
                                                 AND ParamInfo.F_IsEnergyValue = 1
                                                 AND FifteenResult.F_StartTime BETWEEN DATEADD(DAY,DATEDIFF(DAY,0,@EndTime),0) AND @EndTime
-                                                GROUP BY FifteenResult.F_StartTime ,FifteenResult.F_Value
+                                                GROUP BY Circuit.F_CircuitID, FifteenResult.F_StartTime, FifteenResult.F_Value
                                                 ORDER BY  FifteenResult.F_StartTime ASC
                                                 ";
 
