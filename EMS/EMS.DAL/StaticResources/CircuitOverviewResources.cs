@@ -11,19 +11,18 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 支路当日负荷曲线图
         /// </summary>
-        public static string CircuitLoadSQL = @"SELECT Circuit.F_CircuitID AS CircuitID 
+        public static string CircuitLoadSQL = @"SELECT MAX(Circuit.F_CircuitID) AS CircuitID 
                                                 ,MAX(Circuit.F_CircuitName) AS Name 
                                                 ,FifteenResult.F_StartTime AS 'Time'
                                                 ,FifteenResult.F_Value *4 AS Value
-                                                 FROM T_ST_CircuitMeterInfo Circuit
-                                                INNER JOIN T_ST_MeterUseInfo Meter ON Circuit.F_MeterID = Meter.F_MeterID
-                                                INNER JOIN T_MC_MeterFifteenResult FifteenResult ON Meter.F_MeterID = FifteenResult.F_MeterID
-                                                INNER JOIN T_ST_MeterParamInfo ParamInfo ON FifteenResult.F_MeterParamID = ParamInfo.F_MeterParamID
+                                                FROM T_MC_MeterFifteenResult AS FifteenResult
+                                                INNER JOIN T_ST_CircuitMeterInfo AS Circuit ON FifteenResult.F_MeterID = Circuit.F_MeterID
+                                                INNER JOIN T_ST_MeterParamInfo AS ParamInfo ON ParamInfo.F_MeterParamID = FifteenResult.F_MeterParamID
                                                 WHERE Circuit.F_BuildID=@BuildID 
                                                 AND Circuit.F_CircuitID=@CircuitID
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND FifteenResult.F_StartTime BETWEEN CONVERT(VARCHAR(10),@EndTime,120)+' 00:00:00' AND @EndTime
-                                                GROUP BY Circuit.F_CircuitID,FifteenResult.F_StartTime ,FifteenResult.F_Value
+                                                AND FifteenResult.F_StartTime BETWEEN DATEADD(DAY,DATEDIFF(DAY,0,@EndTime),0) AND @EndTime
+                                                GROUP BY FifteenResult.F_StartTime ,FifteenResult.F_Value
                                                 ORDER BY  FifteenResult.F_StartTime ASC
                                                 ";
 
@@ -40,7 +39,7 @@ namespace EMS.DAL.StaticResources
                                                 WHERE Circuit.F_BuildID=@BuildID
                                                 AND Circuit.F_CircuitID=@CircuitID
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10),@EndTime,120)+' 00:00:00' AND  @EndTime 
+                                                AND HourResult.F_StartHour BETWEEN DATEADD(DAY,DATEDIFF(DAY,0,@EndTime),0) AND  @EndTime 
                                                 GROUP BY Circuit.F_CircuitID 
                                                 UNION
                                                 SELECT Circuit.F_CircuitID AS CircuitID
@@ -53,7 +52,7 @@ namespace EMS.DAL.StaticResources
                                                 WHERE Circuit.F_BuildID=@BuildID
                                                 AND Circuit.F_CircuitID=@CircuitID
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10),DATEADD(DD,-1,@EndTime),120)+' 00:00:00' AND DATEADD(DD,-1,@EndTime)
+                                                AND HourResult.F_StartHour BETWEEN DATEADD(DAY,DATEDIFF(DAY,0,@EndTime)-1,0) AND DATEADD(DD,-1,@EndTime)
                                                 GROUP BY Circuit.F_CircuitID 
                                                 ";
 

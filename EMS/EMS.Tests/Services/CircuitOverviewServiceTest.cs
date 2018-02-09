@@ -24,10 +24,10 @@ namespace EMS.Tests.Services
             CircuitOverviewViewModel circuitOverviewView5 = service.GetCircuitOverviewViewModel("admin","000001G001","01000", "000001G0010001","2018-01-30 14:00:00");
 
             Console.WriteLine(GetJson(circuitOverviewView));
-            Console.WriteLine(circuitOverviewView2);
-            Console.WriteLine(circuitOverviewView3);
-            Console.WriteLine(circuitOverviewView4);
-            Console.WriteLine(circuitOverviewView5);
+            //Console.WriteLine(circuitOverviewView2);
+            //Console.WriteLine(circuitOverviewView3);
+            //Console.WriteLine(circuitOverviewView4);
+            //Console.WriteLine(circuitOverviewView5);
         }
 
         public static string GetJson(object o)
