@@ -228,10 +228,10 @@ var Home = (function(){
 				});
 
 				if(currentValue.length!=0)
-					todayValue.push(currentValue[0].value.toFixed(2));
+					todayValue[key] = currentValue[0].value.toFixed(2);
 
 				if(yesValue.length !=0)
-					yesterValue.push(yesValue[0].value.toFixed(2));
+					yesterValue[key] = yesValue[0].value.toFixed(2);
 			});
 
 			var series = [
