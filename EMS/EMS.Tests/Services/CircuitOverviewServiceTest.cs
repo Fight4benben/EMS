@@ -16,12 +16,12 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestGetCircuitOverviewViewModel()
         {
+            DateTime today = DateTime.Now;
             CircuitOverviewService service = new CircuitOverviewService();
             CircuitOverviewViewModel circuitOverviewView = service.GetCircuitOverviewViewModel("admin");
-            CircuitOverviewViewModel circuitOverviewView2 = service.GetCircuitOverviewViewModel("admin","000001G001");
-            CircuitOverviewViewModel circuitOverviewView3 = service.GetCircuitOverviewViewModel("admin","000001G001","01000");
-            CircuitOverviewViewModel circuitOverviewView4 = service.GetCircuitOverviewViewModel("admin","000001G001","01000","000001G0010001");
-            CircuitOverviewViewModel circuitOverviewView5 = service.GetCircuitOverviewViewModel("admin","000001G001","01000", "000001G0010001","2018-01-30 14:00:00");
+            CircuitOverviewViewModel circuitOverviewView2 = service.GetCircuitOverviewViewModel("000001G001", today.ToString());
+            CircuitOverviewViewModel circuitOverviewView3 = service.GetCircuitOverviewViewModel("000001G001", "01000", today.ToString());
+            CircuitOverviewViewModel circuitOverviewView4 = service.GetCircuitOverviewViewModel("000001G001", "01000", "000001G0010001", today.ToString());
 
             Console.WriteLine(GetJson(circuitOverviewView));
             //Console.WriteLine(circuitOverviewView2);

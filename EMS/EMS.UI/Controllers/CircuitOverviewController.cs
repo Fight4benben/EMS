@@ -30,13 +30,13 @@ namespace EMS.UI.Controllers
         /// 根据用户传入的建筑ID，查找该建筑包含的分类能耗，所有支路以及第一支路的用能数据
         /// </summary>
         /// <param name="buildId">建筑ID</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
-        public object Get(string buildId)
+        public object Get(string buildId, string date)
         {
             try
             {
-                string userName = User.Identity.Name;
-                return service.GetCircuitOverviewViewModel(userName, buildId);
+                return service.GetCircuitOverviewViewModel(buildId, date);
             }
             catch (Exception e)
             {
@@ -50,13 +50,13 @@ namespace EMS.UI.Controllers
         /// </summary>
         /// <param name="buildId">建筑ID</param>
         /// <param name="energyCode">分类能耗代码</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
-        public object Get(string buildId, string energyCode)
+        public object Get(string buildId, string energyCode, string date)
         {
             try
             {
-                string userName = User.Identity.Name;
-                return service.GetCircuitOverviewViewModel(userName, buildId, energyCode);
+                return service.GetCircuitOverviewViewModel(buildId, energyCode, date);
             }
             catch (Exception e)
             {
@@ -72,42 +72,19 @@ namespace EMS.UI.Controllers
         /// <param name="buildId">建筑ID</param>
         /// <param name="energyCode">分类能耗代码</param>
         /// <param name="circuitId">支路编码</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及传入支路编码的数据</returns>
-        public object Get(string buildId, string energyCode, string circuitId)
-        {
-            try
-            {
-                string userName = User.Identity.Name;
-                return service.GetCircuitOverviewViewModel(userName, buildId, energyCode, circuitId);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-        /// <summary>
-        /// 根据用户传入的建筑ID，分类能耗代码，支路编码，时间
-        /// 获取传入支路指定截止时间内的用能数据
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="energyCode">分类能耗代码</param>
-        /// <param name="circuitId">支路编码</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及传入支路指定截止时间内的用能数据</returns>
+        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及传入支路编码的数据</returns>
         public object Get(string buildId, string energyCode, string circuitId, string date)
         {
             try
             {
-                string userName = User.Identity.Name;
-                return service.GetCircuitOverviewViewModel(userName, buildId, energyCode, circuitId, date);
+                return service.GetCircuitOverviewViewModel(buildId, energyCode, circuitId, date);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
-
 
     }
 }
