@@ -1,0 +1,151 @@
+﻿<div class="container-fluid main-top">
+        <div class="col-lg-4 col-md-12">
+            <div class="col-lg-12 col-sm-6 build-info2 build-info3">
+               <div class="main-menu">
+                <hr>
+                <i class="fa fa-clipboard"></i>过滤条件
+               </div>
+               <div class="row">
+               <div class="filter-width">建筑名称：</div>
+                  <div class="filter-calc">
+                      <form role="form">  
+                        <div class="form-group">
+                            <select class="form-control" id="buildinglist">  
+                            </select>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+                <div class="row">
+                   <div class="filter-width" style="margin-top:5px;">分类能耗：</div>
+				   <div id="te_surveyBtns" class="filter-calc">
+					  <!-- <acronym title="电"><button class="btn btn-elc" style="width:20px;height:20px;" type="button"></button></acronym>
+					  <acronym title="水"><button class="btn btn-water" style="width:20px;height:20px;"  type="button"></button></acronym>
+					  <acronym title="光伏"><button class="btn btn-solar" type="button"></button></acronym> -->
+				  </div>
+                </div>
+                <div class="row">
+				  <div class="filter-width" style="margin-top:7px;">支路选择：</div>
+				  <div class="filter-calc">
+					<form role="form">
+						<div class="form-group">
+							<select class="form-control" id="circuits">
+							</select>
+						</div>
+					</form>
+				  </div>
+                  </div>
+             </div>
+             <div class="col-lg-12 col-sm-6 col-xs-12 build-info2">
+               <div class="main-menu">
+                <hr>
+                <i class="fa fa-circle-o-notch"></i><span>环比(单位：kW.h)</span>
+               </div>
+               <div class="filter-ring">
+                    <div class="col-xs-4">
+						<div id="today">
+                            <span>当日用电</span>
+                            <p>310.8</p>
+                        </div>
+					</div>
+                    <div class="col-xs-4">
+						<div id="yesterday">
+                            昨日同期
+                            <p>356.4</p>
+                        </div>
+					</div>
+                    <div class="col-xs-4">
+						<div id="dayTrend">
+                            趋势<span><img src="/app/img/survey-up.png"></span>
+                            <p style="margin-top:1px;">-45.6</p>
+                            <hr>
+                            <p style="margin-top:-12px;">12.8%</p>
+                        </div>
+					</div>
+					<div class="col-xs-4">
+						<div id="curMonth">
+                            <span>当月用电</span>
+                            <p>310.8</p>
+                        </div>
+					</div>
+                    <div class="col-xs-4">
+						<div id="lastMonth">
+                            上月同期
+                            <p>356.4</p>
+                        </div>
+					</div>
+                    <div class="col-xs-4">
+						<div id="monthTrend">
+                            趋势<span><img src="/app/img/survey-down.png"></span>
+                            <p style="margin-top:1px;">-45.6</p>
+                            <hr>
+                            <p style="margin-top:-12px;">12.8%</p>
+                        </div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="build-info">
+               <div class="main-menu">
+                <hr>
+                <i class="fa fa-line-chart"></i>当日负荷曲线
+               </div>
+               <div class="col-md-11 col-sm-12 col-xs-12 load-calc">
+				<div id="survey_powerline"></div>
+               </div>
+               <div class="col-md-1 col-xs-12 load">
+					<div class="col-md-12  col-xs-2 load1">
+						<p>最大值</p>
+						<span id="p_max"></span>
+					</div>
+					<div class="col-md-12 col-xs-2 load2">
+						<p>最小值</p>
+						<span id="p_min"></span>
+					</div>
+					<div class="col-md-12 col-xs-2 load3">
+						<p>平均值</p>
+						<span id="p_avg"></span>
+					</div>
+					<div class="col-md-12 col-xs-4 load4">
+						<p>负荷率</p>
+						<span id="p_loadRate"></span>
+					</div>
+					<div class="col-md-12 col-xs-4 load5">
+						<p>峰谷差率</p>
+						<span id="p_diff"></span>
+					</div>
+               </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xs-12 history">
+           <div class="build-info">
+                <div class="main-menu">
+                    <hr>
+                    <i class="fa fa-bar-chart-o"></i>历史趋势
+                </div>
+                <div class="col-sm-1 col-xs-12 history-time">
+                    <div id="trend_hours" class="col-sm-12 col-xs-3 history-time-select">
+                        <h2>48</h2>
+                        过去48时
+                    </div>
+                    <div id="trend_days" class="col-sm-12 col-xs-3">
+                        <h2>31</h2>
+                        过去31天
+                    </div>
+                    <div id="trend_month" class="col-sm-12 col-xs-3">
+                        <h2>12</h2>
+                        过去12月
+                    </div>
+                    <div id="trend_year" class="col-sm-12 col-xs-3">
+                        <h2>3</h2>
+                        过去3年
+                    </div>  
+                </div>
+                <div class="col-sm-11 col-xs-12 history-line">
+                    <div id="history-line"></div>
+                </div>
+            </div> 
+        </div>
+<script src="~/app/js/Circuit/CircuitMain.js"></script>

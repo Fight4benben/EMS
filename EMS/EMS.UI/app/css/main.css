@@ -181,6 +181,8 @@ to {top:-7px;}
 @media (max-width:414px){.build-info-le2{height: 400px; }}
 .le-time{
     width: 100px;
+    height:300px;
+    overflow-y:auto;
 }
 @media (max-width:414px){
     .le-time {
@@ -348,6 +350,10 @@ to {top:-7px;}
    .cp-compareanalysis{min-height: 300px;}
 }
 /*支路用能统计*/
+.treeview .list-group{
+    height:580px;
+    overflow-y: auto;
+}
 .select-width-te{
     float: left;
     width: 67px;
@@ -375,7 +381,7 @@ to {top:-7px;}
     @media (max-width:1260px){.count-info-te-calc{width:68%;}}
     @media (max-width:1205px){.count-info-te-calc{width:63%;}}
 }
-@media (max-width:1024px){.count-info-te{width: 100%; height:auto!important;}.count-info-te-calc{width: 100%;} }
+@media (max-width:1024px){.count-info-te{width: 100%;}.count-info-te-calc{width: 100%;} }
 .count-data{
     width: 250px;
     float: left;
@@ -418,7 +424,7 @@ to {top:-7px;}
 }
 }
 .count-list{
-    padding: 15px 15px 0px 15px;
+    padding: 15px;
 }
 .count-list {marg-left: 50px;}
 @media(max-width:1920px){
@@ -440,7 +446,6 @@ to {top:-7px;}
 .count-list p img{
     margin-top: -2px;
     margin-right: 10px;
-    margin-left: 10px;
 }
 .count-control label{
     float: left;
@@ -520,7 +525,6 @@ to {top:-7px;}
     border: 1px solid #0076D0;
     color: #0076D0;
 }
-
 
 .select-width{
     width: 77px;
@@ -1295,6 +1299,23 @@ to {top:-7px;}
 }
 .abbr-elc{
     border: 1px solid #fff;
+}
+
+.btn-empty{
+    width:45px;
+    height:45px;
+    background-color:#969696;
+    margin-right:5px;
+    margin-bottom:10px;
+    font-size:24px;
+    text-align:center;
+    color:white;
+    padding:6px;
+}
+
+.btn-empty:hover{
+    background-color:#F08500;
+    color:white;
 }
 
  

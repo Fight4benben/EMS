@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace EMS.UI.Controllers
 {
+    [Authorize]
     public class CircuitController : Controller
     {
         // GET: Circuit
