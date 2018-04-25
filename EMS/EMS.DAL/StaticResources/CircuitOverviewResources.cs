@@ -11,8 +11,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 支路当日负荷曲线图
         /// </summary>
-        public static string CircuitLoadSQL = @"SELECT Circuit.F_CircuitID AS CircuitID 
-                                                ,MAX(Circuit.F_CircuitName) AS Name 
+        public static string CircuitLoadSQL = @"SELECT NULL AS CircuitID 
+                                                ,NULL AS Name 
                                                 ,FifteenResult.F_StartTime AS 'Time'
                                                 ,FifteenResult.F_Value *4 AS Value
                                                 FROM T_MC_MeterFifteenResult AS FifteenResult
@@ -89,8 +89,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 最近48小时用能数据
         /// </summary>
-        public static string Circuit48HoursSQL = @"SELECT Circuit.F_CircuitID AS CircuitID
-                                                ,MAX(Circuit.F_CircuitName) AS Name 
+        public static string Circuit48HoursSQL = @"SELECT NULL AS CircuitID
+                                                ,NULL AS Name 
                                                 ,MAX (HourResult.F_StartHour) AS 'Time'
                                                 ,HourResult.F_Value AS Value
                                                 FROM T_MC_MeterHourResult AS HourResult
@@ -107,8 +107,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 最近31天用能数据
         /// </summary>
-        public static string Circuit31DaysSQL = @"SELECT Circuit.F_CircuitID AS CircuitID
-                                                ,MAX(Circuit.F_CircuitName) AS Name 
+        public static string Circuit31DaysSQL = @"SELECT NULL AS CircuitID
+                                                ,NULL AS Name 
                                                 ,DayResult.F_StartDay AS 'Time'
                                                 ,DayResult.F_Value AS Value
                                                 FROM T_MC_MeterDayResult AS DayResult
@@ -125,8 +125,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 最近12个月天用能数据
         /// </summary>
-        public static string Circuit12MonthSQL = @"SELECT Circuit.F_CircuitID AS CircuitID
-                                                ,MAX(Circuit.F_CircuitName) AS Name 
+        public static string Circuit12MonthSQL = @"SELECT NULL AS CircuitID
+                                                ,NULL AS Name 
                                                 ,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult DayResult
@@ -143,8 +143,8 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 最近3年用能数据
         /// </summary>
-        public static string Circuit3YearSQL = @"SELECT Circuit.F_CircuitID AS CircuitID
-                                                ,MAX(Circuit.F_CircuitName) AS Name 
+        public static string Circuit3YearSQL = @"SELECT NULL AS CircuitID
+                                                ,NULL AS Name 
                                                 ,DATEADD(YY,DATEDIFF(YY,0,DayResult.F_StartDay),0) AS 'Time'
                                                 ,SUM (DayResult.F_Value) AS Value
                                                 FROM T_MC_MeterDayResult DayResult

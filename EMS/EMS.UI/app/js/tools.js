@@ -19,6 +19,12 @@ var EMS = {
 				return "0"+num;
 
 			return num;
+		},
+		sortByObjTime:function(a,b){
+			var dateA = new Date(a.time);
+			var dateB = new Date(b.time);
+
+			return dateA>dateB ? 1 : -1;
 		}
 	},
 
@@ -148,10 +154,10 @@ var EMS = {
 			            tooltip: {
 			                trigger: 'axis'
 			            },
-			            legend: {
+			            /*legend: {
 			                data: legendData,
 			                bottom:'bottom'
-			            },
+			            },*/
 			            grid: {
 			                left: 50,
 			                right: 10,
@@ -172,6 +178,12 @@ var EMS = {
 		            series: series,
             	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
         	};
+
+        	if(legendData != undefined)
+        		option.legend =  {
+			                data: legendData,
+			                bottom:'bottom'
+			            };
 
         	charts.init($Line.get(0),'macarons').setOption(option);
 		}

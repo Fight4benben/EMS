@@ -17,6 +17,7 @@ var CircuitMain = (function(){
 				showEnergyButtons(data);
 				showCircuits(data);
 				showCompareInfo(data);
+				showLoadingCurve(data);
 			});
 		}
 
@@ -83,6 +84,10 @@ var CircuitMain = (function(){
 				var todayValue;
 				var yesterdayValue;
 				$.each(data.momDayData, function(key, val) {
+
+					if(!val.hasOwnProperty('time'))
+						return true;//相当于continue
+
 					if(new Date(val.time).toLocaleDateString() == new Date().toLocaleDateString()){
 						$("#today>p").text(val.value);
 						todayValue = val.value;
@@ -96,6 +101,8 @@ var CircuitMain = (function(){
 					var diff = todayValue- yesterdayValue ;
 					$("#dayTrend>p").eq(0).text(diff);
 					$("#dayTrend>p").eq(1).text(((diff/yesterdayValue)*100).toFixed(1)+"%");
+					diff>0 ? $("#dayTrend>span").html('<img src="/app/img/survey-up.png">'):$("#dayTrend>span").html('<img src="/app/img/survey-down.png">');
+
 				}else{
 					$("#dayTrend>p").eq(0).text("-");
 					$("#dayTrend>p").eq(1).text("-");
@@ -106,10 +113,63 @@ var CircuitMain = (function(){
 				var curMonthValue;
 				var lastMonthValue;
 				$.each(data.momMonthData, function(key, val) {
-					
-				});
-			}
 
+					if(!val.hasOwnProperty('time'))
+						return true;//相当于continue
+
+					if(new Date(val.time).getMonth() == new Date().getMonth()){
+						$("#curMonth>p").text(val.value);
+						curMonthValue = val.value;
+					}else{
+						$("#lastMonth>p").text(val.value);
+						lastMonthValue = val.value;
+					}
+				});
+
+				if(curMonthValue !== undefined && lastMonthValue !== undefined){
+					var diff = curMonthValue- lastMonthValue ;
+					$("#monthTrend>p").eq(0).text(diff.toFixed(1));
+					$("#monthTrend>p").eq(1).text(((diff/yesterdayValue)*100).toFixed(1)+"%");
+
+					diff>0 ? $("#monthTrend>span").html('<img src="/app/img/survey-up.png">'):$("#monthTrend>span").html('<img src="/app/img/survey-down.png">');
+				}else{
+					$("#monthTrend>p").eq(0).text("-");
+					$("#monthTrend>p").eq(1).text("-");
+				}
+			}
+		}
+
+		//显示负荷曲线
+		function showLoadingCurve(data){
+
+			$("#survey_powerline").html("");
+
+			if(!data.hasOwnProperty('loadData'))
+				return;
+			var loadData = data.loadData;
+
+			loadData.sort(EMS.Tool.sortByObjTime);
+
+			var times = [];
+			var values = [];
+
+			$.each(loadData, function(key, val) {
+				var currentTime = new Date(val.time);
+				times.push(currentTime.getHours()+":"+currentTime.getMinutes());
+				values.push(val.value);
+			});
+
+			var series = {
+				type:'line',
+				data:values
+			};
+
+			EMS.Chart.showLine(echarts,$("#survey_powerline"),undefined,times,series);
+
+		}
+
+		//显示趋势曲线
+		function showTrendData(data){
 
 		}
 
