@@ -7,9 +7,11 @@ var CircuitMain = (function(){
 			getDataFromServer(url,"");
 		}
 
+		var trendDatas={};
+
 		function getDataFromServer(url,params){
 			$.getJSON(url, params, function(data) {
-				console.log(data);
+				//console.log(data);
 				if(data.hasOwnProperty('message'))
 					location = "/Account/Login";
 
@@ -18,6 +20,7 @@ var CircuitMain = (function(){
 				showCircuits(data);
 				showCompareInfo(data);
 				showLoadingCurve(data);
+				showTrendData(data);
 			});
 		}
 
@@ -28,6 +31,12 @@ var CircuitMain = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+
+			$("#buildinglist").change(function(event) {
+				
+				var url = "/api/circuitoverview";
+				getDataFromServer(url,"buildId="+$("#buildinglist").val())
+			});
 		};
 
 		//显示分类列表
@@ -42,21 +51,29 @@ var CircuitMain = (function(){
 
 				switch(val.energyItemCode){
 					case "01000":
-						$("#te_surveyBtns").append('<acronym title="电"><button class="btn btn-elc" type="button"></button></acronym>');
+						$("#te_surveyBtns").append('<acronym title="电"><button class="btn btn-elc" code="'+val.energyItemCode+'" type="button"></button></acronym>');
 					break;
 					case "02000":
-						$("#te_surveyBtns").append('<acronym title="水"><button class="btn btn-water" type="button"></button></acronym>');
+						$("#te_surveyBtns").append('<acronym title="水"><button class="btn btn-water" code="'+val.energyItemCode+'" type="button"></button></acronym>');
 					break;
 					case "13000":
-						$("#te_surveyBtns").append('<acronym title="光伏"><button class="btn btn-solar" type="button"></button></acronym>');
+						$("#te_surveyBtns").append('<acronym title="光伏"><button class="btn btn-solar" code="'+val.energyItemCode+'" type="button"></button></acronym>');
 					break;
 					default:
-						$("#te_surveyBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" type="button">'+
+						$("#te_surveyBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" code="'+val.energyItemCode+'" type="button">'+
 							val.energyItemName.substring(0,1)+'</button></acronym>');
 				}
 			});
 
 			$("#te_surveyBtns button").eq(0).css('background-color','#F08500');
+			$("#te_surveyBtns button").click(function(event) {
+				$("#te_surveyBtns button").css('background-color','#969696');
+				var $this = $(this);
+				$this.css('background-color','#F08500');
+
+				var url = "/api/circuitoverview";
+				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+$this.attr('code'))
+			});
 		};
 
 		//填充支路信息
@@ -66,6 +83,12 @@ var CircuitMain = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.circuits,$("#circuits"),"circuitName","circuitId");
+
+			$("#circuits").change(function(event) {
+				
+				var url = "/api/circuitoverview";
+				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+"&circuitId="+$(this).val())
+			});
 		}
 
 		//显示同环比信息
@@ -99,7 +122,7 @@ var CircuitMain = (function(){
 
 				if(todayValue !== undefined && yesterdayValue !== undefined){
 					var diff = todayValue- yesterdayValue ;
-					$("#dayTrend>p").eq(0).text(diff);
+					$("#dayTrend>p").eq(0).text(diff.toFixed(1));
 					$("#dayTrend>p").eq(1).text(((diff/yesterdayValue)*100).toFixed(1)+"%");
 					diff>0 ? $("#dayTrend>span").html('<img src="/app/img/survey-up.png">'):$("#dayTrend>span").html('<img src="/app/img/survey-down.png">');
 
@@ -129,7 +152,7 @@ var CircuitMain = (function(){
 				if(curMonthValue !== undefined && lastMonthValue !== undefined){
 					var diff = curMonthValue- lastMonthValue ;
 					$("#monthTrend>p").eq(0).text(diff.toFixed(1));
-					$("#monthTrend>p").eq(1).text(((diff/yesterdayValue)*100).toFixed(1)+"%");
+					$("#monthTrend>p").eq(1).text(((diff/lastMonthValue)*100).toFixed(1)+"%");
 
 					diff>0 ? $("#monthTrend>span").html('<img src="/app/img/survey-up.png">'):$("#monthTrend>span").html('<img src="/app/img/survey-down.png">');
 				}else{
@@ -143,9 +166,16 @@ var CircuitMain = (function(){
 		function showLoadingCurve(data){
 
 			$("#survey_powerline").html("");
+			clearElementContent($("#p_max"));
+			clearElementContent($("#p_min"));
+			clearElementContent($("#p_avg"));
 
 			if(!data.hasOwnProperty('loadData'))
 				return;
+
+			if(data.loadData.length ==0)
+				return;
+
 			var loadData = data.loadData;
 
 			loadData.sort(EMS.Tool.sortByObjTime);
@@ -166,11 +196,123 @@ var CircuitMain = (function(){
 
 			EMS.Chart.showLine(echarts,$("#survey_powerline"),undefined,times,series);
 
+			var max = _.max(values);
+			var min = _.min(values);
+			var avg = _.sum(values)/values.length;
+			$("#p_max").html(max.toFixed(1));
+			$("#p_min").html(min.toFixed(1));
+			$("#p_avg").html(avg.toFixed(1));
 		}
 
 		//显示趋势曲线
 		function showTrendData(data){
 
+			clearElementContent($("#history-line"));
+
+			var id =$(".history-time-select")[0].id;
+
+			if(data.hasOwnProperty('last48HoursData')){
+				trendDatas.hourValues = data.last48HoursData;
+
+				bindClick($("#trend_hours"),"hourValues");
+			}
+
+			if(data.hasOwnProperty('last31DaysData')){
+				trendDatas.dayValues = data.last31DaysData;
+
+				bindClick($("#trend_days"),"dayValues");
+			}
+
+			if(data.hasOwnProperty('last12MonthData')){
+				trendDatas.monthValues = data.last12MonthData;
+				bindClick($("#trend_month"),"monthValues")
+			}
+
+			if(data.hasOwnProperty('last3YearData')){
+				trendDatas.yearValues = data.last3YearData;
+				bindClick($("#trend_year"),"yearValues")
+			}
+
+
+			switch(id){
+				case "trend_hours":
+					showTrendDataById("H","last48HoursData",data);
+				break;
+				case "trend_days":
+					showTrendDataById("D","last31DaysData",data);
+				break;
+				case "trend_months":
+					showTrendDataById("M","last12MonthData",data);
+				break;
+				case "trend_years":
+					showTrendDataById("Y","last3YearData",data);
+				break;
+			}
+
+
+		}
+
+		function showTrendDataById(type,dataName,data){
+			if(!data.hasOwnProperty(dataName))
+				return;
+
+			if(data[dataName].length ==0)
+				return;
+
+			var barData = data[dataName];
+			barData.sort(EMS.Tool.sortByObjTime);
+
+			var times = [];
+			var values = [];
+
+			$.each(barData, function(index, val) {
+				var currentTime = new Date(val.time);
+				switch(type){
+					case "H":
+						times.push(currentTime.toLocaleDateString() + " "+currentTime.getHours());
+					break;
+					case "D":
+						times.push(currentTime.toLocaleDateString());
+					break;
+					case "M":
+						times.push(currentTime.getFullYear() + "/"+ currentTime.getMonth());
+					break;
+					case "Y":
+						times.push(currentTime.getFullYear());
+					break;
+				}
+				values.push(val.value);
+			});
+
+			var series={
+				type:'bar',
+				data:values
+			};
+
+			var grid ={
+                left: 30,
+                right: 10,
+                top:5,
+                bottom:25
+            };
+
+			EMS.Chart.showBar(echarts,$("#history-line"),undefined,times,series,grid);
+		}
+
+		//绑定48，31天12月等click事件
+		function bindClick($Trend,trendName){
+			$Trend.click(function(event) {
+				var $this = $(this);
+
+				if($this[0].id == $(".history-time-select")[0].id)
+					return;
+
+				$(".history-time>div").removeClass('history-time-select');
+
+				$this.addClass('history-time-select');
+
+				showTrendDataById("D",trendName,trendDatas);
+			});
 		}
 
 		//清空DIV中的内容

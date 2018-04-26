@@ -32,10 +32,11 @@ namespace EMS.UI.Controllers
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
-        public object Get(string buildId, string date)
+        public object Get(string buildId)
         {
             try
             {
+                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
                 return service.GetCircuitOverviewViewModel(buildId, date);
             }
             catch (Exception e)
@@ -52,10 +53,11 @@ namespace EMS.UI.Controllers
         /// <param name="energyCode">分类能耗代码</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
-        public object Get(string buildId, string energyCode, string date)
+        public object Get(string buildId, string energyCode)
         {
             try
             {
+                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
                 return service.GetCircuitOverviewViewModel(buildId, energyCode, date);
             }
             catch (Exception e)
@@ -74,10 +76,11 @@ namespace EMS.UI.Controllers
         /// <param name="circuitId">支路编码</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及传入支路编码的数据</returns>
-        public object Get(string buildId, string energyCode, string circuitId, string date)
+        public object Get(string buildId, string energyCode, string circuitId)
         {
             try
             {
+                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
                 return service.GetCircuitOverviewViewModel(buildId, energyCode, circuitId, date);
             }
             catch (Exception e)

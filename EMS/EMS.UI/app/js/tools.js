@@ -186,6 +186,46 @@ var EMS = {
 			            };
 
         	charts.init($Line.get(0),'macarons').setOption(option);
+		},
+		showBar:function(charts,$Bar,legendData,xData,series,gridSetting){
+			var option = {
+			            tooltip: {
+			                trigger: 'axis'
+			            },
+			            /*legend: {
+			                data: legendData,
+			                bottom:'bottom'
+			            },*/
+			            grid: {
+			                left: 50,
+			                right: 10,
+			                top:5,
+			                bottom:'20%'
+			            },
+			            xAxis: {
+			                type: 'category',
+			                data: xData
+			            },
+			            yAxis: {
+			                type: 'value',
+			                axisLabel: {
+			                formatter: '{value}'
+			            }
+			        },
+		            series: series,
+            	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+        	};
+
+        	if(legendData != undefined)
+        		option.legend =  {
+			                data: legendData,
+			                bottom:'bottom'
+			            };
+			if(gridSetting != undefined)
+				option.grid = gridSetting;
+
+
+        	charts.init($Bar.get(0),'macarons').setOption(option);
 		}
 	}
 

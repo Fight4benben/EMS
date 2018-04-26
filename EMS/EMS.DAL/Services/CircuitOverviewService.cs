@@ -71,7 +71,6 @@ namespace EMS.DAL.Services
         /// <returns>返回完整的数据：包含能源按钮列表，回路列表，以及第一支路数据</returns>
         public CircuitOverviewViewModel GetCircuitOverviewViewModel(string buildId, string date)
         {
-           
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
             List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
