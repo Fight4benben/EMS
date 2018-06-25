@@ -93,6 +93,7 @@
     <Compile Include="Services\CircuitCompareService.cs" />
     <Compile Include="Services\CircuitOverviewService.cs" />
     <Compile Include="Services\CircuitReportService.cs" />
+    <Compile Include="Services\EnergyItemOverviewService.cs" />
     <Compile Include="Services\HistoryDataService.cs" />
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="ViewModels\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />
+    <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\Excel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />

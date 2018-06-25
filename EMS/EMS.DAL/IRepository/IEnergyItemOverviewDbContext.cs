@@ -11,7 +11,7 @@ namespace EMS.DAL.IRepository
     {
         List<EnergyItemValue> GetEnergyItemMomDayValueList(string buildId, string date);
         List<EnergyItemValue> GetEnergyItemRankByMonthValueList(string buildId, string date);
-        List<EnergyItemValue> GetEnergyItemMomLast31DayPieChartValueList(string buildId, string date);
-        List<EnergyItemValue> GetEnergyItemMomLast31DayValueList(string buildId, string date);
+        List<EnergyItemValue> GetEnergyItemLast31DayPieChartValueList(string buildId, string date);
+        List<EnergyItemValue> GetEnergyItemLast31DayValueList(string buildId, string date);
     }
 }
