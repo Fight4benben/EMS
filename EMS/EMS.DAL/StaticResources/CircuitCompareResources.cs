@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.StaticResources
 {
-    class CircuitCompareResources
+    public class CircuitCompareResources
     {
         /// <summary>
-        /// 支路当日负荷曲线图
+        /// 支路用能同比分析
         /// </summary>
         public static string CircuitCompareSQL = @"SELECT Circuit.F_CircuitID AS CircuitID
                                                 ,MAX(Circuit.F_CircuitName) AS Name 

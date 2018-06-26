@@ -10,19 +10,18 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class CircuitCompareDbContext : ICircuitCompareDbContext
+    public class EnergyItemCompareDbContext:IEnergyItemCompareDbContext
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<CircuitValue> GetCircuitCompareValueList(string buildId, string circuitId, string date)
+        public List<EnergyItemValue> GetEnergyItemCompareValueList(string buildId, string energyItemCode, string date)
         {
-            //throw new NotImplementedException();
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EnergyItemCode",energyItemCode),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<CircuitValue>(CircuitCompareResources.CircuitCompareSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EnergyItemValue>(EnergyItemCompareResources.EnergyItemCompareSQL, sqlParameters).ToList();
         }
     }
 }
