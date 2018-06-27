@@ -70,6 +70,7 @@
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
     <Compile Include="Entities\EnergyItemDict.cs" />
+    <Compile Include="Entities\EnergyItemInfo.cs" />
     <Compile Include="Entities\EnergyItemValue.cs" />
     <Compile Include="Entities\HistoryDB.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="RepositoryImp\CircuitReportDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemOverviewDbContext.cs" />
+    <Compile Include="RepositoryImp\EnergyItemTreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\HistoryDbContext.cs" />
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="StaticResources\CircuitResources.cs" />
     <Compile Include="StaticResources\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\EnergyItemOverviewResources.cs" />
+    <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="Utils\Util.cs" />

@@ -1,4 +1,5 @@
-﻿using EMS.DAL.ViewModels;
+﻿using EMS.DAL.Entities;
+using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace EMS.DAL.IRepository
 {
     public interface IEnergyItemTreeView
     {
-        List<TreeViewModel> GetEnergyItemTreeViewValueList(string buildId, string energyItem);
+        List<TreeViewModel> GetEnergyItemTreeViewList(string buildId);
+        List<TreeViewModel> GetEnergyItemTreeViewList(string buildId, string energyItemCode);
     }
 }

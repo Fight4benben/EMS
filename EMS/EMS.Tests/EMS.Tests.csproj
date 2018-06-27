@@ -99,6 +99,7 @@
     <Compile Include="Controllers\CircuitOverviewControllerTest.cs" />
     <Compile Include="DbContext\CircuitDbContextTest.cs" />
     <Compile Include="DbContext\CircuitOverviewDbContextTest.cs" />
+    <Compile Include="DbContext\EnergyItemTreeViewDbContextTest.cs" />
     <Compile Include="DbContext\UnitTest1.cs" />
     <Compile Include="DbContext\HomeContextTest.cs" />
     <Compile Include="DbContext\HistoryDbContextTest.cs" />
