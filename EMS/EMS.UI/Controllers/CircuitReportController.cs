@@ -1,5 +1,6 @@
 ﻿using EMS.DAL.Services;
 using EMS.DAL.ViewModels;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,15 @@ namespace EMS.UI.Controllers
             return service.GetViewModel(buildId, energyCode, type, date);
         }
 
-        public object GetReport(string buildId, string energyCode,string circuits, string type, string date)
+        [HttpPost]
+        public object Report([FromBody] JObject obj)
         {
-            return service.GetViewModel(buildId, energyCode, circuits,type, date);
+            string buildId = obj["buildId"].ToString() ;
+            string energyCode = obj["energyCode"].ToString();
+            string circuits = obj["circuits"].ToString();
+            string type = obj["type"].ToString();
+            string date = obj["date"].ToString();
+            return service.GetViewModel(buildId, energyCode, circuits, type, date);
         }
     }
 }

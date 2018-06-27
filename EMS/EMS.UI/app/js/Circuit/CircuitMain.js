@@ -326,6 +326,9 @@ var CircuitMain = (function(){
 })();
 
 jQuery(document).ready(function($) {
+
+	$("#flenergy").attr("class","start active");
+	$("#trunk").attr("class","active");
 	
 	var main = new CircuitMain();
 

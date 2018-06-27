@@ -14,10 +14,14 @@ var CircuitReport = (function(){
 		function initSearchButton(){
 			//查询数据
 			$("#daySearch").click(function(event) {
-				getDataFromServer("/api/CircuitReport/report",
+				/*getDataFromServer("/api/CircuitReport/report",
 						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&circuits="+getCheckedTreeIdArray().join(',')+
-						"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
+						"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());*/
+				getDataFromServer("/api/CircuitReport/report",{
+					buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
+					circuits:getCheckedTreeIdArray().join(','),type:getTypeByReportSelected(),date:$("#daycalendarBox").val()
+				},'POST');
 			});
 
 			//导出的Excel
@@ -39,7 +43,7 @@ var CircuitReport = (function(){
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 					//发送请求
 					getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=DD"+"&date="+$("#daycalendarBox").val());
 				}
 
@@ -60,7 +64,7 @@ var CircuitReport = (function(){
 
 					//发送请求
 					getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=MM"+"&date="+$("#daycalendarBox").val());
 				}
 			});
@@ -80,7 +84,7 @@ var CircuitReport = (function(){
 
 					//发送请求
 					getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$current.attr('value')+
+						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=YY"+"&date="+$("#daycalendarBox").val());
 				}
 			});
@@ -138,14 +142,24 @@ var CircuitReport = (function(){
 		};
 
 		//从服务器获取json数据
-		function getDataFromServer(url,params){
-			jQuery.getJSON(url,params, function(data) {
-			  //console.log(data);
-			  showBuilds(data);
-			  showEnergys(data);
-			  showTreeview(data);
-			  showTable(data);
-			});
+		function getDataFromServer(url,params,httpType){
+			
+			if(httpType =="POST")
+				$.post(url, params, function(data, textStatus, xhr) {
+					showBuilds(data);
+					showEnergys(data);
+					showTreeview(data);
+					showTable(data);
+				});
+			else
+				jQuery.getJSON(url,params, function(data) {
+				  //console.log(data);
+				  showBuilds(data);
+				  showEnergys(data);
+				  showTreeview(data);
+				  showTable(data);
+				});
+			
 		};
 
 		//生成建筑列表，追加到select中
@@ -159,7 +173,7 @@ var CircuitReport = (function(){
 				var buildId = $(this).val();
 				
 				 //console.log($("#daycalendarBox").val());
-				getDataFromServer("/api/CircuitReport/report","buildId="+buildId+"&type="+getTypeByReportSelected+"&date="+$("#daycalendarBox").val());
+				getDataFromServer("/api/CircuitReport/report","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 			});
 		};
 
@@ -336,6 +350,9 @@ jQuery(document).ready(function($) {
 
 	$("body").addClass('page-header-fixed page-sidebar-fixed page-footer-fixed');
 	$('.header').addClass('navbar-fixed-top');
+
+	$("#flenergy").attr("class","start active");
+	$("#count").attr("class","active");
 	
 	var circuitReport = new CircuitReport();
 

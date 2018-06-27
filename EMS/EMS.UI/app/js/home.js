@@ -313,6 +313,9 @@ jQuery(document).ready(function($) {
 
 	$("body").addClass('page-header-fixed page-sidebar-fixed page-footer-fixed');
 	$('.header').addClass('navbar-fixed-top');
+
+	$("#fistpage").attr("class","start active");
+	$("#fistpage").attr("class","active");
 	
 	var home = new Home();
 	home.initDom();
