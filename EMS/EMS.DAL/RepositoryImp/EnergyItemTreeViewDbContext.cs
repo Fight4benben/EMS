@@ -23,16 +23,13 @@ namespace EMS.DAL.RepositoryImp
             };
             List<EnergyItemInfo> energyItemInfos = _db.Database.SqlQuery<EnergyItemInfo>(EnergyItemTreeViewResources.EnergyItemTreeViewSQL, sqlParameters).ToList();
 
-            var parentEnergyItem = energyItemInfos.Where(c => (c.EnergyItemCode == "01A00" || c.EnergyItemCode == "01B00"
-                                                           || c.EnergyItemCode == "01C00" || c.EnergyItemCode == "01D00"));
-
-            foreach (var item in parentEnergyItem)
+            var parentItemCodes = energyItemInfos.Where(c => (c.ParentItemCode == "-1" || string.IsNullOrEmpty(c.ParentItemCode)));
+            foreach (var item in parentItemCodes)
             {
                 TreeViewModel parentNode = new TreeViewModel();
+                List<TreeViewModel> children = GetChildrenNodes(energyItemInfos, item);
                 parentNode.Id = item.EnergyItemCode;
                 parentNode.Text = item.EnergyItemName;
-
-                List<TreeViewModel> children = GetChildrenNodes2Level(energyItemInfos, item);
                 if (children.Count != 0)
                     parentNode.Nodes = children;
                 treeViewModel.Add(parentNode);
@@ -43,7 +40,53 @@ namespace EMS.DAL.RepositoryImp
 
         public List<TreeViewModel> GetEnergyItemTreeViewList(string buildId, string energyItemCode)
         {
-            throw new NotImplementedException();
+            List<TreeViewModel> treeViewModel = new List<TreeViewModel>();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyItemCode)
+            };
+            List<EnergyItemInfo> energyItemInfos = _db.Database.SqlQuery<EnergyItemInfo>(EnergyItemTreeViewResources.EnergyItemTreeViewByEnergyCodeSQL, sqlParameters).ToList();
+
+            var parentItemCodes = energyItemInfos.Where(c => (c.ParentItemCode == "-1" || string.IsNullOrEmpty(c.ParentItemCode)));
+            foreach (var item in parentItemCodes)
+            {
+                TreeViewModel parentNode = new TreeViewModel();
+                List<TreeViewModel> children = GetChildrenNodes(energyItemInfos, item);
+                parentNode.Id = item.EnergyItemCode;
+                parentNode.Text = item.EnergyItemName;
+                if (children.Count != 0)
+                    parentNode.Nodes = children;
+                treeViewModel.Add(parentNode);
+            }
+
+            return treeViewModel;
+        }
+
+
+        /// <summary>
+        /// 递归调用方式填充树状结构的子节点
+        /// </summary>
+        /// <param name="circuits"></param>
+        /// <param name="circuit"></param>
+        /// <returns></returns>
+        List<TreeViewModel> GetChildrenNodes(List<EnergyItemInfo> energyItemInfos, EnergyItemInfo energyItemInfo)
+        {
+            string parentCode = energyItemInfo.EnergyItemCode;
+            List<TreeViewModel> circuitList = new List<TreeViewModel>();
+            var children = energyItemInfos.Where(c => c.ParentItemCode == parentCode);
+
+            foreach (var item in children)
+            {
+                TreeViewModel node = new TreeViewModel();
+                node.Id = item.EnergyItemCode;
+                node.Text = item.EnergyItemName;
+                if (GetChildrenNodes(energyItemInfos, item).Count != 0)
+                    node.Nodes = GetChildrenNodes(energyItemInfos, item);
+
+                circuitList.Add(node);
+            }
+
+            return circuitList;
         }
 
         /// <summary>
