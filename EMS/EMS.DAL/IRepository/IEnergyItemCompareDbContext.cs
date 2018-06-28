@@ -9,6 +9,6 @@ namespace EMS.DAL.IRepository
 {
     public interface IEnergyItemCompareDbContext
     {
-        List<EnergyItemValue> GetEnergyItemCompareValueList(string buildId, string circuitId, string date);
+        List<EnergyItemValue> GetEnergyItemCompareValueList(string buildId, string energyItemCode, string date);
     }
 }
