@@ -1,5 +1,6 @@
 ﻿using EMS.DAL.Services;
 using EMS.DAL.ViewModels;
+using EMS.Tests.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -21,23 +22,12 @@ namespace EMS.Tests.Services
             EnergyItemOverviewModel EnergyItemOverviewView = service.GetEnergyItemOverviewViewModel("admin");
             EnergyItemOverviewModel EnergyItemOverviewView2 = service.GetEnergyItemOverviewViewModel("000001G001", today.ToString());
 
-            Console.WriteLine(GetJson(EnergyItemOverviewView));
+            Console.WriteLine(UtilTest.GetJson(EnergyItemOverviewView));
             //Console.WriteLine(circuitOverviewView2);
             //Console.WriteLine(circuitOverviewView3);
             //Console.WriteLine(circuitOverviewView4);
             //Console.WriteLine(circuitOverviewView5);
         }
 
-        public static string GetJson(object o)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            JavaScriptSerializer json = new JavaScriptSerializer();
-            json.Serialize(o, stringBuilder);
-            return stringBuilder.ToString();
-
-            // 和下面的代码有同样的效果
-            //JavaScriptSerializer json = new JavaScriptSerializer();
-            //return json.Serialize(o);
-        }
     }
 }

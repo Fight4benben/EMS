@@ -2,6 +2,7 @@
 using EMS.DAL.RepositoryImp;
 using EMS.DAL.ViewModels;
 using EMS.Tests.Services;
+using EMS.Tests.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace EMS.Tests.DbContext
             //DateTime today = DateTime.Now;
 
             List<TreeViewModel> treeViewModel = context.GetEnergyItemTreeViewList("000001G008");
-            string treeView= EnergyItemOverviewServiceTest.GetJson(treeViewModel);
+            string treeView= UtilTest.GetJson(treeViewModel);
             Console.WriteLine("分项用能列表：{0}", treeView);
             //foreach (var item in treeViewModel)
             //{
