@@ -10,17 +10,27 @@ var CircuitMain = (function(){
 		var trendDatas={};
 
 		function getDataFromServer(url,params){
+			EMS.Loading.show($("#main-content").parent('div'));
 			$.getJSON(url, params, function(data) {
 				//console.log(data);
 				if(data.hasOwnProperty('message'))
 					location = "/Account/Login";
+				try{
+					showBuildList(data);
+					showEnergyButtons(data);
+					showCircuits(data);
+					showCompareInfo(data);
+					showLoadingCurve(data);
+					showTrendData(data);
+				}catch{
 
-				showBuildList(data);
-				showEnergyButtons(data);
-				showCircuits(data);
-				showCompareInfo(data);
-				showLoadingCurve(data);
-				showTrendData(data);
+				}finally{
+					EMS.Loading.hide($("#main-content").parent('div'));
+				}
+
+				
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
 			});
 		}
 

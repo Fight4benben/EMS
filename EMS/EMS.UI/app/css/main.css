@@ -424,7 +424,7 @@ to {top:-7px;}
 }
 }
 .count-list{
-    padding: 15px;
+    padding: 15px 15px 0 15px;
 }
 .count-list {marg-left: 50px;}
 @media(max-width:1920px){
@@ -439,6 +439,7 @@ to {top:-7px;}
     padding: 10px;
     color: #007cde;
     margin-top: -15px;
+    margin-left:0;
 }
 .count-select{
 	margin-right:90px;
