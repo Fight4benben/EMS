@@ -143,22 +143,41 @@ var CircuitReport = (function(){
 
 		//从服务器获取json数据
 		function getDataFromServer(url,params,httpType){
-			
+			EMS.Loading.show();
 			if(httpType =="POST")
 				$.post(url, params, function(data, textStatus, xhr) {
-					showBuilds(data);
-					showEnergys(data);
-					showTreeview(data);
-					showTable(data);
+					try{
+						showBuilds(data);
+						showEnergys(data);
+						showTreeview(data);
+						showTable(data);
+					}catch{
+
+					}finally{
+						EMS.Loading.hide();
+					}
+					
+				}).fail(function(e){
+					EMS.Tool.statusProcess(e.status);
 				});
 			else
 				jQuery.getJSON(url,params, function(data) {
-				  //console.log(data);
-				  showBuilds(data);
-				  showEnergys(data);
-				  showTreeview(data);
-				  showTable(data);
+
+				  try{
+						showBuilds(data);
+					  	showEnergys(data);
+					    showTreeview(data);
+					    showTable(data);
+					}catch{
+
+					}finally{
+						EMS.Loading.hide();
+					}
+				}).fail(function(e){
+					EMS.Tool.statusProcess(e.status);
 				});
+
+
 			
 		};
 

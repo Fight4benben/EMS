@@ -63,14 +63,22 @@ var Home = (function(){
 
 		//从服务器端获取数据的方法
 		function getDataFromServer(url,params){
-
+			EMS.Loading.show();
 			jQuery.getJSON(url,params, function(data) {
 			  //console.log(data);
-			  showBuildList(data);
-			  showBuildInfo(data);
-			  showEnergyClassifyTable(data);
-			  showEnergyItemPie(data);
-			  showCompareEnergyButtonAndShowLineAndCompare(data);
+			  try{
+				  showBuildList(data);
+				  showBuildInfo(data);
+				  showEnergyClassifyTable(data);
+				  showEnergyItemPie(data);
+				  showCompareEnergyButtonAndShowLineAndCompare(data);
+			  }catch{
+
+			  }finally{
+			  	EMS.Loading.hide();
+			  }
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
 			});
 		};
 
