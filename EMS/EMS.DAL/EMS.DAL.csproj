@@ -83,6 +83,7 @@
     <Compile Include="IRepository\ICircuitOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemCompareDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemOverviewDbContext.cs" />
+    <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
     <Compile Include="RepositoryImp\CircuitCompareDbContext.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="RepositoryImp\CircuitReportDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemOverviewDbContext.cs" />
+    <Compile Include="RepositoryImp\EnergyItemReportDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemTreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\HistoryDbContext.cs" />
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Services\CircuitReportService.cs" />
     <Compile Include="Services\EnergyItemCompareService.cs" />
     <Compile Include="Services\EnergyItemOverviewService.cs" />
+    <Compile Include="Services\EnergyItemReportService.cs" />
     <Compile Include="Services\HistoryDataService.cs" />
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="StaticResources\CircuitResources.cs" />
     <Compile Include="StaticResources\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\EnergyItemOverviewResources.cs" />
+    <Compile Include="StaticResources\EnergyItemReportResources.cs" />
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
+    <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />
     <Compile Include="ViewModels\Excel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />

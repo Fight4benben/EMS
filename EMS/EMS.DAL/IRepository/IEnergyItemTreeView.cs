@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.IRepository
 {
-    public interface IEnergyItemTreeView
+    public interface IEnergyItemTreeViewDbContext
     {
+        List<EnergyItemInfo> GetEnergyItemInfoList(string buildId);
         List<TreeViewModel> GetEnergyItemTreeViewList(string buildId);
         List<TreeViewModel> GetEnergyItemTreeViewList(string buildId, string energyItemCode);
     }

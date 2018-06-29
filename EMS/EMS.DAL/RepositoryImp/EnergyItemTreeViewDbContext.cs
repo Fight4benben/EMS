@@ -11,9 +11,23 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class EnergyItemTreeViewDbContext : IEnergyItemTreeView
+    public class EnergyItemTreeViewDbContext : IEnergyItemTreeViewDbContext
     {
         private EnergyDB _db = new EnergyDB();
+
+        /// <summary>
+        /// 根据建筑ID获取分项用能列表
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <returns></returns>
+        public List<EnergyItemInfo> GetEnergyItemInfoList(string buildId)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId)
+            };
+            List<EnergyItemInfo> energyItemInfos = _db.Database.SqlQuery<EnergyItemInfo>(EnergyItemTreeViewResources.EnergyItemTreeViewSQL, sqlParameters).ToList();
+            return energyItemInfos;
+        }
 
         public List<TreeViewModel> GetEnergyItemTreeViewList(string buildId)
         {

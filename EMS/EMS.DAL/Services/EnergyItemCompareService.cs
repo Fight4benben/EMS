@@ -35,7 +35,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
 
-            IEnergyItemTreeView energyItemtreeView = new EnergyItemTreeViewDbContext();
+            IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
             List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
 
             List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, energyCode, today.ToString());
@@ -60,7 +60,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
 
-            IEnergyItemTreeView energyItemtreeView = new EnergyItemTreeViewDbContext();
+            IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
             List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
 
             List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, energyCode, date);
