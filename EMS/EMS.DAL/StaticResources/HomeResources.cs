@@ -55,6 +55,7 @@ namespace EMS.DAL.StaticResources
                                                 WHERE Formula.F_BuildID = @BuildId
                                                 AND ParamInfo.F_IsEnergyValue = 1
                                                 AND Right(EnergyItem.F_EnergyItemCode,3)<>'000'
+                                                AND RIGHT(EnergyItem.F_EnergyItemCode,2) = '00'
                                                 AND F_StartDay BETWEEN DATEADD(DD,-DAY(@EndDate)+1,@EndDate) AND @EndDate
                                                 GROUP BY Formula.F_EnergyItemCode,Formula.F_BuildID,Circuit.F_EnergyItemCode
                                                 ORDER BY Formula.F_EnergyItemCode ASC";
