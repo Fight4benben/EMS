@@ -18,7 +18,7 @@ namespace EMS.Tests.DbContext
         [TestMethod]
         public void TestGetEnergyItemTreeView()
         {
-            IEnergyItemTreeView context = new EnergyItemTreeViewDbContext();
+            IEnergyItemTreeViewDbContext context = new EnergyItemTreeViewDbContext();
             //DateTime today = DateTime.Now;
 
             List<TreeViewModel> treeViewModel = context.GetEnergyItemTreeViewList("000001G008");

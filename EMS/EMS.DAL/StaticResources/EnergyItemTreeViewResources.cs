@@ -9,7 +9,7 @@ namespace EMS.DAL.StaticResources
     public class EnergyItemTreeViewResources
     {
         /// <summary>
-        /// 分项用能树状列表
+        /// 根据建筑ID 分项用能树状列表
         /// </summary>
         public static string EnergyItemTreeViewSQL = @"SELECT T_ST_CalcFormula.F_FormulaID AS FormulaID
                                                         ,T_DT_EnergyItemDict.F_EnergyItemName AS EnergyItemName
