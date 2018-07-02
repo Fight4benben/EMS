@@ -358,7 +358,7 @@ to {top:-7px;}
 }
 /*支路用能统计*/
 .treeview .list-group{
-    height:580px;
+    /*height:580px;*/
     overflow-y: auto;
 }
 .select-width-te{

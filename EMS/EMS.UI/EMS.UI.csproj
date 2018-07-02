@@ -593,6 +593,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Circuit\Report.cshtml" />
     <Content Include="Views\Circuit\Main.cshtml" />
+    <Content Include="Views\Circuit\Compare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />

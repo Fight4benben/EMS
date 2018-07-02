@@ -233,6 +233,9 @@ var CircuitReport = (function(){
 					case "13000":
 						$("#te_countBtns").append('<acronym title="光伏"><button id="solar" class="btn btn-solar" value="13000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
+					default:
+						$("#te_countBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" code="'+val.energyItemCode+'" type="button">'+
+							val.energyItemName.substring(0,1)+'</button></acronym>');
 				}
 			});
 

@@ -22,6 +22,11 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        public ActionResult Compare()
+        {
+            return View();
+        }
+
         public FileResult GetExcel(string buildId, string energyCode, string type, string circuits,string date)
         {
             string basePath = HttpContext.Server.MapPath("~/App_Data/");

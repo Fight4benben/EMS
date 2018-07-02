@@ -239,10 +239,7 @@ var EMS = {
         	};
 
         	if(legendData != undefined)
-        		option.legend =  {
-			                data: legendData,
-			                bottom:'bottom'
-			            };
+        		option.legend =  legendData;
 			if(gridSetting != undefined)
 				option.grid = gridSetting;
 
