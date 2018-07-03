@@ -264,6 +264,7 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />

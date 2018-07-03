@@ -72,7 +72,7 @@ var Home = (function(){
 				  showEnergyClassifyTable(data);
 				  showEnergyItemPie(data);
 				  showCompareEnergyButtonAndShowLineAndCompare(data);
-			  }catch{
+			  }catch(e){
 
 			  }finally{
 			  	EMS.Loading.hide();

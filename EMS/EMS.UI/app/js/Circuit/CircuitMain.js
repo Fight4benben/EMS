@@ -22,7 +22,7 @@ var CircuitMain = (function(){
 					showCompareInfo(data);
 					showLoadingCurve(data);
 					showTrendData(data);
-				}catch{
+				}catch(e){
 
 				}finally{
 					EMS.Loading.hide($("#main-content").parent('div'));

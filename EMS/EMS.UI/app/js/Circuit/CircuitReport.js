@@ -26,9 +26,14 @@ var CircuitReport = (function(){
 
 			//导出的Excel
 			$("#dayExport").click(function(event) {
+				var circuitsArray=[];
+				$.each(getCheckedTreeIdArray(), function(key, val) {
+					circuitsArray.push(val.substr(-4));
+				});
+				
 				window.location = "/Circuit/GetExcel?buildId="+$("#buildinglist").val()+
 				"&energyCode="+$('.btn-solar-selected').attr('value')+
-				"&circuits="+getCheckedTreeIdArray().join(',')+
+				"&circuits="+circuitsArray.join(',')+
 				"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val()
 			});
 		}
@@ -42,9 +47,14 @@ var CircuitReport = (function(){
 
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 					//发送请求
-					getDataFromServer("/api/CircuitReport/report",
+					/*getDataFromServer("/api/CircuitReport/report",
 						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=DD"+"&date="+$("#daycalendarBox").val());
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=DD"+"&date="+$("#daycalendarBox").val());*/
+
+					getDataFromServer("/api/CircuitReport/report",{
+						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
+						circuits:getCheckedTreeIdArray().join(','),type:"DD",date:$("#daycalendarBox").val()
+					},'POST');
 				}
 
 			});
@@ -63,9 +73,14 @@ var CircuitReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/CircuitReport/report",
+					/*getDataFromServer("/api/CircuitReport/report",
 						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=MM"+"&date="+$("#daycalendarBox").val());
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=MM"+"&date="+$("#daycalendarBox").val());*/
+
+					getDataFromServer("/api/CircuitReport/report",{
+						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
+						circuits:getCheckedTreeIdArray().join(','),type:"MM",date:$("#daycalendarBox").val()
+					},'POST');
 				}
 			});
 
@@ -83,9 +98,14 @@ var CircuitReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/CircuitReport/report",
+					/*getDataFromServer("/api/CircuitReport/report",
 						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=YY"+"&date="+$("#daycalendarBox").val());
+						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=YY"+"&date="+$("#daycalendarBox").val());*/
+
+					getDataFromServer("/api/CircuitReport/report",{
+						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
+						circuits:getCheckedTreeIdArray().join(','),type:"YY",date:$("#daycalendarBox").val()
+					},'POST');
 				}
 			});
 		}
@@ -151,7 +171,7 @@ var CircuitReport = (function(){
 						showEnergys(data);
 						showTreeview(data);
 						showTable(data);
-					}catch{
+					}catch(e){
 
 					}finally{
 						EMS.Loading.hide();
@@ -159,6 +179,7 @@ var CircuitReport = (function(){
 					
 				}).fail(function(e){
 					EMS.Tool.statusProcess(e.status);
+					EMS.Loading.hide();
 				});
 			else
 				jQuery.getJSON(url,params, function(data) {
@@ -168,13 +189,14 @@ var CircuitReport = (function(){
 					  	showEnergys(data);
 					    showTreeview(data);
 					    showTable(data);
-					}catch{
+					}catch(e){
 
 					}finally{
 						EMS.Loading.hide();
 					}
 				}).fail(function(e){
 					EMS.Tool.statusProcess(e.status);
+					EMS.Loading.hide();
 				});
 
 
