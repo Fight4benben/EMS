@@ -224,23 +224,23 @@ var CircuitMain = (function(){
 			if(data.hasOwnProperty('last48HoursData')){
 				trendDatas.hourValues = data.last48HoursData;
 
-				bindClick($("#trend_hours"),"hourValues");
+				bindClick($("#trend_hours"),"hourValues","H");
 			}
 
 			if(data.hasOwnProperty('last31DaysData')){
 				trendDatas.dayValues = data.last31DaysData;
 
-				bindClick($("#trend_days"),"dayValues");
+				bindClick($("#trend_days"),"dayValues","D");
 			}
 
 			if(data.hasOwnProperty('last12MonthData')){
 				trendDatas.monthValues = data.last12MonthData;
-				bindClick($("#trend_month"),"monthValues")
+				bindClick($("#trend_months"),"monthValues","M");
 			}
 
 			if(data.hasOwnProperty('last3YearData')){
 				trendDatas.yearValues = data.last3YearData;
-				bindClick($("#trend_year"),"yearValues")
+				bindClick($("#trend_years"),"yearValues","Y");
 			}
 
 
@@ -310,7 +310,7 @@ var CircuitMain = (function(){
 		}
 
 		//绑定48，31天12月等click事件
-		function bindClick($Trend,trendName){
+		function bindClick($Trend,trendName,type){
 			$Trend.click(function(event) {
 				var $this = $(this);
 
@@ -321,7 +321,7 @@ var CircuitMain = (function(){
 
 				$this.addClass('history-time-select');
 
-				showTrendDataById("D",trendName,trendDatas);
+				showTrendDataById(type,trendName,trendDatas);
 			});
 		}
 

@@ -14,10 +14,7 @@ var CircuitReport = (function(){
 		function initSearchButton(){
 			//查询数据
 			$("#daySearch").click(function(event) {
-				/*getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+
-						"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());*/
+				
 				getDataFromServer("/api/CircuitReport/report",{
 					buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
 					circuits:getCheckedTreeIdArray().join(','),type:getTypeByReportSelected(),date:$("#daycalendarBox").val()
@@ -46,10 +43,7 @@ var CircuitReport = (function(){
 				if(isContinue){
 
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
-					//发送请求
-					/*getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=DD"+"&date="+$("#daycalendarBox").val());*/
+					//发送请求	
 
 					getDataFromServer("/api/CircuitReport/report",{
 						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
@@ -73,9 +67,7 @@ var CircuitReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					/*getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=MM"+"&date="+$("#daycalendarBox").val());*/
+					
 
 					getDataFromServer("/api/CircuitReport/report",{
 						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
@@ -98,10 +90,6 @@ var CircuitReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					/*getDataFromServer("/api/CircuitReport/report",
-						"buildId="+$("#buildinglist").val()+"&energyCode="+$('.btn-solar-selected').attr('value')+
-						"&circuits="+getCheckedTreeIdArray().join(',')+"&type=YY"+"&date="+$("#daycalendarBox").val());*/
-
 					getDataFromServer("/api/CircuitReport/report",{
 						buildId:$("#buildinglist").val(),energyCode:$('.btn-solar-selected').attr('value'),
 						circuits:getCheckedTreeIdArray().join(','),type:"YY",date:$("#daycalendarBox").val()
