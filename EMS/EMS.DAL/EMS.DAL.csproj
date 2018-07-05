@@ -66,6 +66,7 @@
     <Compile Include="Entities\Circuit.cs" />
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
+    <Compile Include="Entities\DepartmentValue.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="IRepository\ICircuitCompareDbContext.cs" />
     <Compile Include="IRepository\ICircuitReportDbContext.cs" />
     <Compile Include="IRepository\ICircuitOverviewDbContext.cs" />
+    <Compile Include="IRepository\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemCompareDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="RepositoryImp\CircuitCompareDbContext.cs" />
     <Compile Include="RepositoryImp\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\CircuitReportDbContext.cs" />
+    <Compile Include="RepositoryImp\DepartmentOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemReportDbContext.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Services\CircuitCompareService.cs" />
     <Compile Include="Services\CircuitOverviewService.cs" />
     <Compile Include="Services\CircuitReportService.cs" />
+    <Compile Include="Services\DepartmentOverviewService.cs" />
     <Compile Include="Services\EnergyItemCompareService.cs" />
     <Compile Include="Services\EnergyItemOverviewService.cs" />
     <Compile Include="Services\EnergyItemReportService.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\CircuitResources.cs" />
+    <Compile Include="StaticResources\DepartmentOverviewResources.cs" />
     <Compile Include="StaticResources\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\EnergyItemOverviewResources.cs" />
     <Compile Include="StaticResources\EnergyItemReportResources.cs" />
@@ -119,6 +124,7 @@
     <Compile Include="ViewModels\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentOverviewModel.cs" />
     <Compile Include="ViewModels\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />
