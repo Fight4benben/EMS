@@ -238,7 +238,7 @@ namespace EMS.DAL.Services
         /// <param name="type"></param>
         /// <param name="date"></param>
         /// <returns>Excel实体类，包含Excel文件的byte数组与Excel文件的名称</returns>
-        public Excel ExportCircuitReportToExcel(string basePath,string buildId, string energyCode, string circuits, string type, string date)
+        public Excel ExportCircuitReportToExcel(string basePath,string buildId, string energyCode, string[] circuits, string type, string date)
         {
             string templatePath=basePath +"/DayReportTemplate.xls";
             string reportType = " 日报(" + date + ")";
@@ -279,9 +279,9 @@ namespace EMS.DAL.Services
 
             DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
 
-            string[] circuitIds = circuits.Split(',');
+            //string[] circuitIds = circuits.Split(',');
 
-            List<ReportValue> data = context.GetReportValueList(circuitIds, now.ToShortDateString(), type);
+            List<ReportValue> data = context.GetReportValueList(circuits, now.ToShortDateString(), type);
 
             //设置Excel标题
             sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName+reportType);
@@ -293,10 +293,10 @@ namespace EMS.DAL.Services
 
             //根据传入circuitIds填充excel
             int rowId = 0;
-            for (int i = 0; i < circuitIds.Length; i++)
+            for (int i = 0; i < circuits.Length; i++)
             {
                 //使用lamda表达式筛选List中Id与传入的Id对应的仪表：一次填充一行Excel
-                List<ReportValue> current = data.FindAll(p=>p.Id==circuitIds[i]);
+                List<ReportValue> current = data.FindAll(p=>p.Id== circuits[i]);
                 if (current.Count > 0)
                 {
                     IRow row = sheet.CreateRow(rowId + 3);

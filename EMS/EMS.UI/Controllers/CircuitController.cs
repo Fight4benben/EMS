@@ -29,9 +29,15 @@ namespace EMS.UI.Controllers
 
         public FileResult GetExcel(string buildId, string energyCode, string type, string circuits,string date)
         {
+            string[] circuitArray = circuits.Split(',');
+            List<string> circuitList = new List<string>();
+            foreach (string circuit in circuitArray)
+            {
+                circuitList.Add(buildId + circuit);
+            }
             string basePath = HttpContext.Server.MapPath("~/App_Data/");
             CircuitReportService service = new CircuitReportService();
-            Excel excel = service.ExportCircuitReportToExcel(basePath,buildId,energyCode,circuits,type,date);
+            Excel excel = service.ExportCircuitReportToExcel(basePath,buildId,energyCode,circuitList.ToArray(),type,date);
             return File(excel.Data,"application/ms-excel",excel.Name);
         }
     }

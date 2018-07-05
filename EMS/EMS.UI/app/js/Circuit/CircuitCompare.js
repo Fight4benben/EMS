@@ -50,7 +50,7 @@ var CircuitCompare = (function(){
 					showEnergys(data);
 					showTreeview(data);
 					showData(data);
-				}catch{
+				}catch(e){
 
 				}finally{
 					EMS.Loading.hide();

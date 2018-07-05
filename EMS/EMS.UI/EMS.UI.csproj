@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CircuitReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +265,7 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
@@ -594,6 +596,7 @@
     <Content Include="Views\Circuit\Report.cshtml" />
     <Content Include="Views\Circuit\Main.cshtml" />
     <Content Include="Views\Circuit\Compare.cshtml" />
+    <Content Include="Views\Item\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />
