@@ -308,9 +308,14 @@ namespace EMS.DAL.Services
                             foreach (var item in current)
                             {//遍历筛选出列表中当前回路中每个小时的数据，填充到Excel中
                                 //当前行的第一列已经填充回路名称，根据时间设置向右偏移一位，将对应数据写入到当前单元格，并设置格式
-                                row.CreateCell(item.Time.Hour + 1).SetCellValue((double)item.Value);
-                                row.GetCell(item.Time.Hour+1).CellStyle = style;
-                                total += item.Value;
+                                if (item.Time != null)
+                                {
+                                    DateTime time = Convert.ToDateTime(item.Time);
+                                    row.CreateCell(time.Hour + 1).SetCellValue((double)item.Value);
+                                    row.GetCell(time.Hour + 1).CellStyle = style;
+                                    total += Convert.ToDecimal(item.Value);
+                                }
+                               
                             }
                             row.CreateCell(25).SetCellValue((double)total);
                             row.GetCell(25).CellStyle = style;
@@ -318,9 +323,14 @@ namespace EMS.DAL.Services
                         case "MM":
                             foreach (var item in current)
                             {
-                                row.CreateCell(item.Time.Day).SetCellValue((double)item.Value);
-                                row.GetCell(item.Time.Day).CellStyle = style;
-                                total += item.Value;
+                                if(item.Time != null)
+                                {
+                                    DateTime time = Convert.ToDateTime(item.Time);
+                                    row.CreateCell(time.Day).SetCellValue((double)item.Value);
+                                    row.GetCell(time.Day).CellStyle = style;
+                                    total += Convert.ToDecimal(item.Value);
+                                }
+                                
                             }
                             row.CreateCell(32).SetCellValue((double)total);
                             row.GetCell(32).CellStyle = style;
@@ -328,9 +338,13 @@ namespace EMS.DAL.Services
                         case "YY":
                             foreach (var item in current)
                             {
-                                row.CreateCell(item.Time.Month).SetCellValue((double)item.Value);
-                                row.GetCell(item.Time.Month).CellStyle = style;
-                                total += item.Value;
+                                if (item.Time != null)
+                                {
+                                    DateTime time = Convert.ToDateTime(item.Time);
+                                    row.CreateCell(time.Month).SetCellValue((double)item.Value);
+                                    row.GetCell(time.Month).CellStyle = style;
+                                    total += Convert.ToDecimal(item.Value);
+                                }
                             }
                             row.CreateCell(13).SetCellValue((double)total);
                             row.GetCell(13).CellStyle = style;

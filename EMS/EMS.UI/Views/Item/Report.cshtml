@@ -1,0 +1,78 @@
+﻿<div class="container-fluid main-top">
+    <div class="count-info-te">
+        <div class=" build-info count-info">
+            <div class="main-menu">
+                <hr>
+                <img src="/app/img/menu1.png" />筛选
+            </div>
+            <div class="row">
+                <div class="select-width">建筑名称：</div>
+                <div class="filter-calc">
+                    <form role="form">
+                        <div class="form-group">
+                            <select class="form-control" id="buildinglist"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="select-width" style="margin-top: 5px;">分类能耗：</div>
+                <div id="se_countBtns" class="filter-calc">
+                    <acronym title="电">
+                        <button class="btn btn-elc"
+                                style="width: 20px; height: 20px;" type="button"></button>
+                    </acronym> <acronym title="水">
+                        <button class="btn btn-water"
+                                style="width: 20px; height: 20px;" type="button"></button>
+                    </acronym> <acronym title="光伏"><button class="btn btn-solar" type="button"></button></acronym>
+                </div>
+            </div>
+            <div class="row dis-tree">
+                <div class="count-list" style="margin-top: 7px;">
+                    <p>
+                        <img src="/app/img/count3.png"><span class="count-select">分项选择：</span>
+                        <!--<label>
+                            <input id="selectall" type="checkbox" value=""><span style="padding-left:5px;cursor:pointer;">全部选中</span>
+                        </label>-->
+                        <label>
+                            <input id="related" type="checkbox" value=""><span style="padding-left:5px;cursor:pointer;">级联选择</span>
+                        </label>
+                    </p>
+                    <div id="treeview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="count-info-te-calc">
+        <div id="biaoqian" class="bq-cp">
+            <ul>
+                <li id="dayReportClick" style="background-color: #F08500;">日报</li>
+                <li id="monthReportClick" style="background-color: #74B000;">月报</li>
+                <li id="yearReportClick" style="background-color: #0076D0;">年报</li>
+            </ul>
+        </div>
+        <div id="content">
+            <div class="cp-tab" style="display: block;">
+                <div class="count-control">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>日期：</label>
+                            <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <button id="daySearch" type="button" class="btn-count1"><span>查询</span></button>
+                            <button id="dayExport" type="button" class="btn-count2"><span>导出</span></button>
+                        </div>
+                    </form>
+                </div>
+                <div data-spy="scroll" data-target="#navbarExample" data-offset="0"
+                     class="scrollspy-example" style="height:703px;width: 100%; overflow: auto;">
+
+                    <div id="dayReport"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
