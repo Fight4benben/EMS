@@ -46,6 +46,7 @@ namespace EMS.DAL.Services
             energyItemReportView.Energys = energys;
             energyItemReportView.TreeView = treeView;
             energyItemReportView.Data = reportValue;
+            energyItemReportView.ReportType = "DD";
 
             return energyItemReportView;
         }
@@ -55,6 +56,7 @@ namespace EMS.DAL.Services
         /// 根据建筑ID和日期，获取第一个分类对应的所有分项当日的用能概况
         /// </summary>
         /// <param name="userName">用户名</param>
+        /// <param name="date">时间</param>
         /// <returns>返回完整的数据：能源按钮列表，分项列表，以及第一分类的当日用能数据</returns>
         public EnergyItemReportViewModel GetEnergyItemReportViewModel(string buildId, string date)
         {
@@ -70,6 +72,7 @@ namespace EMS.DAL.Services
             energyItemReportView.Energys = energys;
             energyItemReportView.TreeView = treeView;
             energyItemReportView.Data = reportValue;
+            energyItemReportView.ReportType = "DD";
 
             return energyItemReportView;
         }
@@ -78,7 +81,12 @@ namespace EMS.DAL.Services
         /// 分项用能统计
         /// 根据建筑ID和日期，获取第一个分类对应的所有分项当日的用能概况
         /// </summary>
-        /// <param name="userName">用户名</param>
+        /// <param name="formulaIDs">分项列表</param>
+        /// <param name="date">时间</param>
+        /// <param name="type">报表类型：DD:日报
+        ///                            MM:月报
+        ///                            YY:年报
+        /// </param>
         /// <returns>返回完整的数据：能源按钮列表，分项列表，以及第一分类的当日用能数据</returns>
         public EnergyItemReportViewModel GetEnergyItemReportViewModel(string[] formulaIDs, string date, string type)
         {
@@ -86,6 +94,7 @@ namespace EMS.DAL.Services
 
             EnergyItemReportViewModel energyItemReportView = new EnergyItemReportViewModel();
             energyItemReportView.Data = reportValue;
+            energyItemReportView.ReportType = type;
 
             return energyItemReportView;
         }

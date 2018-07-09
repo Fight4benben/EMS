@@ -21,8 +21,15 @@ namespace EMS.UI.Controllers
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
         public object Get()
         {
-            string userName = User.Identity.Name;
-            return service.GetCircuitOverviewViewModel(userName);
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetCircuitOverviewViewModel(userName);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
         /// <summary>
@@ -64,7 +71,7 @@ namespace EMS.UI.Controllers
             {
                 return e.Message;
             }
-            
+
         }
 
         /// <summary>
