@@ -101,6 +101,7 @@
     <Compile Include="DbContext\CircuitOverviewDbContextTest.cs" />
     <Compile Include="DbContext\EnergyItemReportDbContextTest.cs" />
     <Compile Include="DbContext\EnergyItemTreeViewDbContextTest.cs" />
+    <Compile Include="DbContext\TreeViewDbContextTest.cs" />
     <Compile Include="DbContext\UnitTest1.cs" />
     <Compile Include="DbContext\HomeContextTest.cs" />
     <Compile Include="DbContext\HistoryDbContextTest.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Services\CircuitOverviewServiceTest.cs" />
     <Compile Include="Services\CircuitServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
+    <Compile Include="Services\DepartmentReportServiceTest.cs" />
     <Compile Include="Services\EnergyItemCompareServiceTest.cs" />
     <Compile Include="Services\EnergyItemOverviewServiceTest.cs" />
     <Compile Include="Services\EnergyItemReportServiceTest.cs" />

@@ -15,7 +15,7 @@ namespace EMS.DAL.RepositoryImp
         private EnergyDB _db = new EnergyDB();
 
         /// <summary>
-        /// 获取分项用能日环比
+        /// 获取部门用能日环比
         /// </summary>
         /// <param name="buildId">建筑ID </param>
         /// <param name="date">结束时间</param>

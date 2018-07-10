@@ -78,6 +78,7 @@
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\TreeView.cs" />
+    <Compile Include="Entities\TreeViewInfo.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\ICircuitCompareDbContext.cs" />
     <Compile Include="IRepository\ICircuitReportDbContext.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="IRepository\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
+    <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
     <Compile Include="RepositoryImp\CircuitCompareDbContext.cs" />
     <Compile Include="RepositoryImp\CircuitOverviewDbContext.cs" />
@@ -102,11 +104,13 @@
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\CircuitCompareService.cs" />
     <Compile Include="Services\CircuitOverviewService.cs" />
     <Compile Include="Services\CircuitReportService.cs" />
     <Compile Include="Services\DepartmentOverviewService.cs" />
+    <Compile Include="Services\DepartmentReportService.cs" />
     <Compile Include="Services\EnergyItemCompareService.cs" />
     <Compile Include="Services\EnergyItemOverviewService.cs" />
     <Compile Include="Services\EnergyItemReportService.cs" />
@@ -123,11 +127,13 @@
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
+    <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModels\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />
     <Compile Include="ViewModels\DepartmentOverviewModel.cs" />
+    <Compile Include="ViewModels\DepartmentReportViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />

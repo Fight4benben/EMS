@@ -9,7 +9,7 @@ namespace EMS.DAL.StaticResources
     public class DepartmentReportResources
     {
         /// <summary>
-        /// 查询小时表的当天每个小时的数据，需要先传入构造的CircuitsID
+        /// 查询小时表的当天每个小时的数据，需要先传入构造的部门ID，DepartmentIDs
         /// </summary>
         public static string DayReportSQL = @"SELECT DepartmentInfo.F_DepartmentID AS ID,DepartmentInfo.F_DepartmentName AS Name 
                                                     ,HourResult.F_StartHour AS 'Time'
