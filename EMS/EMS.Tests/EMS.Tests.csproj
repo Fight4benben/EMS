@@ -110,6 +110,7 @@
     <Compile Include="Services\CircuitCompareServiceTest.cs" />
     <Compile Include="Services\CircuitOverviewServiceTest.cs" />
     <Compile Include="Services\CircuitServiceTest.cs" />
+    <Compile Include="Services\DepartmentCompareServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
     <Compile Include="Services\DepartmentReportServiceTest.cs" />
     <Compile Include="Services\EnergyItemCompareServiceTest.cs" />
