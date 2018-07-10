@@ -78,6 +78,7 @@ namespace EMS.DAL.Services
         /// 根据建筑ID，部门ID和时间，获取该部门用能数据
         /// </summary>
         /// <param name="buildId">建筑ID</param>
+        /// <param name="departmentID">部门ID</param>
         /// <param name="date">时间</param>
         /// <returns>返回：部门用能数据</returns>
         public DepartmentCompareViewModel GetViewModel(string buildId, string departmentID, string date)

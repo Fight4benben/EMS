@@ -14,22 +14,22 @@ namespace EMS.Tests.Services
     public class DepartmentOverviewServiceTest
     {
         [TestMethod]
-        public void TestGetDepartmentOverviewViewModel()
+        public void TestGetDepartmentOverviewViewModelByUser()
         {
             DateTime today = DateTime.Now;
             DepartmentOverviewService service = new DepartmentOverviewService();
-            DepartmentOverviewModel EnergyItemOverviewView = service.GetDepartmentOverviewViewModel("admin");
+            DepartmentOverviewModel EnergyItemOverviewView = service.GetViewModel("admin");
 
             Console.WriteLine(UtilTest.GetJson(EnergyItemOverviewView));
            
         }
 
         [TestMethod]
-        public void TestGetDepartmentOverviewViewModelByBuildIDAndTime()
+        public void TestGetDepartmentOverviewViewModelByBuildID_Time()
         {
             DateTime today = DateTime.Now;
             DepartmentOverviewService service = new DepartmentOverviewService();
-            DepartmentOverviewModel EnergyItemOverviewView = service.GetDepartmentOverviewViewModel("000001G001", today.ToString());
+            DepartmentOverviewModel EnergyItemOverviewView = service.GetViewModel("000001G001", today.ToString());
 
             Console.WriteLine(UtilTest.GetJson(EnergyItemOverviewView));
 

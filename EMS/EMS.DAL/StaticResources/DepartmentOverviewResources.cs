@@ -21,7 +21,7 @@ namespace EMS.DAL.StaticResources
                                                 INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
                                                 WHERE Circuit.F_BuildID=@BuildID 
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-1, 0) AND  @EndTime
+                                                AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-1, 0) AND DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
                                                 GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName ,DayResult.F_StartDay
                                                 ORDER BY 'Time',DepartmentInfo.F_DepartmentID ASC
                                                 ";
@@ -104,7 +104,7 @@ namespace EMS.DAL.StaticResources
                                                         INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
                                                         WHERE Circuit.F_BuildID=@BuildID 
                                                         AND ParamInfo.F_IsEnergyValue = 1
-                                                        AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  @EndTime
+                                                        AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
                                                         GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName 
                                                         ORDER BY DepartmentInfo.F_DepartmentID ASC
                                                         ";
@@ -123,7 +123,7 @@ namespace EMS.DAL.StaticResources
                                                     INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
                                                     WHERE Circuit.F_BuildID=@BuildID 
                                                     AND ParamInfo.F_IsEnergyValue = 1
-                                                    AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  @EndTime
+                                                    AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
                                                     GROUP BY DepartmentInfo.F_DepartmentID, DepartmentInfo.F_DepartmentName, DayResult.F_StartDay
                                                     ORDER BY DepartmentInfo.F_DepartmentID ASC
                                                     ";

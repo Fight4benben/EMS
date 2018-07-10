@@ -18,7 +18,13 @@ namespace EMS.DAL.Services
             context = new DepartmentOverviewDbContext();
         }
 
-        public DepartmentOverviewModel GetDepartmentOverviewViewModel(string userName)
+        /// <summary>
+        /// 部门用能概况
+        /// 初始加载：获取用户名查询建筑列表，部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns>返回完整的数据：包含建筑列表，部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势</returns>
+        public DepartmentOverviewModel GetViewModel(string userName)
         {
             DateTime today = DateTime.Now;
             IHomeDbContext homeContext = new HomeDbContext();
@@ -31,18 +37,25 @@ namespace EMS.DAL.Services
             List<DepartmentValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, today.ToString());
             List<DepartmentValue> last31Day = context.GetLast31DayValueList(buildId, today.ToString());
 
-            DepartmentOverviewModel DepartmentOverviewView = new DepartmentOverviewModel();
-            DepartmentOverviewView.Builds = builds;
-            DepartmentOverviewView.MomDay = momDay;
-            DepartmentOverviewView.RankByYear = rankByYear;
-            DepartmentOverviewView.PlanValue = planValue;
-            DepartmentOverviewView.Last31DayPieChart = last31DayPieChart;
-            DepartmentOverviewView.Last31Day = last31Day;
+            DepartmentOverviewModel OverviewViewModel = new DepartmentOverviewModel();
+            OverviewViewModel.Builds = builds;
+            OverviewViewModel.MomDay = momDay;
+            OverviewViewModel.RankByYear = rankByYear;
+            OverviewViewModel.PlanValue = planValue;
+            OverviewViewModel.Last31DayPieChart = last31DayPieChart;
+            OverviewViewModel.Last31Day = last31Day;
 
-            return DepartmentOverviewView;
+            return OverviewViewModel;
         }
 
-        public DepartmentOverviewModel GetDepartmentOverviewViewModel(string buildId, string date)
+        /// <summary>
+        /// 部门用能概况
+        /// 根据建筑ID和时间，获取该建筑包含部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="date">时间</param>
+        /// <returns>返回：部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势</returns>
+        public DepartmentOverviewModel GetViewModel(string buildId, string date)
         {
             List<DepartmentValue> momDay = context.GetMomDayValueList(buildId, date);
             List<DepartmentValue> rankByYear = context.GetRankByYearValueList(buildId, date);
@@ -50,14 +63,14 @@ namespace EMS.DAL.Services
             List<DepartmentValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, date);
             List<DepartmentValue> last31Day = context.GetLast31DayValueList(buildId, date);
 
-            DepartmentOverviewModel DepartmentOverviewView = new DepartmentOverviewModel();
-            DepartmentOverviewView.MomDay = momDay;
-            DepartmentOverviewView.RankByYear = rankByYear;
-            DepartmentOverviewView.PlanValue = planValue;
-            DepartmentOverviewView.Last31DayPieChart = last31DayPieChart;
-            DepartmentOverviewView.Last31Day = last31Day;
+            DepartmentOverviewModel OverviewViewModel = new DepartmentOverviewModel();
+            OverviewViewModel.MomDay = momDay;
+            OverviewViewModel.RankByYear = rankByYear;
+            OverviewViewModel.PlanValue = planValue;
+            OverviewViewModel.Last31DayPieChart = last31DayPieChart;
+            OverviewViewModel.Last31Day = last31Day;
 
-            return DepartmentOverviewView;
+            return OverviewViewModel;
         }
     }
 }
