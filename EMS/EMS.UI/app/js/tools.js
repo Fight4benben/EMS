@@ -245,7 +245,124 @@ var EMS = {
 
 
         	charts.init($Bar.get(0),'macarons').setOption(option);
+		},
+		showLandscapeBar:function(charts,$Bar,legendData,xData,series,gridSetting){
+			var option = {
+	            tooltip: {
+	                trigger: 'axis',
+	                axisPointer: {
+			            type: 'shadow'
+			        }
+	            },
+	            legend: {
+	                data: legendData,
+	                bottom:'bottom'
+	            },
+	            grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        top:'1%',
+			        containLabel: true
+			    },
+	            xAxis: {
+	                type: 'value',
+			        axisLine:{show:false},
+			        axisTick:{show:false},
+			        axisLabel:{show:false},
+			        boundaryGap: [0, 0.01]
+	            },
+	            yAxis: {
+	                type: 'category',
+        			data: xData
+	            },
+		       
+	            series: series,
+            	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+        	};
+
+        	/*if(legendData != undefined)
+        		option.legend =  legendData;*/
+			if(gridSetting != undefined)
+				option.grid = gridSetting;
+
+
+        	charts.init($Bar.get(0),'macarons').setOption(option);
+		},
+		showStackBar:function(charts,$Pie,names,xData,series,unit){
+			var option = {
+				tooltip : {
+		        	trigger: 'axis',
+			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+			        }
+		    	},
+				legend: {
+		        	data:names,
+		        	bottom:'bottom'
+			    },
+			    grid: {
+			        left: '3%',
+			        right: 10,
+			        bottom: '10%',
+			        top:25,
+			        containLabel: true
+			    },
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : xData
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'value',
+			            name:unit
+			        }
+			    ],
+			    series :series,
+			    color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+			}
+
+			charts.init($Pie.get(0),'macarons').setOption(option);
 		}
 	}
 
 };
+
+//添加浏览器对filter的支持
+if (!Array.prototype.filter)
+{
+  Array.prototype.filter = function(fun /*, thisArg */)
+  {
+    "use strict";
+
+    if (this === void 0 || this === null)
+      throw new TypeError();
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+    if (typeof fun !== "function")
+      throw new TypeError();
+
+    var res = [];
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    for (var i = 0; i < len; i++)
+    {
+      if (i in t)
+      {
+        var val = t[i];
+
+        // NOTE: Technically this should Object.defineProperty at
+        //       the next index, as push can be affected by
+        //       properties on Object.prototype and Array.prototype.
+        //       But that method's new, and collisions should be
+        //       rare, so use the more-compatible alternative.
+        if (fun.call(thisArg, val, i, t))
+          res.push(val);
+      }
+    }
+
+    return res;
+  };
+}
