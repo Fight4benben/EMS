@@ -1,4 +1,5 @@
 ﻿using EMS.DAL.Entities;
+using EMS.DAL.IRepository;
 using EMS.DAL.StaticResources;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class DepartmentReportDbContext
+    public class DepartmentReportDbContext: IDepartmentReportDbContext
     {
         private EnergyDB _db = new EnergyDB();
         /// <summary>
@@ -25,16 +26,16 @@ namespace EMS.DAL.RepositoryImp
             switch (type)
             {
                 case "DD":
-                    sql = string.Format(EnergyItemReportResources.DayReportSQL, "'" + string.Join("','", energyCodes) + "'");
+                    sql = string.Format(DepartmentReportResources.DayReportSQL, "'" + string.Join("','", energyCodes) + "'");
                     break;
                 case "MM":
-                    sql = string.Format(EnergyItemReportResources.MonthReportSQL, "'" + string.Join("','", energyCodes) + "'");
+                    sql = string.Format(DepartmentReportResources.MonthReportSQL, "'" + string.Join("','", energyCodes) + "'");
                     break;
                 case "YY":
-                    sql = string.Format(EnergyItemReportResources.YearReportSQL, "'" + string.Join("','", energyCodes) + "'");
+                    sql = string.Format(DepartmentReportResources.YearReportSQL, "'" + string.Join("','", energyCodes) + "'");
                     break;
                 default:
-                    sql = string.Format(EnergyItemReportResources.DayReportSQL, "'" + string.Join("','", energyCodes) + "'");
+                    sql = string.Format(DepartmentReportResources.DayReportSQL, "'" + string.Join("','", energyCodes) + "'");
                     break;
             }
 

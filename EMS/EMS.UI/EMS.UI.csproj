@@ -163,6 +163,9 @@
     <Compile Include="Controllers\CircuitController.cs" />
     <Compile Include="Controllers\CircuitOverviewController.cs" />
     <Compile Include="Controllers\CircuitReportController.cs" />
+    <Compile Include="Controllers\DeptCompareController.cs" />
+    <Compile Include="Controllers\DeptOverviewController.cs" />
+    <Compile Include="Controllers\DeptReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\ItemCompareController.cs" />

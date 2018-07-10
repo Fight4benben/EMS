@@ -14,7 +14,7 @@ namespace EMS.DAL.StaticResources
         public static string EnergyItemCompareSQL = @"SELECT CalcFormula.F_EnergyItemCode AS EnergyItemCode
                                                     ,CalcFormula.F_FormulaName AS Name 
                                                     ,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0) AS 'Time'
-                                                    ,SUM (DayResult.F_Value) AS Value
+                                                    ,SUM((CASE WHEN CalcFormulaMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * CalcFormulaMeter.F_Rate/100) AS Value
                                                     FROM T_MC_MeterDayResult DayResult
                                                     INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
                                                     INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID

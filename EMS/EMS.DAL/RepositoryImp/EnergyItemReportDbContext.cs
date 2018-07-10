@@ -13,9 +13,6 @@ namespace EMS.DAL.RepositoryImp
     public class EnergyItemReportDbContext : IEnergyItemReportDbContext
     {
         private EnergyDB _db = new EnergyDB();
-
-        
-        
         
         /// <summary>
         /// 获取报表
