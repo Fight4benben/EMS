@@ -10,7 +10,7 @@ var ItemReport = (function(){
 		this.initDom = function(){
 			initDateTime();
 			initChange();
-			//initSearchButton();
+			initSearchButton();
 		};
 
 		function initEnergyBtns(){
@@ -28,6 +28,29 @@ var ItemReport = (function(){
 			return idArray;
 		}
 
+		function initSearchButton(){
+			//查询数据
+			$("#daySearch").click(function(event) {
+				
+				//发送请求
+				getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
+					"&type="+getTypeByReportSelected()+"&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+			});
+
+			//导出的Excel
+			$("#dayExport").click(function(event) {
+				var formulars=[];
+				$.each(getCheckedTreeIdArray(), function(key, val) {
+					formulars.push(val);
+				});
+				
+				window.location = "/Item/GetExcel?buildId="+$("#buildinglist").val()+
+				"&type="+getTypeByReportSelected()+
+				"&formularIds="+formulars.join(',')+
+				"&date="+$("#daycalendarBox").val()
+			});
+		}
+
 		//初始化页面时，先加载
 		function initChange(){
 			$("#dayReportClick").click(function(){
@@ -37,7 +60,8 @@ var ItemReport = (function(){
 
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 					//发送请求	
-
+					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
+						"&type=DD&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 
 			});
@@ -56,7 +80,8 @@ var ItemReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-			
+					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
+						"&type=MM&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 			});
 
@@ -74,7 +99,8 @@ var ItemReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					
+					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
+						"&type=YY&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 			});
 		}
@@ -132,10 +158,12 @@ var ItemReport = (function(){
 		function getDataFromServer(url,params){
 			$.getJSON(url,params, function(data) {
 				EMS.Loading.show($("#main-content").parent('div'));
+				
 				if(data.hasOwnProperty('message'))
 					location = "/Account/Login";
+
 				try{
-					console.log(data);
+					//console.log(data);
 					showBuilds(data);
 					showEnergys(data);
 					showTreeview(data);
@@ -177,30 +205,11 @@ var ItemReport = (function(){
 					case "01000":
 						$("#se_countBtns").append('<acronym title="电"><button id="elec" class="btn btn-elc" value="01000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
-					case "02000":
-						$("#se_countBtns").append('<acronym title="水"><button id="water" class="btn btn-water" value="02000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
-					break;
-					case "13000":
-						$("#se_countBtns").append('<acronym title="光伏"><button id="solar" class="btn btn-solar" value="13000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
-					break;
-					default:
-						$("#se_countBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" code="'+val.energyItemCode+'" type="button">'+
-							val.energyItemName.substring(0,1)+'</button></acronym>');
+
 				}
 			});
 
-			$("#se_countBtns button").eq(0).addClass('btn-solar-selected')
-
-			$("#se_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
-				var $current = $(this);
-
-				var isNotRepeat = setEnergyBtnStyle($current);
-
-				if(isNotRepeat){
-					//发送请求
-					
-				}
-			});
+			$("#se_countBtns button").eq(0).addClass('btn-solar-selected');		
 		};
 
 		//根据数据显示树状结构，如果不包含树状结构数据则不更新数据。

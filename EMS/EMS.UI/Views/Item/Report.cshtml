@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="count-info-te-calc">
+    <div class="count-info-te-calc" style="border:1px solid #B4B4B5;">
         <div id="biaoqian" class="bq-cp">
             <ul>
                 <li id="dayReportClick" style="background-color: #F08500;">日报</li>
@@ -54,23 +54,21 @@
                 <li id="yearReportClick" style="background-color: #0076D0;">年报</li>
             </ul>
         </div>
-        <div id="content">
-            <div class="cp-tab" style="display: block;">
-                <div class="count-control">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>日期：</label>
-                            <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <button id="daySearch" type="button" class="btn-count1"><span>查询</span></button>
-                            <button id="dayExport" type="button" class="btn-count2"><span>导出</span></button>
+        <div>
+            <div class="count-control">
+                <form role="form">
+                    <div class="form-group">
+                        <label>日期：</label>
+                        <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </form>
-                </div>
-                <div id="dayReport"></div>
+                        <button id="daySearch" type="button" class="btn-count1"><span>查询</span></button>
+                        <button id="dayExport" type="button" class="btn-count2"><span>导出</span></button>
+                    </div>
+                </form>
             </div>
+            <div id="dayReport"></div>
         </div>
     </div>
 </div>

@@ -37,17 +37,35 @@ namespace EMS.DAL.RepositoryImp
             };
             List<EnergyItemInfo> energyItemInfos = _db.Database.SqlQuery<EnergyItemInfo>(EnergyItemTreeViewResources.EnergyItemTreeViewSQL, sqlParameters).ToList();
 
-            var parentItemCodes = energyItemInfos.Where(c => (c.ParentItemCode == "-1" || string.IsNullOrEmpty(c.ParentItemCode)));
-            foreach (var item in parentItemCodes)
+            foreach (var item in energyItemInfos)
             {
-                TreeViewModel parentNode = new TreeViewModel();
-                List<TreeViewModel> children = GetChildrenNodes(energyItemInfos, item);
-                parentNode.Id = item.EnergyItemCode;
-                parentNode.Text = item.EnergyItemName;
-                if (children.Count != 0)
-                    parentNode.Nodes = children;
-                treeViewModel.Add(parentNode);
+                EnergyItemInfo info = energyItemInfos.Find(e=>e.EnergyItemCode == item.ParentItemCode);
+
+                if(info == null)
+                {
+                    TreeViewModel parent = new TreeViewModel();
+                    List<TreeViewModel> children = GetChildrenNodes(energyItemInfos,item);
+                    parent.Id = item.FormulaID;
+                    parent.Text = item.EnergyItemName;
+
+                    if (children.Count != 0)
+                        parent.Nodes = children;
+
+                    treeViewModel.Add(parent);
+                }
             }
+
+            //var parentItemCodes = energyItemInfos.Where(c => (c.ParentItemCode == "-1" || string.IsNullOrEmpty(c.ParentItemCode)));
+            //foreach (var item in parentItemCodes)
+            //{
+            //    TreeViewModel parentNode = new TreeViewModel();
+            //    List<TreeViewModel> children = GetChildrenNodes(energyItemInfos, item);
+            //    parentNode.Id = item.EnergyItemCode;
+            //    parentNode.Text = item.EnergyItemName;
+            //    if (children.Count != 0)
+            //        parentNode.Nodes = children;
+            //    treeViewModel.Add(parentNode);
+            //}
 
             return treeViewModel;
         }
@@ -92,7 +110,7 @@ namespace EMS.DAL.RepositoryImp
             foreach (var item in children)
             {
                 TreeViewModel node = new TreeViewModel();
-                node.Id = item.EnergyItemCode;
+                node.Id = item.FormulaID;
                 node.Text = item.EnergyItemName;
                 if (GetChildrenNodes(energyItemInfos, item).Count != 0)
                     node.Nodes = GetChildrenNodes(energyItemInfos, item);
