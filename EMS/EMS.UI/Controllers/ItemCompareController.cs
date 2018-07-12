@@ -39,15 +39,15 @@ namespace EMS.UI.Controllers
         /// <returns>返回：能源按钮列表，分项列表，以及第一分类数据</returns>
         public object Get(string buildId)
         {
-            try
-            {
-                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
-                return service.GetEnergyItemCompareViewModel(buildId, date);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
+
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
+            return service.GetEnergyItemCompareViewModel(buildId, date);
+
+        }
+
+        public object Get(string buildId, string date)
+        {
+            return service.GetEnergyItemCompareViewModel(buildId, date);
         }
 
         /// <summary>
@@ -58,11 +58,11 @@ namespace EMS.UI.Controllers
         /// <param name="energyCode">分项ID</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回：该分项用能同比数据</returns>
-        public object Get(string buildId, string energyCode, string date)
+        public object Get(string buildId, string formulaId, string date)
         {
             try
             {
-                return service.GetEnergyItemCompareViewModel(buildId, energyCode, date);
+                return service.GetEnergyItemCompareViewModel(buildId, formulaId, date);
             }
             catch (Exception e)
             {

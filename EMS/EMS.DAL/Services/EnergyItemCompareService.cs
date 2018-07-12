@@ -33,12 +33,18 @@ namespace EMS.DAL.Services
             string buildId = builds.First().BuildID;
 
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
-            string energyCode = energys.First().EnergyItemCode;
+            //string energyCode = energys.First().EnergyItemCode;
 
             IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
             List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
 
-            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, energyCode, today.ToString());
+            string treeId;
+            if (treeView.Count == 0)
+                treeId = "";
+            else
+                treeId = treeView.First().Id;
+
+            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, treeId, today.ToString());
 
             EnergyItemCompareViewModel energyItemCompareView = new EnergyItemCompareViewModel();
             energyItemCompareView.Builds = builds;
@@ -58,12 +64,18 @@ namespace EMS.DAL.Services
         public EnergyItemCompareViewModel GetEnergyItemCompareViewModel(string buildId, string date)
         {
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
-            string energyCode = energys.First().EnergyItemCode;
+            //string energyCode = energys.First().EnergyItemCode;
 
             IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
             List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
 
-            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, energyCode, date);
+            string treeId;
+            if (treeView.Count == 0)
+                treeId = "";
+            else
+                treeId = treeView.First().Id;
+
+            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, treeId, date);
 
             EnergyItemCompareViewModel energyItemCompareView = new EnergyItemCompareViewModel();
             energyItemCompareView.Energys = energys;
@@ -80,9 +92,9 @@ namespace EMS.DAL.Services
         /// <param name="energyCode">分项ID</param>
         /// <param name="date"> 传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回完整的数据：该分项用能环比数据</returns>
-        public EnergyItemCompareViewModel GetEnergyItemCompareViewModel(string buildId, string energyCode, string date)
+        public EnergyItemCompareViewModel GetEnergyItemCompareViewModel(string buildId, string formulaId, string date)
         {
-            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, energyCode, date);
+            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, formulaId, date);
 
             EnergyItemCompareViewModel energyItemCompareView = new EnergyItemCompareViewModel();
  
