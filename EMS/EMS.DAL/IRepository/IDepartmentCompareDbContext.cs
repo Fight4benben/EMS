@@ -9,6 +9,6 @@ namespace EMS.DAL.IRepository
 {
     public interface IDepartmentCompareDbContext
     {
-        List<DepartmentValue> GetDepartmentCompareValueList(string buildId, string departmentID, string date);
+        List<EMSValue> GetDepartmentCompareValueList(string buildId, string departmentID, string date);
     }
 }

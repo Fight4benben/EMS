@@ -20,49 +20,49 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="buildId">建筑ID </param>
         /// <param name="date">结束时间</param>
         /// <returns></returns>
-        public List<DepartmentValue> GetMomDayValueList(string buildId, string date)
+        public List<EMSValue> GetMomDayValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentOverviewResources.MomDayValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentOverviewResources.MomDayValueSQL, sqlParameters).ToList();
         }
 
-        public List<DepartmentValue> GetRankByYearValueList(string buildId, string date)
+        public List<EMSValue> GetRankByYearValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentOverviewResources.YearValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentOverviewResources.YearValueSQL, sqlParameters).ToList();
         }
 
-        public List<DepartmentValue> GetPlanValueList(string buildId, string date)
+        public List<EMSValue> GetPlanValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentOverviewResources.YearPlanValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentOverviewResources.YearPlanValueSQL, sqlParameters).ToList();
         }
 
-        public List<DepartmentValue> GetLast31DayPieChartValueList(string buildId, string date)
+        public List<EMSValue> GetLast31DayPieChartValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentOverviewResources.Last31DayPieChartValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentOverviewResources.Last31DayPieChartValueSQL, sqlParameters).ToList();
         }
 
-        public List<DepartmentValue> GetLast31DayValueList(string buildId, string date)
+        public List<EMSValue> GetLast31DayValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentOverviewResources.Last31DayValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentOverviewResources.Last31DayValueSQL, sqlParameters).ToList();
         }
 
        

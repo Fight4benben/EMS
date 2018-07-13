@@ -16,6 +16,7 @@ namespace EMS.DAL.Entities
         public virtual DbSet<BuildInfo> BuildInfo { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<EnergyItemDict> EnergyItemDict { get; set; }
+        public virtual DbSet<BuildExtendInfo> BuildExtendInfo { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,6 +25,8 @@ namespace EMS.DAL.Entities
             modelBuilder.Entity<User>().Property(e => e.UserId);
 
             modelBuilder.Entity<EnergyItemDict>().Property(e => e.EnergyItemCode).IsUnicode(false);
+
+            modelBuilder.Entity<BuildExtendInfo>().Property(e => e.BuildID).IsUnicode(false);
         }
     }
 }

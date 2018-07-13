@@ -1,0 +1,80 @@
+﻿<div class="container-fluid main-top">
+    <div class="col-xs-12">
+        <div class="filter-width">
+            建筑名称：
+        </div>
+        <div class="se-right">
+            <form role="form">
+                <div class="form-group">
+                    <select class="form-control" id="buildinglist"></select>
+                </div>
+            </form>
+        </div>
+        <div class="filter-width">
+            分类能耗：
+        </div>
+        <div class="se-right">
+            <form role="form">
+                <div class="form-group">
+                    <select class="form-control" id="energylist"></select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-5">
+        <div class="build-info build-info-le">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-calendar"></i>日区域用能同比分析
+            </div>
+            <div id="compareBar" class="se-yet">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-sm-7">
+        <div class="build-info build-info-le2">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-calendar-o"></i>本月区域用能排名
+            </div>
+            <div id="regionBtns" class="col-sm-1 col-xs-12 le-time">
+                <div id="trend_hours" class="col-sm-12 col-xs-3 le-time-select">
+                    <span>办公楼</span>
+                </div>
+                <div id="trend_days" class="col-sm-12 col-xs-3 ">
+                    <span>宿舍楼</span>
+                </div>
+                <div id="trend_month" class="col-sm-12 col-xs-3">
+                    <span>生产线</span>
+                </div>
+            </div>
+            <div class="col-sm-11 col-xs-12 history-line">
+                <div id="rankBar" class="se-yet"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-5">
+        <div class="build-info build-info-le">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-pie-chart"></i>过去31天区域用能饼图
+            </div>
+            <div id="monthPie" class="se-yet">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-sm-7">
+        <div class="build-info build-info-le">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-bar-chart"></i>过去31天区域用能趋势
+            </div>
+            <div id="monthStackBar" class="se-yet">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/app/js/Region/Main.js" type="text/javascript"></script>

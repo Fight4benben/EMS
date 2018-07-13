@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Entities
 {
-    public class DepartmentValue
+    public class EMSValue
     {
         public string ID { get; set; }
         public string Name { get; set; }

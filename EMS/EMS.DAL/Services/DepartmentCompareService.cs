@@ -37,7 +37,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId);
             string departmentID = treeView.First().Id;
 
-            List<DepartmentValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, today.ToString());
+            List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, today.ToString());
 
             DepartmentCompareViewModel CompareViewModel = new DepartmentCompareViewModel();
             CompareViewModel.Builds = builds;
@@ -63,7 +63,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId);
             string departmentID = treeView.First().Id;
 
-            List<DepartmentValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, date);
+            List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, date);
 
             DepartmentCompareViewModel CompareViewModel = new DepartmentCompareViewModel();
             CompareViewModel.Energys = energys;
@@ -83,7 +83,7 @@ namespace EMS.DAL.Services
         /// <returns>返回：部门用能数据</returns>
         public DepartmentCompareViewModel GetViewModel(string buildId, string departmentID, string date)
         {
-            List<DepartmentValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, date);
+            List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, date);
             DepartmentCompareViewModel CompareViewModel = new DepartmentCompareViewModel();
             CompareViewModel.CompareData = CompareValue;
 

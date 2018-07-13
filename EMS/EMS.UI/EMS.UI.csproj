@@ -172,6 +172,8 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ItemOverviewController.cs" />
     <Compile Include="Controllers\ItemReportController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\RegionMainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -607,6 +609,7 @@
     <Content Include="Views\Item\Main.cshtml" />
     <Content Include="Views\Item\Report.cshtml" />
     <Content Include="Views\Item\Compare.cshtml" />
+    <Content Include="Views\Region\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />

@@ -62,16 +62,24 @@ var ItemMain = (function(){
 			var names=[];
 
 			$.each(data.energyItemMomDay, function(key, val) {
-				var date = new Date(val.time);
+				
+				if($.inArray(val.name, names)<0){
+					var count =names.push(val.name);
+					var arr = data.energyItemMomDay.filter(function(innerobj){
+						return innerobj.name == val.name;
+					});
 
-				if($.inArray(val.name, names)<0)
-					names.push(val.name);
-
-				if(date.getDate() == new Date().getDate()){
-					today.push(val.value);
-				}else{
-					yesterday.push(val.value);
+					$.each(arr, function(index, value) {
+						var date = new Date(value.time);
+						if(date.getDate() == new Date().getDate()){
+							today[count-1] = value.value;
+						}else{
+							yesterday[count-1] = value.value;
+						}
+					});
 				}
+
+				
 			});
 
 			var series=[
@@ -80,7 +88,7 @@ var ItemMain = (function(){
 	            	type: 'bar',
 	            	data:today
 				},{
-					name: '今日',
+					name: '昨日',
 	            	type: 'bar',
 	            	data:yesterday
 				}

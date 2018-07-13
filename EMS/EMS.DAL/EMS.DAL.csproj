@@ -62,11 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BuildExtendInfo.cs" />
     <Compile Include="Entities\BuildInfo.cs" />
     <Compile Include="Entities\Circuit.cs" />
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
-    <Compile Include="Entities\DepartmentValue.cs" />
+    <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Entities\HistoryDB.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
+    <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\TreeView.cs" />
     <Compile Include="Entities\TreeViewInfo.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="IRepository\ICircuitCompareDbContext.cs" />
     <Compile Include="IRepository\ICircuitReportDbContext.cs" />
     <Compile Include="IRepository\ICircuitOverviewDbContext.cs" />
+    <Compile Include="IRepository\ICommonContext.cs" />
     <Compile Include="IRepository\IDepartmentCompareDbContext.cs" />
     <Compile Include="IRepository\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\IDepartmentReportDbContext.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="IRepository\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
+    <Compile Include="IRepository\IRegionMainDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
     <Compile Include="RepositoryImp\CircuitCompareDbContext.cs" />
@@ -106,6 +110,7 @@
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryImp\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\CircuitCompareService.cs" />
@@ -119,6 +124,7 @@
     <Compile Include="Services\EnergyItemReportService.cs" />
     <Compile Include="Services\HistoryDataService.cs" />
     <Compile Include="Services\HomeServices.cs" />
+    <Compile Include="Services\RegionMainService.cs" />
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\CircuitResources.cs" />
@@ -130,6 +136,7 @@
     <Compile Include="StaticResources\EnergyItemReportResources.cs" />
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
+    <Compile Include="StaticResources\RegionMainResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\Util.cs" />
@@ -144,6 +151,7 @@
     <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />
     <Compile Include="ViewModels\Excel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\RegionMainViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

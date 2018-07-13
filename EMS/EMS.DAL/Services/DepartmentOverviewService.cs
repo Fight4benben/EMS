@@ -31,11 +31,11 @@ namespace EMS.DAL.Services
             List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
             string buildId = builds.First().BuildID;
 
-            List<DepartmentValue> momDay = context.GetMomDayValueList(buildId, today.ToString());
-            List<DepartmentValue> rankByYear = context.GetRankByYearValueList(buildId, today.ToString());
-            List<DepartmentValue> planValue = context.GetPlanValueList(buildId, today.ToString());
-            List<DepartmentValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, today.ToString());
-            List<DepartmentValue> last31Day = context.GetLast31DayValueList(buildId, today.ToString());
+            List<EMSValue> momDay = context.GetMomDayValueList(buildId, today.ToString());
+            List<EMSValue> rankByYear = context.GetRankByYearValueList(buildId, today.ToString());
+            List<EMSValue> planValue = context.GetPlanValueList(buildId, today.ToString());
+            List<EMSValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, today.ToString());
+            List<EMSValue> last31Day = context.GetLast31DayValueList(buildId, today.ToString());
 
             DepartmentOverviewModel OverviewViewModel = new DepartmentOverviewModel();
             OverviewViewModel.Builds = builds;
@@ -57,11 +57,11 @@ namespace EMS.DAL.Services
         /// <returns>返回：部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势</returns>
         public DepartmentOverviewModel GetViewModel(string buildId, string date)
         {
-            List<DepartmentValue> momDay = context.GetMomDayValueList(buildId, date);
-            List<DepartmentValue> rankByYear = context.GetRankByYearValueList(buildId, date);
-            List<DepartmentValue> planValue = context.GetPlanValueList(buildId, date);
-            List<DepartmentValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, date);
-            List<DepartmentValue> last31Day = context.GetLast31DayValueList(buildId, date);
+            List<EMSValue> momDay = context.GetMomDayValueList(buildId, date);
+            List<EMSValue> rankByYear = context.GetRankByYearValueList(buildId, date);
+            List<EMSValue> planValue = context.GetPlanValueList(buildId, date);
+            List<EMSValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, date);
+            List<EMSValue> last31Day = context.GetLast31DayValueList(buildId, date);
 
             DepartmentOverviewModel OverviewViewModel = new DepartmentOverviewModel();
             OverviewViewModel.MomDay = momDay;

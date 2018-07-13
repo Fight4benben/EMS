@@ -49,7 +49,7 @@ var Compare = (function(){
 		}
 
 		function getDataFromServer(url,params){
-			EMS.Loading.show();
+			EMS.Loading.show($("#main-content").parent('div'));
 			$.getJSON(url,params, function(data) {
 				try{
 					showBuilds(data);
@@ -59,9 +59,11 @@ var Compare = (function(){
 				}catch(e){
 
 				}finally{
-					EMS.Loading.hide();
+					EMS.Loading.hide($("#main-content").parent('div'));
 				}
 				
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
 			});
 		};
 
@@ -117,13 +119,15 @@ var Compare = (function(){
 
 		//根据数据显示树状结构，如果不包含树状结构数据则不更新数据。
 		function showTreeview(data){
-			$("#treeview").html("");//更新树状结构之前先将该区域清空
-
 			if(!data.hasOwnProperty('treeView'))
 				return;
 
+			$("#treeview").html("");//更新树状结构之前先将该区域清空
+
 			if(data.treeView.length==0)
 				return;
+
+
 
 			$("#treeview").parent('div').css('overflow','auto');
 			$("#treeview").width(350);

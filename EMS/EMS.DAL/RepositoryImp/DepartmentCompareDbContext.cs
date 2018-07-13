@@ -14,14 +14,14 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<DepartmentValue> GetDepartmentCompareValueList(string buildId, string departmentID, string date)
+        public List<EMSValue> GetDepartmentCompareValueList(string buildId, string departmentID, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@DepartmentID",departmentID),
                 new SqlParameter("@EndTime",date)
             };
-            return _db.Database.SqlQuery<DepartmentValue>(DepartmentCompareResources.CompareSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EMSValue>(DepartmentCompareResources.CompareSQL, sqlParameters).ToList();
         }
         
     }
