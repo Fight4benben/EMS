@@ -23,7 +23,7 @@ namespace EMS.UI.Controllers
             try
             {
                 string userName = User.Identity.Name;
-                return service.GetViewModel(userName);
+                return service.GetViewModelByUserName(userName);
             }
             catch (Exception e)
             {
@@ -42,8 +42,7 @@ namespace EMS.UI.Controllers
         {
             try
             {
-                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
-                return service.GetViewModel(buildId, date);
+                return service.GetViewModel(buildId);
             }
             catch (Exception e)
             {
@@ -51,5 +50,16 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId,string energyCode)
+        {
+            try
+            {
+                return service.GetViewModel(buildId,energyCode);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
     }
 }

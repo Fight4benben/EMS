@@ -12,18 +12,21 @@ namespace EMS.DAL.StaticResources
         /// 部门天用能同比
         /// </summary>
         public static string MomDayValueSQL = @"SELECT DepartmentInfo.F_DepartmentID AS ID,DepartmentInfo.F_DepartmentName AS Name 
-                                                ,DayResult.F_StartDay AS 'Time'
-                                                ,SUM( (CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS Value
-                                                FROM T_MC_MeterDayResult DayResult
-                                                INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
-                                                INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
-                                                INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
-                                                INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
-                                                WHERE Circuit.F_BuildID=@BuildID 
-                                                AND ParamInfo.F_IsEnergyValue = 1
-                                                AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-1, 0) AND DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
-                                                GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName ,DayResult.F_StartDay
-                                                ORDER BY 'Time',DepartmentInfo.F_DepartmentID ASC
+                                            ,DayResult.F_StartDay AS 'Time'
+                                            ,SUM( (CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS Value
+                                            FROM T_MC_MeterDayResult DayResult
+                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+                                            INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+                                            INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                            WHERE Circuit.F_BuildID=@BuildID 
+                                            AND ParamInfo.F_IsEnergyValue = 1
+                                            AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-1, 0) AND DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
+                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
+                                            AND {0}
+                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName ,DayResult.F_StartDay
+                                            ORDER BY 'Time',DepartmentInfo.F_DepartmentID ASC
                                                 ";
 
         /// <summary>
@@ -48,18 +51,21 @@ namespace EMS.DAL.StaticResources
         /// 部门当年用能
         /// </summary>
         public static string YearValueSQL = @"SELECT DepartmentInfo.F_DepartmentID AS ID, DepartmentInfo.F_DepartmentName AS Name 
-                                                ,SUM( (CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS Value
-                                                FROM T_MC_MeterDayResult DayResult
-                                                INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
-                                                INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
-                                                INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
-                                                INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
-                                                WHERE Circuit.F_BuildID=@BuildID 
-                                                AND ParamInfo.F_IsEnergyValue = 1
-                                                AND DayResult.F_StartDay  BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime), 0) 
-						                                                  AND DATEADD(SS,-3,DATEADD(YEAR, DATEDIFF(YEAR,0,@EndTime)+1, 0))
-                                                GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName
-                                                ORDER BY DepartmentInfo.F_DepartmentID ASC
+                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator = '加' THEN 1 ELSE -1 END)*DayResult.F_Value* DepartmentMeter.F_Rate/100) AS Value
+                                            FROM T_MC_MeterDayResult DayResult
+                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+                                            INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+                                            INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                            WHERE Circuit.F_BuildID=@BuildID
+                                            AND ParamInfo.F_IsEnergyValue = 1
+                                            AND DayResult.F_StartDay  BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime), 0) 
+                                                            AND DATEADD(SS,-3, DATEADD(YEAR, DATEDIFF(YEAR,0, @EndTime)+1, 0))
+                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
+                                            AND {0}
+                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName
+                                            ORDER BY DepartmentInfo.F_DepartmentID ASC
                                                 ";
 
 
@@ -86,8 +92,11 @@ namespace EMS.DAL.StaticResources
                                                 ,SUM (DepartmentPlan.F_Value) AS Value
                                                 FROM T_ST_DepartmentPlan DepartmentPlan
                                                 INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentPlan.F_DepartmentID
+                                                INNER JOIN T_DT_EnergyItemDict EnergyItem ON DepartmentPlan.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                 WHERE DepartmentInfo.F_BuildID=@BuildID
                                                 AND DepartmentPlan.F_Year=YEAR(@EndTime)
+                                                AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
+                                                AND {0}
                                                 GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentPlan.F_Year
                                                 ";
 
@@ -102,9 +111,12 @@ namespace EMS.DAL.StaticResources
                                                         INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
                                                         INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
                                                         INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+                                                        INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                         WHERE Circuit.F_BuildID=@BuildID 
                                                         AND ParamInfo.F_IsEnergyValue = 1
                                                         AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
+                                                        AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
+                                                        AND {0}
                                                         GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName 
                                                         ORDER BY DepartmentInfo.F_DepartmentID ASC
                                                         ";
@@ -121,9 +133,12 @@ namespace EMS.DAL.StaticResources
                                                     INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
                                                     INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
                                                     INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+                                                    INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                     WHERE Circuit.F_BuildID=@BuildID 
                                                     AND ParamInfo.F_IsEnergyValue = 1
                                                     AND DayResult.F_StartDay BETWEEN DATEADD(DAY, DATEDIFF(DAY, 0, @EndTime)-30, 0) AND  DATEADD(SS,-3,DATEADD(DAY, DATEDIFF(DAY,0,@EndTime)+1, 0))
+                                                    AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
+                                                    AND {0}
                                                     GROUP BY DepartmentInfo.F_DepartmentID, DepartmentInfo.F_DepartmentName, DayResult.F_StartDay
                                                     ORDER BY DepartmentInfo.F_DepartmentID ASC
                                                     ";

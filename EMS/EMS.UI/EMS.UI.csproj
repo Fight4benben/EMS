@@ -163,6 +163,7 @@
     <Compile Include="Controllers\CircuitController.cs" />
     <Compile Include="Controllers\CircuitOverviewController.cs" />
     <Compile Include="Controllers\CircuitReportController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DeptCompareController.cs" />
     <Compile Include="Controllers\DeptOverviewController.cs" />
     <Compile Include="Controllers\DeptReportController.cs" />
@@ -275,10 +276,12 @@
     <Content Include="app\img\water2.png" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
+    <Content Include="app\js\Department\Main.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
     <Content Include="app\js\Item\Overview.js" />
     <Content Include="app\js\Item\Report.js" />
+    <Content Include="app\js\Region\Main.js" />
     <Content Include="app\js\tools.js" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />
@@ -610,6 +613,7 @@
     <Content Include="Views\Item\Report.cshtml" />
     <Content Include="Views\Item\Compare.cshtml" />
     <Content Include="Views\Region\Main.cshtml" />
+    <Content Include="Views\Department\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />

@@ -9,10 +9,9 @@ namespace EMS.DAL.IRepository
 {
     public interface IDepartmentOverviewDbContext
     {
-        List<EMSValue> GetMomDayValueList(string buildId, string date);
-        List<EMSValue> GetRankByYearValueList(string buildId, string date);
-        List<EMSValue> GetPlanValueList(string buildId, string date);
-        List<EMSValue> GetLast31DayPieChartValueList(string buildId, string date);
-        List<EMSValue> GetLast31DayValueList(string buildId, string date);
+        List<EMSValue> GetRankByYearValueList(string buildId, string date,string energyCode, string filterType);
+        List<EMSValue> GetPlanValueList(string buildId, string date, string energyCode, string filterType);
+        List<EMSValue> GetLast31DayPieChartValueList(string buildId, string date, string energyCode, string filterType);
+        List<EMSValue> GetLast31DayValueList(string buildId, string date, string energyCode, string filterType);
     }
 }

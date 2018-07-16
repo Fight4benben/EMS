@@ -18,7 +18,7 @@ namespace EMS.Tests.Services
         {
             DateTime today = DateTime.Now;
             DepartmentOverviewService service = new DepartmentOverviewService();
-            DepartmentOverviewModel EnergyItemOverviewView = service.GetViewModel("admin");
+            DepartmentOverviewModel EnergyItemOverviewView = service.GetViewModelByUserName("admin");
 
             Console.WriteLine(UtilTest.GetJson(EnergyItemOverviewView));
            
