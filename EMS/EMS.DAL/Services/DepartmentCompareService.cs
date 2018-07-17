@@ -33,8 +33,15 @@ namespace EMS.DAL.Services
             string buildId = builds.First().BuildID;
 
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
             ITreeViewDbContext treeViewDb = new TreeViewDbContext();
-            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId);
+            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId,energyCode);
             string departmentID = treeView.First().Id;
 
             List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, today.ToString());
@@ -59,8 +66,15 @@ namespace EMS.DAL.Services
         {
 
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
             ITreeViewDbContext treeViewDb = new TreeViewDbContext();
-            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId);
+            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId,energyCode);
             string departmentID = treeView.First().Id;
 
             List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, departmentID, date);

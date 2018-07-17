@@ -38,12 +38,23 @@ namespace EMS.UI.Controllers
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">时间</param>
         /// <returns>返回完整的数据：能源按钮列表，部门列表，以及用能数据天报表</returns>
-        public object Get(string buildId)
+        public object Get(string buildId,string date ,string type)
         {
             try
             {
-                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
-                return service.GetViewModel(buildId, date);
+                return service.GetViewModel(buildId, date, type);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public object Get(string buildId, string energyCode, string date, string type)
+        {
+            try
+            {
+                return service.GetViewModel(buildId, date, energyCode,type);
             }
             catch (Exception e)
             {
@@ -62,11 +73,12 @@ namespace EMS.UI.Controllers
         ///                            YY:年报
         /// </param>
         /// <returns>返回：指定部门，时间，报表类型的用能数据</returns>
-        public object Get(string[] departmentIDs, string date, string type)
+        public object Get(string buildId,string energyCode,string departmentIDs, string date, string type)
         {
+            string[] ids = departmentIDs.Split(',');
             try
             {
-                return service.GetViewModel(departmentIDs, date, type);
+                return service.GetViewModel(energyCode, ids, date, type);
             }
             catch (Exception e)
             {

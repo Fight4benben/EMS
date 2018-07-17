@@ -9,9 +9,9 @@ namespace EMS.DAL.IRepository
 {
     public interface ITreeViewDbContext
     {
-        List<TreeViewModel> GetDepartmentTreeViewList(string buildId);
+        //List<TreeViewModel> GetDepartmentTreeViewList(string buildId);
         List<TreeViewModel> GetDepartmentTreeViewList(string buildId, string energyItemCode);
-        string[] GetDepartmentIDs(string buildId);
+        string[] GetDepartmentIDs(string buildId, string energyItemCode);
         List<TreeViewModel> GetRegionTreeViewList(string buildId);
         List<TreeViewModel> GetRegionTreeViewList(string buildId, string energyItemCode);
         string[] GetRegionIDs(string buildId);

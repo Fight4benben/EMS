@@ -19,11 +19,12 @@ namespace EMS.DAL.RepositoryImp
         /// </summary>
         /// <param name="buildId"></param>
         /// <returns></returns>
-        public List<TreeViewModel> GetDepartmentTreeViewList(string buildId)
+        public List<TreeViewModel> GetDepartmentTreeViewList(string buildId,string energyCode)
         {
             List<TreeViewModel> treeViewModel = new List<TreeViewModel>();
             SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId)
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode)
             };
             List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildIDSQL, sqlParameters).ToList();
 
@@ -47,20 +48,16 @@ namespace EMS.DAL.RepositoryImp
         /// </summary>
         /// <param name="buildId"></param>
         /// <returns></returns>
-        public string[] GetDepartmentIDs(string buildId)
+        public string[] GetDepartmentIDs(string buildId,string energyCode)
         {
             List<TreeViewModel> treeViewModel = new List<TreeViewModel>();
             SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId)
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode)
             };
             List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildIDSQL, sqlParameters).ToList();
 
             return GetIDs(treeViewInfos);
-        }
-
-        public List<TreeViewModel> GetDepartmentTreeViewList(string buildId, string energyItemCode)
-        {
-            throw new NotImplementedException();
         }
 
         public List<TreeViewModel> GetRegionTreeViewList(string buildId)

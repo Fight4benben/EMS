@@ -9,6 +9,6 @@ namespace EMS.DAL.IRepository
 {
     public interface IDepartmentReportDbContext
     {
-        List<ReportValue> GetReportValueList(string[] circuits, string date, string type);
+        List<ReportValue> GetReportValueList(string energyCode,string[] circuits, string date, string type);
     }
 }

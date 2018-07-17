@@ -28,7 +28,7 @@ namespace EMS.Tests.Services
         {
             DateTime today = DateTime.Now;
             DepartmentReportService service = new DepartmentReportService();
-            DepartmentReportViewModel reportViewModel = service.GetViewModel("000001G001", today.ToString());
+            DepartmentReportViewModel reportViewModel = service.GetViewModel("000001G001", today.ToString(),"DD");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
@@ -40,7 +40,7 @@ namespace EMS.Tests.Services
             string[] departmentIDs = { "D000001G001001", "D000001G001002", "D000001G001003" };
             DepartmentReportService service = new DepartmentReportService();
 
-            DepartmentReportViewModel reportViewModel = service.GetViewModel(departmentIDs, today.ToString(),"DD");
+            DepartmentReportViewModel reportViewModel = service.GetViewModel("01000",departmentIDs, today.ToString(),"DD");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
@@ -52,7 +52,7 @@ namespace EMS.Tests.Services
             string[] departmentIDs = { "D000001G001001", "D000001G001002", "D000001G001003" };
             DepartmentReportService service = new DepartmentReportService();
 
-            DepartmentReportViewModel reportViewModel = service.GetViewModel(departmentIDs, today.ToString(), "MM");
+            DepartmentReportViewModel reportViewModel = service.GetViewModel("01000",departmentIDs, today.ToString(), "MM");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
@@ -64,7 +64,7 @@ namespace EMS.Tests.Services
             string[] departmentIDs = { "D000001G001001", "D000001G001002", "D000001G001003" };
             DepartmentReportService service = new DepartmentReportService();
 
-            DepartmentReportViewModel reportViewModel = service.GetViewModel(departmentIDs, today.ToString(), "YY");
+            DepartmentReportViewModel reportViewModel = service.GetViewModel("01000",departmentIDs, today.ToString(), "YY");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
