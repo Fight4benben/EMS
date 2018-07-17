@@ -21,11 +21,11 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 部门用能统计报表
-        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有部门的用能天报表
+        /// 区域用能统计报表
+        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有区域的用能天报表
         /// </summary>
         /// <param name="userName">用户名</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，部门列表，以及用能数据天报表</returns>
+        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，区域列表，以及用能数据天报表</returns>
         public RegionReportViewModel GetViewModelByUserName(string userName)
         {
             DateTime today = DateTime.Now;
@@ -36,7 +36,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
 
-            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId);
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
@@ -48,6 +48,56 @@ namespace EMS.DAL.Services
             reportView.TreeView = treeViewModel;
             reportView.Data = reportValue;
             reportView.ReportType = "DD";
+
+            return reportView;
+        }
+
+        /// <summary>
+        /// 区域用能统计报表
+        /// 根据建筑ID和日期，获取能源按钮列表，区域列表，以及用能数据天报表
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="energyCode">能耗分类编码</param>
+        /// <returns>返回完整的数据：能源按钮列表，区域列表，以及用能数据天报表</returns>
+        public RegionReportViewModel GetViewModel(string buildId, string energyCode)
+        {
+            DateTime today = DateTime.Now;
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
+            string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
+
+            List<ReportValue> reportValue = context.GetReportValueList(RegionIDs, energyCode, today.ToString(), "DD");
+
+            RegionReportViewModel reportView = new RegionReportViewModel();
+            reportView.Energys = energys;
+            reportView.TreeView = treeViewModel;
+            reportView.Data = reportValue;
+            reportView.ReportType = "DD";
+
+            return reportView;
+        }
+
+        /// <summary>
+        /// 区域用能统计报表
+        /// 根据区域，时间，报表类型，获取指定的用能数据
+        /// </summary>
+        /// <param name="RegionIDs">区域ID</param>
+        /// <param name="energyCode">能耗分类编码</param>
+        /// <param name="date">时间</param>
+        /// <param name="type">报表类型：DD:日报
+        ///                            MM:月报
+        ///                            YY:年报
+        /// </param>
+        /// <returns>返回：指定区域，能耗分类，时间，报表类型的用能数据</returns>
+        public RegionReportViewModel GetViewModel(string[] RegionIDs, string energyCode, string date, string type)
+        {
+            List<ReportValue> reportValue = context.GetReportValueList(RegionIDs, energyCode, date, type);
+
+            RegionReportViewModel reportView = new RegionReportViewModel();
+            reportView.Data = reportValue;
+            reportView.ReportType = type;
 
             return reportView;
         }

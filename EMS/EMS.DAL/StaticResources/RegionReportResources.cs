@@ -70,10 +70,15 @@ namespace EMS.DAL.StaticResources
         /// 获取区域列表
         /// 
         /// </summary>
-        public static string TreeViewInfoSQL = @" SELECT F_RegionID AS ID, F_RegionParentID AS ParentID,F_RegionName AS Name
+        public static string TreeViewInfoSQL = @" SELECT Region.F_RegionID AS ID, F_RegionParentID AS ParentID,F_RegionName AS Name
                                                         FROM T_ST_Region AS Region
-                                                        WHERE F_BuildID=@BuildID
-                                                        ORDER BY F_RegionID";
+	                                                    INNER JOIN T_ST_RegionMeter RegionMeter ON Region.F_RegionID = RegionMeter.F_RegionID
+	                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON RegionMeter.F_MeterID = Circuit.F_MeterID
+	                                                    INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                                        WHERE Region.F_BuildID=@BuildID
+	                                                    AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
+	                                                    GROUP BY Region.F_RegionID,F_RegionParentID,F_RegionName
+                                                        ORDER BY ID";
 
     }
 }

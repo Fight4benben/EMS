@@ -51,10 +51,11 @@ namespace EMS.DAL.RepositoryImp
 
         }
 
-        public List<TreeViewInfo> GetTreeViewInfoList(string buildId)
+        public List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode)
         {
             SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId)
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode)
             };
             List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(RegionReportResources.TreeViewInfoSQL, sqlParameters).ToList();
             return treeViewInfos;

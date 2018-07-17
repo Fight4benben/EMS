@@ -10,6 +10,6 @@ namespace EMS.DAL.IRepository
     public interface IRegionReportDbContext
     {
         List<ReportValue> GetReportValueList(string[] RegionIDs, string energyCode, string date, string type);
-        List<TreeViewInfo> GetTreeViewInfoList(string buildId);
+        List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode);
     }
 }

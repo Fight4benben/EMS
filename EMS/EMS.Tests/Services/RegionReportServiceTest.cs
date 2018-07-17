@@ -23,6 +23,24 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
-       
+
+        [TestMethod]
+        public void TestGetRegionReportViewModelByBuild_EnergyCode()
+        {
+            DateTime today = DateTime.Now;
+            RegionReportViewModel reportViewModel = service.GetViewModel("000001G001","01000");
+
+            Console.WriteLine(UtilTest.GetJson(reportViewModel));
+        }
+
+        [TestMethod]
+        public void TestGetRegionReportViewModelByRegionIDs_EnergyCode_Date_Type()
+        {
+            DateTime today = DateTime.Now;
+            string[] regionIDs = { "000001G0010002", "000001G0010005", "000001G0010006", "000001G0010007" };
+            RegionReportViewModel reportViewModel = service.GetViewModel(regionIDs, "01000", today.ToString(),"MM");
+
+            Console.WriteLine(UtilTest.GetJson(reportViewModel));
+        }
     }
 }
