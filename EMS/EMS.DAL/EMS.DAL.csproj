@@ -95,6 +95,7 @@
     <Compile Include="IRepository\IEnergyItemStatisticDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
     <Compile Include="IRepository\IRegionMainDbContext.cs" />
+    <Compile Include="IRepository\IRegionReportDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
     <Compile Include="RepositoryImp\CircuitCompareDbContext.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImp\RegionMainDbContext.cs" />
+    <Compile Include="RepositoryImp\RegionReportDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\CircuitCompareService.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Services\HistoryDataService.cs" />
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="Services\RegionMainService.cs" />
+    <Compile Include="Services\RegionReportService.cs" />
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\CircuitResources.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\RegionMainResources.cs" />
+    <Compile Include="StaticResources\RegionReportResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\Util.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="ViewModels\Excel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\RegionMainViewModel.cs" />
+    <Compile Include="ViewModels\RegionReportViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
