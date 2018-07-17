@@ -1,9 +1,9 @@
-var ItemReport = (function(){
+var DeptReport = (function(){
 
-	function _itemReport(){
+	function _deptReport(){
 
 		this.show=function(){
-			var url ="/api/ItemReport";
+			var url ="/api/DeptReport";
 			getDataFromServer(url,"");
 		}
 		//公开暴露的方法:初始化页面
@@ -14,7 +14,7 @@ var ItemReport = (function(){
 		};
 
 		function initEnergyBtns(){
-			$("#se_countBtns").html("");
+			$("#de_countBtns").html("");
 		}
 		//获取选中的回路
 		function getCheckedTreeIdArray(){
@@ -33,8 +33,9 @@ var ItemReport = (function(){
 			$("#daySearch").click(function(event) {
 				
 				//发送请求
-				getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
-					"&type="+getTypeByReportSelected()+"&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+				getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
+					"&energyCode="+$('.btn-solar-selected').attr('value')+
+					"&type="+getTypeByReportSelected()+"&departmentIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 			});
 
 			//导出的Excel
@@ -44,9 +45,10 @@ var ItemReport = (function(){
 					formulars.push(val);
 				});
 				
-				window.location = "/Item/GetExcel?buildId="+$("#buildinglist").val()+
+				window.location = "/Department/GetExcel?buildId="+$("#buildinglist").val()+
+				"&energyCode="+$(".btn-solar-selected").attr('value')+
 				"&type="+getTypeByReportSelected()+
-				"&formularIds="+formulars.join(',')+
+				"&departmentIDs="+formulars.join(',')+
 				"&date="+$("#daycalendarBox").val()
 			});
 		}
@@ -60,8 +62,9 @@ var ItemReport = (function(){
 
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 					//发送请求	
-					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
-						"&type=DD&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+					getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
+						"&energyCode="+$(".btn-solar-selected").attr('value')+
+						"&type=DD&departmentIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 
 			});
@@ -80,8 +83,9 @@ var ItemReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
-						"&type=MM&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+					getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
+						"&energyCode="+$(".btn-solar-selected").attr('value')+
+						"&type=MM&departmentIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 			});
 
@@ -99,8 +103,9 @@ var ItemReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
-						"&type=YY&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+					getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
+						"&energyCode="+$(".btn-solar-selected").attr('value')+
+						"&type=YY&departmentIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
 			});
 		}
@@ -121,13 +126,13 @@ var ItemReport = (function(){
 
 		//选中分类能耗按钮后添加选中样式或判断如果再次点击本分类，则不重新加载数据
 		function setEnergyBtnStyle($current){
-			var id = $("#se_countBtns .btn-solar-selected")[0].id;
+			var id = $("#de_countBtns .btn-solar-selected")[0].id;
 
 			if($current[0].id==id){
 				return false;
 			}
 
-			$("#se_countBtns button").removeClass('btn-solar-selected');
+			$("#de_countBtns button").removeClass('btn-solar-selected');
 
 			$current.addClass('btn-solar-selected');
 
@@ -156,10 +161,9 @@ var ItemReport = (function(){
 		}
 
 		function getDataFromServer(url,params){
-			EMS.Loading.show($("#main-content").parent('div'));
+			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				
-				
+
 				if(data.hasOwnProperty('message'))
 					location = "/Account/Login";
 
@@ -172,7 +176,7 @@ var ItemReport = (function(){
 				}catch(e){
 
 				}finally{
-					EMS.Loading.hide($("#main-content").parent('div'));
+					EMS.Loading.hide();
 				}
 			});
 		}
@@ -188,7 +192,7 @@ var ItemReport = (function(){
 				var buildId = $(this).val();
 				
 				 //console.log($("#daycalendarBox").val());
-				getDataFromServer("/api/ItemReport","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
+				getDataFromServer("/api/DeptReport","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 			});
 		};
 
@@ -204,13 +208,36 @@ var ItemReport = (function(){
 
 				switch(val.energyItemCode){
 					case "01000":
-						$("#se_countBtns").append('<acronym title="电"><button id="elec" class="btn btn-elc" value="01000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
+						$("#de_countBtns").append('<acronym title="电"><button id="'+val.energyItemCode+'" class="btn btn-elc" value="01000" style="width: 20px; height: 20px;" type="button"></button></acronym>')
 					break;
+					case "02000":
+						$("#de_countBtns").append('<acronym title="水"><button id="'+val.energyItemCode+'" class="btn btn-water" value="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
+					case "13000":
+						$("#de_countBtns").append('<acronym title="光伏"><button id="'+val.energyItemCode+'" class="btn btn-solar" value="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
+					default:
+						$("#de_countBtns").append('<acronym title="'+val.energyItemName+'"><button id="'+val.energyItemCode+'" class="btn btn-empty" value="'+val.energyItemCode+'" type="button">'+
+							val.energyItemName.substring(0,1)+'</button></acronym>');
 
 				}
 			});
 
-			$("#se_countBtns button").eq(0).addClass('btn-solar-selected');		
+			$("#de_countBtns button").eq(0).addClass('btn-solar-selected');	
+
+			$("#de_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
+				var $current = $(this);
+
+				var isNotRepeat = setEnergyBtnStyle($current);
+
+				if(isNotRepeat){
+					//发送请求
+					getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
+						"&energyCode="+$('.btn-solar-selected').attr('value')+
+						"&type="+getTypeByReportSelected()+
+						"&date="+$("#daycalendarBox").val());
+				}
+			});	
 		};
 
 		//根据数据显示树状结构，如果不包含树状结构数据则不更新数据。
@@ -362,17 +389,17 @@ var ItemReport = (function(){
 
 	};
 
-	return _itemReport;
+	return _deptReport;
 
 })();
 
 jQuery(document).ready(function($) {
 
-	$("#seenergy").attr("class","start active");
-	$("#se_count").attr("class","active");
+	$("#deenergy").attr("class","start active");
+	$("#de_count").attr("class","active");
 
 
-	var report = new ItemReport();
+	var report = new DeptReport();
 	report.initDom();
 	report.show();
 });

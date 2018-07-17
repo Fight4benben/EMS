@@ -20,7 +20,7 @@ namespace EMS.Tests.DbContext
             ITreeViewDbContext context = new TreeViewDbContext();
             //DateTime today = DateTime.Now;
 
-            List<TreeViewModel> treeViewModel = context.GetDepartmentTreeViewList("000001G001");
+            List<TreeViewModel> treeViewModel = context.GetDepartmentTreeViewList("000001G001","01000");
             Console.WriteLine( UtilTest.GetJson(treeViewModel));
         }
     }
