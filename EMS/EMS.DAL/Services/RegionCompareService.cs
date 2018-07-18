@@ -31,7 +31,11 @@ namespace EMS.DAL.Services
             DateTime today = DateTime.Now;
 
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
-            string buildId = builds.First().BuildID;
+            string buildId;
+            if (builds.Count > 0)
+                buildId = builds.First().BuildID;
+            else
+                buildId = "";
 
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
             string energyCode;
