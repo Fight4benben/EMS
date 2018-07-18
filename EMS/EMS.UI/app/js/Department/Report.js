@@ -356,7 +356,7 @@ var DeptReport = (function(){
 			});
 			//console.log(dataList);
 
-			var columns = [{field:'name',title:'分项名称'}];
+			var columns = [{field:'name',title:'部门名称'}];
 			var rows =[];
 
 			$.each(times, function(index, val) {

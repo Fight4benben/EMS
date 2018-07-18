@@ -616,6 +616,7 @@
     <Content Include="Views\Region\Main.cshtml" />
     <Content Include="Views\Department\Main.cshtml" />
     <Content Include="Views\Department\Report.cshtml" />
+    <Content Include="Views\Department\Compare.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />

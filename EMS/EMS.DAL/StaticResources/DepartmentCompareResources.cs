@@ -19,8 +19,10 @@ namespace EMS.DAL.StaticResources
                                                 INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
                                                 INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
                                                 INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+                                                INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                 WHERE Circuit.F_BuildID=@BuildID 
                                                 AND DepartmentInfo.F_DepartmentID = @DepartmentID
+                                                AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
                                                 AND ParamInfo.F_IsEnergyValue = 1
                                                 AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime)-1, 0) 
                                                                              AND DATEADD(SS,-3,DATEADD(YY, DATEDIFF(YY,0,@EndTime)+1, 0))
