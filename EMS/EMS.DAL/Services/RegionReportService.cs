@@ -98,7 +98,7 @@ namespace EMS.DAL.Services
         ///                            MM:月报
         ///                            YY:年报
         /// </param>
-        /// <returns>返回：指定区域，能耗分类，时间，报表类型的用能数据</returns>
+        /// <returns>返回：指定用能数据</returns>
         public RegionReportViewModel GetViewModel(string energyCode, string[] RegionIDs, string date, string type)
         {
             List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, date, type);

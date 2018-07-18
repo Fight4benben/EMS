@@ -25,7 +25,7 @@ namespace EMS.DAL.Services
         /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有区域的用能同比分析
         /// </summary>
         /// <param name="userName">用户名</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，区域列表，以及用能数据同比分析</returns>
+        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，区域列表，以及用能同比分析</returns>
         public RegionCompareViewModel GetViewModelByUserName(string userName)
         {
             DateTime today = DateTime.Now;
@@ -65,11 +65,11 @@ namespace EMS.DAL.Services
 
         /// <summary>
         /// 区域用能同比分析
-        /// 根据建筑ID和日期，获取能源按钮列表，区域列表，以及用能同比分析
+        /// 根据建筑ID和日期，获取区域列表，以及用能同比分析
         /// </summary>
         /// <param name="buildId">建筑ID</param>
         /// <param name="energyCode">能耗分类编码</param>
-        /// <returns>返回完整的数据：能源按钮列表，区域列表，以及用能数据天报表</returns>
+        /// <returns>返回：区域列表，用能同比分析</returns>
         public RegionCompareViewModel GetViewModel(string buildId, string energyCode)
         {
             DateTime today = DateTime.Now;
