@@ -265,7 +265,6 @@ namespace EMS.DAL.Services
                 book.Write(stream);
                 stream.Seek(0, SeekOrigin.Begin);
                 excel.Data = stream.ToArray();
-
             }
 
             return excel;

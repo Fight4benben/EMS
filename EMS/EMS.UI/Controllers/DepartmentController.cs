@@ -20,6 +20,11 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        public ActionResult Compare()
+        {
+            return View();
+        }
+
         public FileResult GetExcel(string buildId, string energyCode, string departmentIDs, string date, string type)
         {
             string[] formulars = departmentIDs.Split(',');

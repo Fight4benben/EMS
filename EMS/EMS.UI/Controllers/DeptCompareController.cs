@@ -38,12 +38,36 @@ namespace EMS.UI.Controllers
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">时间</param>
         /// <returns>返回：能源按钮列表，部门列表，以及第一个部门用能数据</returns>
-        public object Get(string buildId)
+        //public object Get(string buildId)
+        //{
+        //    try
+        //    {
+        //        string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
+        //        return service.GetViewModel(buildId, date);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return e.Message;
+        //    }
+        //}
+
+        public object Get(string buildId,string date)
         {
             try
             {
-                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
                 return service.GetViewModel(buildId, date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public object Get(string buildId,string energyCode,string date)
+        {
+            try
+            {
+                return service.GetViewModel(buildId, energyCode,date);
             }
             catch (Exception e)
             {
@@ -59,11 +83,11 @@ namespace EMS.UI.Controllers
         /// <param name="departmentID">部门ID</param>
         /// <param name="date">时间</param>
         /// <returns>返回：部门用能数据</returns>
-        public object Get(string buildId, string departmentID, string date)
+        public object Get(string buildId, string energyCode,string departmentID, string date)
         {
             try
             {
-                return service.GetViewModel(buildId, departmentID, date);
+                return service.GetViewModel(buildId, energyCode, departmentID, date);
             }
             catch (Exception e)
             {
