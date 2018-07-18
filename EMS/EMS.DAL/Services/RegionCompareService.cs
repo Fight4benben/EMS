@@ -34,11 +34,19 @@ namespace EMS.DAL.Services
             string buildId = builds.First().BuildID;
 
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
-            string energyCode = energys.First().EnergyItemCode;
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
-            string regionID = treeViewInfos.First().ID;
+            string regionID;
+            if (treeViewInfos.Count > 0)
+                regionID = treeViewInfos.First().ID;
+            else
+                regionID = "";
 
             List<EMSValue> compareValue = context.GetCompareValueList( energyCode, regionID, today.ToString());
 
@@ -64,8 +72,12 @@ namespace EMS.DAL.Services
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
-            string regionID = treeViewInfos.First().ID;
-
+            string regionID;
+            if (treeViewInfos.Count > 0)
+                regionID = treeViewInfos.First().ID;
+            else
+                regionID = "";
+            
             List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, today.ToString());
 
             RegionCompareViewModel ViewModel = new RegionCompareViewModel();

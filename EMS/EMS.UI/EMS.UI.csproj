@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ItemReportController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\RegionMainController.cs" />
+    <Compile Include="Controllers\RegionReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
