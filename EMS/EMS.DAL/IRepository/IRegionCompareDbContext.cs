@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.IRepository
 {
-    public interface IRegionReportDbContext
+    public interface IRegionCompareDbContext
     {
-        List<ReportValue> GetReportValueList(string energyCode, string[] RegionIDs, string date, string type);
+        List<EMSValue> GetCompareValueList(string energyCode, string regionID, string date);
         List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode);
     }
 }

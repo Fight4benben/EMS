@@ -31,16 +31,24 @@ namespace EMS.DAL.Services
             DateTime today = DateTime.Now;
             
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
-            string buildId = builds.First().BuildID;
+            string buildId;
+            if (builds.Count > 0)
+                buildId = builds.First().BuildID;
+            else
+                buildId = "";
 
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
-            string energyCode = energys.First().EnergyItemCode;
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
-            List<ReportValue> reportValue = context.GetReportValueList(RegionIDs,energyCode, today.ToString(), "DD");
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, today.ToString(), "DD");
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Builds = builds;
@@ -68,7 +76,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
-            List<ReportValue> reportValue = context.GetReportValueList(RegionIDs, energyCode, today.ToString(), "DD");
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, today.ToString(), "DD");
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Energys = energys;
@@ -91,9 +99,9 @@ namespace EMS.DAL.Services
         ///                            YY:年报
         /// </param>
         /// <returns>返回：指定区域，能耗分类，时间，报表类型的用能数据</returns>
-        public RegionReportViewModel GetViewModel(string[] RegionIDs, string energyCode, string date, string type)
+        public RegionReportViewModel GetViewModel(string energyCode, string[] RegionIDs, string date, string type)
         {
-            List<ReportValue> reportValue = context.GetReportValueList(RegionIDs, energyCode, date, type);
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, date, type);
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Data = reportValue;

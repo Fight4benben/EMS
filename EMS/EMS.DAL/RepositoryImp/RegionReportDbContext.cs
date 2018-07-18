@@ -24,7 +24,7 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="date">传入的日期</param>
         /// <param name="type">年月日类型：（DD：日报表，MM：月报表，YY:年报表）</param>
         /// <returns>List<ReportValue></returns>
-        public List<ReportValue> GetReportValueList(string[] RegionIDs, string energyCode, string date, string type)
+        public List<ReportValue> GetReportValueList(string energyCode, string[] RegionIDs,  string date, string type)
         {
             string sql;
             switch (type)
