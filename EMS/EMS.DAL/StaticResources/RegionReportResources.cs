@@ -60,6 +60,7 @@ namespace EMS.DAL.StaticResources
                                                     INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
                                                     INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
                                                     WHERE Region.F_RegionID IN ({0})
+                                                    AND Region.F_BuildID=@BuildID
                                                     AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
                                                     AND ParamInfo.F_IsEnergyValue = 1
                                                     AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime), 0) 

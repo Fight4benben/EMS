@@ -54,7 +54,7 @@ namespace EMS.UI.Controllers
             try
             {
                 string[] ids = regionIDs.Split(',');
-                return service.GetViewModel(energyCode, ids, date, type);
+                return service.GetViewModel(buildId,energyCode, ids, date, type);
             }
             catch (Exception e)
             {

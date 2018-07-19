@@ -9,7 +9,7 @@ namespace EMS.DAL.IRepository
 {
     public interface IRegionReportDbContext
     {
-        List<ReportValue> GetReportValueList(string energyCode, string[] RegionIDs, string date, string type);
+        List<ReportValue> GetReportValueList(string buildId,string energyCode, string[] RegionIDs, string date, string type);
         List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode);
     }
 }

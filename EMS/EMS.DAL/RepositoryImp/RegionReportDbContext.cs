@@ -24,9 +24,13 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="date">传入的日期</param>
         /// <param name="type">年月日类型：（DD：日报表，MM：月报表，YY:年报表）</param>
         /// <returns>List<ReportValue></returns>
-        public List<ReportValue> GetReportValueList(string energyCode, string[] RegionIDs,  string date, string type)
+        public List<ReportValue> GetReportValueList(string buildId,string energyCode, string[] RegionIDs,  string date, string type)
         {
             string sql;
+            List<SqlParameter> sqlParameters = new List<SqlParameter>(){
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@EndTime",date)
+            };
             switch (type)
             {
                 case "DD":
@@ -37,17 +41,15 @@ namespace EMS.DAL.RepositoryImp
                     break;
                 case "YY":
                     sql = string.Format(RegionReportResources.YearReportSQL, "'" + string.Join("','", RegionIDs) + "'");
+                    sqlParameters.Add(new SqlParameter("@BuildID",buildId));
                     break;
                 default:
                     sql = string.Format(RegionReportResources.DayReportSQL, "'" + string.Join("','", RegionIDs) + "'");
                     break;
             }
 
-            SqlParameter[] sqlParameters ={
-                new SqlParameter("@EnergyItemCode",energyCode),
-                new SqlParameter("@EndTime",date)
-            };
-            return _db.Database.SqlQuery<ReportValue>(sql, sqlParameters).ToList();
+            
+            return _db.Database.SqlQuery<ReportValue>(sql, sqlParameters.ToArray()).ToList();
 
         }
 

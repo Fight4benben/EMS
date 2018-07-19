@@ -28,7 +28,7 @@ namespace EMS.Tests.Services
         public void TestGetRegionReportViewModelByBuild_EnergyCode()
         {
             DateTime today = DateTime.Now;
-            RegionReportViewModel reportViewModel = service.GetViewModel("000001G009","01000");
+            RegionReportViewModel reportViewModel = service.GetViewModel("000001G001","2018-07-18","YY");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
@@ -38,7 +38,7 @@ namespace EMS.Tests.Services
         {
             DateTime today = DateTime.Now;
             string[] regionIDs = { "000001G0010002", "000001G0010005", "000001G0010006", "000001G0010007" };
-            RegionReportViewModel reportViewModel = service.GetViewModel(regionIDs, "01000", today.ToString(),"MM");
+            RegionReportViewModel reportViewModel = service.GetViewModel("000001G001", "01000", regionIDs,  today.ToString(),"YY");
 
             Console.WriteLine(UtilTest.GetJson(reportViewModel));
         }
