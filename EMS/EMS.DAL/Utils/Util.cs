@@ -19,6 +19,18 @@ namespace EMS.DAL.Utils
             return dt = Convert.ToDateTime(date, dtFormat);
         }
 
+        public static DateTime GetMonthEndDate(string date)
+        {
+            int year = Convert.ToInt32(date.Split('-')[0]);
+            int month = Convert.ToInt32(date.Split('-')[1]);
+
+            DateTime first = new DateTime(year,month,1);
+            DateTime end = first.AddMonths(1).AddDays(-1);
+
+            return end;
+
+        }
+
         /// <summary>
         /// 根据list生成树状结构
         /// </summary>

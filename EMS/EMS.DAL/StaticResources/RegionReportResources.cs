@@ -42,8 +42,8 @@ namespace EMS.DAL.StaticResources
                                                     WHERE Region.F_RegionID IN ({0})
                                                     AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
                                                     AND ParamInfo.F_IsEnergyValue = 1
-                                                    AND DayResult.F_StartDay BETWEEN DATEADD(MONTH, DATEDIFF(MONTH, 0, @EndTime), 0) 
-							                                                     AND DATEADD(SS,-3,DATEADD(MONTH, DATEDIFF(MONTH,0,@EndTime)+1, 0))
+                                                    AND DayResult.F_StartDay BETWEEN @BegDate
+							                                                     AND @EndDate
                                                     GROUP BY Region.F_RegionID,Region.F_RegionName ,DayResult.F_StartDay
                                                     ORDER BY Region.F_RegionID, 'Time' ASC";
 
@@ -53,18 +53,17 @@ namespace EMS.DAL.StaticResources
         /// </summary>
         public static string YearReportSQL = @"SELECT Region.F_RegionID AS ID,Region.F_RegionName AS Name , DATEADD(MM, DATEDIFF(MM,0,F_StartDay),0) AS 'Time'
                                                     ,SUM( (CASE WHEN RegionMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * RegionMeter.F_Rate/100) AS Value
-                                                    FROM T_MC_MeterDayResult DayResult
-                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+                                                    FROM T_ST_Region Region 
+                                                    INNER JOIN T_ST_RegionMeter RegionMeter ON Region.F_RegionID = RegionMeter.F_RegionID
+                                                    INNER JOIN T_ST_MeterUseInfo Meter ON RegionMeter.F_MeterID = Meter.F_MeterID
+                                                    INNER JOIN T_MC_MeterDayResult DayResult ON Meter.F_MeterID = DayResult.F_MeterID
+                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON Meter.F_MeterID = Circuit.F_MeterID
                                                     INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                     INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
-                                                    INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
-                                                    INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
                                                     WHERE Region.F_RegionID IN ({0})
-                                                    AND Region.F_BuildID=@BuildID
                                                     AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
                                                     AND ParamInfo.F_IsEnergyValue = 1
-                                                    AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime), 0) 
-							                                                     AND DATEADD(SS,-3,DATEADD(YEAR, DATEDIFF(YEAR,0,@EndTime)+1, 0))
+                                                    AND DayResult.F_StartDay BETWEEN @BegDate AND CAST(DATEPART(yy,@BegDate) AS VARCHAR)+'-12-31'
                                                     GROUP BY Region.F_RegionID,Region.F_RegionName ,DATEADD(MM, DATEDIFF(MM,0,F_StartDay),0) 
                                                     ORDER BY Region.F_RegionID, 'Time' ASC";
         /// <summary>

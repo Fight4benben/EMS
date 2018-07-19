@@ -178,6 +178,8 @@ var RegionReport = (function(){
 				}finally{
 					EMS.Loading.hide();
 				}
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
 			});
 		}
 

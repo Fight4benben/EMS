@@ -48,7 +48,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
-            List<ReportValue> reportValue = context.GetReportValueList(buildId,energyCode, RegionIDs, today.ToString(), "DD");
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, today.ToString(), "DD");
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Builds = builds;
@@ -73,7 +73,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
-            List<ReportValue> reportValue = context.GetReportValueList(buildId,energyCode, RegionIDs, date, type);
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, date, type);
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Energys = energys;
@@ -99,7 +99,7 @@ namespace EMS.DAL.Services
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
             string[] RegionIDs = Util.GetAllIDs(treeViewInfos);
 
-            List<ReportValue> reportValue = context.GetReportValueList(buildId,energyCode, RegionIDs, date, type);
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, date, type);
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.TreeView = treeViewModel;
@@ -123,16 +123,16 @@ namespace EMS.DAL.Services
         /// <returns>返回：指定用能数据</returns>
         public RegionReportViewModel GetViewModel(string buildId,string energyCode, string[] RegionIDs, string date, string type)
         {
-            if (type == "MM")
-            {
-                date += "-01";
-            }
-            else if (type == "YY")
-            {
-                date += "-01-01";
-            }
+            //if (type == "MM")
+            //{
+            //    date += "-01";
+            //}
+            //else if (type == "YY")
+            //{
+            //    date += "-01-01";
+            //}
 
-            List<ReportValue> reportValue = context.GetReportValueList(buildId,energyCode, RegionIDs, date, type);
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, RegionIDs, date, type);
 
             RegionReportViewModel reportView = new RegionReportViewModel();
             reportView.Data = reportValue;
