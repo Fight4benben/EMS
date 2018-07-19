@@ -52,10 +52,38 @@ namespace EMS.DAL.Services
             else
                 regionID = "";
 
-            List<EMSValue> compareValue = context.GetCompareValueList( energyCode, regionID, today.ToString());
+            List<EMSValue> compareValue = context.GetCompareValueList( energyCode, regionID, today.ToString("yyyy-MM-dd"));
 
             RegionCompareViewModel ViewModel = new RegionCompareViewModel();
             ViewModel.Builds = builds;
+            ViewModel.Energys = energys;
+            ViewModel.TreeView = treeViewModel;
+            ViewModel.CompareData = compareValue;
+
+            return ViewModel;
+        }
+
+        public RegionCompareViewModel GetViewModel(string buildId,string date)
+        {
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
+            string regionID;
+            if (treeViewInfos.Count > 0)
+                regionID = treeViewInfos.First().ID;
+            else
+                regionID = "";
+
+            List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, date);
+
+            RegionCompareViewModel ViewModel = new RegionCompareViewModel();
+
             ViewModel.Energys = energys;
             ViewModel.TreeView = treeViewModel;
             ViewModel.CompareData = compareValue;
@@ -70,9 +98,8 @@ namespace EMS.DAL.Services
         /// <param name="buildId">建筑ID</param>
         /// <param name="energyCode">能耗分类编码</param>
         /// <returns>返回：区域列表，用能同比分析</returns>
-        public RegionCompareViewModel GetViewModel(string buildId, string energyCode)
+        public RegionCompareViewModel GetViewModel(string buildId, string energyCode,string date)
         {
-            DateTime today = DateTime.Now;
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
@@ -82,7 +109,7 @@ namespace EMS.DAL.Services
             else
                 regionID = "";
             
-            List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, today.ToString());
+            List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, date);
 
             RegionCompareViewModel ViewModel = new RegionCompareViewModel();
             ViewModel.TreeView = treeViewModel;
@@ -98,7 +125,7 @@ namespace EMS.DAL.Services
         /// <param name="regionID">单个区域ID</param>
         /// <param name="date">日期</param>
         /// <returns>返回：用能数据同比分析</returns>
-        public RegionCompareViewModel GetViewModel(string energyCode, string regionID, string date)
+        public RegionCompareViewModel GetViewModel(string buildId,string energyCode, string regionID, string date)
         {
 
             List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, date);

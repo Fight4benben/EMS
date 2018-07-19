@@ -18,5 +18,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Compare()
+        {
+            return View();
+        }
     }
 }

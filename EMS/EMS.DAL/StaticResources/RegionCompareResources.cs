@@ -23,8 +23,8 @@ namespace EMS.DAL.StaticResources
                                                 WHERE Region.F_RegionID = @RegionID
                                                 AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
                                                 AND ParamInfo.F_IsEnergyValue = 1
-                                                AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime)-1, 0) 
-							                                             AND  DATEADD(SS,-3,DATEADD(YY, DATEDIFF(YY,0,@EndTime)+1, 0))
+                                                AND DayResult.F_StartDay BETWEEN CONVERT(VARCHAR(4),DATEADD(YEAR,-1,@EndTime),120)+'-01-01'
+							                                             AND  CONVERT(VARCHAR(4),@EndTime,120)+'-12-31'
                                                 GROUP BY Region.F_RegionID,Region.F_RegionName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
                                                 ORDER BY ID,'Time' ASC
                                                 ";
