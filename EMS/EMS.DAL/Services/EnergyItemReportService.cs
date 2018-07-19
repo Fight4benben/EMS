@@ -195,7 +195,7 @@ namespace EMS.DAL.Services
             List<ReportValue> data = context.GetReportValueList(formulaIDs, now.ToShortDateString(), type);
 
             //设置Excel标题
-            sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName + reportType);
+            sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName + "分项用能" + reportType);
 
             //设置Excel中报表的能源类别
             sheet.GetRow(1).GetCell(1).SetCellValue(energyItem.EnergyItemName);

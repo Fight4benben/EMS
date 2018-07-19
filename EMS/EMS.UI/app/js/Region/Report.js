@@ -45,10 +45,10 @@ var RegionReport = (function(){
 					formulars.push(val);
 				});
 				
-				window.location = "/Department/GetExcel?buildId="+$("#buildinglist").val()+
+				window.location = "/Region/GetExcel?buildId="+$("#buildinglist").val()+
 				"&energyCode="+$(".btn-solar-selected").attr('value')+
 				"&type="+getTypeByReportSelected()+
-				"&departmentIDs="+formulars.join(',')+
+				"&regionIDs="+formulars.join(',')+
 				"&date="+$("#daycalendarBox").val()
 			});
 		}
