@@ -34,6 +34,16 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
+        public void TestGetDepartmentReportViewModelByBuild_Date_YY()
+        {
+            DateTime today = DateTime.Now;
+            DepartmentReportService service = new DepartmentReportService();
+            DepartmentReportViewModel reportViewModel = service.GetViewModel("000001G001", "2018", "YY");
+
+            Console.WriteLine(UtilTest.GetJson(reportViewModel));
+        }
+
+        [TestMethod]
         public void TestGetDepartmentReportViewModelByBuild_Date_DD()
         {
             DateTime today = DateTime.Now;
@@ -58,7 +68,7 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
-        public void TestGetDepartmentReportViewModelByBuild_Date_YY()
+        public void TestGetDepartmentReportViewModelByBuild_Date_YY2()
         {
             DateTime today = DateTime.Now;
             string[] departmentIDs = { "D000001G001001", "D000001G001002", "D000001G001003" };

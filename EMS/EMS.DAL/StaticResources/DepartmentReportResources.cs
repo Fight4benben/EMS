@@ -44,8 +44,7 @@ namespace EMS.DAL.StaticResources
                                                     WHERE DepartmentInfo.F_DepartmentID IN ({0})
                                                     AND ParamInfo.F_IsEnergyValue = 1
                                                     AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
-                                                    AND DayResult.F_StartDay BETWEEN DATEADD(MONTH, DATEDIFF(MONTH, 0, @EndTime), 0) 
-							                                                     AND DATEADD(SS,-3,DATEADD(MONTH, DATEDIFF(MONTH,0,@EndTime)+1, 0))
+                                                    AND DayResult.F_StartDay BETWEEN  @BegDate AND @EndDate
                                                     GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName ,DayResult.F_StartDay
                                                     ORDER BY DepartmentInfo.F_DepartmentID, 'Time' ASC";
 
@@ -65,8 +64,7 @@ namespace EMS.DAL.StaticResources
                                                     WHERE DepartmentInfo.F_DepartmentID IN ({0})
                                                     AND ParamInfo.F_IsEnergyValue = 1
                                                     AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
-                                                    AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, DATEDIFF(YEAR, 0, @EndTime), 0) 
-							                                                     AND DATEADD(SS,-3,DATEADD(YEAR, DATEDIFF(YEAR,0,@EndTime)+1, 0))
+                                                    AND DayResult.F_StartDay BETWEEN @BegDate AND CAST(DATEPART(yy,@BegDate) AS VARCHAR)+'-12-31'
                                                     GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName ,DATEADD(MM, DATEDIFF(MM,0,F_StartDay),0) 
                                                     ORDER BY DepartmentInfo.F_DepartmentID, 'Time' ASC";
     }

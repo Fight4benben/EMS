@@ -23,28 +23,33 @@ namespace EMS.DAL.RepositoryImp
         public List<ReportValue> GetReportValueList(string energyCode,string[] deptIds, string date, string type)
         {
             string sql;
+            List<SqlParameter> sqlParameters = new List<SqlParameter>(){
+                new SqlParameter("@EnergyItemCode",energyCode)
+            };
             switch (type)
             {
                 case "DD":
                     sql = string.Format(DepartmentReportResources.DayReportSQL, "'" + string.Join("','", deptIds) + "'");
+                    sqlParameters.Add(new SqlParameter("@EndTime", date));
                     break;
                 case "MM":
                     sql = string.Format(DepartmentReportResources.MonthReportSQL, "'" + string.Join("','", deptIds) + "'");
+                    sqlParameters.Add(new SqlParameter("@BegDate", date + "-01"));
+                    sqlParameters.Add(new SqlParameter("@EndDate", Utils.Util.GetMonthEndDate(date).ToString("yyyy-MM-dd")));
                     break;
                 case "YY":
                     sql = string.Format(DepartmentReportResources.YearReportSQL, "'" + string.Join("','", deptIds) + "'");
+                    sqlParameters.Add(new SqlParameter("@BegDate", date + "-01-01"));
                     break;
                 default:
                     sql = string.Format(DepartmentReportResources.DayReportSQL, "'" + string.Join("','", deptIds) + "'");
+                    sqlParameters.Add(new SqlParameter("@EndTime", date));
                     break;
             }
 
-            SqlParameter[] sqlParameters = {
-                new SqlParameter("@EndTime", date),
-                new SqlParameter("@EnergyItemCode",energyCode)
-            };
+           
 
-            return _db.Database.SqlQuery<ReportValue>(sql, sqlParameters).ToList();
+            return _db.Database.SqlQuery<ReportValue>(sql, sqlParameters.ToArray()).ToList();
 
         }
     }

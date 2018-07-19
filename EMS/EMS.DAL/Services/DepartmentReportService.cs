@@ -121,14 +121,14 @@ namespace EMS.DAL.Services
         /// <returns>返回：指定部门，时间，报表类型的用能数据</returns>
         public DepartmentReportViewModel GetViewModel(string energyCode,string[] departmentIDs, string date, string type)
         {
-            if (type == "MM")
-            {
-                date += "-01";
-            }
-            else if (type == "YY")
-            {
-                date += "-01-01";
-            }
+            //if (type == "MM")
+            //{
+            //    date += "-01";
+            //}
+            //else if (type == "YY")
+            //{
+            //    date += "-01-01";
+            //}
 
             List<ReportValue> reportValue = context.GetReportValueList(energyCode, departmentIDs, date, type);
 
