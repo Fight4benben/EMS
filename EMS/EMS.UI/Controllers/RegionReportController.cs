@@ -25,11 +25,11 @@ namespace EMS.UI.Controllers
             }
         }
 
-        public object Get(string buildId, string energyCode)
+        public object Get(string buildId,string date,string type)
         {
             try
             {
-                return service.GetViewModel(buildId, energyCode);
+                return service.GetViewModel(buildId, date, type);
             }
             catch (Exception e)
             {
@@ -37,11 +37,23 @@ namespace EMS.UI.Controllers
             }
         }
 
-        public object Get(string energyCode, string RegionIDs, string date, string type)
+        public object Get(string buildId, string energyCode,string date,string type)
         {
             try
             {
-                string[] ids = RegionIDs.Split(',');
+                return service.GetViewModel(buildId, energyCode,date,type);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public object Get(string buildId,string energyCode, string regionIDs, string date, string type)
+        {
+            try
+            {
+                string[] ids = regionIDs.Split(',');
                 return service.GetViewModel(energyCode, ids, date, type);
             }
             catch (Exception e)
