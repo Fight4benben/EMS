@@ -26,6 +26,11 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        public ActionResult Cost()
+        {
+            return View();
+        }
+
         public FileResult GetExcel(string buildId, string energyCode, string type, string regionIDs, string date)
         {
             string[] regions = regionIDs.Split(',');

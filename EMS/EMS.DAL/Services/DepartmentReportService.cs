@@ -146,13 +146,11 @@ namespace EMS.DAL.Services
             if (type == "MM")
             {
                 reportType = " 月报(" + date + ")";
-                date += "-01";
                 templatePath = basePath + "/MonthReportTemplate.xls";
             }
             else if (type == "YY")
             {
                 reportType = " 年报(" + date + ")";
-                date += "-01-01";
                 templatePath = basePath + "/YearReportTemplate.xls";
             }
             else if (type == "DD")
@@ -178,14 +176,12 @@ namespace EMS.DAL.Services
             //获取能源类型
             EnergyItemDict energyItem = reportContext.GetUnitByEnergyCode("01000");
 
-            DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
-
             //string[] circuitIds = circuits.Split(',');
 
-            List<ReportValue> data = context.GetReportValueList(energyCode,formulaIDs, now.ToShortDateString(), type);
+            List<ReportValue> data = context.GetReportValueList(energyCode,formulaIDs, date, type);
 
             //设置Excel标题
-            sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName + reportType);
+            sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName+" 部门用能 " + reportType);
 
             //设置Excel中报表的能源类别
             sheet.GetRow(1).GetCell(1).SetCellValue(energyItem.EnergyItemName);

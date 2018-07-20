@@ -283,6 +283,7 @@
     <Content Include="app\js\Department\Report.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
+    <Content Include="app\js\Item\Compare.js" />
     <Content Include="app\js\Item\Overview.js" />
     <Content Include="app\js\Item\Report.js" />
     <Content Include="app\js\Region\Compare.js" />
@@ -624,6 +625,7 @@
     <Content Include="Views\Department\Compare.cshtml" />
     <Content Include="Views\Region\Report.cshtml" />
     <Content Include="Views\Region\Compare.cshtml" />
+    <Content Include="Views\Region\Cost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />
