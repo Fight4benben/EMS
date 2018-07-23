@@ -281,6 +281,7 @@
     <Content Include="app\js\Department\Compare.js" />
     <Content Include="app\js\Department\Main.js" />
     <Content Include="app\js\Department\Report.js" />
+    <Content Include="app\js\equipment.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
     <Content Include="app\js\Item\Compare.js" />

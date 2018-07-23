@@ -91,6 +91,10 @@ var Home = (function(){
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 		};
 
+		function getCurrentBuildId(){
+			return $("#buildinglist").val();
+		}
+
 		//显示当前建筑物详细信息
 		function showBuildInfo(data){
 			initBuildInfo();
@@ -202,13 +206,22 @@ var Home = (function(){
 
 				$.each(energyArray, function(key, val) {
 					if(val.code == $this.attr("value")){
-						showLine(val);
+						if(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002")
+							showPreviewLine(energyArray[0]);
+						else
+							showLine(energyArray[0]);
 						showCompareValue(val);
 					}
 				});
 			});
 
-			showLine(energyArray[0]);
+			
+			//var 
+			if(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002")
+				showPreviewLine(energyArray[0]);
+			else
+				showLine(energyArray[0]);
+
 			showCompareValue(energyArray[0]);
 		};
 
@@ -256,6 +269,142 @@ var Home = (function(){
 
 			EMS.Chart.showLine(echarts,$("#main_line"),['昨日', '今日'],hours,series);
 		};
+
+		function showPreviewLine(data){
+			//initChartLine();
+			var hours=['0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时', 
+					'13时', '14时', '15时', '16时', '17时', '18时', '19时', '20时', '21时', '22时', '23时'];
+
+			var todayValue=[];
+			var yesterValue=[];
+			var todayHour = new Date().getHours();
+
+			$.each(hours, function(key, val) {
+				
+				var currentValue = data.hourValues.today.filter(function(hourValue){
+					var timeString = hourValue.valueTime.replace('-','/');
+					var date = new Date(timeString);
+					return key ==  date.getHours();
+				});
+
+				var yesValue = data.hourValues.yesterday.filter(function(hourValue){
+					var timeString = hourValue.valueTime.replace('-','/');
+					var date = new Date(timeString);
+					return key ==  date.getHours();
+				});
+
+				if(currentValue.length!=0){
+					if(key === todayHour-1)
+						yesterValue[key] = currentValue[0].value.toFixed(2);
+
+					if(key <= todayHour){
+						todayValue[key] = currentValue[0].value.toFixed(2);
+						
+					}
+					else
+						todayValue[key] = undefined;
+				}
+
+				if(yesValue.length !=0){
+					if(key >= todayHour)
+						yesterValue[key] = yesValue[0].value.toFixed(2);
+				}
+			});
+
+			var up=[];
+			var low=[];
+			$.each(yesterValue, function(index, val) {
+				if(val != undefined){
+					up[index] = (val*0.2).toFixed(1);
+					low[index] = (val*0.9).toFixed(1);
+				}
+			});
+
+			var options={
+		        tooltip: {
+	                //trigger: 'axis'
+	                trigger: 'axis',
+		            formatter: '{a2}:{c2}<br/>{a3}:{c3}'
+	            },
+	            legend: {
+	                data: ['昨日', '今日'],
+	                bottom:'bottom'
+	            },
+	            grid: {
+	                left: 50,
+	                right: 10,
+	                top:35,
+	                bottom:'20%'
+	            },
+	            xAxis: {
+	                type: 'category',
+	                boundaryGap: false,
+	                data: hours
+	            },
+	            yAxis: {
+	                type: 'value',
+	                nameLocation:'end',
+	                axisLabel: {
+	                	formatter: '{value}'
+	            	}
+	            },
+		        series: [
+			        	{
+			        		name:'L',
+			        		type:'line',
+			        		data:low,
+			        		lineStyle:{
+			        			normal:{
+			        				opacity:0
+			        			}
+			        		},
+			        		stack: 'TEST',
+			        		symbol: 'none'
+			        	},
+			        	{
+							name: 'U',
+				            type: 'line',
+				            data: up,
+				            lineStyle: {
+				                normal: {
+				                    opacity: 0
+				                }
+				            },
+				            areaStyle: {
+				                normal: {
+				                    color: '#ccc'
+				                }
+				            },
+				            stack: 'TEST',
+				            symbol: 'none'
+			        	},
+			            {
+			                name: '昨日',
+			                type: 'line',
+			                lineStyle:{
+			                	normal:{
+			                		type:'dashed'
+			                	}
+			                	
+			                },
+			                data: yesterValue,
+
+			            },
+			            {
+			                name: '今日',
+			                type: 'line',
+			                data: todayValue,
+			            }
+			        ],
+		        	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+		    };
+
+		    var myLine = echarts.init($("#main_line").get(0),'macarons');
+
+		    myLine.setOption(options);
+
+
+		}
 
 		function showCompareValue(data){
 
