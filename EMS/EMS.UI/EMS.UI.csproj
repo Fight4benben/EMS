@@ -627,6 +627,7 @@
     <Content Include="Views\Region\Report.cshtml" />
     <Content Include="Views\Region\Compare.cshtml" />
     <Content Include="Views\Region\Cost.cshtml" />
+    <Content Include="Views\Circuit\Collect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\CircuitOverview\" />
