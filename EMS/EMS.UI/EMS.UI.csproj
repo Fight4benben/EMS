@@ -279,6 +279,7 @@
     <Content Include="app\img\water2.png" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
+    <Content Include="app\js\Circuit\Collect.js" />
     <Content Include="app\js\Department\Compare.js" />
     <Content Include="app\js\Department\Main.js" />
     <Content Include="app\js\Department\Report.js" />
