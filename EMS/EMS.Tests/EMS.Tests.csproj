@@ -110,6 +110,7 @@
     <Compile Include="DbContext\DepartmentDbTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\CircuitCollectServiceTest.cs" />
     <Compile Include="Services\CircuitCompareServiceTest.cs" />
     <Compile Include="Services\CircuitOverviewServiceTest.cs" />
     <Compile Include="Services\CircuitServiceTest.cs" />

@@ -57,7 +57,7 @@ namespace EMS.DAL.RepositoryImp
 
             return _db.Database.SqlQuery<ReportValue>(sql,new SqlParameter("@EndDate",date)).ToList();
         }
-
+     
         public EnergyItemDict GetUnitByEnergyCode(string energyCode)
         {
             EnergyItemDict dict = _db.EnergyItemDict.Find(energyCode);
