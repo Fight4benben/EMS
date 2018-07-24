@@ -65,6 +65,7 @@
     <Compile Include="Entities\BuildExtendInfo.cs" />
     <Compile Include="Entities\BuildInfo.cs" />
     <Compile Include="Entities\Circuit.cs" />
+    <Compile Include="Entities\CircuitMeterInfo.cs" />
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
     <Compile Include="Entities\EMSValue.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="RepositoryImp\RegionReportDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
+    <Compile Include="Services\CircuitCollectService.cs" />
     <Compile Include="Services\CircuitCompareService.cs" />
     <Compile Include="Services\CircuitOverviewService.cs" />
     <Compile Include="Services\CircuitReportService.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Services\RegionCompareService.cs" />
     <Compile Include="Services\RegionMainService.cs" />
     <Compile Include="Services\RegionReportService.cs" />
+    <Compile Include="StaticResources\CircuitCollectResources.cs" />
     <Compile Include="StaticResources\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\CircuitResources.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModels\CircuitCollectViewModel.cs" />
     <Compile Include="ViewModels\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />

@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CircuitCollectController.cs" />
     <Compile Include="Controllers\CircuitCompareController.cs" />
     <Compile Include="Controllers\CircuitController.cs" />
     <Compile Include="Controllers\CircuitOverviewController.cs" />

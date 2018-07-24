@@ -1,6 +1,9 @@
 ﻿using EMS.DAL.Entities;
+using EMS.DAL.StaticResources;
+using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +12,7 @@ namespace EMS.DAL.RepositoryImp
 {
     public class HistoryDbContext
     {
+        private EnergyDB _EMSdb = new EnergyDB();
         private HistoryDB _db = new HistoryDB();
 
         public List<HistoryValue> GetHistoryValues(string[] meterIds,string[] meterParamIds,DateTime time)
@@ -26,6 +30,26 @@ namespace EMS.DAL.RepositoryImp
                 " AND F_MeterParamID in"+ meterparams + "";
 
             return _db.Database.SqlQuery<HistoryValue>(sql).ToList();
+        }
+
+        public List<CircuitMeterInfo> GetCircuitMeterInfoList(string buildId, string[] circuitIDs)
+        {
+            string sql = string.Format(CircuitCollectResources.CircuitInfoSQL, "'" + string.Join("','", circuitIDs) + "'");
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId)
+            };
+            return _EMSdb.Database.SqlQuery<CircuitMeterInfo>(sql, sqlParameters).ToList();
+        }
+
+
+        public List<BuildViewModel> GetBuildsByUserName(string userName)
+        {
+            return _EMSdb.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL, new SqlParameter("@UserName", userName)).ToList();
+        }
+
+        public List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId)
+        {
+            return _EMSdb.Database.SqlQuery<EnergyItemDict>(SharedResources.EnergyItemDictSQL, new SqlParameter("@BuildId", buildId)).ToList();
         }
     }
 }
