@@ -206,7 +206,7 @@ var Home = (function(){
 
 				$.each(energyArray, function(key, val) {
 					if(val.code == $this.attr("value")){
-						if(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002")
+						if(isSelectedDateToday() && (getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002"))
 							showPreviewLine(energyArray[0]);
 						else
 							showLine(energyArray[0]);
@@ -215,9 +215,9 @@ var Home = (function(){
 				});
 			});
 
-			
+
 			//var 
-			if(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002")
+			if(isSelectedDateToday() &&(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002"))
 				showPreviewLine(energyArray[0]);
 			else
 				showLine(energyArray[0]);
@@ -270,6 +270,22 @@ var Home = (function(){
 			EMS.Chart.showLine(echarts,$("#main_line"),['昨日', '今日'],hours,series);
 		};
 
+		function isSelectedDateToday(){
+			var date = $("#box").val();
+			var year = parseInt(date.split('-')[0]);
+			var month = parseInt(date.split('-')[1]);
+			var day = parseInt(date.split('-')[2]);
+
+			var curDate = new Date();
+			if(curDate.getFullYear() ==year && 
+				(curDate.getMonth()+1) == month && 
+				day == curDate.getDate())
+				return true;
+			else
+				return false;
+
+		}
+
 		function showPreviewLine(data){
 			//initChartLine();
 			var hours=['0时', '1时', '2时', '3时', '4时', '5时', '6时', '7时', '8时', '9时', '10时', '11时', '12时', 
@@ -315,8 +331,14 @@ var Home = (function(){
 			var low=[];
 			$.each(yesterValue, function(index, val) {
 				if(val != undefined){
-					up[index] = (val*0.2).toFixed(1);
-					low[index] = (val*0.9).toFixed(1);
+					if(index == new Date().getHours()-1){
+						up[index] = (val*0).toFixed(1);
+						low[index] = (val*1).toFixed(1);
+					}else{
+						up[index] = (val*0.2).toFixed(1);
+						low[index] = (val*0.9).toFixed(1);
+					}
+					
 				}
 			});
 

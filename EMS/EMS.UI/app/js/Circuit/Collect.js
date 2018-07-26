@@ -8,11 +8,69 @@ var Collect = (function(){
 		};
 
 		this.initDom = function(){
-			
+			initTime();
+			initLoad();
 		};
+
+		function clearData(){
+			$("#tableData").html("");
+		}
+
+		function initLoad(){
+			$("#BtnExec").click(function(){
+				var buildId = $("#buildinglist").val();
+				var energyCode = $('.btn-solar-selected').attr('value');
+				var circuits = getCheckedTreeIdArray().join(',');
+				var startTime = $('#StartBox').val()+" "+$("#StartHour").find("option:selected").text()+":"+
+					$("#StartMinute").find("option:selected").text()+":00";
+				var endTime = $('#EndBox').val()+" "+$("#EndHour").find("option:selected").text()+":"+
+					$("#EndMinute").find("option:selected").text()+":00";
+
+				var url ="/api/CircuitCollect/Collect";
+
+				getDataFromServer(url,{
+					buildId:buildId,
+					energyCode:energyCode,
+					circuits:circuits,
+					startTime:startTime,
+					endTime:endTime
+				},"POST");
+			});
+		}
 
 		function initEnergyBtns(){
 			$("#te_CollectBtns").html("");
+		}
+
+		function initTime(){
+			initDate("Start");
+			initDate("End");
+		}
+
+		function initDate(type){
+			switch(type){
+				case 'Start':
+					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#StartDate"),$("#StartBox"));
+					$("#StartHour").val(0);
+					$("#StartMinute").val(0);
+				break;
+				case 'End':
+					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#EndDate"),$("#EndBox"));
+					var date = new Date();
+					var hour = date.getHours();
+
+					
+
+					var minute = date.getMinutes();
+					if(minute <10){
+						$("#EndHour").val(hour-1);
+						$("#EndMinute").val(55);
+					}else{
+						$("#EndHour").val(hour);
+						$("#EndMinute").val(minute - minute%5 -5);
+					}
+				break;
+			}
 		}
 
 		function getDataFromServer(url,params,httpType){
@@ -20,10 +78,7 @@ var Collect = (function(){
 			if(httpType =="POST")
 				$.post(url, params, function(data, textStatus, xhr) {
 					try{
-						/*showBuilds(data);
-						showEnergys(data);
-						showTreeview(data);
-						showTable(data);*/
+						showTable(data);
 					}catch(e){
 
 					}finally{
@@ -38,11 +93,9 @@ var Collect = (function(){
 				jQuery.getJSON(url,params, function(data) {
 
 				  try{
-				  	console.log(data);
 						showBuilds(data);
 					  	showEnergys(data);
 					    showTreeview(data);
-					    //showTable(data);
 					}catch(e){
 
 					}finally{
@@ -62,6 +115,9 @@ var Collect = (function(){
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
 			$("#buildinglist").change(function(event) {
+
+				clearData();
+
 				var buildId = $(this).val();
 				
 				 //console.log($("#daycalendarBox").val());
@@ -103,6 +159,7 @@ var Collect = (function(){
 				var isNotRepeat = setEnergyBtnStyle($current);
 
 				if(isNotRepeat){
+					clearData();
 					//发送请求
 					getDataFromServer("/api/CircuitCollect","buildId="+$("#buildinglist").val()+"&energyCode="+
 						$current.attr('value'));
@@ -162,6 +219,74 @@ var Collect = (function(){
 			$("#treeview").treeview('checkAll',{silent:true});
 		};
 
+		//获取选中的回路
+		function getCheckedTreeIdArray(){
+			var idArray = [];
+			var treeArray = $("#treeview").treeview('getChecked');
+
+			$.each(treeArray, function(key, val) {
+				idArray.push(val.id);
+			});
+
+			return idArray;
+		}
+
+		//树状结构级联选择，采用递归方法。需要传入两个参数，一个当前的node一个是tree的div
+		function checkChildren(node,$Tree){
+			var str =JSON.stringify(node);
+			var pattern = new RegExp('nodes');
+			if(pattern.test(str)){
+				$.each(node.nodes,function(key,val){
+					$Tree.treeview('checkNode',[val.nodeId]);
+					checkChildren(val,$Tree);
+				});
+			}
+		};
+
+		//级联方式取消树状结构的选中状态
+		function unCheckChildren(node,$Tree){
+			var str =JSON.stringify(node);
+			var pattern = new RegExp('nodes');
+			if(pattern.test(str)){
+				$.each(node.nodes,function(key,val){
+					$Tree.treeview('uncheckNode',[val.nodeId]);
+					unCheckChildren(val,$Tree);
+				});
+			};
+		};
+
+		function showTable(data){
+			var columns = [
+				{field:'name',title:'回路名称'},
+				{field:'startValue',title:'起始数值'},
+				{field:'endValue',title:'截止数值'},
+				{field:'diffValue',title:'差值'},
+			];
+
+			var rows=[];
+
+			if(!data.hasOwnProperty('data'))
+				return;
+
+			if(data.data.length == 0)
+				return;
+
+			$.each(data.data, function(key, val) {
+				rows.push({name:val.name,startValue:val.startValue.toFixed(2),
+					endValue:val.endValue.toFixed(2),diffValue:val.diffValue.toFixed(2)});
+			});
+
+			$("#tableData").html("<table></table>");
+			$("#tableData>table").attr('data-height',$("#tableData").height());
+
+			$("#tableData>table").bootstrapTable({
+				striped:true,
+				classes:'table table-border',
+				columns:columns,
+				data:rows
+			});
+		}
+
 	};
 
 	return _collect;
@@ -169,7 +294,7 @@ var Collect = (function(){
 
 jQuery(document).ready(function($) {
 	var collect = new Collect();
-
+	collect.initDom();
 	collect.show();
 
 });

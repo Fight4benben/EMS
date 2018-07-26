@@ -1,6 +1,7 @@
 ﻿using EMS.DAL.RepositoryImp;
 using EMS.DAL.Services;
 using EMS.UI.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using System.Web.Security;
 namespace EMS.UI.Controllers
 {
@@ -80,12 +80,18 @@ namespace EMS.UI.Controllers
         /// <param name="startDate">起始时间</param>
         /// <param name="endDate">结束时间</param>
         /// <returns>返回数据：指定的集抄数据</returns>
-        public object Get(string buildId, string energyCode, string circuitIDs, string startDate, string endDate)
+        [HttpPost]
+        public object Collect([FromBody] JObject obj)
         {
+                string buildId = obj["buildId"].ToString();
+                string energyCode = obj["energyCode"].ToString();
+                string circuits = obj["circuits"].ToString();
+                string startTime = obj["startTime"].ToString();
+                string endTime = obj["endTime"].ToString();
             try
             {
-                string[] ids = circuitIDs.Split(',');
-                return service.GetViewModel(buildId, energyCode, ids, startDate, endDate);
+                string[] ids = circuits.Split(',');
+                return service.GetViewModel(buildId, energyCode, ids, startTime, endTime);
             }
             catch (Exception e)
             {
