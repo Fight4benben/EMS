@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
-    public class ItemReportController:ApiController
+    public class ItemReportController : ApiController
     {
         EnergyItemReportService service = new EnergyItemReportService();
 
@@ -68,12 +68,11 @@ namespace EMS.UI.Controllers
             return null;
         }
 
-        public object Get(string buildId,string energyCode,string type, string formulaIds, string date)
+        public object Get(string buildId, string energyCode, string type, string formulaIds, string date)
         {
-            string[] formulas = formulaIds.Trim().Split(',');
-
             try
             {
+                string[] formulas = formulaIds.Trim().Split(',');
                 return service.GetEnergyItemReportViewModel(formulas, date, type);
             }
             catch (Exception e)
