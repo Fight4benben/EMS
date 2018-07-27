@@ -31,7 +31,8 @@ var DeptReport = (function(){
 		function initSearchButton(){
 			//查询数据
 			$("#daySearch").click(function(event) {
-				
+				if(getCheckedTreeIdArray().length == 0)
+					return;
 				//发送请求
 				getDataFromServer("/api/DeptReport","buildId="+$("#buildinglist").val()+
 					"&energyCode="+$('.btn-solar-selected').attr('value')+

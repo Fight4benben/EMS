@@ -293,6 +293,11 @@ var Collect = (function(){
 })();
 
 jQuery(document).ready(function($) {
+
+
+	$("#flenergy").attr("class","start active");
+	$("#te_collect").attr("class","active");
+	
 	var collect = new Collect();
 	collect.initDom();
 	collect.show();
