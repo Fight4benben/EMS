@@ -7,6 +7,10 @@ var CircuitMain = (function(){
 			getDataFromServer(url,"");
 		}
 
+		this.init = function(){
+			initCircuitEvent();
+		}
+
 		var trendDatas={};
 
 		function getDataFromServer(url,params){
@@ -48,6 +52,14 @@ var CircuitMain = (function(){
 				getDataFromServer(url,"buildId="+$("#buildinglist").val())
 			});
 		};
+
+		function initCircuitEvent(){
+			$("#circuits").change(function(event) {
+				
+				var url = "/api/circuitoverview";
+				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+"&circuitId="+$(this).val())
+			});
+		}
 
 		//显示分类列表
 		function showEnergyButtons(data){
@@ -94,11 +106,6 @@ var CircuitMain = (function(){
 
 			EMS.DOM.initSelect(data.circuits,$("#circuits"),"circuitName","circuitId");
 
-			$("#circuits").change(function(event) {
-				
-				var url = "/api/circuitoverview";
-				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+"&circuitId="+$(this).val())
-			});
 		}
 
 		//显示同环比信息
@@ -341,6 +348,8 @@ jQuery(document).ready(function($) {
 	$("#trunk").attr("class","active");
 	
 	var main = new CircuitMain();
+
+	main.init();
 
 	main.show();
 });
