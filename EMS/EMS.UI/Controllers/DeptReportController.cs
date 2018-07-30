@@ -75,9 +75,9 @@ namespace EMS.UI.Controllers
         /// <returns>返回：指定部门，时间，报表类型的用能数据</returns>
         public object Get(string buildId,string energyCode,string departmentIDs, string date, string type)
         {
-            string[] ids = departmentIDs.Split(',');
             try
             {
+                string[] ids = departmentIDs.Split(',');
                 return service.GetViewModel(energyCode, ids, date, type);
             }
             catch (Exception e)
