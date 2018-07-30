@@ -24,7 +24,7 @@ namespace EMS.DAL.Utils
             int year = Convert.ToInt32(date.Split('-')[0]);
             int month = Convert.ToInt32(date.Split('-')[1]);
 
-            DateTime first = new DateTime(year,month,1);
+            DateTime first = new DateTime(year, month, 1);
             DateTime end = first.AddMonths(1).AddDays(-1);
 
             return end;
@@ -40,20 +40,26 @@ namespace EMS.DAL.Utils
         {
             List<TreeViewModel> treeViewModel = new List<TreeViewModel>();
 
-            var parentItemCodes = treeViewInfos.Where(c => (c.ParentID == "-1"));
-            foreach (var parentItem in parentItemCodes)
+            foreach (var item in treeViewInfos)
             {
-                TreeViewModel parentNode = new TreeViewModel();
-                List<TreeViewModel> children = GetChildrenNodes(treeViewInfos, parentItem);
-                parentNode.Id = parentItem.ID;
-                parentNode.Text = parentItem.Name;
-                if (children.Count != 0)
-                    parentNode.Nodes = children;
-                treeViewModel.Add(parentNode);
-            }
+                TreeViewInfo info = treeViewInfos.Find(e => e.ID == item.ParentID);
+                if (info == null)
+                {
+                    TreeViewModel parent = new TreeViewModel();
+                    List<TreeViewModel> children = GetChildrenNodes(treeViewInfos, item);
+                    parent.Id = item.ID;
+                    parent.Text = item.Name;
 
+                    if (children.Count != 0)
+                        parent.Nodes = children;
+
+                    treeViewModel.Add(parent);
+                }
+            }
             return treeViewModel;
         }
+
+
 
         /// <summary>
         /// 递归调用方式填充树状结构的子节点
