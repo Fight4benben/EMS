@@ -20,13 +20,14 @@ namespace EMS.Tests.DbContext
         public void TestRegionTreeView()
         {
             IRegionReportDbContext context = new RegionReportDbContext();
-            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList("000001G001","02000");
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList("000001G001","01000");
             List<TreeViewModel> treeViewModel = UnitTest1.GetTreeViewModel(treeViewInfos);
 
             Console.WriteLine(UtilTest.GetJson(treeViewModel));
 
         }
 
+        /*
         [TestMethod]
         public void TestDeptTreeView()
         {
@@ -37,5 +38,6 @@ namespace EMS.Tests.DbContext
             Console.WriteLine(UtilTest.GetJson(treeViewModel));
 
         }
+        */
     }
 }
