@@ -123,6 +123,7 @@
     <Compile Include="Services\EnergyItemReportServiceTest.cs" />
     <Compile Include="Services\EnergyItemStatisticServiceTest.cs" />
     <Compile Include="Services\HomeServiceTest.cs" />
+    <Compile Include="Services\MapServiceTest.cs" />
     <Compile Include="Services\RegionCompareServiceTest.cs" />
     <Compile Include="Services\RegionReportServiceTest.cs" />
     <Compile Include="Services\RegionServiceTest.cs" />
