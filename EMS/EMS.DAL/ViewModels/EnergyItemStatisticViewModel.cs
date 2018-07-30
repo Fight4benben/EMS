@@ -9,6 +9,7 @@ namespace EMS.DAL.ViewModels
 {
     public class EnergyItemStatisticViewModel
     {
+        public List<BuildViewModel> Builds { get; set; }
         public List<ReportValue> MonthPlanData { get; set; }
         public List<ReportValue> YearPlanData { get; set; }
         public List<ReportValue> MonthRealData { get; set; }

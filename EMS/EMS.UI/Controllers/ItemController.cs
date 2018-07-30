@@ -27,6 +27,11 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        public ActionResult Statistic()
+        {
+            return View();
+        }
+
         public FileResult GetExcel(string buildId, string type, string formularIds, string date)
         {
             string[] formulars = formularIds.Split(',');
