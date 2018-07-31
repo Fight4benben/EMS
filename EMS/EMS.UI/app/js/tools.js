@@ -209,7 +209,7 @@ var EMS = {
 
         	charts.init($Line.get(0),'macarons').setOption(option);
 		},
-		showBar:function(charts,$Bar,legendData,xData,series,gridSetting){
+		showBar:function(charts,$Bar,legendData,xData,series,gridSetting,defaultColor){
 			var option = {
 			            tooltip: {
 			                trigger: 'axis'
@@ -242,6 +242,9 @@ var EMS = {
         		option.legend =  legendData;
 			if(gridSetting != undefined)
 				option.grid = gridSetting;
+
+			if(defaultColor != undefined)
+				delete option.color;
 
 
         	charts.init($Bar.get(0),'macarons').setOption(option);
