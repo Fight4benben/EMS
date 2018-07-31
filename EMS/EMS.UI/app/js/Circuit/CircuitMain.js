@@ -313,7 +313,7 @@ var CircuitMain = (function(){
                 bottom:25
             };
 
-			EMS.Chart.showBar(echarts,$("#history-line"),undefined,times,series,grid);
+			EMS.Chart.showBar(echarts,$("#history-line"),undefined,times,series,grid,"default");
 		}
 
 		//绑定48，31天12月等click事件
