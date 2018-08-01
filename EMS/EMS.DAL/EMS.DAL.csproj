@@ -76,9 +76,11 @@
     <Compile Include="Entities\EnergyItemDict.cs" />
     <Compile Include="Entities\EnergyItemInfo.cs" />
     <Compile Include="Entities\EnergyItemValue.cs" />
+    <Compile Include="Entities\EnergyPrice.cs" />
     <Compile Include="Entities\HistoryDB.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
+    <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\TreeView.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="IRepository\IEnergyItemStatisticDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
     <Compile Include="IRepository\IMapDbContext.cs" />
+    <Compile Include="IRepository\IPriceDbContext.cs" />
     <Compile Include="IRepository\IRegionCompareDbContext.cs" />
     <Compile Include="IRepository\IRegionMainDbContext.cs" />
     <Compile Include="IRepository\IRegionReportDbContext.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImp\MapDbContext.cs" />
+    <Compile Include="RepositoryImp\PriceDbContext.cs" />
     <Compile Include="RepositoryImp\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\RegionReportDbContext.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="Services\HistoryDataService.cs" />
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="Services\MapService.cs" />
+    <Compile Include="Services\PriceService.cs" />
     <Compile Include="Services\RegionCompareService.cs" />
     <Compile Include="Services\RegionMainService.cs" />
     <Compile Include="Services\RegionReportService.cs" />
@@ -154,6 +159,7 @@
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\MapResources.cs" />
+    <Compile Include="StaticResources\PriceResouces.cs" />
     <Compile Include="StaticResources\RegionCompareResources.cs" />
     <Compile Include="StaticResources\RegionMainResources.cs" />
     <Compile Include="StaticResources\RegionReportResources.cs" />
@@ -174,6 +180,7 @@
     <Compile Include="ViewModels\Excel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
+    <Compile Include="ViewModels\PriceViewModel.cs" />
     <Compile Include="ViewModels\RegionCompareViewModel.cs" />
     <Compile Include="ViewModels\RegionMainViewModel.cs" />
     <Compile Include="ViewModels\RegionReportViewModel.cs" />
