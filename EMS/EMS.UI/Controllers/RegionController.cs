@@ -40,5 +40,15 @@ namespace EMS.UI.Controllers
             Excel excel = service.ExportReportToExcel(basePath, buildId, energyCode, regions,date,type);
             return File(excel.Data, "application/ms-excel", excel.Name);
         }
+
+        public FileResult GetPriceExcel(string buildId, string energyCode, string type, string regionIDs, string date)
+        {
+            string[] regions = regionIDs.Split(',');
+
+            string basePath = HttpContext.Server.MapPath("~/App_Data/");
+            PriceService service = new PriceService();
+            Excel excel = service.ExportReportToExcel(basePath, buildId, energyCode, regions, date, type);
+            return File(excel.Data, "application/ms-excel", excel.Name);
+        }
     }
 }

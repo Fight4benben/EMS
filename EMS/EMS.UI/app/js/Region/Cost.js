@@ -3,7 +3,7 @@ var RegionReport = (function(){
 	function _regionReport(){
 
 		this.show=function(){
-			var url ="/api/RegionReport";
+			var url ="/api/Price";
 			getDataFromServer(url,"");
 		}
 		//公开暴露的方法:初始化页面
@@ -33,7 +33,7 @@ var RegionReport = (function(){
 			$("#daySearch").click(function(event) {
 				
 				//发送请求
-				getDataFromServer("/api/RegionReport","buildId="+$("#buildinglist").val()+
+				getDataFromServer("/api/Price","buildId="+$("#buildinglist").val()+
 					"&energyCode="+$('.btn-solar-selected').attr('value')+
 					"&type="+getTypeByReportSelected()+"&regionIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 			});
@@ -45,7 +45,7 @@ var RegionReport = (function(){
 					formulars.push(val);
 				});
 				
-				window.location = "/Region/GetExcel?buildId="+$("#buildinglist").val()+
+				window.location = "/Region/GetPriceExcel?buildId="+$("#buildinglist").val()+
 				"&energyCode="+$(".btn-solar-selected").attr('value')+
 				"&type="+getTypeByReportSelected()+
 				"&regionIDs="+formulars.join(',')+
@@ -62,7 +62,7 @@ var RegionReport = (function(){
 
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 					//发送请求	
-					getDataFromServer("/api/RegionReport","buildId="+$("#buildinglist").val()+
+					getDataFromServer("/api/Price","buildId="+$("#buildinglist").val()+
 						"&energyCode="+$(".btn-solar-selected").attr('value')+
 						"&type=DD&regionIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
@@ -83,7 +83,7 @@ var RegionReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/RegionReport","buildId="+$("#buildinglist").val()+
+					getDataFromServer("/api/Price","buildId="+$("#buildinglist").val()+
 						"&energyCode="+$(".btn-solar-selected").attr('value')+
 						"&type=MM&regionIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
@@ -103,7 +103,7 @@ var RegionReport = (function(){
 									        pickerPosition: "bottom-left"});
 
 					//发送请求
-					getDataFromServer("/api/RegionReport","buildId="+$("#buildinglist").val()+
+					getDataFromServer("/api/Price","buildId="+$("#buildinglist").val()+
 						"&energyCode="+$(".btn-solar-selected").attr('value')+
 						"&type=YY&regionIDs="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
 				}
@@ -185,28 +185,28 @@ var RegionReport = (function(){
 
 		//生成建筑列表，追加到select中
 		function showBuilds(data){
-			if(!data.hasOwnProperty('builds'))
+			if(!data.regionReportModel.hasOwnProperty('builds'))
 				return;
 
-			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+			EMS.DOM.initSelect(data.regionReportModel.builds,$("#buildinglist"),"buildName","buildID");
 
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
 				
 				 //console.log($("#daycalendarBox").val());
-				getDataFromServer("/api/RegionReport","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
+				getDataFromServer("/api/Price","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 			});
 		};
 
 		//生成不同能源类型的按钮
 		function showEnergys(data){
 			
-			if(!data.hasOwnProperty('energys'))
+			if(!data.regionReportModel.hasOwnProperty('energys'))
 				return;
 
 			initEnergyBtns();
 
-			$.each(data.energys, function(key, val) {
+			$.each(data.regionReportModel.energys, function(key, val) {
 
 				switch(val.energyItemCode){
 					case "01000":
@@ -234,7 +234,7 @@ var RegionReport = (function(){
 
 				if(isNotRepeat){
 					//发送请求
-					getDataFromServer("/api/RegionReport","buildId="+$("#buildinglist").val()+
+					getDataFromServer("/api/Price","buildId="+$("#buildinglist").val()+
 						"&energyCode="+$('.btn-solar-selected').attr('value')+
 						"&type="+getTypeByReportSelected()+
 						"&date="+$("#daycalendarBox").val());
@@ -244,7 +244,7 @@ var RegionReport = (function(){
 
 		//根据数据显示树状结构，如果不包含树状结构数据则不更新数据。
 		function showTreeview(data){
-			if(!data.hasOwnProperty('treeView'))
+			if(!data.regionReportModel.hasOwnProperty('treeView'))
 				return;
 
 			$("#treeview").html("");//更新树状结构之前先将该区域清空
@@ -255,7 +255,7 @@ var RegionReport = (function(){
 			$("#treeview").height($(".count-info-te").height() - 258);
 			//$("#treeview").parent('div').height(800);
 
-			EMS.DOM.initTreeview(data.treeView,$("#treeview"),{
+			EMS.DOM.initTreeview(data.regionReportModel.treeView,$("#treeview"),{
 				showIcon: true,
 				showCheckbox: true,
 				showBorder:false,
@@ -311,12 +311,27 @@ var RegionReport = (function(){
 			var report;
 			var color;
 
-			if(data.reportType=="DD"){
+			var energyCode = $('.btn-solar-selected').attr('value');
+			var price;
+			var priceobj = data.energyPrice.filter(function(item) {
+				return item.code === energyCode ;
+			});
+
+			if(priceobj.length > 0){
+				if(priceobj[0].hasOwnProperty('price'))
+					price = priceobj[0].price;
+				else
+					price = 1;
+			}
+			else
+				price = 1;
+
+			if(data.regionReportModel.reportType=="DD"){
 				report="时";
 				$("#dayReportClick").addClass('current');
 				color = '#F08500';
 			}
-			else if(data.reportType=="MM"){
+			else if(data.regionReportModel.reportType=="MM"){
 				report="日";
 				color = '#74B000';
 			}
@@ -325,11 +340,11 @@ var RegionReport = (function(){
 				color = '#0076D0';
 			}
 
-			$.each(data.data, function(index, val) {
+			$.each(data.regionReportModel.data, function(index, val) {
 				
 				var date = new Date(val.time);
 				var time;
-				switch(data.reportType){
+				switch(data.regionReportModel.reportType){
 					case "DD":
 						time = date.getHours();
 					break;
@@ -346,10 +361,10 @@ var RegionReport = (function(){
 				}
 
 				if( $.inArray(val.name, names) != -1){
-					dataList[$.inArray(val.name, names)].data.push({time:time,value:val.value.toFixed(2)});
+					dataList[$.inArray(val.name, names)].data.push({time:time,value:(val.value*price).toFixed(2)});
 				}else{
 					names.push(val.name);
-					dataList.push({name:val.name,data:[{time:time,value:val.value.toFixed(2)}]});
+					dataList.push({name:val.name,data:[{time:time,value:(val.value*price).toFixed(2)}]});
 				}
 
 			});
@@ -358,7 +373,7 @@ var RegionReport = (function(){
 			});
 			//console.log(dataList);
 
-			var columns = [{field:'name',title:'部门名称'}];
+			var columns = [{field:'name',title:'区域名称'},{field:'unit',title:'单位'}];
 			var rows =[];
 
 			$.each(times, function(index, val) {
@@ -368,6 +383,7 @@ var RegionReport = (function(){
 			$.each(dataList, function(index, val) {
 				var row={};
 				row.name = val.name;
+				row.unit = "元";
 				$.each(val.data, function(key,value){
 					row[value.time] = value.value;
 
@@ -377,7 +393,16 @@ var RegionReport = (function(){
 			});
 
 			$("#dayReport").html('<table></table>');
-			var totalHeight = $("#main-content").height() - 127;
+
+			var windowWidth = $(window).width();
+			var totalHeight;
+			if(windowWidth>1024)
+				totalHeight = $("#main-content").height() - 127;
+			else if(windowWidth>500)
+				totalHeight = $(".report-modify").height()-50;
+			else if(windowWidth<=500)
+				totalHeight = $(".report-modify").height()-127;
+
 			$("#dayReport").height(totalHeight);
 			$("#dayReport>table").attr('data-height',totalHeight);
 
