@@ -63,12 +63,8 @@ namespace EMS.UI.Controllers
             }
         }
 
-        public object Get(string buildId, string energyCode, string type, string date)
-        {
-            return null;
-        }
 
-        public object Get(string buildId, string energyCode, string type, string formulaIds, string date)
+        public object Get(string buildId, string type, string formulaIds, string date)
         {
             try
             {
