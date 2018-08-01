@@ -1,6 +1,13 @@
 *{
     font-family: "Microsoft YaHei";
 }
+/*2018综合修改*/
+.Statistic-h{
+ height:786px;
+ width: 100%;
+ border: 1px solid #B4B4B5;
+ overflow-x: auto;
+}
 /*数据集抄*/
 .c-t-right,.c-t-left{
     width:380px;
@@ -355,6 +362,7 @@ to {top:-7px;}
 }
 @media(max-width:1024px){
    .cp-compareanalysis{min-height: 300px;}
+
 }
 /*支路用能统计*/
 .treeview .list-group{
@@ -388,7 +396,25 @@ to {top:-7px;}
     @media (max-width:1260px){.count-info-te-calc{width:68%;}}
     @media (max-width:1205px){.count-info-te-calc{width:63%;}}
 }
-@media (max-width:1024px){.count-info-te{width: 100%;}.count-info-te-calc{width: 100%;} }
+@media (max-width:1024px){
+    .count-info-te{width: 100%;}
+    .count-info-te-calc{width: 100%;}
+    .report-add{
+        height:186px!important;
+        padding-right: 0!important;
+    }
+    .compare-add{
+         height:226px!important;
+    }
+    .main-add{
+        clear:left;
+    }
+    .report-modify{
+        height:400px!important;
+        margin-bottom:50px!important;
+        border:0!important;
+    }
+}
 .count-data{
     width: 250px;
     float: left;

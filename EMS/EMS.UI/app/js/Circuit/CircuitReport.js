@@ -399,7 +399,15 @@ var CircuitReport = (function(){
 			});
 
 			$("#dayReport").html('<table></table>');
-			var totalHeight = $("#main-content").height() - 127;
+			var windowWidth = $(window).width();
+			var totalHeight;
+			if(windowWidth>1024)
+				totalHeight = $("#main-content").height() - 127;
+			else if(windowWidth>500)
+				totalHeight = $(".report-modify").height()-50;
+			else if(windowWidth<=500)
+				totalHeight = $(".report-modify").height()-127;
+			
 			$("#dayReport").height(totalHeight);
 			$("#dayReport>table").attr('data-height',totalHeight);
 
