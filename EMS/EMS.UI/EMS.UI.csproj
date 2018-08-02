@@ -252,6 +252,7 @@
     <Content Include="app\img\load-5.png" />
     <Content Include="app\img\logo.ico" />
     <Content Include="app\img\map.png" />
+    <Content Include="app\img\mapCon.png" />
     <Content Include="app\img\menu1.png" />
     <Content Include="app\img\menu2.png" />
     <Content Include="app\img\menu3.png" />
