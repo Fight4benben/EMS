@@ -19,7 +19,7 @@ namespace EMS.DAL.Services
         private RegionReportDbContext regioncontext = new RegionReportDbContext();
         private ICircuitReportDbContext reportContext = new CircuitReportDbContext();
         RegionReportService service = new RegionReportService();
-       
+
         public PriceService()
         {
             context = new PriceDbContext();
@@ -101,25 +101,26 @@ namespace EMS.DAL.Services
         {
             Price price = context.GetPrice(buildId);
             List<EnergyPrice> energyPrice = new List<EnergyPrice>();
+            if (price != null)
+            {
+                EnergyPrice ePrice = new EnergyPrice();
+                ePrice.Name = "电";
+                ePrice.Code = "01000";
+                ePrice.Price = price.ElectriPrice;
+                energyPrice.Add(ePrice);
 
-            EnergyPrice ePrice = new EnergyPrice();
-            ePrice.Name = "电";
-            ePrice.Code = "01000";
-            ePrice.Price = price.ElectriPrice;
-            energyPrice.Add(ePrice);
+                EnergyPrice wPrice = new EnergyPrice();
+                wPrice.Name = "水";
+                wPrice.Code = "02000";
+                wPrice.Price = price.WaterPrice;
+                energyPrice.Add(wPrice);
 
-            EnergyPrice wPrice = new EnergyPrice();
-            wPrice.Name = "水";
-            wPrice.Code = "02000";
-            wPrice.Price = price.WaterPrice;
-            energyPrice.Add(wPrice);
-
-            EnergyPrice gPrice = new EnergyPrice();
-            gPrice.Name = "气";
-            gPrice.Code = "03000";
-            gPrice.Price = price.GasPrice;
-            energyPrice.Add(gPrice);
-
+                EnergyPrice gPrice = new EnergyPrice();
+                gPrice.Name = "气";
+                gPrice.Code = "03000";
+                gPrice.Price = price.GasPrice;
+                energyPrice.Add(gPrice);
+            }
             return energyPrice;
         }
 
@@ -252,9 +253,9 @@ namespace EMS.DAL.Services
                                 if (item.Time != null)
                                 {
                                     DateTime time = Convert.ToDateTime(item.Time);
-                                    row.CreateCell(time.Hour + 1).SetCellValue((double)item.Value* finalPrice);
+                                    row.CreateCell(time.Hour + 1).SetCellValue((double)item.Value * finalPrice);
                                     row.GetCell(time.Hour + 1).CellStyle = style;
-                                    total += Convert.ToDecimal(item.Value * (decimal ?)finalPrice);
+                                    total += Convert.ToDecimal(item.Value * (decimal?)finalPrice);
                                 }
 
                             }
@@ -284,7 +285,7 @@ namespace EMS.DAL.Services
                                     DateTime time = Convert.ToDateTime(item.Time);
                                     row.CreateCell(time.Month).SetCellValue((double)item.Value * finalPrice);
                                     row.GetCell(time.Month).CellStyle = style;
-                                    total += Convert.ToDecimal(item.Value* (decimal?)finalPrice);
+                                    total += Convert.ToDecimal(item.Value * (decimal?)finalPrice);
                                 }
                             }
                             row.CreateCell(13).SetCellValue((double)total);
