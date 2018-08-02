@@ -26,7 +26,7 @@
 
 			$.each(data.builds, function(key, val) {
 				if(val.hasOwnProperty('buildLong') && val.hasOwnProperty('buildLat')){
-					var tempPoint = new BMap.Point(val.buildLong.toFixed(2),val.buildLat.toFixed(2));
+					var tempPoint = new BMap.Point(val.buildLong,val.buildLat);
 					pointArr.push(tempPoint);
 					buildArr.push({name:val.buildName,id:val.buildID});
 					markerArr.push(new BMap.Marker(tempPoint,{icon:myIcon}));
