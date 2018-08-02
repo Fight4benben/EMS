@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ItemReportController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ItemStatisticController.cs" />
+    <Compile Include="Controllers\MapViewController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\RegionCompareController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
@@ -293,6 +294,7 @@
     <Content Include="app\js\Item\Overview.js" />
     <Content Include="app\js\Item\Report.js" />
     <Content Include="app\js\Item\Statistic.js" />
+    <Content Include="app\js\map.js" />
     <Content Include="app\js\Region\Compare.js" />
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />
@@ -636,10 +638,9 @@
     <Content Include="Views\Region\Cost.cshtml" />
     <Content Include="Views\Circuit\Collect.cshtml" />
     <Content Include="Views\Item\Statistic.cshtml" />
+    <Content Include="Views\MapView\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\CircuitOverview\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>

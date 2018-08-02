@@ -40,6 +40,15 @@ var Collect = (function(){
 
 		function initEnergyBtns(){
 			$("#te_CollectBtns").html("");
+
+			$("#selectall").change(function(event) {
+				var state = $(this).prop('checked');
+
+				if(state)
+					$("#treeview").treeview('checkAll');
+				else
+					$("#treeview").treeview('uncheckAll');
+			});
 		}
 
 		function initTime(){
@@ -58,8 +67,6 @@ var Collect = (function(){
 					EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#EndDate"),$("#EndBox"));
 					var date = new Date();
 					var hour = date.getHours();
-
-					
 
 					var minute = date.getMinutes();
 					if(minute <10){
