@@ -190,7 +190,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\css\main.css" />
+    <Content Include="app\css\main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="app\img\1.jpg" />
     <Content Include="app\img\11.png" />
     <Content Include="app\img\11a.png" />
