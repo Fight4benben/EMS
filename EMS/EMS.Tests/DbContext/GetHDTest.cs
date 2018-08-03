@@ -1,4 +1,6 @@
 ﻿using EMS.DAL.Entities;
+using EMS.Tests.Utils;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -8,8 +10,17 @@ using System.Threading.Tasks;
 
 namespace EMS.Tests.DbContext
 {
+    [TestClass]
     public class GetHDTest
     {
+        public class HistoryBinarys
+        {
+            public string MeterID { get; set; }
+            public string CircuitName { get; set; }
+            public string ParamName { get; set; }
+            public byte[] Value { get; set; }
+        }
+
         private static readonly byte[] nullBytes = new byte[]
         {
             0,
@@ -545,13 +556,13 @@ namespace EMS.Tests.DbContext
             return (double)num2 - num / 1000000.0;
         }
 
-        
+
         public static double SelectBinarysToDoubleByDateOfFive(SqlBinary sourceBinary, int day, int hour, int minute)
         {
             return SelectBinarysToDoubleOriOfFive(sourceBinary, (day - 1) * 24 * 12 + hour * 12 + minute / 5 + 1);
         }
 
-        
+
         public static byte[] SelectBinarysOriOfFive(SqlBinary sourceBinary, int FIndex)
         {
             byte[] array = new byte[]
@@ -576,7 +587,7 @@ namespace EMS.Tests.DbContext
         /// </summary>
         private HistoryDB _db = new HistoryDB();
 
-        public string GetHistoryString(string[] meterIds, string[] meterParamIds, DateTime time)
+        public List<HistoryBinarys> GetHistoryString(string[] meterIds, string[] meterParamIds, DateTime time)
         {
             string month = time.Month.ToString("00");
             int day = time.Day;
@@ -586,26 +597,75 @@ namespace EMS.Tests.DbContext
             string meters = "('" + string.Join("','", meterIds) + "')";
             string meterparams = "('" + string.Join("','", meterParamIds) + "')";
 
-            string sql = @"SELECT F_Month" + month +
-                @" FROM HistoryData WITH(NOLOCK) WHERE F_Year = " + time.Year + " AND F_MeterID in" + meters + "" +
-                " AND F_MeterParamID in" + meterparams + "";
+            string sql = @"SELECT HistoryData.F_MeterID AS MeterID, F_CircuitName AS CircuitName
+                                , ParamInfo.F_MeterParamName AS ParamName
+                                , F_Month" + month +
+                                @" AS Value FROM HistoryData WITH(NOLOCK)
+                                INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID=HistoryData.F_MeterID
+	                            INNER JOIN EMS.dbo.T_ST_MeterParamInfo ParamInfo ON ParamInfo.F_MeterParamID= HistoryData.F_MeterParamID
+                                WHERE F_Year = " + time.Year + 
+                                " AND HistoryData.F_MeterID in" + meters + "" +
+                                " AND HistoryData.F_MeterParamID in" + meterparams + "";
 
-            return _db.Database.SqlQuery<SqlBinary>(sql).ToString();
+            return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
+
         }
 
-        public string GetHistoryValue(string oriString, string[] meterIds, string[] meterParamIds, DateTime time)
+
+        public double GetHistoryValue(byte[] oriString, int day, int hour, int minute)
         {
-            string month = time.Month.ToString("00");
-            int day = time.Day;
-            int hour = time.Hour;
-            int minute = time.Minute;
-            //SqlBinary oriBinary =  oriString;
-            string meters = "('" + string.Join("','", meterIds) + "')";
-            string meterparams = "('" + string.Join("','", meterParamIds) + "')";
+            SqlBinary oriBinary = (SqlBinary)oriString;
 
-            //SelectBinarysToDoubleByDateOfFive(oriString, day, hour, minute);
+            double value = SelectBinarysToDoubleByDateOfFive(oriBinary, day, hour, minute);
+            return value;
+        }
 
-            return null;
+        [TestMethod]
+        public void GetHistoryParamValueTest()
+        {
+            DateTime today = DateTime.Now;
+
+            string circuitIDs = "000001G0010001";
+            string[] ids = circuitIDs.Split(',');
+
+            string circuitPrame = "31000000000711,31000000000700,31000000000701,31000000000702";
+            string[] prame = circuitPrame.Split(',');
+
+            DateTime startTime = DateTime.Now;
+            int step = 65;
+
+            List<HistoryBinarys> historyBinarys = GetHistoryString(ids, prame, today);
+
+            //int day = 0;
+            //int hour = 0;
+            //int minute = 0;
+            //Console.WriteLine(UtilTest.GetJson(historyBinarys));
+
+            List<HistoryParameterValue> historyValueList = new List<HistoryParameterValue>();
+
+            foreach (var item in historyBinarys)
+            {
+                for (int hour = 0; hour < 24; hour++)
+                {
+                    for (int minute = 0; minute < 56; minute = minute + step)
+                    {
+                        HistoryParameterValue historyValue = new HistoryParameterValue();
+                        historyValue.ID = item.MeterID;
+                        historyValue.Name = item.CircuitName;
+                        historyValue.ParamName = item.ParamName;
+
+                        historyValue.Time = new DateTime(startTime.Year, startTime.Month, startTime.Day, hour, minute, 0);
+                        double value = GetHistoryValue(item.Value, startTime.Day, hour, minute);
+                        if (-9999 != value)
+                        {
+                            historyValue.Value = value;
+                            historyValueList.Add(historyValue);
+                        }
+
+                    }
+                }
+            }
+            Console.WriteLine(UtilTest.GetJson(historyValueList));
         }
     }
 }

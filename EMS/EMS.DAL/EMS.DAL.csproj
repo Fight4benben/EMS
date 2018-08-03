@@ -78,6 +78,7 @@
     <Compile Include="Entities\EnergyItemValue.cs" />
     <Compile Include="Entities\EnergyPrice.cs" />
     <Compile Include="Entities\HistoryDB.cs" />
+    <Compile Include="Entities\HistoryParemValue.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\Price.cs" />
