@@ -77,10 +77,12 @@
     <Compile Include="Entities\EnergyItemInfo.cs" />
     <Compile Include="Entities\EnergyItemValue.cs" />
     <Compile Include="Entities\EnergyPrice.cs" />
+    <Compile Include="Entities\HistoryBinarys.cs" />
     <Compile Include="Entities\HistoryDB.cs" />
-    <Compile Include="Entities\HistoryParemValue.cs" />
+    <Compile Include="Entities\HistoryParameterValue.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
+    <Compile Include="Entities\MeterParam.cs" />
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemStatisticDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemTreeView.cs" />
+    <Compile Include="IRepository\IHistoryParamDbContext.cs" />
     <Compile Include="IRepository\IMapDbContext.cs" />
     <Compile Include="IRepository\IPriceDbContext.cs" />
     <Compile Include="IRepository\IRegionCompareDbContext.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="RepositoryImp\EnergyItemStatisticDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemTreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\HistoryDbContext.cs" />
+    <Compile Include="RepositoryImp\HistoryParamDbContext.cs" />
     <Compile Include="RepositoryImp\HomeDbContext.cs" />
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="StaticResources\EnergyItemReportResources.cs" />
     <Compile Include="StaticResources\EnergyItemStatisticResources.cs" />
     <Compile Include="StaticResources\EnergyItemTreeViewResources.cs" />
+    <Compile Include="StaticResources\HistoryParamResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\MapResources.cs" />
     <Compile Include="StaticResources\PriceResouces.cs" />
@@ -166,6 +171,7 @@
     <Compile Include="StaticResources\RegionReportResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
+    <Compile Include="Utils\BinaryToDouble.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModels\CircuitCollectViewModel.cs" />
     <Compile Include="ViewModels\CircuitCompareViewModel.cs" />
