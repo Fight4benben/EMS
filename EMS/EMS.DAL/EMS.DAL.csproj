@@ -144,6 +144,7 @@
     <Compile Include="Services\EnergyItemReportService.cs" />
     <Compile Include="Services\EnergyItemStatisticService.cs" />
     <Compile Include="Services\HistoryDataService.cs" />
+    <Compile Include="Services\HistoryParamService.cs" />
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="Services\MapService.cs" />
     <Compile Include="Services\PriceService.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemStatisticViewModel.cs" />
     <Compile Include="ViewModels\Excel.cs" />
+    <Compile Include="ViewModels\HistoryParamViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MapViewModel.cs" />
     <Compile Include="ViewModels\PriceViewModel.cs" />

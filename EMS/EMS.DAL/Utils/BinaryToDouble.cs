@@ -568,7 +568,7 @@ namespace EMS.DAL.Utils
             return SelectBinarysToDoubleOriOfFive(sourceBinary, (day - 1) * 24 * 12 + hour * 12 + minute / 5 + 1);
         }
 
-        public static double GetHistoryParamValue(byte[] binaryByte, int day, int hour, int minute)
+        public static double GetParamValue(byte[] binaryByte, int day, int hour, int minute)
         {
             SqlBinary sqlBinarys = (SqlBinary)binaryByte;
             double value = SelectBinarysToDoubleByDateOfFive(sqlBinarys, day, hour, minute);

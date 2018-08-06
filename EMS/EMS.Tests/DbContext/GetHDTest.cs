@@ -15,7 +15,7 @@ namespace EMS.Tests.DbContext
     {
         public class HistoryBinarys
         {
-            public string MeterID { get; set; }
+            public string CircuitID { get; set; }
             public string CircuitName { get; set; }
             public string ParamName { get; set; }
             public byte[] Value { get; set; }
@@ -597,14 +597,14 @@ namespace EMS.Tests.DbContext
             string meters = "('" + string.Join("','", meterIds) + "')";
             string meterparams = "('" + string.Join("','", meterParamIds) + "')";
 
-            string sql = @"SELECT HistoryData.F_MeterID AS MeterID, F_CircuitName AS CircuitName
+            string sql = @"SELECT Circuit.F_CircuitID AS CircuitID, F_CircuitName AS CircuitName
                                 , ParamInfo.F_MeterParamName AS ParamName
                                 , F_Month" + month +
                                 @" AS Value FROM HistoryData WITH(NOLOCK)
                                 INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID=HistoryData.F_MeterID
 	                            INNER JOIN EMS.dbo.T_ST_MeterParamInfo ParamInfo ON ParamInfo.F_MeterParamID= HistoryData.F_MeterParamID
-                                WHERE F_Year = " + time.Year + 
-                                " AND HistoryData.F_MeterID in" + meters + "" +
+                                WHERE F_Year = " + time.Year +
+                                " AND Circuit.F_CircuitID in" + meters + "" +
                                 " AND HistoryData.F_MeterParamID in" + meterparams + "";
 
             return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
@@ -650,7 +650,7 @@ namespace EMS.Tests.DbContext
                     for (int minute = 0; minute < 56; minute = minute + step)
                     {
                         HistoryParameterValue historyValue = new HistoryParameterValue();
-                        historyValue.ID = item.MeterID;
+                        historyValue.ID = item.CircuitID;
                         historyValue.Name = item.CircuitName;
                         historyValue.ParamName = item.ParamName;
 

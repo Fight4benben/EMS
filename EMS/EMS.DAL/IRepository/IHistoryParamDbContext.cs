@@ -10,5 +10,6 @@ namespace EMS.DAL.IRepository
     public interface IHistoryParamDbContext
     {
         List<HistoryBinarys> GetHistoryBinaryString(string[] meterIds, string[] meterParamIds, DateTime time);
+        List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode);
     }
 }

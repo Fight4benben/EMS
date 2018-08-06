@@ -103,6 +103,7 @@
     <Compile Include="DbContext\EnergyItemReportDbContextTest.cs" />
     <Compile Include="DbContext\EnergyItemTreeViewDbContextTest.cs" />
     <Compile Include="DbContext\GetHDTest.cs" />
+    <Compile Include="DbContext\HistoryParamDbContextTest.cs" />
     <Compile Include="DbContext\PriceDbContextTest.cs" />
     <Compile Include="DbContext\RegionReportDbContextTest.cs" />
     <Compile Include="DbContext\TreeViewDbContextTest.cs" />

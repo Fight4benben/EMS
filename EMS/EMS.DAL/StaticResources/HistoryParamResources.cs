@@ -21,5 +21,14 @@ namespace EMS.DAL.StaticResources
                                                       WHERE Circuit.F_BuildID=@BuildID
                                                       AND F_CircuitID IN (@CircuitIDs)
                                                       ORDER BY F_Order ASC";
+
+        /// <summary>
+        /// 获取参数查询的支路列表
+        /// </summary>
+        public static string TreeViewInfoSQL = @" SELECT F_CircuitID AS ID, F_ParentID AS ParentID,F_CircuitName AS Name
+                                                        FROM T_ST_CircuitMeterInfo AS Circuit	
+                                                        WHERE Circuit.F_BuildID=@BuildID
+	                                                    AND F_EnergyItemCode=@EnergyItemCode
+                                                        ORDER BY ID ASC ";
     }
 }
