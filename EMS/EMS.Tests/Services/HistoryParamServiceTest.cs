@@ -48,9 +48,9 @@ namespace EMS.Tests.Services
         {
             HistoryParamService service = new HistoryParamService();
 
-            string[] ids = new string[] { "000001G0010001", "000001G0010002" };
+            string circuitID = "000001G0010001";
 
-            HistoryParamViewModel model = service.GetViewModel("000001G001", "01000", ids);
+            HistoryParamViewModel model = service.GetViewModel("000001G001", "01000", circuitID);
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -60,11 +60,11 @@ namespace EMS.Tests.Services
         {
             HistoryParamService service = new HistoryParamService();
 
-            string[] circuitIDs = new string[] { "000001G0010001", "000001G0010002" };
+            string circuitID = "000001G0010001";
             string[] paramIDs = new string[] { "31000000000700", "31000000000701", "31000000000702", "31000000000709", "31000000000711" };
             DateTime today = DateTime.Now;
 
-            HistoryParamViewModel model = service.GetViewModel(circuitIDs, paramIDs, today,60);
+            HistoryParamViewModel model = service.GetViewModel(circuitID, paramIDs, today,60);
 
             Console.WriteLine(UtilTest.GetJson(model));
         }

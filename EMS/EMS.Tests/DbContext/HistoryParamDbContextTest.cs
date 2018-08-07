@@ -20,12 +20,13 @@ namespace EMS.Tests.DbContext
 
             DateTime today = DateTime.Now;
             string circuitIDs = "000001G0010001,000001G0010002,000001G0010003,000001G0010004,000001G0010005";
+            string circuitID = "000001G0010001";
             string[] ids = circuitIDs.Split(',');
 
             string circuitPrame = "31000000000711,31000000000700,31000000000701,31000000000702";
             string[] prame = circuitPrame.Split(',');
 
-            List<HistoryParameterValue> historyParameterValueList = context.GetHistoryParamValue(ids, prame,today,60);
+            List<HistoryParameterValue> historyParameterValueList = context.GetHistoryParamValue(circuitID, prame,today,60);
 
             Console.WriteLine(UtilTest.GetJson(historyParameterValueList));
 

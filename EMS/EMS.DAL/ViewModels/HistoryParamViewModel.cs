@@ -12,6 +12,7 @@ namespace EMS.DAL.ViewModels
         public List<BuildViewModel> Builds { get; set; }
         public List<EnergyItemDict> Energys { get; set; }
         public List<TreeViewModel> TreeView { get; set; }
+        public List<ParamClassify> ParamClassify { get; set; }
         public List<MeterParam> MeterParam { get; set; }
         public List<HistoryParameterValue> Data { get; set; }
     }

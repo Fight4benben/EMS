@@ -30,7 +30,6 @@ namespace EMS.UI.Controllers
         {
             try
             {
-                
                 return service.GetViewModel(buildId);
             }
             catch (Exception e)
@@ -43,7 +42,6 @@ namespace EMS.UI.Controllers
         {
             try
             {
-
                 return service.GetViewModel(buildId, energyCode);
             }
             catch (Exception e)
@@ -51,28 +49,39 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
-
-        public object Get(string buildId, string energyCode, string circuitIDs)
+       /// <summary>
+       /// 获取单个支路包含的参数
+       /// </summary>
+       /// <param name="buildId"></param>
+       /// <param name="energyCode"></param>
+       /// <param name="circuitID"></param>
+       /// <returns></returns>
+        public object Get(string buildId, string energyCode, string circuitID)
         {
             try
             {
-                string[] ids = circuitIDs.Split(',');
-                return service.GetViewModel(buildId, energyCode, ids);
+                return service.GetViewModel(buildId, energyCode, circuitID);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
-
-        public object Get(string circuitIDs, string meterParamIDs, string startTime, int step)
+        /// <summary>
+        /// 获取单个各个参数的数据
+        /// </summary>
+        /// <param name="circuitID"></param>
+        /// <param name="meterParamIDs"></param>
+        /// <param name="startTime"></param>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        public object Get(string circuitID, string meterParamIDs, string startTime, int step)
         {
             try
             {
-                string[] ids = circuitIDs.Split(',');
                 string[] paramIDs= meterParamIDs.Split(',');
                 DateTime start = Util.ConvertString2DateTime(startTime, "yyyy-MM-dd HH:mm:ss");
-                return service.GetViewModel(ids,paramIDs, start,step);
+                return service.GetViewModel(circuitID, paramIDs, start,step);
             }
             catch (Exception e)
             {

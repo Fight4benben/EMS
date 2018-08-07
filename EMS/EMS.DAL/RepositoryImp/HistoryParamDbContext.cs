@@ -25,11 +25,11 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="startTime">查询时间</param>
         /// <param name="step">时间间隔（分钟）</param>
         /// <returns></returns>
-        public List<HistoryParameterValue> GetHistoryParamValue(string[] circuitIDs, string[] meterParamIds, DateTime startTime, int step)
+        public List<HistoryParameterValue> GetHistoryParamValue(string circuitID, string[] meterParamIds, DateTime startTime, int step)
         {
             List<HistoryParameterValue> historyValueList = new List<HistoryParameterValue>();
 
-            List<HistoryBinarys> historyBinarys = GetHistoryBinaryString(circuitIDs, meterParamIds, startTime);
+            List<HistoryBinarys> historyBinarys = GetHistoryBinaryString(circuitID, meterParamIds, startTime);
 
             foreach (var item in historyBinarys)
             {
@@ -63,11 +63,11 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="meterParamIds"></param>
         /// <param name="time"></param>
         /// <returns></returns>
-        public List<HistoryBinarys> GetHistoryBinaryString(string[] circuitIDs, string[] meterParamIds, DateTime time)
+        public List<HistoryBinarys> GetHistoryBinaryString(string circuitID, string[] meterParamIds, DateTime time)
         {
             string month = time.Month.ToString("00");
 
-            string circuits = "('" + string.Join("','", circuitIDs) + "')";
+           
             string meterparams = "('" + string.Join("','", meterParamIds) + "')";
 
             string sql = @"SELECT Circuit.F_CircuitID AS CircuitID, F_CircuitName AS CircuitName
@@ -77,7 +77,7 @@ namespace EMS.DAL.RepositoryImp
                                 INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID=HistoryData.F_MeterID
 	                            INNER JOIN EMS.dbo.T_ST_MeterParamInfo ParamInfo ON ParamInfo.F_MeterParamID= HistoryData.F_MeterParamID
                                 WHERE F_Year = " + time.Year +
-                                " AND Circuit.F_CircuitID in" + circuits + "" +
+                                " AND Circuit.F_CircuitID = '" + circuitID + "' " +
                                 " AND HistoryData.F_MeterParamID in" + meterparams + " ORDER BY CircuitID ASC";
 
             return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
@@ -99,19 +99,34 @@ namespace EMS.DAL.RepositoryImp
             return treeViewInfos;
         }
 
+        
         /// <summary>
-        /// 获取仪表参数信息
+        /// 获取仪表参数分类信息
         /// </summary>
         /// <param name="buildId">建筑ID</param>
         /// <param name="circuitIDs">支路ID</param>
-        /// <returns>支路对应仪表的参数</returns>
-        public List<MeterParam> GetMeterParamInfo(string buildId, string[] circuitIDs)
+        /// <returns>支路对应仪表的参数分类</returns>
+        public List<ParamClassify> GetMeterParamClassify(string buildId, string circuitID)
         {
-            string sql = string.Format(HistoryParamResources.MeterParamInfoSQL, "'" + string.Join("','", circuitIDs) + "'");
             SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId)
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@CircuitID",circuitID)
             };
-            return _EMSdb.Database.SqlQuery<MeterParam>(sql, sqlParameters).ToList();
+            return _EMSdb.Database.SqlQuery<ParamClassify>(HistoryParamResources.ParamClassifySQL, sqlParameters).ToList();
+        }
+        /// <summary>
+        /// 获取仪表所有参数信息
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="circuitIDs">支路ID</param>
+        /// <returns>支路对应仪表的所有参数</returns>
+        public List<MeterParam> GetMeterParam(string buildId, string circuitID)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@CircuitID",circuitID)
+            };
+            return _EMSdb.Database.SqlQuery<MeterParam>(HistoryParamResources.MeterParamSQL, sqlParameters).ToList();
         }
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)

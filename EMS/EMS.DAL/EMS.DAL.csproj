@@ -83,6 +83,8 @@
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\MeterParam.cs" />
+    <Compile Include="Entities\MeterParamInfo.cs" />
+    <Compile Include="Entities\ParamClassify.cs" />
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />

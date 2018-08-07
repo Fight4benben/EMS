@@ -42,7 +42,7 @@ namespace EMS.DAL.Services
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
-         
+
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
             viewMode.Builds = builds;
             viewMode.Energys = energys;
@@ -81,17 +81,19 @@ namespace EMS.DAL.Services
             return viewMode;
         }
 
-        public HistoryParamViewModel GetViewModel(string buildId, string energyCode, string[] circuitIDs)
+        public HistoryParamViewModel GetViewModel(string buildId, string energyCode, string circuitID)
         {
-            List<MeterParam> meterParams = context.GetMeterParamInfo(buildId, circuitIDs);
+            List<ParamClassify> paramClassifyList = context.GetMeterParamClassify(buildId, circuitID);
+            List<MeterParam> meterParamList = context.GetMeterParam(buildId, circuitID);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
-            viewMode.MeterParam = meterParams;
+            viewMode.ParamClassify = paramClassifyList;
+            viewMode.MeterParam = meterParamList;
 
             return viewMode;
         }
 
-        public HistoryParamViewModel GetViewModel( string[] circuitIDs, string[] meterParamIDs,DateTime startTime,int step)
+        public HistoryParamViewModel GetViewModel(string circuitID, string[] meterParamIDs, DateTime startTime, int step)
         {
             switch (step)
             {
@@ -115,7 +117,7 @@ namespace EMS.DAL.Services
                     break;
             }
 
-            List<HistoryParameterValue> parameterValue = context.GetHistoryParamValue(circuitIDs, meterParamIDs, startTime, step);
+            List<HistoryParameterValue> parameterValue = context.GetHistoryParamValue(circuitID, meterParamIDs, startTime, step);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
             viewMode.Data = parameterValue;
