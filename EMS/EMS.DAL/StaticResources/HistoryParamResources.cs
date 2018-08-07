@@ -19,8 +19,8 @@ namespace EMS.DAL.StaticResources
                                                       INNER JOIN T_ST_MeterParamInfo ParamInfo ON Meter.F_MeterProdID = ParamInfo.F_MeterProdID
                                                       INNER JOIN T_DT_Param ParamDict ON ParamDict.F_ParamCode = ParamInfo.F_MeterParaCode
                                                       WHERE Circuit.F_BuildID=@BuildID
-                                                      AND F_CircuitID IN (@CircuitIDs)
-                                                      ORDER BY F_Order ASC";
+                                                      AND F_CircuitID IN ({0})
+                                                      ORDER BY Circuit.F_CircuitID,F_Order ASC";
 
         /// <summary>
         /// 获取参数查询的支路列表
