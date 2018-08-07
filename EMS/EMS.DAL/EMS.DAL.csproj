@@ -88,6 +88,7 @@
     <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\TreeView.cs" />
     <Compile Include="Entities\TreeViewInfo.cs" />
+    <Compile Include="Entities\UserMenus.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\ICircuitCompareDbContext.cs" />
     <Compile Include="IRepository\ICircuitReportDbContext.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="IRepository\IHomeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryImp\MapDbContext.cs" />
+    <Compile Include="RepositoryImp\MenuDbContext.cs" />
     <Compile Include="RepositoryImp\PriceDbContext.cs" />
     <Compile Include="RepositoryImp\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\RegionMainDbContext.cs" />
