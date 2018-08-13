@@ -95,7 +95,7 @@ var CircuitCompare = (function(){
 						$("#te_CompareBtns").append('<acronym title="光伏"><button id="solar" class="btn btn-solar" value="13000" style="width: 20px; height: 20px;"  unit="'+val.energyItemUnit+'" type="button"></button></acronym>')
 					break;
 					default:
-						$("#te_CompareBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" value="'+val.energyItemCode+'" unit="'+val.energyItemUnit+'" type="button">'+
+						$("#te_CompareBtns").append('<acronym title="'+val.energyItemName+'"><button id="compare'+val.energyItemCode+'" class="btn btn-empty" value="'+val.energyItemCode+'" unit="'+val.energyItemUnit+'" type="button">'+
 							val.energyItemName.substring(0,1)+'</button></acronym>');
 				}
 			});

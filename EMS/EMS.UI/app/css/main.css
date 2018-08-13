@@ -1314,7 +1314,7 @@ to {top:-7px;}
     background-color:#F08500;
 }
 .btn-solar-selected{
-    background-color:#F08500;
+    background-color:#F08500!important;
 }
 
 .btn-steam{
