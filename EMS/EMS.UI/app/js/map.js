@@ -11,6 +11,8 @@
 			$.getJSON(url, "", function(data) {
 				//console.log(data);
 				showMap(data);
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
 			});
 		}
 
