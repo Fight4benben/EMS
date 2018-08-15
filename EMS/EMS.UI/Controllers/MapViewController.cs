@@ -11,7 +11,15 @@ namespace EMS.UI.Controllers
         // GET: MapView
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return View(e.Message);
+            }
+           
         }
     }
 }
