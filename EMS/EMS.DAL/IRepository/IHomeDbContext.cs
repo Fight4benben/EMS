@@ -23,5 +23,6 @@ namespace EMS.DAL.IRepository
         List<EnergyItem> GetEnergyItemValues(string buildId,string date);
 
         List<HourValue> GetHourValues(string buildId,string date);
+        string GetExetendFunc(string buildId);
     }
 }

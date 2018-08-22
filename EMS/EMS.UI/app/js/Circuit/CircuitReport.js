@@ -332,6 +332,7 @@ var CircuitReport = (function(){
 			var dataList=[];
 			var report;
 			var color;
+			var total = {name :'总计',sum:0}
 
 			if(data.reportType=="DD"){
 				report="时";
@@ -367,6 +368,14 @@ var CircuitReport = (function(){
 					times.push(time);
 				}
 
+				if(total.hasOwnProperty(time)){
+					total[time]+= parseFloat(val.value);
+				}else{
+					total[time] = parseFloat(val.value);
+				}
+
+				total.sum += parseFloat(val.value);
+
 				if( $.inArray(val.name, names) != -1){
 					dataList[$.inArray(val.name, names)].data.push({time:time,value:val.value.toFixed(2)});
 				}else{
@@ -387,16 +396,30 @@ var CircuitReport = (function(){
 				columns.push({field:val,title:EMS.Tool.appendZero(val)+report});
 			});
 
+			columns.push({field:'sum',title:'合计'});
+
 			$.each(dataList, function(index, val) {
 				var row={};
 				row.name = val.name;
+				var sum = 0;
 				$.each(val.data, function(key,value){
 					row[value.time] = value.value;
-
+					sum += parseFloat(value.value);
 				});
+
+				row.sum = sum.toFixed(2);
 
 				rows.push(row);
 			});
+			var totalRow={};
+			$.each(total, function(index, val) {
+				if(index !== 'name')
+					totalRow[index] = val.toFixed(2);
+				else
+					totalRow[index] = val;
+			});
+
+			rows.push(totalRow);
 
 			$("#dayReport").html('<table></table>');
 			var windowWidth = $(window).width();

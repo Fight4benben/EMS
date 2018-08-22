@@ -4,6 +4,8 @@ var Home = (function(){
 		//不同分类下的小时数据与对比数据
 		var energyArray=[];
 
+		var lineMode;
+
 		this.initDom = function(){
 			initEnergyClassifyTable();
 			initDateTimePicker();
@@ -158,6 +160,11 @@ var Home = (function(){
 
 			initButtons();
 
+			if(!data.hasOwnProperty('lineMode'))
+				lineMode = "Normal";
+			else
+				lineMode = data.lineMode;
+
 			if(!data.hasOwnProperty('compareValues'))
 				return;
 
@@ -206,7 +213,7 @@ var Home = (function(){
 
 				$.each(energyArray, function(key, val) {
 					if(val.code == $this.attr("value")){
-						if(isSelectedDateToday() && (getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002"))
+						if(lineMode=="Special")
 							showPreviewLine(energyArray[0]);
 						else
 							showLine(energyArray[0]);
@@ -217,7 +224,7 @@ var Home = (function(){
 
 
 			//var 
-			if(isSelectedDateToday() &&(getCurrentBuildId() == "000001G001" || getCurrentBuildId() == "000001G002"))
+			if(lineMode == "Special")
 				showPreviewLine(energyArray[0]);
 			else
 				showLine(energyArray[0]);

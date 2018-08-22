@@ -24,5 +24,10 @@ namespace EMS.DAL.StaticResources
                                                 INNER JOIN T_DT_EnergyItemDict EnergyItemDict ON Circuit.F_EnergyItemCode = EnergyItemDict.F_EnergyItemCode
                                                 WHERE F_BuildID=@BuildId
                                                 GROUP BY EnergyItemDict.F_EnergyItemCode";
+
+        /// <summary>
+        /// 根据建筑ID 获取T_BD_BuildExInfo中ExtendFunc字段，Normal表示曲线按照常规方式显示，Special表示按照特殊方式显示（铁狮门方式，带10%预测）
+        /// </summary>
+        public static string ExtendFunc = @"SELECT F_ExtendFunc ExtendFunc FROM T_BD_BuildExInfo WHERE F_BuildID = @BuildId";
     }
 }

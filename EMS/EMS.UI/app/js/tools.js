@@ -198,7 +198,7 @@ var EMS = {
 			            }
 			        },
 		            series: series,
-            	color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+            	color:['#74B000','#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
         	};
 
         	if(legendData != undefined)

@@ -95,5 +95,14 @@ namespace EMS.DAL.RepositoryImp
 
             return _db.Database.SqlQuery<HourValue>(HomeResources.HourValueSQL,sqlParameters).ToList();
         }
+
+        public string GetExetendFunc(string buildId)
+        {
+            List<string> list = _db.Database.SqlQuery<string>(SharedResources.ExtendFunc, new SqlParameter("@BuildId", buildId)).ToList();
+            if (list.Count == 0)
+                return "Normal";
+            else
+                return list[0];
+        }
     }
 }
