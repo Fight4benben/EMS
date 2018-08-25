@@ -121,6 +121,7 @@
     <Compile Include="Services\DepartmentCompareServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
     <Compile Include="Services\DepartmentReportServiceTest.cs" />
+    <Compile Include="Services\EnergyAlarmServiceTest.cs" />
     <Compile Include="Services\EnergyItemCompareServiceTest.cs" />
     <Compile Include="Services\EnergyItemOverviewServiceTest.cs" />
     <Compile Include="Services\EnergyItemReportServiceTest.cs" />
