@@ -27,8 +27,8 @@ namespace EMS.Tests.Services
         public void TestEnergyAlarmByBuildID_Date()
         {
             EnergyAlarmService service = new EnergyAlarmService();
-            DateTime today = DateTime.Now;
-            EnergyAlarmViewModel model = service.GetViewModel("000001G001", string.Format("{0:d}", today));
+            DateTime today = DateTime.Now.AddDays(-8);
+            EnergyAlarmViewModel model = service.GetViewModel("000001G001", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }

@@ -54,7 +54,7 @@ namespace EMS.DAL.Services
 
         public EnergyAlarmViewModel GetViewModel(string buildId, string date)
         {
-            string startTime= string.Format("{0:d}",date);
+            string startTime= string.Format("{0:yyyy-MM-dd}", date);
 
             List<EnergyAlarm> energyAlarmValue = context.GetEnergyOverLimitValueList(buildId, startTime);
 
