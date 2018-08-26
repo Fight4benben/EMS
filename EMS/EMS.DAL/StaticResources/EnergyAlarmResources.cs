@@ -29,5 +29,17 @@ namespace EMS.DAL.StaticResources
 	                                                        WHERE Value > LimitValue
 	                                                        ORDER BY ID
                                                     ";
+        /// <summary>
+        /// 设置设备用能越限告警
+        /// </summary>
+        public static string SetOverLimitValueSQL = @" IF EXISTS (SELECT 1 FROM T_ST_DeviceAlarmPlan WHERE F_MeterID= @MeterID AND F_BuildID=@BuildID AND F_Year=@Year AND F_Month=@Month) 
+                                                                    UPDATE T_ST_DeviceAlarmPlan SET F_StartTime = @StartDay , F_EndTime = @EndDay
+					                                                        ,F_IsOverDay=@isOverDay, F_LimitValue=@LimitValue
+                                                            ELSE
+                                                                INSERT INTO T_ST_DeviceAlarmPlan
+                                                                (F_MeterID, F_BuildID, F_Year, F_Month,F_StartTime,F_EndTime,F_IsOverDay,F_LimitValue) VALUES
+                                                                    ( @MeterID,@BuildID,@Year,@Month,@StartDay,@EndDay,@isOverDay,@LimitValue)
+                                                    ";
+
     }
 }

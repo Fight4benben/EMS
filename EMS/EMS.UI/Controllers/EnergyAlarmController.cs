@@ -32,7 +32,7 @@ namespace EMS.UI.Controllers
         }
 
         /// <summary>
-        /// 部门用能统计报表
+        /// 设备用能越限告警数据
         /// 根据建筑ID和日期，获取指定建筑的用能越限告警数据
         /// </summary>
         /// <param name="buildId">建筑ID</param>
