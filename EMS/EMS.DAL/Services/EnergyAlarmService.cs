@@ -98,5 +98,23 @@ namespace EMS.DAL.Services
             viewModel.CompareData = compareDatas;
             return viewModel;
         }
+
+        /// <summary>
+        /// 获取部门用能 月份同比
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="date">时间（"yyyy-MM-dd"）</param>
+        /// <returns></returns>
+        public EnergyAlarmViewModel GetCompareDeptViewModel(string buildId, string date)
+        {
+            DateTime dateTime = Convert.ToDateTime(date);
+            string startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
+            string endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+            List<CompareData> compareDatas = context.GetDeptCompareValueList(buildId, startDay, endDay);
+
+            EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
+            viewModel.CompareData = compareDatas;
+            return viewModel;
+        }
     }
 }

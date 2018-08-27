@@ -97,5 +97,44 @@ namespace EMS.DAL.StaticResources
 	                                                        WHERE ABS(case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> 0.2 
 	                                                        ORDER BY ID
                                                     ";
+
+        /// <summary>
+        /// 同比--本月与上年同月
+        /// </summary>
+        public static string DeptCompareValueSQL = @"SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END AS Rate
+                                                        FROM (
+		                                                        SELECT DepartmentInfo.F_DepartmentID AS ID
+		                                                        ,DepartmentInfo.F_DepartmentName AS Name 
+		                                                        ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+		                                                        WHERE Circuit.F_BuildID=@BuildID 
+		                                                        AND ParamInfo.F_IsEnergyValue = 1
+		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T1
+                                                        INNER JOIN 
+		                                                        (
+			                                                        SELECT DepartmentInfo.F_DepartmentID AS ID
+			                                                        ,DepartmentInfo.F_DepartmentName AS Name 
+			                                                        ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+			                                                        FROM T_MC_MeterDayResult DayResult
+			                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+			                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+			                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+			                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+			                                                        WHERE Circuit.F_BuildID=@BuildID 
+			                                                        AND ParamInfo.F_IsEnergyValue = 1
+			                                                        AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, -1,  @StartDay) AND DATEADD(YEAR, -1,  @EndDay)
+			                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T2 ON T1.ID = T2.ID
+	                                                        WHERE ABS(case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> 0.2 
+	                                                        ORDER BY ID
+                                                    ";
     }
 }

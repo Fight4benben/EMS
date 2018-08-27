@@ -87,5 +87,24 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
+
+        /// <summary>
+        /// 获取部门用能 月份同比
+        /// 根据建筑ID和日期，获取部门用能 天环比数据
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="date">起始时间（"yyyy-MM-dd"）</param>
+        /// <returns>用能数据：</returns>
+        public object GetDeptMonth(string buildId, string date)
+        {
+            try
+            {
+                return service.GetCompareDeptViewModel(buildId, date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
     }
 }
