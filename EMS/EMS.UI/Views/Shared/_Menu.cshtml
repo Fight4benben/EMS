@@ -14,7 +14,7 @@
             <li class="sidebar-toggler-wrapper">
                 <div class="sidebar-toggler hidden-phone"></div>
             </li>
-            @if (menu.Menus.Contains("1P")|| menu.Menus.Contains("all"))
+            @if (menu.Menus.Contains("1P") || menu.Menus.Contains("all"))
             {
                 <li id="fistpage" class="">
                     <a href="/Home/Index"
@@ -35,6 +35,16 @@
                 </li>
             }
 
+            @if (menu.Menus.Contains("7P") || menu.Menus.Contains("all"))
+            {
+                <li id="mappage" class="">
+                    <a href="/Home/OverAll" id="btn-map">
+                        <i class="fa fa-map-marker"></i>
+                        <span class="title">综合查询</span>
+                    </a>
+                </li>
+            }
+
             @if (menu.Menus.Contains("3P") || menu.Menus.Contains("all"))
             {
                 <li id="flenergy" class="">
@@ -43,18 +53,22 @@
                         <span class="title">支路用能 </span><span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" id="tenergy">
-                        @if(menu.Menus.Contains("3.1") || menu.Menus.Contains("all") )
+                        @if (menu.Menus.Contains("3.1") || menu.Menus.Contains("all"))
                         {
-                        <li id="trunk" class=""><a href="/Circuit/Main"><i class="fa fa-caret-right"></i>支路用能概况</a></li>
+                            <li id="trunk" class=""><a href="/Circuit/Main"><i class="fa fa-caret-right"></i>支路用能概况</a></li>
                         }
-                        @if(menu.Menus.Contains("3.2") || menu.Menus.Contains("all") ){
-                        <li id="count" class=""><a href="/Circuit/Report"><i class="fa fa-caret-right"></i>支路用能统计</a></li>
+                        @if (menu.Menus.Contains("3.2") || menu.Menus.Contains("all"))
+                        {
+                            <li id="count" class=""><a href="/Circuit/Report"><i class="fa fa-caret-right"></i>支路用能统计</a></li>
                         }
-                        @if(menu.Menus.Contains("3.3") || menu.Menus.Contains("all") ){
-                        <li id="te_collect" class=""><a href="/Circuit/Collect"><i class="fa fa-caret-right"></i>数据集抄</a></li>
+                        @if (menu.Menus.Contains("3.3") || menu.Menus.Contains("all"))
+                        {
+                            <li id="te_collect" class=""><a href="/Circuit/Collect"><i class="fa fa-caret-right"></i>数据集抄</a></li>
                         }
-                        @if(menu.Menus.Contains("3.4") || menu.Menus.Contains("all") ){
-                        <li id="table" class=""><a href="/Circuit/Compare"><i class="fa fa-caret-right"></i>同比分析</a></li>
+
+                        @if (menu.Menus.Contains("3.4") || menu.Menus.Contains("all"))
+                        {
+                            <li id="table" class=""><a href="/Circuit/Compare"><i class="fa fa-caret-right"></i>同比分析</a></li>
                         }
                         <!-- <li id="" class=""><a href="javascript:;"> <span style="color:#b1b0b0">趋势曲线</span></a></li> -->
                         <!-- <li id="te_loss" class=""><a href="rest/tela"><i class="fa fa-caret-right"></i>损耗分析</a></li> -->
@@ -86,7 +100,7 @@
                         {
                             <li id="se_statistic" class=""><a href="/Item/Statistic"><i class="fa fa-caret-right"></i>分类分项统计报表</a></li>
                         }
-                   </ul>
+                    </ul>
                 </li>
             }
 
@@ -110,7 +124,11 @@
                         {
                             <li id="de_compare" class=""><a href="/Department/Compare"><i class="fa fa-caret-right"></i>同比分析</a></li>
                         }
-                        </ul>
+                        @if (menu.Menus.Contains("5.4") || menu.Menus.Contains("all"))
+                        {
+                            <li id="de_rank" class=""><a href="/Department/Rank"><i class="fa fa-caret-right"></i>能耗排名</a></li>
+                        }
+                    </ul>
                 </li>
             }
 
@@ -141,7 +159,31 @@
                 </li>
             }
 
-            </ul>
+            @if (menu.Menus.Contains("8P") || menu.Menus.Contains("all"))
+            {
+                <li id="alarm" class="">
+                    <a href="javascript:;">
+                        <i class="fa fa-flag"></i><span class="title">能耗报警提示</span><span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" id="alarmlist">
+                        @if (menu.Menus.Contains("8.1") || menu.Menus.Contains("all"))
+                        {
+                            <li id="equipAlarm" class=""><a href="/Alarm/EquipAlarm"><i class="fa fa-caret-right"></i>设备用能报警提示</a></li>
+                        }
+                        @if (menu.Menus.Contains("8.2") || menu.Menus.Contains("all"))
+                        {
+                            <li id="deptAlarm" class=""><a href="/Alarm/DepartmentAlarm"><i class="fa fa-caret-right"></i>部门用能报警提示</a></li>
+                        }
+                        @if (menu.Menus.Contains("8.3") || menu.Menus.Contains("all"))
+                        {
+                            <li id="outofworkAlarm" class=""><a href="/Alarm/OutOfWorkAlarm"><i class="fa fa-caret-right"></i>重点设备报警提示</a></li>
+                        }
+                        
+                    </ul>
+                </li>
+            }
+
+        </ul>
     </div>
 </div>
 <!-- END SIDEBAR -->
