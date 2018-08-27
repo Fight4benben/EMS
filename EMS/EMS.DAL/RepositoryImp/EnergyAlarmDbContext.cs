@@ -24,6 +24,17 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<EnergyAlarm>(EnergyAlarmResources.OverLimitValueSQL, sqlParameters).ToList();
         }
 
+        public List<CompareData> GetDayCompareValueList(string buildId, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",date)
+            };
+            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DayCompareValueSQL, sqlParameters).ToList();
+        }
+
+
+
         public List<BuildViewModel> GetBuildsByUserName(string userName)
         {
             return _db.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL, new SqlParameter("@UserName", userName)).ToList();

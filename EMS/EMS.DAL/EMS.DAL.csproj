@@ -69,6 +69,7 @@
     <Compile Include="Entities\CircuitMeterInfo.cs" />
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
+    <Compile Include="Entities\CompareData.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />

@@ -47,19 +47,37 @@ namespace EMS.DAL.Services
             viewModel.Builds = builds;
             viewModel.Energys = energys;
             viewModel.TreeView = treeViewModel;
-            viewModel.Data = energyAlarmValue;
+            viewModel.EnergyAlarmData = energyAlarmValue;
 
             return viewModel;
         }
 
+        /// <summary>
+        /// 获取设备用你越限告警
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="date">时间（"yyyy-MM-dd"）</param>
+        /// <returns></returns>
         public EnergyAlarmViewModel GetViewModel(string buildId, string date)
         {
-            string startTime= string.Format("{0:yyyy-MM-dd}", date);
-
-            List<EnergyAlarm> energyAlarmValue = context.GetEnergyOverLimitValueList(buildId, startTime);
+            List<EnergyAlarm> energyAlarmValue = context.GetEnergyOverLimitValueList(buildId, date);
 
             EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
-            viewModel.Data = energyAlarmValue;
+            viewModel.EnergyAlarmData = energyAlarmValue;
+            return viewModel;
+        }
+        /// <summary>
+        /// 获取设备用能 天环比数据
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="date">时间（"yyyy-MM-dd"）</param>
+        /// <returns></returns>
+        public EnergyAlarmViewModel GetCompareDayViewModel(string buildId, string date)
+        {
+            List<CompareData> compareDatas = context.GetDayCompareValueList(buildId, date);
+
+            EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
+            viewModel.CompareData = compareDatas;
             return viewModel;
         }
     }
