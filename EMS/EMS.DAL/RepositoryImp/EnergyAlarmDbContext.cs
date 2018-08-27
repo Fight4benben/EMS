@@ -33,6 +33,16 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DayCompareValueSQL, sqlParameters).ToList();
         }
 
+        public List<CompareData> GetMonthCompareValueList(string buildId, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.MonthCompareValueSQL, sqlParameters).ToList();
+        }
+
 
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)

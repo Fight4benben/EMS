@@ -64,9 +64,38 @@ namespace EMS.DAL.StaticResources
 			                                                        WHERE ParamInfo.F_IsEnergyValue = 1
 			                                                        AND Meter.F_BuildID = @BuildID
 			                                                        AND DayResult.F_StartDay = DATEADD(DAY, -1,  @StartDay)) T2 ON T1.F_MeterID = T2.F_MeterID 
-                                                                    WHERE ABS(case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> 0.2 
-                                                                    ORDER BY ID
+                                                        WHERE ABS(case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> 0.2 
+                                                        ORDER BY ID
                                                     ";
 
+        /// <summary>
+        /// 同比--本月与上年同月
+        /// </summary>
+        public static string MonthCompareValueSQL = @"SELECT t1.F_MeterID AS ID,T1.F_MeterName AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                            (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                            ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END AS Rate
+                                                            FROM (
+		                                                            SELECT DayResult.F_MeterID,Meter.F_MeterName,SUM(DayResult.F_Value) AS F_Value 
+		                                                            FROM T_MC_MeterDayResult DayResult
+		                                                            INNER JOIN T_ST_MeterUseInfo Meter ON DayResult.F_MeterID = Meter.F_MeterID
+		                                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                            WHERE ParamInfo.F_IsEnergyValue = 1
+		                                                            AND Meter.F_BuildID = @BuildID
+		                                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                            GROUP BY DayResult.F_MeterID,Meter.F_MeterName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                            ) T1
+                                                            INNER JOIN 
+		                                                            (SELECT DayResult.F_MeterID,SUM(DayResult.F_Value) AS F_Value 
+			                                                            FROM T_MC_MeterDayResult DayResult
+			                                                            INNER JOIN T_ST_MeterUseInfo Meter ON DayResult.F_MeterID = Meter.F_MeterID
+			                                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+			                                                            WHERE ParamInfo.F_IsEnergyValue = 1
+			                                                            AND Meter.F_BuildID = @BuildID
+			                                                            AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, -1,  @StartDay) AND DATEADD(YEAR, -1,  @EndDay) 
+			                                                            GROUP BY DayResult.F_MeterID,Meter.F_MeterName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+			                                                            ) T2 ON T1.F_MeterID = T2.F_MeterID
+	                                                        WHERE ABS(case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> 0.2 
+	                                                        ORDER BY ID
+                                                    ";
     }
 }

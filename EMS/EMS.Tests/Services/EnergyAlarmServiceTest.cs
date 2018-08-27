@@ -42,5 +42,16 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
+
+        [TestMethod]
+        public void TestCompareMonthByBuildID_Date()
+        {
+            EnergyAlarmService service = new EnergyAlarmService();
+
+            //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
+            EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08");
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
     }
 }
