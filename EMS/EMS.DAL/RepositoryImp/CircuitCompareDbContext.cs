@@ -16,7 +16,6 @@ namespace EMS.DAL.RepositoryImp
 
         public List<CircuitValue> GetCircuitCompareValueList(string buildId, string circuitId, string date)
         {
-            //throw new NotImplementedException();
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@CircuitID",circuitId),
