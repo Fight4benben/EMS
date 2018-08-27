@@ -70,6 +70,7 @@
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
     <Compile Include="Entities\EMSValue.cs" />
+    <Compile Include="Entities\EnergyAlarm.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="IRepository\IDepartmentCompareDbContext.cs" />
     <Compile Include="IRepository\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\IDepartmentReportDbContext.cs" />
+    <Compile Include="IRepository\IEnergyAlarmDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemCompareDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\IEnergyItemReportDbContext.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="RepositoryImp\DepartmentCompareDbContext.cs" />
     <Compile Include="RepositoryImp\DepartmentOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\DepartmentReportDbContext.cs" />
+    <Compile Include="RepositoryImp\EnergyAlarmDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyItemReportDbContext.cs" />
@@ -143,6 +146,7 @@
     <Compile Include="Services\DepartmentCompareService.cs" />
     <Compile Include="Services\DepartmentOverviewService.cs" />
     <Compile Include="Services\DepartmentReportService.cs" />
+    <Compile Include="Services\EnergyAlarmService.cs" />
     <Compile Include="Services\EnergyItemCompareService.cs" />
     <Compile Include="Services\EnergyItemOverviewService.cs" />
     <Compile Include="Services\EnergyItemReportService.cs" />
@@ -162,6 +166,7 @@
     <Compile Include="StaticResources\DepartmentCompareResources.cs" />
     <Compile Include="StaticResources\DepartmentOverviewResources.cs" />
     <Compile Include="StaticResources\DepartmentReportResources.cs" />
+    <Compile Include="StaticResources\EnergyAlarmResources.cs" />
     <Compile Include="StaticResources\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\EnergyItemOverviewResources.cs" />
     <Compile Include="StaticResources\EnergyItemReportResources.cs" />
@@ -185,6 +190,7 @@
     <Compile Include="ViewModels\DepartmentCompareViewModel.cs" />
     <Compile Include="ViewModels\DepartmentOverviewModel.cs" />
     <Compile Include="ViewModels\DepartmentReportViewModel.cs" />
+    <Compile Include="ViewModels\EnergyAlarmViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\EnergyItemReportViewModel.cs" />
