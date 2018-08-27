@@ -17,6 +17,12 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        //返回综合查询页面
+        public ActionResult OverAll()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
