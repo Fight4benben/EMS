@@ -2,6 +2,69 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+/*测试*/
+.R-Table{
+    height:780px;
+    border:1px solid #B4B4B5;
+    clear:both;
+}
+.col-xs-12 .equip-right{
+    width:200px;
+    margin-right:10px;
+}
+.col-xs-12 .equip-right2{
+    width:100px;
+    margin-right:10px;
+}
+.overall-column{
+    height:315px;
+}
+.R-Columnar{
+    height:776px;
+    border:1px solid #B4B4B5;
+}
+.Rank-Columnar{
+    height:315px;
+    clear:both;
+    border:1px solid #B4B4B5;
+    margin-bottom:10px;
+}
+.Rank-Table{
+    height:435px;
+    clear:both;
+    border:1px solid #B4B4B5;
+}
+.overall{
+    padding-left:0!important;
+    padding-right:0!important;
+    clear:both;
+    overflow:hidden;
+    margin-top:10px;
+}
+.btn-equip{
+    width:90px;
+    height:35px;
+    float:left;
+    background:url(../img/search2.png) no-repeat 14px 6px;
+    background-color:#007cde;
+    color:#FFF;
+    padding-left:35px;
+    border:0;
+}
+#treeview{
+    height:400px!important;
+}
+.Ranking-sort,.equip-row{
+    float:left;
+}
+.equipAlarm .count-data{
+    width:150px;
+}
+.equip-width{
+    width:50px;
+    float:left;
+    line-height: 32px;
+}
 .Statistic-h{
  height:786px;
  width: 100%;
@@ -1426,6 +1489,14 @@ to {top:-7px;}
 }
 @media (max-width:414px){
     .fa-head2{margin-top: 1px;margin-right: 13px;}
+}
+@media (max-width:1200px){
+    .Ranking-sort{
+        clear:left;
+    }
+    .equipAlarm .filter-width{
+        margin-left:0;
+    }
 }
 .fa-reorder{
     font-size: 22px!important;
