@@ -251,6 +251,7 @@
     <Content Include="app\img\gongzong.jpg" />
     <Content Include="app\img\Hand Up-48.png" />
     <Content Include="app\img\icon.jpg" />
+    <Content Include="app\img\icons8-user-groups-filled-35.png" />
     <Content Include="app\img\load-1.png" />
     <Content Include="app\img\load-2.png" />
     <Content Include="app\img\load-3.png" />
@@ -288,6 +289,7 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\js\Alarm\OutOfWork.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\Collect.js" />

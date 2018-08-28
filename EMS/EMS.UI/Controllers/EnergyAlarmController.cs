@@ -38,11 +38,24 @@ namespace EMS.UI.Controllers
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>
         /// <returns>用能数据：</returns>
-        public object Get(string buildId, string date)
+        public object Get(string buildId, string date,string type)
         {
             try
             {
-                return service.GetViewModel(buildId, date);
+                switch (type)
+                {
+                    case "Limit":
+                        return service.GetViewModel(buildId, date);
+                    case "Day":
+                        return service.GetCompareDayViewModel(buildId, date);
+                    case "Month":
+                        return service.GetCompareMonthViewModel(buildId, date);
+                    case "Dept":
+                        return service.GetCompareDeptViewModel(buildId, date);
+                    default:
+                        return "null";
+                }
+                
             }
             catch (Exception e)
             {
@@ -50,61 +63,6 @@ namespace EMS.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// 获取设备用能 天环比数据
-        /// 根据建筑ID和日期，获取设备用能 天环比数据
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="date">时间（"yyyy-MM-dd"）</param>
-        /// <returns>用能数据：</returns>
-        public object GetCompareDay(string buildId, string date)
-        {
-            try
-            {
-                return service.GetCompareDayViewModel(buildId, date);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-        /// <summary>
-        /// 获取设备用能 月份同比
-        /// 根据建筑ID和日期，获取设备用能 天环比数据
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="date">起始时间（"yyyy-MM-dd"）</param>
-        /// <returns>用能数据：</returns>
-        public object GetCompareMonth(string buildId, string date)
-        {
-            try
-            {
-                return service.GetCompareMonthViewModel(buildId, date);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-        /// <summary>
-        /// 获取部门用能 月份同比
-        /// 根据建筑ID和日期，获取部门用能 天环比数据
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="date">起始时间（"yyyy-MM-dd"）</param>
-        /// <returns>用能数据：</returns>
-        public object GetDeptMonth(string buildId, string date)
-        {
-            try
-            {
-                return service.GetCompareDeptViewModel(buildId, date);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
+        
     }
 }
