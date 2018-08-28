@@ -179,6 +179,7 @@
     <Compile Include="StaticResources\HistoryParamResources.cs" />
     <Compile Include="StaticResources\HomeResources.cs" />
     <Compile Include="StaticResources\MapResources.cs" />
+    <Compile Include="StaticResources\OverAllSearchResources.cs" />
     <Compile Include="StaticResources\PriceResouces.cs" />
     <Compile Include="StaticResources\RegionCompareResources.cs" />
     <Compile Include="StaticResources\RegionMainResources.cs" />
