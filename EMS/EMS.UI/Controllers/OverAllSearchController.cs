@@ -1,0 +1,33 @@
+﻿using EMS.DAL.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+
+namespace EMS.UI.Controllers
+{
+    [Authorize]
+    public class OverAllSearchController : ApiController
+    {
+        OverAllSearchService service = new OverAllSearchService();
+
+        /// <summary>
+        /// 获取搜索结果
+        /// </summary>
+        /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
+        /// <param name="keyWord">搜索内容</param>
+        /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
+        public object Get(string type, string keyWord, string endDay)
+        {
+            try
+            {
+                return service.GetViewModel(type,keyWord,endDay);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+    }
+}

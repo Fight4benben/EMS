@@ -53,7 +53,7 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 获取设备用你越限告警
+        /// 获取设备用能越限告警
         /// </summary>
         /// <param name="buildId"></param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ItemStatisticController.cs" />
     <Compile Include="Controllers\MapViewController.cs" />
+    <Compile Include="Controllers\OverAllSearchController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
     <Compile Include="Controllers\RegionCompareController.cs" />
     <Compile Include="Controllers\RegionController.cs" />

@@ -70,7 +70,7 @@ namespace EMS.DAL.StaticResources
         /// </summary>
         public static string CircuitMomMonthSQL = @" SELECT t1.F_MeterID AS ID,T1.F_MeterName AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
 	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
-	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END AS Rate
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
                                                         FROM (
 		                                                        SELECT DayResult.F_MeterID,Meter.F_MeterName,SUM(DayResult.F_Value) AS F_Value 
 		                                                        FROM T_MC_MeterDayResult DayResult
@@ -99,7 +99,7 @@ namespace EMS.DAL.StaticResources
         /// </summary>
         public static string CircuitCompareMonthSQL = @" SELECT t1.F_MeterID AS ID,T1.F_MeterName AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
 	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
-	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END AS Rate
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
                                                         FROM (
 		                                                        SELECT DayResult.F_MeterID,Meter.F_MeterName,SUM(DayResult.F_Value) AS F_Value 
 		                                                        FROM T_MC_MeterDayResult DayResult
@@ -121,6 +121,153 @@ namespace EMS.DAL.StaticResources
 			                                                        GROUP BY DayResult.F_MeterID,Meter.F_MeterName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
 			                                                        ) T2 ON T1.F_MeterID = T2.F_MeterID   
 	                                                    ORDER BY ID
+                                                    ";
+
+        /// <summary>
+        /// 部门-月份环比
+        /// </summary>
+        public static string DeptMomMonthSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
+                                                        FROM (
+		                                                        SELECT DepartmentInfo.F_DepartmentID AS ID
+		                                                        ,DepartmentInfo.F_DepartmentName AS Name 
+		                                                        ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                        AND DepartmentInfo.F_DepartmentName =
+					                                                ( SELECT TOP 1  T_ST_DepartmentInfo.F_DepartmentName FROM T_ST_DepartmentInfo WHERE T_ST_DepartmentInfo.F_DepartmentName LIKE '%'+ @KeyWord +'%')
+		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T1
+                                                        INNER JOIN 
+		                                                       (
+			                                                    SELECT DepartmentInfo.F_DepartmentID AS ID
+			                                                    ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+			                                                    FROM T_MC_MeterDayResult DayResult
+			                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+			                                                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+			                                                    INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+			                                                    INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+			                                                    WHERE ParamInfo.F_IsEnergyValue = 1
+			                                                    AND DayResult.F_StartDay BETWEEN DATEADD(MONTH, -1,  @StartDay) AND DATEADD(MONTH, -1,  @EndDay)
+			                                                    GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                       ) T2 ON T1.ID = T2.ID
+	                                                      ORDER BY ID
+                                                    ";
+
+        /// <summary>
+        /// 部门-月份同比
+        /// </summary>
+        public static string DeptCompareMonthSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
+                                                        FROM (
+		                                                        SELECT DepartmentInfo.F_DepartmentID AS ID
+		                                                        ,DepartmentInfo.F_DepartmentName AS Name 
+		                                                        ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                        AND DepartmentInfo.F_DepartmentName =
+					                                                ( SELECT TOP 1  T_ST_DepartmentInfo.F_DepartmentName FROM T_ST_DepartmentInfo WHERE T_ST_DepartmentInfo.F_DepartmentName LIKE '%'+ @KeyWord +'%')
+		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T1
+                                                        INNER JOIN 
+		                                                       (
+			                                                    SELECT DepartmentInfo.F_DepartmentID AS ID
+			                                                    ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS F_Value
+			                                                    FROM T_MC_MeterDayResult DayResult
+			                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+			                                                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+			                                                    INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
+			                                                    INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+			                                                    WHERE ParamInfo.F_IsEnergyValue = 1
+			                                                    AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, -1,  @StartDay) AND DATEADD(YEAR, -1,  @EndDay)
+			                                                    GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                       ) T2 ON T1.ID = T2.ID
+	                                                      ORDER BY ID
+                                                    ";
+        /// <summary>
+        /// 区域-月份环比
+        /// </summary>
+        public static string RegionMomMonthSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
+                                                        FROM (
+		                                                        SELECT Region.F_RegionID AS ID
+		                                                        ,Region.F_RegionName AS Name 
+		                                                        ,SUM((CASE WHEN RegionMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * RegionMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
+	                                                            INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                        AND Region.F_RegionName =
+					                                                ( SELECT TOP 1  T_ST_Region.F_RegionName FROM T_ST_Region WHERE T_ST_Region.F_RegionName LIKE '%'+ @KeyWord +'%')
+		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                        GROUP BY Region.F_RegionID,Region.F_RegionName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T1
+                                                        INNER JOIN 
+		                                                       (
+			                                                    SELECT Region.F_RegionID AS ID
+		                                                        ,SUM((CASE WHEN RegionMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * RegionMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
+	                                                            INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                         AND DayResult.F_StartDay BETWEEN DATEADD(MONTH, -1,  @StartDay) AND DATEADD(MONTH, -1,  @EndDay)
+		                                                        GROUP BY Region.F_RegionID,Region.F_RegionName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                       ) T2 ON T1.ID = T2.ID
+	                                                      ORDER BY ID
+                                                    ";
+
+        /// <summary>
+        /// 区域-月份同比
+        /// </summary>
+        public static string RegionCompareMonthSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
+	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
+	                                                        ,case when t2.F_Value = 0 then NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value*100 END AS Rate
+                                                        FROM (
+		                                                        SELECT Region.F_RegionID AS ID
+		                                                        ,Region.F_RegionName AS Name 
+		                                                        ,SUM((CASE WHEN RegionMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * RegionMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
+	                                                            INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                        AND Region.F_RegionName =
+					                                                ( SELECT TOP 1  T_ST_Region.F_RegionName FROM T_ST_Region WHERE T_ST_Region.F_RegionName LIKE '%'+ @KeyWord +'%')
+		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
+		                                                        GROUP BY Region.F_RegionID,Region.F_RegionName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                        ) T1
+                                                        INNER JOIN 
+		                                                       (
+			                                                    SELECT Region.F_RegionID AS ID
+		                                                        ,SUM((CASE WHEN RegionMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * RegionMeter.F_Rate/100) AS F_Value
+		                                                        FROM T_MC_MeterDayResult DayResult
+		                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
+		                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
+		                                                        INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
+	                                                            INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
+		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+		                                                         AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, -1,  @StartDay) AND DATEADD(YEAR, -1,  @EndDay)
+		                                                        GROUP BY Region.F_RegionID,Region.F_RegionName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
+		                                                       ) T2 ON T1.ID = T2.ID
+	                                                      ORDER BY ID
                                                     ";
     }
 }

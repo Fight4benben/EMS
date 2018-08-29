@@ -14,7 +14,14 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<EMSValue> GetLast31DayList(string type, string keyWord, string startDay, string endDay)
+        /// <summary>
+        /// 最近31天用能数据
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
+        public List<EMSValue> GetLast31DayList(string type, string keyWord, string endDay)
         {
             string sql;
 
@@ -39,12 +46,18 @@ namespace EMS.DAL.RepositoryImp
 
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@KeyWord",keyWord),
-                new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<EMSValue>(sql, sqlParameters).ToList();
         }
-
+        /// <summary>
+        /// 本月每天用能数据
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="startDay"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
         public List<EMSValue> GetMonthList(string type, string keyWord, string startDay, string endDay)
         {
             string sql;
@@ -75,15 +88,81 @@ namespace EMS.DAL.RepositoryImp
             };
             return _db.Database.SqlQuery<EMSValue>(sql, sqlParameters).ToList();
         }
-
+        /// <summary>
+        /// 环比数据
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="startDay"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
         public List<CompareData> GetMomMonthList(string type, string keyWord, string startDay, string endDay)
         {
-           
-        }
+            string sql;
 
+            switch (type)
+            {
+                case "Circuit":
+                    sql = OverAllSearchResources.CircuitMomMonthSQL;
+                    break;
+
+                case "Dept":
+                    sql = OverAllSearchResources.DeptMomMonthSQL;
+                    break;
+
+                case "Region":
+                    sql = OverAllSearchResources.RegionMomMonthSQL;
+                    break;
+
+                default:
+                    sql = OverAllSearchResources.DeptMomMonthSQL;
+                    break;
+            }
+
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(sql, sqlParameters).ToList();
+        }
+        /// <summary>
+        /// 同比数据
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="keyWord"></param>
+        /// <param name="startDay"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
         public List<CompareData> GetCompareMonthList(string type, string keyWord, string startDay, string endDay)
         {
-            throw new NotImplementedException();
+            string sql;
+
+            switch (type)
+            {
+                case "Circuit":
+                    sql = OverAllSearchResources.CircuitCompareMonthSQL;
+                    break;
+
+                case "Dept":
+                    sql = OverAllSearchResources.DeptCompareMonthSQL;
+                    break;
+
+                case "Region":
+                    sql = OverAllSearchResources.RegionCompareMonthSQL;
+                    break;
+
+                default:
+                    sql = OverAllSearchResources.DeptCompareMonthSQL;
+                    break;
+            }
+
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(sql, sqlParameters).ToList();
         }
        
     }
