@@ -67,7 +67,7 @@ namespace EMS.DAL.Services
             return viewModel;
         }
         /// <summary>
-        /// 获取设备用能 天环比数据
+        /// 获取设备用能 天环比数据 大于20%
         /// </summary>
         /// <param name="buildId"></param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>
@@ -82,7 +82,7 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 获取设备用能 月份同比
+        /// 获取设备用能 月份同比 大于20%
         /// </summary>
         /// <param name="buildId"></param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>
@@ -100,7 +100,7 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 获取部门用能 月份同比
+        /// 获取部门用能 月份同比大于20%
         /// </summary>
         /// <param name="buildId"></param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>
