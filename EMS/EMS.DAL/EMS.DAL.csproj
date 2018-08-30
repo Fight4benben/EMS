@@ -72,6 +72,7 @@
     <Compile Include="Entities\CompareData.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
+    <Compile Include="Entities\EnergyAverage.cs" />
     <Compile Include="Entities\EnergyClassify.cs" />
     <Compile Include="Entities\EnergyDB.cs" />
     <Compile Include="Entities\EnergyItem.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="IRepository\ICircuitOverviewDbContext.cs" />
     <Compile Include="IRepository\ICommonContext.cs" />
     <Compile Include="IRepository\IDepartmentCompareDbContext.cs" />
+    <Compile Include="IRepository\IDepartmentEnergyAverageDbContext.cs" />
     <Compile Include="IRepository\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\IDepartmentReportDbContext.cs" />
     <Compile Include="IRepository\IEnergyAlarmDbContext.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="RepositoryImp\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\CircuitReportDbContext.cs" />
     <Compile Include="RepositoryImp\DepartmentCompareDbContext.cs" />
+    <Compile Include="RepositoryImp\DepartmentEnergyAverageDbContext.cs" />
     <Compile Include="RepositoryImp\DepartmentOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\DepartmentReportDbContext.cs" />
     <Compile Include="RepositoryImp\EnergyAlarmDbContext.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Services\CircuitOverviewService.cs" />
     <Compile Include="Services\CircuitReportService.cs" />
     <Compile Include="Services\DepartmentCompareService.cs" />
+    <Compile Include="Services\DepartmentEnergyAverageService.cs" />
     <Compile Include="Services\DepartmentOverviewService.cs" />
     <Compile Include="Services\DepartmentReportService.cs" />
     <Compile Include="Services\EnergyAlarmService.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="StaticResources\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\CircuitResources.cs" />
     <Compile Include="StaticResources\DepartmentCompareResources.cs" />
+    <Compile Include="StaticResources\DepartmentEnergyAverageResources.cs" />
     <Compile Include="StaticResources\DepartmentOverviewResources.cs" />
     <Compile Include="StaticResources\DepartmentReportResources.cs" />
     <Compile Include="StaticResources\EnergyAlarmResources.cs" />
@@ -193,6 +198,7 @@
     <Compile Include="ViewModels\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\CircuitOverviewViewModel.cs" />
     <Compile Include="ViewModels\DepartmentCompareViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentEnergyAverageViewModel.cs" />
     <Compile Include="ViewModels\DepartmentOverviewModel.cs" />
     <Compile Include="ViewModels\DepartmentReportViewModel.cs" />
     <Compile Include="ViewModels\EnergyAlarmViewModel.cs" />
