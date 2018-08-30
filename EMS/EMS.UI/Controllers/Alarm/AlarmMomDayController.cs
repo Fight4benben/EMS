@@ -5,10 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace EMS.UI.Controllers
+namespace EMS.UI.Controllers.Alarm
 {
     [Authorize]
-    public class EnergyAlarmController : ApiController
+    public class AlarmMomDayController : ApiController
     {
         EnergyAlarmService service = new EnergyAlarmService();
 
@@ -30,39 +30,22 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
-
         /// <summary>
-        /// 设备用能越限告警数据
-        /// 根据建筑ID和日期，获取指定建筑的用能越限告警数据
+        /// 获取设备用能 天环比大于20%
         /// </summary>
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">时间（"yyyy-MM-dd"）</param>
-        /// <returns>用能数据：</returns>
-        public object Get(string buildId, string date,string type)
+        /// <returns></returns>
+        public object Get(string buildId, string date)
         {
             try
             {
-                switch (type)
-                {
-                    case "Limit":
-                        return service.GetViewModel(buildId, date);
-                    case "Day":
-                        return service.GetMomDayViewModel(buildId, date);
-                    case "Month":
-                        return service.GetCompareMonthViewModel(buildId, date);
-                    case "Dept":
-                        return service.GetCompareDeptMonthViewModel(buildId, date);
-                    default:
-                        return "null";
-                }
-                
+                return service.GetMomDayViewModel(buildId, date);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
-
-        
     }
 }

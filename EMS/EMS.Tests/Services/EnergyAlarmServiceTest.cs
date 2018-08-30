@@ -34,11 +34,22 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
-        public void TestCompareDayByBuildID_Date()
+        public void TestMomDayByBuildID_Date()
         {
             EnergyAlarmService service = new EnergyAlarmService();
             
-            EnergyAlarmViewModel model = service.GetCompareDayViewModel("000001G001", "2018-08-20");
+            EnergyAlarmViewModel model = service.GetMomDayViewModel("000001G001", "2018-08-20");
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestMomMonthByBuildID_Date()
+        {
+            EnergyAlarmService service = new EnergyAlarmService();
+
+            //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
+            EnergyAlarmViewModel model = service.GetMomMonthViewModel("000001G001", "2018-08");
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -48,8 +59,16 @@ namespace EMS.Tests.Services
         {
             EnergyAlarmService service = new EnergyAlarmService();
 
-            //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
-            EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08");
+            EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-30");
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestMomDeptByBuildID_Date()
+        {
+            EnergyAlarmService service = new EnergyAlarmService();
+            EnergyAlarmViewModel model = service.GetMomDeptMonthViewModel("000001G001", "2018-08-30");
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -60,7 +79,7 @@ namespace EMS.Tests.Services
             EnergyAlarmService service = new EnergyAlarmService();
 
             //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
-            EnergyAlarmViewModel model = service.GetCompareDeptViewModel("000001G001", "2018-08");
+            EnergyAlarmViewModel model = service.GetCompareDeptMonthViewModel("000001G001", "2018-08");
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
