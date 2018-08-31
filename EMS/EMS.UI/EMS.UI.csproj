@@ -270,6 +270,8 @@
     <Content Include="app\img\menu2.png" />
     <Content Include="app\img\menu3.png" />
     <Content Include="app\img\menu4.png" />
+    <Content Include="app\img\Overall-down.png" />
+    <Content Include="app\img\Overall-up.png" />
     <Content Include="app\img\people.png" />
     <Content Include="app\img\pic2.png" />
     <Content Include="app\img\pic3.png" />
@@ -567,6 +569,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Assets\css\fontawesome-4.2.0_ie7\4.2.0\fonts\fontawesome-webfont.eot" />
     <Content Include="Assets\css\fontawesome-4.2.0_ie7\4.2.0\fonts\fontawesome-webfont.ttf" />
