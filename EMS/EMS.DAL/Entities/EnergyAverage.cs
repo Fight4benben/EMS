@@ -11,7 +11,7 @@ namespace EMS.DAL.Entities
         public string ID { get; set; }
         public string Name { get; set; }
         public decimal? TotalArea { get; set; }
-        public decimal? TotalPeople { get; set; }
+        public int? TotalPeople { get; set; }
         public decimal? TotalValue { get; set; }
         public decimal? AreaAvg { get; set; }
         public decimal? PeopleAvg { get; set; }

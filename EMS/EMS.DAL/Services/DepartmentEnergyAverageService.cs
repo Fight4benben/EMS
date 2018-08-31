@@ -21,11 +21,11 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 区域用能统计报表
-        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有区域的用能天报表
+        /// 部门列表
+        /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有部门
         /// </summary>
         /// <param name="userName">用户名</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，区域列表，以及用能数据天报表</returns>
+        /// <returns>包含建筑列表，能源按钮列表，部门列表</returns>
         public DepartmentEnergyAverageViewModel GetViewModelByUserName(string userName)
         {
             DateTime today = DateTime.Now;
@@ -55,30 +55,49 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public DepartmentEnergyAverageViewModel GetViewModel(string buildId, string energyCode, string departmentID,string type, string date)
+        /// <summary>
+        /// 部门人均用能-单位面积用能
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="departmentID"></param>
+        /// <param name="type"> 查询类型：月度平均值:"MM";  季度平均值："QQ";  年度平均值："YY"</param>
+        /// <param name="date">结束时间(yyyy-MM-dd)</param>
+        /// <returns></returns>
+        public DepartmentEnergyAverageViewModel GetViewModel(string buildId, string energyCode, string type, string date)
         {
-            DateTime dateTime = Convert.ToDateTime(date);
-            string startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
-            string endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+            DateTime dateTime;
+            string startDay, endDay;
 
             List<EnergyAverage> averageData = new List<EnergyAverage>();
 
             switch (type)
             {
                 case "MM":
-                    averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, departmentID, startDay, endDay);
+                    dateTime = Util.ConvertString2DateTime(date,"yyyy-MM-dd");
+                    startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
+                    endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+                    averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, startDay, endDay);
                     break;
 
                 case "QQ":
-                    averageData = context.GetDeptQuarterEnergyAverageList(buildId, energyCode, departmentID, startDay, endDay);
+                    dateTime = Util.ConvertString2DateTime(date, "yyyy-MM");
+                    startDay = dateTime.AddDays(-dateTime.Day + 1).AddMonths(-2).ToString("yyyy-MM-dd");
+                    endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+                    averageData = context.GetDeptQuarterEnergyAverageList(buildId, energyCode, startDay, endDay);
                     break;
 
                 case "YY":
-                    averageData = context.GetDeptYearEnergyAverageList(buildId, energyCode, departmentID, startDay, endDay);
+                    startDay = date + "-01-01";
+                    endDay = date + "-12-31";
+                    averageData = context.GetDeptYearEnergyAverageList(buildId, energyCode, startDay, endDay);
                     break;
 
                 default:
-                    averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, departmentID, startDay, endDay);
+                    dateTime = Util.ConvertString2DateTime(date, "yyyy-MM-dd");
+                    startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
+                    endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+                    averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, startDay, endDay);
                     break;
             }
 

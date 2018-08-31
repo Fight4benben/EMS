@@ -9,8 +9,8 @@ namespace EMS.DAL.IRepository
 {
     public interface IDepartmentEnergyAverageDbContext
     {
-        List<EnergyAverage> GetDeptMonthEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay);
-        List<EnergyAverage> GetDeptQuarterEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay);
-        List<EnergyAverage> GetDeptYearEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay);
+        List<EnergyAverage> GetDeptMonthEnergyAverageList(string buildId, string energyCode, string startDay, string endDay);
+        List<EnergyAverage> GetDeptQuarterEnergyAverageList(string buildId, string energyCode, string startDay, string endDay);
+        List<EnergyAverage> GetDeptYearEnergyAverageList(string buildId, string energyCode, string startDay, string endDay);
     }
 }

@@ -15,11 +15,10 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<EnergyAverage> GetDeptMonthEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay)
+        public List<EnergyAverage> GetDeptMonthEnergyAverageList(string buildId, string energyCode, string startDay, string endDay)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@DepartmentID",departmentID),
                 new SqlParameter("@EnergyItemCode",energyCode),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
@@ -27,11 +26,10 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<EnergyAverage>(DepartmentEnergyAverageResources.DeptMonthAvgSQL, sqlParameters).ToList();
         }
 
-        public List<EnergyAverage> GetDeptQuarterEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay)
+        public List<EnergyAverage> GetDeptQuarterEnergyAverageList(string buildId, string energyCode, string startDay, string endDay)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@DepartmentID",departmentID),
                 new SqlParameter("@EnergyItemCode",energyCode),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
@@ -39,17 +37,18 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<EnergyAverage>(DepartmentEnergyAverageResources.DeptQuarterAvgSQL, sqlParameters).ToList();
         }
 
-        public List<EnergyAverage> GetDeptYearEnergyAverageList(string buildId, string energyCode, string departmentID, string startDay, string endDay)
+        public List<EnergyAverage> GetDeptYearEnergyAverageList(string buildId, string energyCode, string startDay, string endDay)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@DepartmentID",departmentID),
                 new SqlParameter("@EnergyItemCode",energyCode),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<EnergyAverage>(DepartmentEnergyAverageResources.DeptYearAvgSQL, sqlParameters).ToList();
         }
+
+
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)
         {
