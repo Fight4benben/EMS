@@ -24,13 +24,23 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<EnergyAlarm>(EnergyAlarmResources.OverLimitValueSQL, sqlParameters).ToList();
         }
 
-        public List<CompareData> GetDayCompareValueList(string buildId, string date)
+        public List<CompareData> GetDayMomValueList(string buildId, string date)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@StartDay",date)
             };
             return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DayCompareValueSQL, sqlParameters).ToList();
+        }
+
+        public List<CompareData> GetMonthMomValueList(string buildId, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.MonthMomValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetMonthCompareValueList(string buildId, string startDay, string endDay)
@@ -41,6 +51,16 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.MonthCompareValueSQL, sqlParameters).ToList();
+        }
+
+        public List<CompareData> GetDeptMomValueList(string buildId, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DeptMomValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetDeptCompareValueList(string buildId, string startDay, string endDay)

@@ -158,6 +158,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Alarm\AlarmCompareDeptController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmCompareMonthController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmMomDayController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmMomDeptController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmMomMonthController.cs" />
     <Compile Include="Controllers\Login\AccountController.cs" />
     <Compile Include="Controllers\Alarm\AlarmController.cs" />
     <Compile Include="Controllers\Circuit\CircuitCollectController.cs" />
