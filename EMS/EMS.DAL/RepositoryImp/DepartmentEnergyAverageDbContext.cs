@@ -15,6 +15,14 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
+        /// <summary>
+        /// 部门-月份用能平均值
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="startDay"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
         public List<EnergyAverage> GetDeptMonthEnergyAverageList(string buildId, string energyCode, string startDay, string endDay)
         {
             SqlParameter[] sqlParameters ={
@@ -48,6 +56,46 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<EnergyAverage>(DepartmentEnergyAverageResources.DeptYearAvgSQL, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 部门-部门月份同比
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="startDay"></param>
+        /// <param name="endDay"></param>
+        /// <returns></returns>
+        public List<CompareData> GetDeptMonthCompareList(string buildId, string energyCode, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(DepartmentEnergyAverageResources.DeptMonthCompareSQL, sqlParameters).ToList();
+        }
+
+        public List<CompareData> GetDeptQuarterCompareList(string buildId, string energyCode, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(DepartmentEnergyAverageResources.DeptQuarterCompareSQL, sqlParameters).ToList();
+        }
+
+        public List<CompareData> GetDeptYearCompareList(string buildId, string energyCode, string startDay, string endDay)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
+            };
+            return _db.Database.SqlQuery<CompareData>(DepartmentEnergyAverageResources.DeptYearCompareSQL, sqlParameters).ToList();
+        }
 
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)

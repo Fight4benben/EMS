@@ -70,6 +70,7 @@ namespace EMS.DAL.Services
             string startDay, endDay;
 
             List<EnergyAverage> averageData = new List<EnergyAverage>();
+            List<CompareData> compareData = new List<CompareData>();
 
             switch (type)
             {
@@ -78,6 +79,7 @@ namespace EMS.DAL.Services
                     startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
                     endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
                     averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, startDay, endDay);
+                    compareData = context.GetDeptMonthCompareList(buildId, energyCode, startDay, endDay);
                     break;
 
                 case "QQ":
@@ -85,12 +87,14 @@ namespace EMS.DAL.Services
                     startDay = dateTime.AddDays(-dateTime.Day + 1).AddMonths(-2).ToString("yyyy-MM-dd");
                     endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
                     averageData = context.GetDeptQuarterEnergyAverageList(buildId, energyCode, startDay, endDay);
+                    compareData = context.GetDeptQuarterCompareList(buildId, energyCode, startDay, endDay);
                     break;
 
                 case "YY":
                     startDay = date + "-01-01";
                     endDay = date + "-12-31";
                     averageData = context.GetDeptYearEnergyAverageList(buildId, energyCode, startDay, endDay);
+                    compareData = context.GetDeptYearCompareList(buildId, energyCode, startDay, endDay);
                     break;
 
                 default:
@@ -98,11 +102,13 @@ namespace EMS.DAL.Services
                     startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
                     endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
                     averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, startDay, endDay);
+                    compareData = context.GetDeptMonthCompareList(buildId, energyCode, startDay, endDay);
                     break;
             }
 
             DepartmentEnergyAverageViewModel viewModel = new DepartmentEnergyAverageViewModel();
             viewModel.AverageData = averageData;
+            viewModel.CompareData = compareData;
 
             return viewModel;
         }

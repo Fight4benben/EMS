@@ -36,6 +36,7 @@ namespace EMS.DAL.StaticResources
 		                                            INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                            INNER JOIN T_ST_DepartmentInfo_ExInfo DepartmentExInfo ON DepartmentExInfo.F_DepartmentID = DepartmentInfo.F_DepartmentID
 		                                            WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                    AND DepartmentInfo.F_BuildID=@BuildID
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
@@ -57,6 +58,7 @@ namespace EMS.DAL.StaticResources
 		                                            INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                            INNER JOIN T_ST_DepartmentInfo_ExInfo DepartmentExInfo ON DepartmentExInfo.F_DepartmentID = DepartmentInfo.F_DepartmentID
 		                                            WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                    AND DepartmentInfo.F_BuildID=@BuildID
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
@@ -78,6 +80,7 @@ namespace EMS.DAL.StaticResources
 		                                            INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                            INNER JOIN T_ST_DepartmentInfo_ExInfo DepartmentExInfo ON DepartmentExInfo.F_DepartmentID = DepartmentInfo.F_DepartmentID
 		                                            WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                    AND DepartmentInfo.F_BuildID=@BuildID
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
@@ -102,6 +105,7 @@ namespace EMS.DAL.StaticResources
 		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
 		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                                AND DepartmentInfo.F_BuildID=@BuildID
                                                                 AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(MM,DATEDIFF(MM,0,DayResult.F_StartDay),0)
@@ -140,6 +144,7 @@ namespace EMS.DAL.StaticResources
 		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
 		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                                AND DepartmentInfo.F_BuildID=@BuildID
                                                                 AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(QUARTER,DATEDIFF(QUARTER,0,DayResult.F_StartDay),0)
@@ -178,6 +183,7 @@ namespace EMS.DAL.StaticResources
 		                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
 		                                                        INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                                        WHERE ParamInfo.F_IsEnergyValue = 1 
+                                                                AND DepartmentInfo.F_BuildID=@BuildID
                                                                 AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                                        AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                                        GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)
