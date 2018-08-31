@@ -2,6 +2,103 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+/*综合查询*/
+.OverAll-top input{
+    height: 35px;
+    width:200px;
+    margin-right: 5px;
+}
+.OverAll-top button{
+    width:100px;
+    height: 35px;
+    /* background: #007CDE;
+    color: #FFF;
+    border: 0; */
+    margin-right:5px;
+}
+.OverAll-top button i{
+    font-size:17px;
+}
+.page-sidebar.navbar-collapse{
+    height: 886px!important;
+}
+.OverAll-bottom{
+    height:390px;
+    clear:both;
+    position: relative;
+}
+.Over-month{
+    width:95px;
+    height:95px;
+    top:14px;
+    left:0;
+    text-align:center;
+    line-height: 95px;
+    font-size:22px;
+    position: absolute;
+    -moz-border-radius: 50px!important;
+    -webkit-border-radius: 50px!important;
+    border-radius:50px!important;
+    color:#FFF;
+    z-index: 2;
+}
+.Over-month2{
+    width: 100%;
+    height:123px;
+    font-size:25px;
+    line-height: 126px;
+    padding-right:10px;
+    text-align: right;
+    -moz-border-radius: 10px!important;
+    -webkit-border-radius: 10px!important;
+    border-radius:10px!important;
+}
+.purple2{
+    background-color:#e3e2f0;
+    color: rgb(116,111,183);
+}
+.purple{
+   background:#746FB7;
+}
+.blue2{
+    background-color:#cbeffb;
+    color: #00AEEF;
+}
+.blue{
+   background:#00AEEF;
+}
+.green2{
+    background-color:#daf1e1;
+    color: #44B868;
+}
+.green{
+   background:#44B868;
+}
+.OverAll-bottom .OverAll-bottom-in{
+    padding:0 0 0 45px;
+    margin-bottom:10px;
+}
+.OverAll-bottom .OverAll-bottom-in:last-child{
+    margin-bottom:0;
+}
+.OverAll-bottom > .col-xs-12{
+    padding-left:0;
+}
+.OverAll-right{
+    height:390px;
+    border:1px solid #B4B4B5;
+    padding-right:0;
+}
+.OverAll-right   table   th{
+    background: #007CDE;
+    color: #FFF;
+    font-weight: normal;
+}
+..OverAll-right   table{
+    border-top:0;
+    border-left:0;
+    border-right:0;
+}
 /*测试*/
 .R-Table{
     height:780px;
@@ -234,6 +331,7 @@ to {top:-7px;}
     left: 0;
     right: 0;
     bottom:0;
+    z-index: 99;
 }
 /*用户名密码*/
 .modal-footer{border-top: none;}
