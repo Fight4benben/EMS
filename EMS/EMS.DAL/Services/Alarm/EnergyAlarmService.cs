@@ -19,6 +19,11 @@ namespace EMS.DAL.Services
             context = new EnergyAlarmDbContext();
         }
 
+        /// <summary>
+        /// 越限默认
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public EnergyAlarmViewModel GetViewModelByUserName(string userName)
         {
             DateTime today = DateTime.Now;
@@ -65,6 +70,40 @@ namespace EMS.DAL.Services
             EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
             viewModel.EnergyAlarmData = energyAlarmValue;
             return viewModel;
+        }
+
+        /// <summary>
+        /// 仪表的环比数据，当日与昨日，当月与去年同期，今年上一季度与去年同期
+        /// 默认昨天与前天的数据
+        /// </summary>
+        /// <returns></returns>
+        public EnergyAlarmViewModel GetDeviceMomData(string userName)
+        {
+            DateTime today = DateTime.Now;
+
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+            string buildId;
+            if (builds.Count > 0)
+                buildId = builds.First().BuildID;
+            else
+                buildId = "";
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<CompareData> compareDatas = context.GetDayMomValueList(buildId, today.AddDays(-1).ToString("yyyy-MM-dd"));
+
+            EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
+            viewModel.Builds = builds;
+            viewModel.Energys = energys;
+            viewModel.CompareData = compareDatas;
+            return viewModel;
+
+
         }
         /// <summary>
         /// 获取设备用能 天环比数据 大于20%

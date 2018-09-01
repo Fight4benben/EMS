@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace EMS.UI.Controllers.Alarm
+namespace EMS.UI.Controllers
 {
     [Authorize]
     public class AlarmCompareMonthController : ApiController
