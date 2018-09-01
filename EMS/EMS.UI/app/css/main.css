@@ -2,6 +2,13 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+/*能耗报警提示*/
+.equip-date{
+    height:35px;
+    border:1px solid #e5e5e5;
+    width:50px;
+    margin-right:10px;
+}
 /*综合查询*/
 .OverAll-top input{
     height: 35px;
@@ -112,6 +119,11 @@
 .col-xs-12 .equip-right2{
     width:100px;
     margin-right:10px;
+    float:left;
+}
+.col-xs-12 .equip-right3{
+    width:50px;
+    padding:0 5px;
 }
 .overall-column{
     height:315px;
@@ -627,6 +639,16 @@ to {top:-7px;}
 @media(max-width:1024px){
    .dis-tree{display: none;}
    .count-info{min-height: 145px;padding-bottom: 10px;}
+   .equip-right .form-group{
+    margin-bottom:10px;
+   }
+   .control-label, .equip-right .form-control{
+    margin-bottom:0;
+   }
+   .equip-row2{
+    margin-bottom:5px;
+    clear:both;
+   }
 }
 .count-list p{
     background: #F4F4F4;

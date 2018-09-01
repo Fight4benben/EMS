@@ -41,13 +41,13 @@ namespace EMS.DAL.Services
 
             //List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
 
-            //List<EnergyAlarm> energyAlarmValue = context.GetEnergyOverLimitValueList(buildId, today.ToString("yyyy-MM-dd"));
+            List<EnergyAlarm> energyAlarmValue = context.GetEnergyOverLimitValueList(buildId, today.ToString("yyyy-MM-dd"));
 
             EnergyAlarmViewModel viewModel = new EnergyAlarmViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
             //viewModel.TreeView = treeViewModel;
-            //viewModel.EnergyAlarmData = energyAlarmValue;
+            viewModel.EnergyAlarmData = energyAlarmValue;
 
             return viewModel;
         }

@@ -33,8 +33,8 @@ var OutOfWork = (function(){
 				console.log(data);
 				try{
 					showBuilds(data);
-				showEnergys(data);
-				showTable(data);
+					showEnergys(data);
+					showTable(data);
 				}catch{
 
 				}finally{

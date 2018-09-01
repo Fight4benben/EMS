@@ -62,7 +62,7 @@ var EMS = {
 					getTypeDate=EMS.Tool.dateFormat(new Date(year,month,dateOfMonth-2));
 				break;
 				case "YEARMONTH":
-					getTypeDate =year +"-"+(month+1);
+					getTypeDate =year +"-"+EMS.Tool.appendZero(month+1);
 				break;
 				case "YEAR":
 					getTypeDate = year;
