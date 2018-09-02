@@ -164,6 +164,7 @@
     <Compile Include="Controllers\Alarm\AlarmMomDayController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomDeptController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomMonthController.cs" />
+    <Compile Include="Controllers\Department\DepartmentRankController.cs" />
     <Compile Include="Controllers\Login\AccountController.cs" />
     <Compile Include="Controllers\Alarm\AlarmController.cs" />
     <Compile Include="Controllers\Circuit\CircuitCollectController.cs" />
@@ -305,6 +306,7 @@
     <Content Include="app\js\Circuit\Collect.js" />
     <Content Include="app\js\Department\Compare.js" />
     <Content Include="app\js\Department\Main.js" />
+    <Content Include="app\js\Department\Rank.js" />
     <Content Include="app\js\Department\Report.js" />
     <Content Include="app\js\equipment.js" />
     <Content Include="app\js\home.js" />
@@ -666,7 +668,9 @@
     <Content Include="Views\Home\OverAll.cshtml" />
     <Content Include="Views\Alarm\DepartmentAlarm.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\DepartmentRank\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
