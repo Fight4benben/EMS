@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Services
 {
-    public class DeviceAlarmService
+    public class AlarmDepartmentService
     {
-        private DeviceAlarmDbContext context;
+        private AlarmDepartmentDbContext context;
 
-        public DeviceAlarmService()
+        public AlarmDepartmentService()
         {
-            context = new DeviceAlarmDbContext();
+            context = new AlarmDepartmentDbContext();
         }
 
         /// <summary>
@@ -24,9 +24,12 @@ namespace EMS.DAL.Services
         /// </summary>
         /// <param name="userName"></param>
         /// <returns>建筑ID，分类能耗，建筑报警等级，设备用能越限-天环比</returns>
-        public DeviceAlarmViewModel GetViewModelByUserName(string userName)
+        public AlarmDepartmentViewModel GetViewModelByUserName(string userName)
         {
-            DateTime today = DateTime.Now;
+            DateTime today = DateTime.Now.AddDays(-1);
+            string startDay, endDay;
+            startDay = today.ToString("yyyy-MM-dd");
+            endDay = today.ToString("yyyy-MM-dd")+" 23:00";
 
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
             string buildId;
@@ -43,9 +46,9 @@ namespace EMS.DAL.Services
                 energyCode = "";
             List<BuildAlarmLevel> buildAlarmLevels = context.GetBuildAlarmLevelValueList(buildId);
 
-            List<CompareData> deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, today.ToString("yyyy-MM-dd"));
+            List<CompareData> deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, startDay, endDay);
 
-            DeviceAlarmViewModel viewModel = new DeviceAlarmViewModel();
+            AlarmDepartmentViewModel viewModel = new AlarmDepartmentViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
             viewModel.BuildAlarmLevels = buildAlarmLevels;
@@ -54,27 +57,6 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        /// <summary>
-        /// 获取设备告警-天环比
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="energyCode">分类代码</param>
-        /// <param name="date">结束时间（yyyy-MM-dd HH:00） </param>
-        /// <returns></returns>
-        public DeviceAlarmViewModel GetMomDayViewModel(string buildId, string energyCode, string date)
-        {
-
-            List<BuildAlarmLevel> buildAlarmLevels = context.GetBuildAlarmLevelValueList(buildId);
-
-            List<CompareData> deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, date);
-
-            DeviceAlarmViewModel viewModel = new DeviceAlarmViewModel();
-
-            viewModel.BuildAlarmLevels = buildAlarmLevels;
-            viewModel.CompareDatas = deviceAlarmValue;
-
-            return viewModel;
-        }
 
         /// <summary>
         /// 获取设备告警
@@ -84,7 +66,7 @@ namespace EMS.DAL.Services
         /// <param name="type">数据类型: "DD"：日环比； "MM"：月同比； "SS":季度 </param>
         /// <param name="date">结束时间（yyyy-MM-dd HH:00） </param>
         /// <returns></returns>
-        public DeviceAlarmViewModel GetViewModel(string buildId, string energyCode,string type, string date)
+        public AlarmDepartmentViewModel GetViewModel(string buildId, string energyCode, string type, string date)
         {
 
             DateTime dateTime;
@@ -95,9 +77,10 @@ namespace EMS.DAL.Services
             switch (type)
             {
                 case "DD":
-                    dateTime = Util.ConvertString2DateTime(date, "yyyy-MM-dd HH:mm");
-                    startDay = dateTime.ToString("yyyy-MM-dd")+" 23:00";
-                    deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, startDay);
+                    dateTime = Util.ConvertString2DateTime(date, "yyyy-MM-dd");
+                    startDay = dateTime.ToString("yyyy-MM-dd") + " 00:00";
+                    endDay = dateTime.ToString("yyyy-MM-dd") + " 23:00";
+                    deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, startDay, endDay);
                     break;
 
                 case "MM":
@@ -116,17 +99,17 @@ namespace EMS.DAL.Services
 
                 default:
                     dateTime = Util.ConvertString2DateTime(date, "yyyy-MM-dd HH:mm");
-                    startDay = dateTime.ToString("yyyy-MM-dd HH:mm");
-                    deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, startDay);
+                    startDay = dateTime.ToString("yyyy-MM-dd") + " 00:00";
+                    endDay = dateTime.ToString("yyyy-MM-dd") + " 23:00";
+                    deviceAlarmValue = context.GetMomDayValueList(buildId, energyCode, startDay, endDay);
                     break;
             }
 
-            DeviceAlarmViewModel viewModel = new DeviceAlarmViewModel();
+            AlarmDepartmentViewModel viewModel = new AlarmDepartmentViewModel();
             viewModel.BuildAlarmLevels = buildAlarmLevels;
             viewModel.CompareDatas = deviceAlarmValue;
 
             return viewModel;
         }
-
     }
 }

@@ -160,6 +160,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Alarm\AlarmCompareDeptController.cs" />
     <Compile Include="Controllers\Alarm\AlarmCompareMonthController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmDepartmentController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomDayController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomDeptController.cs" />

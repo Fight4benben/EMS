@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class DeviceAlarmDbContext
+    public class AlarmDepartmentDbContext
     {
         private EnergyDB _db = new EnergyDB();
 
@@ -19,17 +19,18 @@ namespace EMS.DAL.RepositoryImp
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId)
             };
-            return _db.Database.SqlQuery<BuildAlarmLevel>(DeviceAlarmResources.DeviceAlarmLevelValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<BuildAlarmLevel>(AlarmDeviceResources.DeviceAlarmLevelValueSQL, sqlParameters).ToList();
         }
 
-        public List<CompareData> GetMomDayValueList(string buildId, string energyCode, string date)
+        public List<CompareData> GetMomDayValueList(string buildId, string energyCode, string startDay, string endDay)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EnergyItemCode",energyCode),
-                new SqlParameter("@StartDay",date)
+                new SqlParameter("@StartDay",startDay),
+                new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(DeviceAlarmResources.DeviceMomDayOverLevel1ValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDepartmentResources.DeptMomDayOverLevel1ValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetCompareMonthValueList(string buildId, string energyCode, string startDay, string endDay)
@@ -40,7 +41,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(DeviceAlarmResources.DeviceCompareMonthOverLevel1ValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDepartmentResources.DeptCompareMonthOverLevel1ValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetCompareQuarterValueList(string buildId, string energyCode, string startDay, string endDay)
@@ -51,7 +52,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(DeviceAlarmResources.DeviceCompareQuarterOverLevel1ValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDepartmentResources.DeptCompareQuarterOverLevel1ValueSQL, sqlParameters).ToList();
         }
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)

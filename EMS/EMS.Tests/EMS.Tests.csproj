@@ -115,6 +115,7 @@
     <Compile Include="DbContext\DepartmentDbTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\AlarmDepartmentServiceTest.cs" />
     <Compile Include="Services\CircuitCollectServiceTest.cs" />
     <Compile Include="Services\CircuitCompareServiceTest.cs" />
     <Compile Include="Services\CircuitOverviewServiceTest.cs" />
@@ -123,7 +124,7 @@
     <Compile Include="Services\DepartmentEnergyAverageServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
     <Compile Include="Services\DepartmentReportServiceTest.cs" />
-    <Compile Include="Services\DeviceAlarmServiceTest.cs" />
+    <Compile Include="Services\AlarmDeviceServiceTest.cs" />
     <Compile Include="Services\EnergyAlarmServiceTest.cs" />
     <Compile Include="Services\EnergyItemCompareServiceTest.cs" />
     <Compile Include="Services\EnergyItemOverviewServiceTest.cs" />

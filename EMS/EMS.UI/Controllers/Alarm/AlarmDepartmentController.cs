@@ -8,10 +8,9 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
-    public class AlarmDeviceController : ApiController
+    public class AlarmDepartmentController : ApiController
     {
-        AlarmDeviceService service = new AlarmDeviceService();
-
+        AlarmDepartmentService service = new AlarmDepartmentService();
         /// <summary>
         /// 设备用能越限告警数据
         /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一栋建筑对应的报警等级，第一栋建筑对应的报警设备
@@ -49,5 +48,6 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
+
     }
 }

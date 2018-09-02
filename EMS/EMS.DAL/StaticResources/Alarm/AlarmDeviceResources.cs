@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.StaticResources
 {
-    public class DeviceAlarmResources
+    public class AlarmDeviceResources
     {
         /// <summary>
         /// 获取设告警等级值

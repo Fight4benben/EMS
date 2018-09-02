@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.ViewModels
 {
-    public class DeviceAlarmViewModel
+    public class AlarmDepartmentViewModel
     {
         public List<BuildViewModel> Builds { get; set; }
         public List<EnergyItemDict> Energys { get; set; }

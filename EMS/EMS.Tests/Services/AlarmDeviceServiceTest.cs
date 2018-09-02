@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 namespace EMS.Tests.Services
 {
     [TestClass]
-    public class DeviceAlarmServiceTest
+    public class AlarmDeviceServiceTest
     {
         [TestMethod]
         public void TestGetDeviceAlarmViewModelByUser()
         {
             DateTime today = DateTime.Now;
-            DeviceAlarmService service = new DeviceAlarmService();
-            DeviceAlarmViewModel ViewModel = service.GetViewModelByUserName("admin");
+            AlarmDeviceService service = new AlarmDeviceService();
+            AlarmDeviceViewModel ViewModel = service.GetViewModelByUserName("admin");
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
 
@@ -28,8 +28,8 @@ namespace EMS.Tests.Services
         public void TestGetDeviceAlarmViewModelByDay()
         {
             DateTime today = DateTime.Now;
-            DeviceAlarmService service = new DeviceAlarmService();
-            DeviceAlarmViewModel ViewModel = service.GetViewModel("000001G001", "01000", "DD", today.ToString("yyyy-MM-dd"));
+            AlarmDeviceService service = new AlarmDeviceService();
+            AlarmDeviceViewModel ViewModel = service.GetViewModel("000001G001", "01000", "DD", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
@@ -38,8 +38,8 @@ namespace EMS.Tests.Services
         public void TestGetDeviceAlarmViewModelByMonth()
         {
             DateTime today = DateTime.Now;
-            DeviceAlarmService service = new DeviceAlarmService();
-            DeviceAlarmViewModel ViewModel = service.GetViewModel("000001G001", "01000", "MM", today.ToString("yyyy-MM"));
+            AlarmDeviceService service = new AlarmDeviceService();
+            AlarmDeviceViewModel ViewModel = service.GetViewModel("000001G001", "01000", "MM", today.ToString("yyyy-MM"));
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
@@ -48,8 +48,8 @@ namespace EMS.Tests.Services
         public void TestGetDeviceAlarmViewModelByQuarter()
         {
             DateTime today = DateTime.Now;
-            DeviceAlarmService service = new DeviceAlarmService();
-            DeviceAlarmViewModel ViewModel = service.GetViewModel("000001G001", "01000", "SS", today.ToString("yyyy-MM"));
+            AlarmDeviceService service = new AlarmDeviceService();
+            AlarmDeviceViewModel ViewModel = service.GetViewModel("000001G001", "01000", "SS", today.ToString("yyyy-MM"));
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
