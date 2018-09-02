@@ -5,7 +5,7 @@ var DeviceAlarm = (function(){
 		this.show = function(){
 			initDom();
 
-			var url="/api/AlarmMomDay";
+			var url="/api/AlarmDevice";
 
 			getDataFromServer(url,"");
 		}
@@ -31,10 +31,22 @@ var DeviceAlarm = (function(){
 				EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
 				break;
 				case "MM"://月
-				EMS.DOM.initDateTimePicker('YEARMONTH',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
+				EMS.DOM.initDateTimePicker('YEARMONTH',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy-mm',
+									        language: 'zh-CN',
+									        autoclose: 1,
+									        startView: 3,
+									        minView: 3,
+									        forceParse: false,
+									        pickerPosition: "bottom-left"});
 				break;
 				case "SS"://季度
-				EMS.DOM.initDateTimePicker('YEAR',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
+				EMS.DOM.initDateTimePicker('YEAR',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy',
+									        language: 'zh-CN',
+									        autoclose: 1,
+									        startView: 4,
+									        minView: 4,
+									        forceParse: false,
+									        pickerPosition: "bottom-left"});
 				break;
 
 			}
@@ -54,10 +66,18 @@ var DeviceAlarm = (function(){
 			$("#searchButton").click(function(event) {
 				
 				var buildId = $("#buildinglist").val();
-				var date = $("#daycalendarBox").val();
+				var date; 
 
-				var url = "/api/AlarmMomDay";
-				var params = "buildId="+buildId+"&date="+date;
+				var type =$("#dateType").val();
+				if(type=="SS"){
+					var season = $("#season").val();
+					date = $("#daycalendarBox").val()+"-"+EMS.Tool.appendZero(parseInt(season));
+				}else
+					date = $("#daycalendarBox").val();
+				var energyCode = $("#energys").val();
+
+				var url = "/api/AlarmDevice";
+				var params = "buildId="+buildId+"&date="+date+"&type="+type+"&energyCode="+energyCode;
 
 				getDataFromServer(url,params);
 
@@ -101,14 +121,26 @@ var DeviceAlarm = (function(){
 
 		function showTable(data){
 
+			var buildId = $("#buildinglist").val();
+			var firstLevel = 0.2;
+			var secondLevel = 0.5;
+
+			if(data.buildAlarmLevels.length>0){
+				data.buildAlarmLevels.filter(function(item) {
+					firstLevel = item.level1;
+					secondLevel = item.level2;
+					return item.buildID === buildId;
+				});
+			}
+
 			var typeValue = $("#dateType").val();
 			var columns;
 			switch(typeValue){
 				case "DD"://日
 					columns=[
 						{field:'name',title:'名称'},
-						{field:'value',title:'当前用能'},
-						{field:'lastValue',title:'前日同期'},
+						{field:'value',title:'当日用能'},
+						{field:'lastValue',title:'前日用能'},
 						{field:'diffValue',title:'差值'},
 						{field:'rate',title:'比例'}
 					];
@@ -137,7 +169,7 @@ var DeviceAlarm = (function(){
 
 			var rows = [];
 
-			$.each(data.compareData, function(key, val) {
+			$.each(data.compareDatas, function(key, val) {
 				var row={};
 				row.name = val.name;
 				row.value = val.value;
@@ -157,13 +189,13 @@ var DeviceAlarm = (function(){
 				rowStyle:function(row,index){
 					var style={};
 
-					if(parseInt(row.level)>=20 && parseInt(row.level)<=50)
+					if(parseInt(row.level)>=(firstLevel*100) && parseInt(row.level)<=(secondLevel*100))
 						style={css:{'background-color':'#FFFF00'}};
-					else if(parseInt(row.level)>50)
+					else if(parseInt(row.level)>(secondLevel*100))
 						style={css:{'background-color':'#FF0000','color':'white'}};
-					else if(parseInt(row.level)>=-50 && parseInt(row.level)<=-20)
+					else if(parseInt(row.level)>=-(secondLevel*100) && parseInt(row.level)<=-(firstLevel*100))
 						style={css:{'background-color':'#1E90FF','color':'white'}};
-					else if(parseInt(row.level)<-50)
+					else if(parseInt(row.level)<-(secondLevel*100))
 						style={css:{'background-color':'#66CD00','color':'white'}};
 					   
 		             return style;
