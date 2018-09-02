@@ -122,6 +122,7 @@
     <Compile Include="Services\DepartmentEnergyAverageServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
     <Compile Include="Services\DepartmentReportServiceTest.cs" />
+    <Compile Include="Services\DeviceAlarmServiceTest.cs" />
     <Compile Include="Services\EnergyAlarmServiceTest.cs" />
     <Compile Include="Services\EnergyItemCompareServiceTest.cs" />
     <Compile Include="Services\EnergyItemOverviewServiceTest.cs" />

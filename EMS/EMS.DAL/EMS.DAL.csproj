@@ -70,6 +70,7 @@
     <Compile Include="Entities\CircuitValue.cs" />
     <Compile Include="Entities\CollectValue.cs" />
     <Compile Include="Entities\CompareData.cs" />
+    <Compile Include="Entities\BuildAlarmLevel.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
     <Compile Include="Entities\EnergyAverage.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="IRepository\Region\IRegionReportDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
+    <Compile Include="RepositoryImp\Alarm\DeviceAlarmDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitReportDbContext.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
+    <Compile Include="Services\Alarm\DeviceAlarmService.cs" />
     <Compile Include="Services\Circuit\CircuitCollectService.cs" />
     <Compile Include="Services\Circuit\CircuitCompareService.cs" />
     <Compile Include="Services\Circuit\CircuitOverviewService.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
     <Compile Include="Services\Region\RegionReportService.cs" />
+    <Compile Include="StaticResources\Alarm\DeviceAlarmResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitCollectResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitOverviewResources.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="ViewModels\DepartmentEnergyAverageViewModel.cs" />
     <Compile Include="ViewModels\DepartmentOverviewModel.cs" />
     <Compile Include="ViewModels\DepartmentReportViewModel.cs" />
+    <Compile Include="ViewModels\DeviceAlarmViewModel.cs" />
     <Compile Include="ViewModels\EnergyAlarmViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\EnergyItemOverviewModel.cs" />
