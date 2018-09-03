@@ -2,6 +2,27 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+/*修改树状结构*/
+.Report-search{
+    height:35px;
+    width:90px;
+    margin-left:5px;
+    background: url(../img/search2.png) no-repeat 14px 6px;
+    font-size:15px;
+    border: 0;
+    padding-left:35px;
+    background-color: #007cde;
+    color: #FFF;
+    margin-bottom:10px;
+}
+.Reaport-input{
+    height: 35px;
+    width:165px;
+    margin-left:10px;
+}
+.treeview-Compare{      /*树状结构高度*/
+   height:535px;
+}
 /*能耗报警提示*/
 .equip-date{
     height:35px;
@@ -161,7 +182,7 @@
     border:0;
 }
 #treeview{
-    height:400px!important;
+    height:561px!important;
 }
 .Ranking-sort,.equip-row{
     float:left;

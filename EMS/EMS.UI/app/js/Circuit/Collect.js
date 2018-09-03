@@ -36,6 +36,45 @@ var Collect = (function(){
 					endTime:endTime
 				},"POST");
 			});
+
+			$("#treeSearch").click(function(){
+				var inputValue = $("#search-input").val().trim();
+
+				if(inputValue==="")
+					return;
+
+				$("#treeview").treeview('uncheckAll',{silent:true})
+
+				var nodes = EMS.Tool.searchTree($("#treeview"),inputValue);
+
+				if(nodes.length===0){
+					alert("查不到当前回路名称，请重新输入名称！");
+					return;
+				}
+
+				$.each(nodes, function(index, val) {
+					$('#treeview').treeview('checkNode', [ val.nodeId, { silent: true } ]);
+				});
+
+
+				var buildId = $("#buildinglist").val();
+				var energyCode = $('.btn-solar-selected').attr('value');
+				var circuits = getCheckedTreeIdArray().join(',');
+				var startTime = $('#StartBox').val()+" "+$("#StartHour").find("option:selected").text()+":"+
+					$("#StartMinute").find("option:selected").text()+":00";
+				var endTime = $('#EndBox').val()+" "+$("#EndHour").find("option:selected").text()+":"+
+					$("#EndMinute").find("option:selected").text()+":00";
+
+				var url ="/api/CircuitCollect/Collect";
+
+				getDataFromServer(url,{
+					buildId:buildId,
+					energyCode:energyCode,
+					circuits:circuits,
+					startTime:startTime,
+					endTime:endTime
+				},"POST");
+			});
 		}
 
 		function initEnergyBtns(){
