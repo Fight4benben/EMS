@@ -29,6 +29,15 @@ var EMS = {
 		statusProcess:function(status){
 			if(status === 401)
 				window.location = "/Account/Login";
+		},
+		searchTree:function($treeview,searchContent){
+			var array = $treeview.treeview('search',[searchContent,{
+				ignoreCase:true,
+				exactMatch:false,
+				revealResults:true
+			}]);
+
+			return array;
 		}
 	},
 

@@ -40,6 +40,25 @@ var CircuitCompare = (function(){
 
 		function initEnergyBtns(){
 			$("#te_CompareBtns").html("");
+
+			$("#treeSearch").click(function(){
+				var inputValue = $("#search-input").val().trim();
+
+				if(inputValue==="")
+					return;
+
+				$("#treeview").treeview('uncheckAll',{silent:true})
+
+				var nodes = EMS.Tool.searchTree($("#treeview"),inputValue);
+
+				if(nodes.length===0){
+					alert("查不到当前回路名称，请重新输入名称！");
+					return;
+				}
+
+				$('#treeview').treeview('selectNode', [ nodes[0].nodeId ]);
+
+			});
 		}
 
 		function getDataFromServer(url,params){

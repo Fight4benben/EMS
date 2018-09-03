@@ -49,6 +49,29 @@ var ItemReport = (function(){
 				"&formularIds="+formulars.join(',')+
 				"&date="+$("#daycalendarBox").val()
 			});
+
+			$("#treeSearch").click(function(){
+				var inputValue = $("#search-input").val().trim();
+
+				if(inputValue==="")
+					return;
+
+				$("#treeview").treeview('uncheckAll',{silent:true})
+
+				var nodes = EMS.Tool.searchTree($("#treeview"),inputValue);
+
+				if(nodes.length===0){
+					alert("查不到当前回路名称，请重新输入名称！");
+					return;
+				}
+
+				$.each(nodes, function(index, val) {
+					$('#treeview').treeview('checkNode', [ val.nodeId, { silent: true } ]);
+				});
+
+				getDataFromServer("/api/ItemReport","buildId="+$("#buildinglist").val()+
+					"&type="+getTypeByReportSelected()+"&formulaIds="+getCheckedTreeIdArray().join(',')+"&date="+$("#daycalendarBox").val());
+			});
 		}
 
 		//初始化页面时，先加载
