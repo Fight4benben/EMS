@@ -17,7 +17,7 @@ namespace EMS.UI.Controllers
         /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有设备
         /// </summary>
         /// <param name="userName">用户名</param>
-        /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，支路</returns>
+        /// <returns>包含建筑列表，能源按钮列表</returns>
         public object Get()
         {
             try

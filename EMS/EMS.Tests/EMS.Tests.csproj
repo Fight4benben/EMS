@@ -115,6 +115,7 @@
     <Compile Include="DbContext\DepartmentDbTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\AlarmDepartmentOverLimitServiceTest.cs" />
     <Compile Include="Services\AlarmDepartmentServiceTest.cs" />
     <Compile Include="Services\CircuitCollectServiceTest.cs" />
     <Compile Include="Services\CircuitCompareServiceTest.cs" />
