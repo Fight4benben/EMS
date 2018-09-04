@@ -178,7 +178,11 @@
                         {
                             <li id="outofworkAlarm" class=""><a href="/Alarm/OutOfWorkAlarm"><i class="fa fa-caret-right"></i>重点设备报警提示</a></li>
                         }
-                        
+                        @if (menu.Menus.Contains("8.4") || menu.Menus.Contains("all"))
+                        {
+                            <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>办公室异常时段用能提示</a></li>
+                        }
+
                     </ul>
                 </li>
             }
