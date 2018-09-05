@@ -34,14 +34,14 @@ namespace EMS.DAL.Services
         /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
         /// <param name="keyWord">搜索内容</param>
         /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
-        public OverAllSearchViewModel GetViewModel(string type, string keyWord, string endDay)
+        public OverAllSearchViewModel GetViewModel(string type, string keyWord, string buildID, string endDay)
         {
             DateTime startTime = Convert.ToDateTime(endDay);
              startTime = startTime.AddDays(-startTime.Day+1);
             string startDay = startTime.ToString("yyyy-MM-dd");
 
             OverAllSearchViewModel viewModel = new OverAllSearchViewModel();
-            List<EMSValue> last31Day= context.GetLast31DayList(type, keyWord, endDay);
+            List<EMSValue> last31Day= context.GetLast31DayList(type, keyWord, buildID, endDay);
             List<EMSValue> monthData = new List<EMSValue>();
             if (last31Day != null && last31Day.Count > 0)
             {
@@ -55,10 +55,10 @@ namespace EMS.DAL.Services
                 }
             }
 
-            viewModel.Last31Day= context.GetLast31DayList(type, keyWord,endDay);
+            viewModel.Last31Day= context.GetLast31DayList(type, keyWord, buildID, endDay);
             viewModel.MonthDate = monthData;
-            viewModel.MomData = context.GetMomMonthList(type,keyWord,startDay,endDay);
-            viewModel.CompareData = context.GetCompareMonthList(type, keyWord, startDay, endDay);
+            viewModel.MomData = context.GetMomMonthList(type,keyWord, buildID, startDay,endDay);
+            viewModel.CompareData = context.GetCompareMonthList(type, keyWord, buildID, startDay, endDay);
 
             return viewModel;
         }

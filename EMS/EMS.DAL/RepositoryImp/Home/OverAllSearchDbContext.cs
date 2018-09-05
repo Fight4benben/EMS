@@ -22,7 +22,7 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="keyWord"></param>
         /// <param name="endDay"></param>
         /// <returns></returns>
-        public List<EMSValue> GetLast31DayList(string type, string keyWord, string endDay)
+        public List<EMSValue> GetLast31DayList(string type, string keyWord, string buildID, string endDay)
         {
             string sql;
 
@@ -47,6 +47,7 @@ namespace EMS.DAL.RepositoryImp
 
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<EMSValue>(sql, sqlParameters).ToList();
@@ -59,7 +60,7 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="startDay"></param>
         /// <param name="endDay"></param>
         /// <returns></returns>
-        public List<EMSValue> GetMonthList(string type, string keyWord, string startDay, string endDay)
+        public List<EMSValue> GetMonthList(string type, string keyWord, string buildID, string startDay, string endDay)
         {
             string sql;
 
@@ -84,6 +85,7 @@ namespace EMS.DAL.RepositoryImp
 
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
@@ -97,7 +99,7 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="startDay"></param>
         /// <param name="endDay"></param>
         /// <returns></returns>
-        public List<CompareData> GetMomMonthList(string type, string keyWord, string startDay, string endDay)
+        public List<CompareData> GetMomMonthList(string type, string keyWord, string buildID, string startDay, string endDay)
         {
             string sql;
 
@@ -122,6 +124,7 @@ namespace EMS.DAL.RepositoryImp
 
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
@@ -135,7 +138,7 @@ namespace EMS.DAL.RepositoryImp
         /// <param name="startDay"></param>
         /// <param name="endDay"></param>
         /// <returns></returns>
-        public List<CompareData> GetCompareMonthList(string type, string keyWord, string startDay, string endDay)
+        public List<CompareData> GetCompareMonthList(string type, string keyWord, string buildID, string startDay, string endDay)
         {
             string sql;
 
@@ -160,6 +163,7 @@ namespace EMS.DAL.RepositoryImp
 
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@KeyWord",keyWord),
+                new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
