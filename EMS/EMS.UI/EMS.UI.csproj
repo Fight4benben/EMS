@@ -320,6 +320,7 @@
     <Content Include="app\js\Item\Report.js" />
     <Content Include="app\js\Item\Statistic.js" />
     <Content Include="app\js\map.js" />
+    <Content Include="app\js\overallsearch.js" />
     <Content Include="app\js\Region\Compare.js" />
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />
