@@ -87,7 +87,7 @@ var DepartmentAlarm = (function(){
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
+				//console.log(data);
 				try{
 					showBuilds(data);
 					showEnergys(data);

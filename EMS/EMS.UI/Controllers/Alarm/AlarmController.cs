@@ -23,5 +23,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult DepartmentOutOfAlarm()
+        {
+            return View();
+        }
     }
 }

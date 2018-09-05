@@ -6,7 +6,7 @@ var OutOfWork = (function(){
 			initDateTime();
 			initButton();
 
-			var url = "/api/EnergyAlarm";
+			var url = "/api/AlarmDepartmentOverLimit";
 
 			getDataFromServer(url,"");
 		};
@@ -17,10 +17,10 @@ var OutOfWork = (function(){
 
 		function initButton(){
 			$("#Load").click(function(event) {
-				var url="/api/EnergyAlarm";
+				var url="/api/AlarmDepartmentOverLimit";
 
 				var params = "buildId="+$("#buildinglist").val()+"&date="+
-				$("#daycalendarBox").val()+"&type=Limit";
+				$("#daycalendarBox").val();
 
 				getDataFromServer(url,params);
 			});
@@ -99,7 +99,7 @@ var OutOfWork = (function(){
 jQuery(document).ready(function($) {
 
 	$("#alarm").attr("class","start active");
-	$("#outofworkAlarm").attr("class","active");
+	$("#deptOutofworkAlarm").attr("class","active");
 	
 	var outOfWork = new OutOfWork();
 

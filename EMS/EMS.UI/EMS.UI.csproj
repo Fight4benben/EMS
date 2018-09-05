@@ -301,6 +301,8 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\js\Alarm\DepartmentAlarm.js" />
+    <Content Include="app\js\Alarm\DepartmentOutofWork.js" />
     <Content Include="app\js\Alarm\DeviceAlarm.js" />
     <Content Include="app\js\Alarm\OutOfWork.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
@@ -318,6 +320,7 @@
     <Content Include="app\js\Item\Report.js" />
     <Content Include="app\js\Item\Statistic.js" />
     <Content Include="app\js\map.js" />
+    <Content Include="app\js\overallsearch.js" />
     <Content Include="app\js\Region\Compare.js" />
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />
@@ -669,6 +672,7 @@
     <Content Include="Views\Alarm\OutOfWorkAlarm.cshtml" />
     <Content Include="Views\Home\OverAll.cshtml" />
     <Content Include="Views\Alarm\DepartmentAlarm.cshtml" />
+    <Content Include="Views\Alarm\DepartmentOutOfAlarm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\DepartmentRank\" />
