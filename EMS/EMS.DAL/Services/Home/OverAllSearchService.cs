@@ -18,6 +18,16 @@ namespace EMS.DAL.Services
             context = new OverAllSearchDbContext();
         }
 
+        public OverAllSearchViewModel GetViewModelByUserName(string userName)
+        {
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+            
+            OverAllSearchViewModel viewModel = new OverAllSearchViewModel();
+            viewModel.Builds = builds;
+            return viewModel;
+
+        }
+
         /// <summary>
         /// 获取搜索结果
         /// </summary>

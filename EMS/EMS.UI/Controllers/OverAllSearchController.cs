@@ -11,6 +11,22 @@ namespace EMS.UI.Controllers
     public class OverAllSearchController : ApiController
     {
         OverAllSearchService service = new OverAllSearchService();
+        /// <summary>
+        /// 根据用户名获取建筑列表
+        /// </summary>
+        /// <returns></returns>
+        public object Get()
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByUserName(userName);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
         /// <summary>
         /// 获取搜索结果

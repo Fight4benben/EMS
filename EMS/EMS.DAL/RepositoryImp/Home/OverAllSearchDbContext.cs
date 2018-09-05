@@ -1,6 +1,7 @@
 ﻿using EMS.DAL.Entities;
 using EMS.DAL.IRepository;
 using EMS.DAL.StaticResources;
+using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -164,6 +165,11 @@ namespace EMS.DAL.RepositoryImp
             };
             return _db.Database.SqlQuery<CompareData>(sql, sqlParameters).ToList();
         }
-       
+
+        public List<BuildViewModel> GetBuildsByUserName(string userName)
+        {
+            return _db.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL, new SqlParameter("@UserName", userName)).ToList();
+        }
+
     }
 }
