@@ -89,7 +89,7 @@ namespace EMS.DAL.StaticResources
         
 
         /// <summary>
-        /// 部门-部门月份同比
+        /// 部门-部门用能总量月份同比
         /// </summary>
         public static string DeptMonthCompareSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
 	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
@@ -128,7 +128,7 @@ namespace EMS.DAL.StaticResources
 	                                                      ORDER BY ID";
 
         /// <summary>
-        /// 部门-部门季度同比
+        /// 部门-部门用能总量季度同比
         /// </summary>
         public static string DeptQuarterCompareSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
 	                                                        (t1.F_Value - t2.F_Value) AS DiffValue
@@ -167,7 +167,7 @@ namespace EMS.DAL.StaticResources
 	                                                      ORDER BY ID";
 
         /// <summary>
-        /// 部门-部门年度同比
+        /// 部门-部门用能总量年度同比
         /// </summary>
         public static string DeptYearCompareSQL = @" SELECT t1.ID AS ID,T1.Name AS Name,t1.F_Value AS Value,t2.F_Value AS LastValue ,
 	                                                        (t1.F_Value - t2.F_Value) AS DiffValue

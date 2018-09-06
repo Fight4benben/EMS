@@ -71,6 +71,7 @@
     <Compile Include="Entities\CollectValue.cs" />
     <Compile Include="Entities\CompareData.cs" />
     <Compile Include="Entities\BuildAlarmLevel.cs" />
+    <Compile Include="Entities\DeptCompletionRate.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
     <Compile Include="Entities\EnergyAverage.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="IRepository\Region\IRegionReportDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
+    <Compile Include="RepositoryImp\Alarm\AlarmDepartmentComletionRateDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentOverLimitDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDeviceDbContext.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
+    <Compile Include="Services\Alarm\AlarmDepartmentComletionRateService.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentOverLimitService.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentService.cs" />
     <Compile Include="Services\Alarm\AlarmDeviceService.cs" />
@@ -177,6 +180,7 @@
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
     <Compile Include="Services\Region\RegionReportService.cs" />
+    <Compile Include="StaticResources\Alarm\AlarmDepartmentCompletionRateResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentOverLimitResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDeviceResources.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\BinaryToDouble.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModels\Alarm\AlarmDepartmentComletionRateViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDepartmentOverLimitViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDepartmentViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitCollectViewModel.cs" />
