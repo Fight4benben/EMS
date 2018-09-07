@@ -11,15 +11,11 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 获取当前设定部门用能同比下降百分率
         /// </summary>
-        public static string GetDeptCompletionRateSQL = @" SELECT DepartmentInfo_ExInfo.F_DepartmentID AS ID
-                                                                  , DepartmentInfo.F_DepartmentName AS Name
-                                                                  , DepartmentInfo_ExInfo.F_BuildID AS BuildID
-                                                                  , F_People AS People , F_Area AS Area
-                                                                  , F_Value AS Value , F_Rate AS Rate
-                                                              FROM T_ST_DepartmentInfo_ExInfo AS DepartmentInfo_ExInfo
-                                                              INNER JOIN T_ST_DepartmentInfo AS DepartmentInfo
-                                                                    ON DepartmentInfo_ExInfo.F_DepartmentID= DepartmentInfo.F_DepartmentID
-                                                                WHERE DepartmentInfo_ExInfo.F_BuildID= @BuildID
+        public static string GetDeptCompletionRateSQL = @" SELECT F_BuildID AS BuildID
+                                                                  ,F_EnergyItemCode AS EnergyCode
+                                                                  ,F_DepartmentCompleteRate AS Rate
+                                                             FROM T_ST_BuildAlarmLevel 
+                                                             WHERE F_BuildID=@BuildID
                                                          ";
 
         /// <summary>

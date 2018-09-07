@@ -45,13 +45,16 @@ namespace EMS.DAL.Services
             else
                 energyCode = "";
 
-            List<CompareData> totalCompareData = context.GetDeptTotalValueCompareMonthList(buildId, energyCode,startDay,endDay);
-            List<CompareData> areaAvgCompareData = context.GetDeptAreaAvgCompareMonthList(buildId, energyCode,startDay,endDay);
+            List<DeptCompletionRate> deptCompletionRate = context.GetDeptComletionRateList(buildId);
+
+            List<CompareData> totalCompareData = context.GetDeptTotalValueCompareMonthList(buildId, energyCode, startDay, endDay);
+            List<CompareData> areaAvgCompareData = context.GetDeptAreaAvgCompareMonthList(buildId, energyCode, startDay, endDay);
 
 
             AlarmDepartmentComletionRateViewModel viewModel = new AlarmDepartmentComletionRateViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
+            viewModel.DeptCompletionRate = deptCompletionRate;
             viewModel.TotalCompareData = totalCompareData;
             viewModel.AreaAvgCompareData = areaAvgCompareData;
 
@@ -112,12 +115,15 @@ namespace EMS.DAL.Services
                     break;
             }
 
+            List<DeptCompletionRate> deptCompletionRate = context.GetDeptComletionRateList(buildId);
             AlarmDepartmentComletionRateViewModel viewModel = new AlarmDepartmentComletionRateViewModel();
+            viewModel.DeptCompletionRate = deptCompletionRate;
             viewModel.TotalCompareData = totalCompareData;
             viewModel.AreaAvgCompareData = areaAvgCompareData;
 
+
             return viewModel;
         }
-       
+
     }
 }

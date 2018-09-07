@@ -11,6 +11,7 @@ namespace EMS.DAL.ViewModels
     {
         public List<BuildViewModel> Builds { get; set; }
         public List<EnergyItemDict> Energys { get; set; }
+        public List<DeptCompletionRate> DeptCompletionRate { get; set; }
         public List<CompareData> TotalCompareData { get; set; }
         public List<CompareData> AreaAvgCompareData { get; set; }
 
