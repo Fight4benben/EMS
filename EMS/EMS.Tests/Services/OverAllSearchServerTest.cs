@@ -19,7 +19,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("Circuit", "进线","000001G001", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("Circuit", "进线","000001G003", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -30,7 +30,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("Dept", "研发中心", "000001G001", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("Dept", "研发", "000001G003", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }

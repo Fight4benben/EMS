@@ -19,7 +19,7 @@ namespace EMS.DAL.StaticResources
 		                                                    INNER JOIN T_ST_CircuitMeterInfo AS Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
 		                                                    INNER JOIN T_ST_MeterParamInfo AS ParamInfo ON DayResult.F_MeterParamID = ParamInfo.F_MeterParamID
 		                                                    WHERE Circuit.F_CircuitName =
-                                                                ( select top 1 T_ST_CircuitMeterInfo.F_CircuitName from T_ST_CircuitMeterInfo where T_ST_CircuitMeterInfo.F_CircuitName like '%'+ @KeyWord +'%')
+                                                                ( select top 1 T_ST_CircuitMeterInfo.F_CircuitName from T_ST_CircuitMeterInfo where  F_BuildID=@BuildID AND T_ST_CircuitMeterInfo.F_CircuitName like '%'+ @KeyWord +'%')
 		                                                    AND ParamInfo.F_IsEnergyValue = 1
                                                             AND Circuit.F_BuildID=@BuildID
 		                                                    AND DayResult.F_StartDay BETWEEN DATEADD(DD,-31,@EndDay) AND  @EndDay
@@ -39,7 +39,7 @@ namespace EMS.DAL.StaticResources
 		                                                INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DayResult.F_MeterID = DepartmentMeter.F_MeterID
 		                                                INNER JOIN T_ST_DepartmentInfo DepartmentInfo ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
 		                                                WHERE DepartmentInfo.F_DepartmentName =
-				                                              ( SELECT TOP 1  T_ST_DepartmentInfo.F_DepartmentName FROM T_ST_DepartmentInfo WHERE T_ST_DepartmentInfo.F_DepartmentName LIKE '%'+ @KeyWord +'%')
+				                                              ( SELECT TOP 1  T_ST_DepartmentInfo.F_DepartmentName FROM T_ST_DepartmentInfo WHERE F_BuildID=@BuildID AND T_ST_DepartmentInfo.F_DepartmentName LIKE '%'+ @KeyWord +'%')
 		                                                AND ParamInfo.F_IsEnergyValue = 1
                                                         AND DepartmentInfo.F_BuildID=@BuildID
 		                                                AND DayResult.F_StartDay BETWEEN DATEADD(DD,-31,@EndDay)  AND  @EndDay
@@ -60,7 +60,7 @@ namespace EMS.DAL.StaticResources
 		                                                    INNER JOIN T_ST_RegionMeter RegionMeter ON DayResult.F_MeterID = RegionMeter.F_MeterID
 		                                                    INNER JOIN T_ST_Region Region ON Region.F_RegionID = RegionMeter.F_RegionID
 		                                                    WHERE Region.F_RegionName =
-			                                                    ( SELECT TOP 1  T_ST_Region.F_RegionName FROM T_ST_Region WHERE T_ST_Region.F_RegionName LIKE '%'+ @KeyWord +'%')
+			                                                    ( SELECT TOP 1  T_ST_Region.F_RegionName FROM T_ST_Region WHERE F_BuildID=@BuildID AND T_ST_Region.F_RegionName LIKE '%'+ @KeyWord +'%')
 		                                                    AND ParamInfo.F_IsEnergyValue = 1
                                                             AND Region.F_BuildID=@BuildID
 		                                                    AND DayResult.F_StartDay BETWEEN DATEADD(DD,-31,@EndDay)  AND  @EndDay
