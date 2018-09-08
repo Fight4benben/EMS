@@ -3,6 +3,7 @@ var OverAll = (function(){
 	function _overAll(){
 
 		this.show = function(){
+			initBuilds();
 			$(".searchBtn").click(function(event) {
 				var id = $(this)[0].id;
 				var keyWord = $("#search-keyword").val();
@@ -13,11 +14,27 @@ var OverAll = (function(){
 				}
 
 				var url="/api/OverAllSearch";
-				var params ="type="+id+"&keyWord="+keyWord+"&endDay="+EMS.Tool.dateFormat(new Date());
+				var params ="type="+id+"&keyWord="+keyWord+"&buildID="+$("#buildinglist").val()+"&endDay="+EMS.Tool.dateFormat(new Date());
 
 				getDataFromServer(url,params,id);
 			});
 		}
+
+		function initBuilds(){
+			var url="/api/OverAllSearch";
+
+			$.getJSON(url,"", function(data) {
+				showBuildList(data);
+			});
+		}
+
+		function showBuildList(data){
+
+			if(!data.hasOwnProperty('builds'))
+				return;
+
+			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+		};
 
 
 

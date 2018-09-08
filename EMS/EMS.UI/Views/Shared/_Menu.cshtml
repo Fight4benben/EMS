@@ -39,7 +39,7 @@
             {
                 <li id="overAll" class="">
                     <a href="/Home/OverAll" id="btn-map">
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-search"></i>
                         <span class="title">综合查询</span>
                     </a>
                 </li>
@@ -163,7 +163,7 @@
             {
                 <li id="alarm" class="">
                     <a href="javascript:;">
-                        <i class="fa fa-flag"></i><span class="title">能耗报警提示</span><span class="arrow "></span>
+                        <i class="fa fa-bell"></i><span class="title">能耗报警提示</span><span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" id="alarmlist">
                         @if (menu.Menus.Contains("8.1") || menu.Menus.Contains("all"))
@@ -182,6 +182,20 @@
                         {
                             <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>办公室异常时段用能提示</a></li>
                         }
+
+                    </ul>
+                </li>
+            }
+
+            @if (menu.Menus.Contains("9P") || menu.Menus.Contains("all"))
+            {
+                <li id="settings" class="">
+                    <a href="javascript:;">
+                        <i class="fa fa-gears"></i><span class="title">系统设置 </span><span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" id="">
+                        <!-- rest/sysstatus -->
+                        <li id="connectStatus" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
 
                     </ul>
                 </li>

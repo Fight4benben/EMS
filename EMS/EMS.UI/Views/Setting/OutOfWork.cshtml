@@ -11,8 +11,8 @@
             </form>
         </div>
     </div>
-    <div class="col-lg-8 col-sm-7">
-        <div class="build-info">
+    <div class="OutWork-left">
+        <div class="build-info OutWork-list">
             <div class="main-menu">
                 <hr>
                 <i class="fa fa-calendar-o"></i>列表
@@ -35,9 +35,12 @@
                         <td> </td>
                         <td> </td>
                         <td> </td>
-                        <td><img src="../app/img/delete-35.png" /><img src="../app/img/edit-35.png" /></td>
+                        <td> </td>
+                        <td> </td>
+                        <td><img src="../app/img/icons8-trash-27.png" style="margin-right:20px;" /><img src="../app/img/edit-30.png" /></td>
                     </tr>
                     <tr>
+                        <td> </td>
                         <td> </td>
                         <td> </td>
                         <td> </td>
@@ -49,19 +52,19 @@
             </table>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-5">
-        <div class="build-info">
+    <div class="OutWork-right">
+        <div class="build-info OutWork-message">
             <div class="main-menu">
                 <hr>
                 <i class="fa fa-calendar"></i>信息
             </div>
-            <div class="se-yet">
-                <label>设备：</label>
-                <select>
+            <div class="se-yet OutWork-service">
+                <label>设&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 备：</label>
+                <select class="OutWork-select">
                     <option>1</option>
                     <option>2</option>
                 </select>
-                <label>起始时间：</label>
+                <label class="O-time">起始时间： </label>
                 <div id="StartDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                     <input id="StartBox" class="form-control" size="16" type="text" value="" readonly>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
@@ -106,7 +109,7 @@
                     <option value="50">50</option>
                     <option value="55">55</option>
                 </select> <label class="d-s-hour">分</label>
-                <label>结束时间：</label>
+                <label class="O-end">结束时间： </label>
                 <div id="EndDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                     <input id="EndBox" class="form-control" size="16" type="text" value="" readonly>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
@@ -151,9 +154,9 @@
                     <option value="50">50</option>
                     <option value="55">55</option>
                 </select><label class="d-s-hour">分</label>
-                <label>报警值：</label>
-                <input type="text" />
-                <button type="button">保存</button>
+                <label class="O-alarm2">报  &nbsp;警   &nbsp;值：</label>
+                <input class="O-alarm" type="text" />
+                <button type="button" class="O-btn">保存</button>
                 <button type="button">取消</button>
             </div>
         </div>
