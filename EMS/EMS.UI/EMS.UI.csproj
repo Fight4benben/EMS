@@ -251,6 +251,7 @@
     <Content Include="app\img\demo2.png" />
     <Content Include="app\img\down.ico" />
     <Content Include="app\img\down.png" />
+    <Content Include="app\img\edit-30.png" />
     <Content Include="app\img\elc.png" />
     <Content Include="app\img\elc2.png" />
     <Content Include="app\img\excel.png" />
@@ -261,6 +262,7 @@
     <Content Include="app\img\gongzong.jpg" />
     <Content Include="app\img\Hand Up-48.png" />
     <Content Include="app\img\icon.jpg" />
+    <Content Include="app\img\icons8-trash-27.png" />
     <Content Include="app\img\icons8-user-groups-filled-35.png" />
     <Content Include="app\img\load-1.png" />
     <Content Include="app\img\load-2.png" />

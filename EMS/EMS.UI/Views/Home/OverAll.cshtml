@@ -1,7 +1,15 @@
 ﻿<div class="container-fluid main-top">
     <div class="col-xs-12 OverAll-top">
-        <label>查询框：</label>
-        <input id="search-keyword" type="text" />
+        <label>建筑名称：</label>
+        <div class="Over-building">
+            <form role="form">
+                <div class="form-group">
+                    <select class="form-control" id="buildinglist"></select>
+                </div>
+            </form>
+        </div>
+        <label class="Over-search">查询框：</label>
+        <input id="search-keyword" type="text"  placeholder="请输入搜索内容"/>
         <button id="Dept" type="button" class="searchBtn"><i class="fa fa-group"></i> 部 门</button>
         <button id="Region" type="button" class="searchBtn"><i class="fa fa-flag"></i> 区 域</button>
         <button id="Circuit" type="button" class="searchBtn"><i class="fa fa-sitemap"></i> 支 路</button>
