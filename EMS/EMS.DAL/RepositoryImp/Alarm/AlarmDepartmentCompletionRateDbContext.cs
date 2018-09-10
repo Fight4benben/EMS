@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class AlarmDepartmentComletionRateDbContext
+    public class AlarmDepartmentCompletionRateDbContext
     {
         private EnergyDB _db = new EnergyDB();
 

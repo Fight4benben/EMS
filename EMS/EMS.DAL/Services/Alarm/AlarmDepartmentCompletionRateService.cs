@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Services
 {
-    public class AlarmDepartmentComletionRateService
+    public class AlarmDepartmentCompletionRateService
     {
-        private AlarmDepartmentComletionRateDbContext context;
+        private AlarmDepartmentCompletionRateDbContext context;
 
-        public AlarmDepartmentComletionRateService()
+        public AlarmDepartmentCompletionRateService()
         {
-            context = new AlarmDepartmentComletionRateDbContext();
+            context = new AlarmDepartmentCompletionRateDbContext();
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace EMS.DAL.Services
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns>包含建筑列表，能源按钮列表，月度用能总量,单位面积 同比大于 -2%</returns>
-        public AlarmDepartmentComletionRateViewModel GetViewModelByUserName(string userName)
+        public AlarmDepartmentCompletionRateViewModel GetViewModelByUserName(string userName)
         {
             DateTime today = DateTime.Now;
             string startDay = today.ToString("yyyy-MM-01");
@@ -51,7 +51,7 @@ namespace EMS.DAL.Services
             List<CompareData> areaAvgCompareData = context.GetDeptAreaAvgCompareMonthList(buildId, energyCode, startDay, endDay);
 
 
-            AlarmDepartmentComletionRateViewModel viewModel = new AlarmDepartmentComletionRateViewModel();
+            AlarmDepartmentCompletionRateViewModel viewModel = new AlarmDepartmentCompletionRateViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
             viewModel.DeptCompletionRate = deptCompletionRate;
@@ -72,7 +72,7 @@ namespace EMS.DAL.Services
         ///                                年度：yyyy-MM (具体到月份) 
         /// </param>
         /// <returns></returns>
-        public AlarmDepartmentComletionRateViewModel GetViewModel(string buildId, string energyCode, string type, string date)
+        public AlarmDepartmentCompletionRateViewModel GetViewModel(string buildId, string energyCode, string type, string date)
         {
             DateTime dateTime;
             string startDay, endDay;
@@ -116,7 +116,7 @@ namespace EMS.DAL.Services
             }
 
             List<DeptCompletionRate> deptCompletionRate = context.GetDeptComletionRateList(buildId);
-            AlarmDepartmentComletionRateViewModel viewModel = new AlarmDepartmentComletionRateViewModel();
+            AlarmDepartmentCompletionRateViewModel viewModel = new AlarmDepartmentCompletionRateViewModel();
             viewModel.DeptCompletionRate = deptCompletionRate;
             viewModel.TotalCompareData = totalCompareData;
             viewModel.AreaAvgCompareData = areaAvgCompareData;

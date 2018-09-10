@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 namespace EMS.Tests.Services
 {
     [TestClass]
-    public class AlarmDepartmentComletionRateServiceTest
+    public class AlarmDepartmentCompletionRateServiceTest
     {
         [TestMethod]
         public void TestAlarmDepartmentComletionRateByUserName()
         {
-            AlarmDepartmentComletionRateService service = new AlarmDepartmentComletionRateService();
+            AlarmDepartmentCompletionRateService service = new AlarmDepartmentCompletionRateService();
 
-            AlarmDepartmentComletionRateViewModel model = service.GetViewModelByUserName("admin");
+            AlarmDepartmentCompletionRateViewModel model = service.GetViewModelByUserName("admin");
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -27,9 +27,9 @@ namespace EMS.Tests.Services
         public void TestGetDepartmentComletionRateViewModelByMonth()
         {
             DateTime today = DateTime.Now;
-            AlarmDepartmentComletionRateService service = new AlarmDepartmentComletionRateService();
+            AlarmDepartmentCompletionRateService service = new AlarmDepartmentCompletionRateService();
 
-            AlarmDepartmentComletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "MM", "2018-08");
+            AlarmDepartmentCompletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "MM", "2018-08");
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
@@ -38,8 +38,8 @@ namespace EMS.Tests.Services
         public void TestDepartmentComletionRateViewModelByQuarter()
         {
             DateTime today = DateTime.Now;
-            AlarmDepartmentComletionRateService service = new AlarmDepartmentComletionRateService();
-            AlarmDepartmentComletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "QQ", "2018-09");
+            AlarmDepartmentCompletionRateService service = new AlarmDepartmentCompletionRateService();
+            AlarmDepartmentCompletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "QQ", "2018-09");
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
@@ -48,8 +48,8 @@ namespace EMS.Tests.Services
         public void TestDepartmentComletionRateViewModelByYear()
         {
             DateTime today = DateTime.Now;
-            AlarmDepartmentComletionRateService service = new AlarmDepartmentComletionRateService();
-            AlarmDepartmentComletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "YY", "2018-8");
+            AlarmDepartmentCompletionRateService service = new AlarmDepartmentCompletionRateService();
+            AlarmDepartmentCompletionRateViewModel ViewModel = service.GetViewModel("000001G003", "01000", "YY", "2018-8");
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
