@@ -679,9 +679,7 @@
     <Content Include="Views\Alarm\DepartmentOutOfAlarm.cshtml" />
     <Content Include="Views\Department\Check.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\DepartmentRank\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
