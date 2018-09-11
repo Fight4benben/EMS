@@ -128,6 +128,10 @@
                         {
                             <li id="de_rank" class=""><a href="/Department/Rank"><i class="fa fa-caret-right"></i>能耗排名</a></li>
                         }
+                        @if (menu.Menus.Contains("5.5") || menu.Menus.Contains("all"))
+                        {
+                            <li id="de_check" class=""><a href="/Department/Check"><i class="fa fa-caret-right"></i>节能考核</a></li>
+                        }
                     </ul>
                 </li>
             }
