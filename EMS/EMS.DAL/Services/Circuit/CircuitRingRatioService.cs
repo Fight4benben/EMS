@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Services
 {
-    public class CircuitCompareService
+    public class CircuitRingRatioService
     {
         private ICircuitCompareDbContext context;
         private ICircuitReportDbContext reportContext = new CircuitReportDbContext();
 
-        public CircuitCompareService()
+        public CircuitRingRatioService()
         {
             context = new CircuitCompareDbContext();
         }
@@ -27,7 +27,7 @@ namespace EMS.DAL.Services
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns>返回完整的数据：包含建筑列表，能源按钮列表，回路列表，以及第一支路数据</returns>
-        public CircuitCompareViewModel GetCircuitCompareViewModel(string userName)
+        public CircuitCompareViewModel GetDayRingRationViewModel(string userName)
         {
             DateTime today = DateTime.Now;
             IHomeDbContext homeContext = new HomeDbContext();
@@ -39,7 +39,7 @@ namespace EMS.DAL.Services
 
             List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
-            List<CircuitValue> compareData = context.GetCircuitCompareValueList(buildId, circuitId, today.ToString());
+            List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, today.ToString());
 
             CircuitCompareViewModel circuitCompareView = new CircuitCompareViewModel();
             circuitCompareView.Builds = builds;
@@ -56,7 +56,7 @@ namespace EMS.DAL.Services
         /// <param name="buildId">建筑ID</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回数据：能源按钮列表，回路列表，以及第一支路数据</returns>
-        public CircuitCompareViewModel GetCircuitCompareViewModel(string buildId, string date)
+        public CircuitCompareViewModel GetDayRingRationViewModel(string buildId, string date)
         {
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
@@ -64,7 +64,7 @@ namespace EMS.DAL.Services
 
             List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
-            List<CircuitValue> compareData = context.GetCircuitCompareValueList(buildId, circuitId, date);
+            List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, date);
 
             CircuitCompareViewModel circuitCompareView = new CircuitCompareViewModel();
             circuitCompareView.Energys = energys;
@@ -81,12 +81,12 @@ namespace EMS.DAL.Services
         /// <param name="energyCode">分类能耗编码</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回数据：回路列表，以及第一支路数据</returns>
-        public CircuitCompareViewModel GetCircuitCompareViewModel(string buildId, string energyCode, string date)
+        public CircuitCompareViewModel GetDayRingRationViewModel(string buildId, string energyCode, string date)
         {
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
             List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
-            List<CircuitValue> compareData = context.GetCircuitCompareValueList(buildId, circuitId, date);
+            List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, date);
 
             CircuitCompareViewModel circuitCompareView = new CircuitCompareViewModel();
             circuitCompareView.TreeView = treeView;
@@ -104,16 +104,16 @@ namespace EMS.DAL.Services
         /// <param name="circuitId">支路编码</param>
         /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
         /// <returns>返回数据：支路用能数据</returns>
-        public CircuitCompareViewModel GetCircuitCompareViewModel(string buildId, string energyCode, string circuitId, string date)
+        public CircuitCompareViewModel GetDayRingRationViewModel(string buildId, string energyCode, string circuitId, string date)
         {
-            List<CircuitValue> compareData = context.GetCircuitCompareValueList(buildId, circuitId, date);
+            List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, date);
             CircuitCompareViewModel circuitCompareView = new CircuitCompareViewModel();
             circuitCompareView.CompareData = compareData;
 
             return circuitCompareView;
         }
 
-        
+
 
 
         /*-----------------------------------------------------------------------------------------------------*/
@@ -179,7 +179,5 @@ namespace EMS.DAL.Services
 
             return list.ToArray();
         }
-
-
     }
 }

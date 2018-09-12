@@ -166,6 +166,7 @@
     <Compile Include="Controllers\Alarm\AlarmMomDayController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomDeptController.cs" />
     <Compile Include="Controllers\Alarm\AlarmMomMonthController.cs" />
+    <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />
     <Compile Include="Controllers\Login\AccountController.cs" />
@@ -311,6 +312,7 @@
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\Collect.js" />
+    <Content Include="app\js\Circuit\RingRatio.js" />
     <Content Include="app\js\Department\Check.js" />
     <Content Include="app\js\Department\Compare.js" />
     <Content Include="app\js\Department\Main.js" />
@@ -678,6 +680,7 @@
     <Content Include="Views\Alarm\DepartmentAlarm.cshtml" />
     <Content Include="Views\Alarm\DepartmentOutOfAlarm.cshtml" />
     <Content Include="Views\Department\Check.cshtml" />
+    <Content Include="Views\Circuit\RingRatio.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

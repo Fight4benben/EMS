@@ -32,7 +32,7 @@ var EMS = {
 		},
 		searchTree:function($treeview,searchContent){
 			var array = $treeview.treeview('search',[searchContent,{
-				ignoreCase:true,
+				ignoreCase:false,
 				exactMatch:false,
 				revealResults:true
 			}]);
@@ -147,7 +147,7 @@ var EMS = {
 	},
 	Chart:{
 		//绘制echarts饼图
-		showPie:function(charts,$Pie,names,values,seriesName){
+		showPie:function(charts,$Pie,names,values,seriesName,legendFlag){
 
 			option = {
 				tooltip : {
@@ -157,7 +157,8 @@ var EMS = {
 			    legend: {
 			        orient: 'horizontal',
 			        bottom: 'bottom',
-			        data: names
+			        data: names,
+			        show:legendFlag
 			    },
 			    series : [
 			        {
@@ -258,7 +259,7 @@ var EMS = {
 
         	charts.init($Bar.get(0),'macarons').setOption(option);
 		},
-		showLandscapeBar:function(charts,$Bar,legendData,xData,series,gridSetting){
+		showLandscapeBar:function(charts,$Bar,legendData,xData,series,gridSetting,dataZoom){
 			var option = {
 	            tooltip: {
 	                trigger: 'axis',
@@ -298,10 +299,13 @@ var EMS = {
 			if(gridSetting != undefined)
 				option.grid = gridSetting;
 
+			if(dataZoom != undefined)
+				option.dataZoom = dataZoom
+
 
         	charts.init($Bar.get(0),'macarons').setOption(option);
 		},
-		showStackBar:function(charts,$Pie,names,xData,series,unit){
+		showStackBar:function(charts,$Pie,names,xData,series,unit,legendFlag){
 			var option = {
 				tooltip : {
 		        	trigger: 'axis',
@@ -311,7 +315,8 @@ var EMS = {
 		    	},
 				legend: {
 		        	data:names,
-		        	bottom:'bottom'
+		        	bottom:'bottom',
+			        show:legendFlag
 			    },
 			    grid: {
 			        left: '3%',

@@ -91,6 +91,7 @@ var RegionMain = (function(){
 			var today=[];
 			var yesterday=[];
 			var names=[];
+			var dataZoom;
 
 			$.each(data.compareValues, function(key, val) {
 				
@@ -125,8 +126,25 @@ var RegionMain = (function(){
 				}
 			];
 
+			if(names.length >6){
+				dataZoom = [
+		            {
+		            	type:'slider',
+		                show: true,
+		                start:0,
+		                end:100*(6/names.length),
+		                yAxisIndex: 0,
+		                filterMode: 'filter',
+		                width: 15,
+		                height: '80%',
+		                showDataShadow: false,
+		                left: '0%'
+		            }
+		        ];
+			}
 
-			EMS.Chart.showLandscapeBar(echarts,$("#compareBar"),['今日','昨日'],names,series);
+
+			EMS.Chart.showLandscapeBar(echarts,$("#compareBar"),['今日','昨日'],names,series,undefined,dataZoom);
 		};
 
 		//显示排名信息
@@ -220,7 +238,10 @@ var RegionMain = (function(){
 				names.push(val.name);
 			});
 
-			EMS.Chart.showPie(echarts,$('#monthPie'),names,values,"区域用能");
+			if(names.length>5)
+				EMS.Chart.showPie(echarts,$('#monthPie'),names,values,"区域用能",false);
+			else
+				EMS.Chart.showPie(echarts,$('#monthPie'),names,values,"区域用能",true);
 		}
 
 		function showStackBar(data){
@@ -278,8 +299,10 @@ var RegionMain = (function(){
 			$.each(dataArray, function(index, val) {
 				names.push(val.name);
 			});
+			var legendFlag = false;
 
-			EMS.Chart.showStackBar(echarts,$("#monthStackBar"),names,times,dataArray,unit);
+			names.length>5 ? legendFlag = false : legendFlag = true;
+			EMS.Chart.showStackBar(echarts,$("#monthStackBar"),names,times,dataArray,unit,legendFlag);
 		}
 
 	};

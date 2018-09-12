@@ -53,8 +53,10 @@ var ItemReport = (function(){
 			$("#treeSearch").click(function(){
 				var inputValue = $("#search-input").val().trim();
 
-				if(inputValue==="")
+				if(inputValue===""){
+					$('#treeview').treeview('clearSearch');
 					return;
+				}
 
 				$("#treeview").treeview('uncheckAll',{silent:true})
 

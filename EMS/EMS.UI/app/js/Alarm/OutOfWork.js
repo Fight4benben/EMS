@@ -35,7 +35,7 @@ var OutOfWork = (function(){
 					showBuilds(data);
 					showEnergys(data);
 					showTable(data);
-				}catch{
+				}catch(exception){
 
 				}finally{
 					EMS.Loading.hide();

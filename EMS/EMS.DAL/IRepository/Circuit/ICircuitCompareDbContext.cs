@@ -10,5 +10,7 @@ namespace EMS.DAL.IRepository
     public interface ICircuitCompareDbContext
     {
         List<CircuitValue> GetCircuitCompareValueList(string buildId, string circuitId, string date);
+
+        List<CircuitValue> GetDayRingCompareValueList(string buildId, string circuitId, string date);
     }
 }

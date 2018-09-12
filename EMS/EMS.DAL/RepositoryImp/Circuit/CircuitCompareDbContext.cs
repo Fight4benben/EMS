@@ -23,5 +23,15 @@ namespace EMS.DAL.RepositoryImp
             };
             return _db.Database.SqlQuery<CircuitValue>(CircuitCompareResources.CircuitCompareSQL, sqlParameters).ToList();
         }
+
+        public List<CircuitValue> GetDayRingCompareValueList(string buildId, string circuitId, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@CircuitID",circuitId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<CircuitValue>(CircuitCompareResources.CircuitDayCompareSQL, sqlParameters).ToList();
+        }
     }
 }

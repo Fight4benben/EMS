@@ -161,6 +161,7 @@
     <Compile Include="Services\Circuit\CircuitCompareService.cs" />
     <Compile Include="Services\Circuit\CircuitOverviewService.cs" />
     <Compile Include="Services\Circuit\CircuitReportService.cs" />
+    <Compile Include="Services\Circuit\CircuitRingRatioService.cs" />
     <Compile Include="Services\Department\DepartmentCompareService.cs" />
     <Compile Include="Services\Department\DepartmentEnergyAverageService.cs" />
     <Compile Include="Services\Department\DepartmentOverviewService.cs" />
