@@ -334,6 +334,7 @@ var RegionReport = (function(){
 			var dataList=[];
 			var report;
 			var color;
+			var total = {name :'总计',sum:0}
 
 			var energyCode = $('.btn-solar-selected').attr('value');
 			var price;
@@ -384,6 +385,14 @@ var RegionReport = (function(){
 					times.push(time);
 				}
 
+				if(total.hasOwnProperty(time)){
+					total[time]+= parseFloat(val.value);
+				}else{
+					total[time] = parseFloat(val.value);
+				}
+
+				total.sum += parseFloat(val.value);
+
 				if( $.inArray(val.name, names) != -1){
 					dataList[$.inArray(val.name, names)].data.push({time:time,value:(val.value*price).toFixed(2)});
 				}else{
@@ -397,24 +406,43 @@ var RegionReport = (function(){
 			});
 			//console.log(dataList);
 
-			var columns = [{field:'name',title:'区域名称'},{field:'unit',title:'单位'}];
+			var columns = [{field:'name',title:'区域名称'}/*,{field:'unit',title:'单位'}*/];
 			var rows =[];
 
 			$.each(times, function(index, val) {
 				columns.push({field:val,title:EMS.Tool.appendZero(val)+report});
 			});
 
+			columns.push({field:'sum',title:'用能合计'});
+			columns.push({field:'costSum',title:'费用合计'});
+
 			$.each(dataList, function(index, val) {
 				var row={};
 				row.name = val.name;
 				row.unit = "元";
+				var sum = 0;
 				$.each(val.data, function(key,value){
-					row[value.time] = value.value;
-
+					row[value.time] = (parseFloat(value.value)/price).toFixed(2);
+					sum += parseFloat(value.value)/price;
 				});
+
+				row.sum = sum.toFixed(2);
+				row.costSum = (sum*price).toFixed(2);
 
 				rows.push(row);
 			});
+
+			var totalRow={};
+			$.each(total, function(index, val) {
+				if(index !== 'name')
+					totalRow[index] = val.toFixed(2);
+				else
+					totalRow[index] = val;
+			});
+
+			totalRow.costSum = (total.sum*price).toFixed(2);
+
+			rows.push(totalRow);
 
 			$("#dayReport").html('<table></table>');
 

@@ -60,7 +60,7 @@ var Rank = (function (){
 					showBuilds(data);
 					showEnergys(data);
 					showRankData(data);
-				}catch{
+				}catch(exception){
 
 				}finally{
 					EMS.Loading.hide();

@@ -238,6 +238,7 @@
     <Content Include="app\img\99.png" />
     <Content Include="app\img\99b.png" />
     <Content Include="app\img\address.png" />
+    <Content Include="app\img\alarm.png" />
     <Content Include="app\img\area.png" />
     <Content Include="app\img\cloud.png" />
     <Content Include="app\img\count-down.png" />

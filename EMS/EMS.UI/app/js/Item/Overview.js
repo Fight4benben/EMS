@@ -164,13 +164,21 @@ var ItemMain = (function(){
 			var name = ["", "", "", "", "", "", "", "", "", ""];
 			var value =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-			$.each(rankData[code].names, function(key, val) {
-				name[key] = val;
-			});
+			for (var i = 0; i <10; i++) {
+				if(rankData[code].names[i]!==undefined)
+					name[i] = rankData[code].names[i];
 
-			$.each(rankData[code].data, function(key, val) {
-				value[key] = val;
-			});
+				if(rankData[code].data[i] !== undefined)
+					value[i] = rankData[code].data[i]
+			}
+
+			// $.each(rankData[code].names, function(key, val) {
+			// 	name[key] = val;
+			// });
+
+			// $.each(rankData[code].data, function(key, val) {
+			// 	value[key] = val;
+			// });
 
 			var series = {
             	type: 'bar',
@@ -196,7 +204,7 @@ var ItemMain = (function(){
 
 		//对数组进行降序排列
 		function itemValueSort(a,b){
-			return a.value<b.value;
+			return a.value<b.value?1:-1;
 		}
 
 		function showPie(data){

@@ -46,7 +46,7 @@ var OverAll = (function(){
 					showTrendData(data);
 					showTable(data,type);
 					showRingRatio(data);
-				}catch{
+				}catch(exception){
 
 				}finally{
 					EMS.Loading.hide();
