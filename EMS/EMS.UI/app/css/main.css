@@ -2,10 +2,31 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+.count-table tbody i{
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+}
+.count-table tbody i:hover{
+    color:#F08500;
+}
+.count-table tbody i:first-child{margin-right:10px;}
+.OWork-add{
+    float:right;
+    margin-right:10px;
+    cursor: pointer;
+}
+.OWork-add:hover{
+    color:#F08500;
+}
 /*重点设备报警设置*/
 .OutWork-list{
     height:800px;
     float:left;
+}
+.target .fa{
+    font-size:20px;
+    margin:0 10px 0 10px;
 }
 .OutWork-list table td img{cursor: pointer;}
 .OutWork-message{
@@ -14,13 +35,37 @@
 .main-top .OutWork-right{
     padding-right:0;
 }
-.OutWork-service label,.OutWork-service select,.O-alarm,.OutWork-service button{
+.check-label{
+    height:35px;
+    line-height: 35px;
+    margin:0 10px 0 10px;
+}
+.O-btn-del,.O-btn,.target,#Dept,#Region,#Circuit{
+    height:35px;
+    background-color: #007cde;
+    border:0;
+    color:#FFF;
+    padding:0 10px 0 5px;
+}
+.modal-header{
+    padding:12px;
+}
+.O-btn-del,.O-btn,.modal-footer button,.modal-content,.target,#Dept,#Region,#Circuit,.Report-search,.collect-top button,.count-control button,.btn-equip{
+    border-radius: 5px!important;           /*圆角*/
+    -webkit-border-radius: 5px!important;
+    -o-border-radius: 5px!important;
+}
+.O-btn-del:hover,.O-btn:hover,.target:hover,#Dept:hover,#Region:hover,#Circuit:hover,.Report-search:hover,.collect-top button:hover,.btn-equip:hover{
+    background-color: #116db5;
+}
+.check-label,.target,.OutWork-service label,.OutWork-service select,.O-alarm,.OutWork-service button{
     float:left;
 }
 .OutWork-service .O-time{
     clear:left;
     margin-bottom:10px;
-}.O-btn{margin:0 10px 0 138px;}
+}
+.O-btn{margin:0 10px 0 138px;}
 .OutWork-service .O-end{clear:left;margin-bottom:10px;}
 .O-btn{clear:left;}
 .OutWork-service .O-alarm2{clear:left;margin-bottom:10px;}
@@ -41,6 +86,7 @@
     width: 370px;
     float:left;
     margin-left:10px;
+    background: url(../img/alarm.png) no-repeat 9px 627px;
 }
 .Over-building{
     width:200px;
@@ -63,6 +109,9 @@
 }
 @media (max-width:1024px){
      .OutWork-left,.OutWork-right,.OutWork-left .OutWork-list{width:100%;}
+     .OutWork-message{
+        background: url(../img/alarm.png) no-repeat bottom right;
+      }
      .OutWork-right{margin-left:0;}
      .main-top .OutWork-right{padding-right:15px;}
      .OutWork-message{height:300px;margin-bottom:60px!important;}
@@ -196,6 +245,9 @@
     border-right:0;
 }
 @media (max-width:600px){
+    .OutWork-message{
+        background: #FFF;
+    }
     .Over-search{clear:left;}
     .OverAll-top #Dept{clear:left;}
     .OverAll-top button{margin-top:7px;}
@@ -207,7 +259,7 @@
     clear:both;
 }
 .col-xs-12 .equip-right{
-    width:200px;
+    width:220px;
     margin-right:10px;
 }
 .col-xs-12 .equip-right2{
@@ -924,7 +976,6 @@ to {top:-7px;}
 .filter-width{
     width: 77px;
     float: left;
-    margin-left: 15px;
     line-height: 32px;
 }
 .filter-calc{
@@ -1706,14 +1757,23 @@ to {top:-7px;}
 @media (max-width:414px){
     .fa-head2{margin-top: 1px;margin-right: 13px;}
 }
-@media (max-width:1200px){
-    .Ranking-sort{
+@media (max-width:700px){
+    .check-label{
         clear:left;
+        margin-left:0;
+        margin-bottom:10px;
     }
+}
+@media (max-width:1200px){
     .equipAlarm .filter-width{
         margin-left:0;
     }
 }
 .fa-reorder{
     font-size: 22px!important;
+}
+@media (max-width:1600px){
+    .Ranking-sort{
+        clear:left;
+    }
 }

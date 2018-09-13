@@ -40,9 +40,37 @@
             </select>
         </div>
         <button id="searchButton" type="button" class="btn-equip">查询</button>
+        <label class="check-label">软件开发部</label>
+        <button class="target" data-toggle="modal" data-target=".bs-example-modal-sm">
+            <i class="fa fa-area-chart"></i>
+           考核目标设置
+        </button>
     </div>
     <div id="alarmTable" class="col-xs-12 R-Columnar">
        
     </div>
+
+    <!--考核目标设置模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">考核目标设置</h5>
+          </div>
+          <div class="modal-body">
+            <label>节能目标：</label>
+            <input type="text"/> %
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
 <script type="text/javascript" src="/app/js/Alarm/DeviceAlarm.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+

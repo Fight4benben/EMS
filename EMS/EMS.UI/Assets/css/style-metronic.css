@@ -1283,10 +1283,6 @@ Bootstrap modal
 /***
 Modal header close button fix
 ***/
-.modal-header .close {
-  margin-top: 8px !important;
-}
-
 .modal > .loading {
   position: absolute;
   top: 50%;

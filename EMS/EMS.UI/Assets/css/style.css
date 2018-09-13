@@ -208,7 +208,7 @@ li [class*=" fa-"].icon-large {
 /***
 Close icon used for modal dialog and other UI element close buttons
 ***/
-.close {
+/*.close {
   display: inline-block;
   margin-top: 0px;
   margin-right: 0px;
@@ -218,6 +218,10 @@ Close icon used for modal dialog and other UI element close buttons
   text-indent: -10000px;
   outline: none;
   background-image: url("../img/remove-icon-small.png") !important;
+}*/
+.close{
+  color:#FFF;
+  text-shadow: 0 0 0 #FFF;
 }
 
 /***
