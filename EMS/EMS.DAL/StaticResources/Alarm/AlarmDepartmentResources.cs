@@ -9,14 +9,26 @@ namespace EMS.DAL.StaticResources
     public class AlarmDepartmentResources
     {
         /// <summary>
-        /// 获取设告警等级值
+        /// 获取部门告警等级值
         /// </summary>
-        public static string AlarmDeptLevelValueSQL = @" SELECT F_BuildID AS BuildID
-                                                                    ,F_EnergyItemCode AS EnergyCode
-                                                                    ,F_Level1 AS Level1
-                                                                    ,F_Level2 AS Level2
-                                                                FROM T_ST_BuildAlarmLevel 
-                                                                WHERE F_BuildID=@BuildID
+        public static string GetAlarmDeptLevelValueSQL = @" SELECT F_BuildID AS BuildID
+                                                                ,F_EnergyItemCode AS EnergyCode
+                                                                ,F_Level1 AS Level1
+                                                                ,F_Level2 AS Level2
+                                                            FROM T_ST_BuildAlarmLevel 
+                                                            WHERE F_BuildID=@BuildID
+                                                         ";
+        /// <summary>
+        /// 设置部门告警等级值
+        /// </summary>
+        public static string SetAlarmDeptLevelValueSQL = @"
+                                                            IF EXISTS (SELECT 1 FROM T_ST_BuildAlarmLevel WHERE F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyCode  ) 
+		                                                            UPDATE T_ST_BuildAlarmLevel SET F_Level1 = @Level1 , F_Level2 = @Level2
+                                                                            WHERE F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyCode			
+	                                                            ELSE
+		                                                            INSERT INTO T_ST_BuildAlarmLevel
+			                                                            (F_BuildID, F_EnergyItemCode, F_Level1,F_Level2,F_DepartmentCompleteRate) VALUES
+			                                                            (@BuildID,@EnergyCode,@Level1,@Level2,0.02 )
                                                          ";
 
         /// <summary>

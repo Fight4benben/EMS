@@ -54,5 +54,17 @@ namespace EMS.Tests.Services
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
 
+        [TestMethod]
+        public void TestSetAlarmDeviceLevelUpdata()
+        {
+            DateTime today = DateTime.Now;
+            AlarmDeviceService service = new AlarmDeviceService();
+            decimal l1 = 0.3m;
+            decimal l2 = 0.7m;
+            int result = service.SetDeviceBuildAlarmLevel("000001G002", "01000", l1, l2);
+
+            Console.WriteLine(UtilTest.GetJson(result));
+        }
+
     }
 }

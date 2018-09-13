@@ -19,7 +19,18 @@ namespace EMS.DAL.RepositoryImp
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId)
             };
-            return _db.Database.SqlQuery<BuildAlarmLevel>(AlarmDeviceResources.DeviceAlarmLevelValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<BuildAlarmLevel>(AlarmDepartmentResources.GetAlarmDeptLevelValueSQL, sqlParameters).ToList();
+        }
+
+        public int SetBuildAlarmLevel(string buildId, string energyCode, decimal level1, decimal level2)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyCode",energyCode),
+                new SqlParameter("@Level1",level1),
+                new SqlParameter("@Level2",level2)
+            };
+            return _db.Database.ExecuteSqlCommand(AlarmDepartmentResources.SetAlarmDeptLevelValueSQL, sqlParameters);
         }
 
         public List<CompareData> GetMomDayValueList(string buildId, string energyCode, string startDay, string endDay)
