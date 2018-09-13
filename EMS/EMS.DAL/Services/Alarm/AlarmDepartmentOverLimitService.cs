@@ -67,5 +67,23 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+        /// <summary>
+        /// 设置部门用能越限值（每天设定时间段内用能超过设定阈值）
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="departmentID"></param>
+        /// <param name="startTime"> 起始时间：17:00</param>
+        /// <param name="endTime">结束时间：08:00</param>
+        /// <param name="isOverDay">是否跨越天 1：跨天 ；其他不夸天</param>
+        /// <param name="limitValue"> 报警阈值</param>
+        /// <returns></returns>
+        public int SetDeptOverLimitValue(string buildId, string energyCode, string departmentID, string startTime, string endTime, int isOverDay, decimal limitValue)
+        {
+            int result = context.SetDeptOverLimitValue(buildId, energyCode, departmentID, startTime, endTime, isOverDay, limitValue);
+
+            return result;
+        }
+
     }
 }

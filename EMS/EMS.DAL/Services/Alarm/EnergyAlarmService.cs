@@ -20,7 +20,7 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
-        /// 越限默认
+        /// 获取设备用能越限告警（每天设定时间段内用能超过设定阈值）
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>

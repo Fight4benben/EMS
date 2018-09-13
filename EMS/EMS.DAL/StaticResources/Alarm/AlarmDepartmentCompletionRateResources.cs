@@ -19,7 +19,7 @@ namespace EMS.DAL.StaticResources
                                                          ";
 
         /// <summary>
-        /// 设置部门告警等级值
+        /// 设置部门用能 同比达标比例值
         /// </summary>
         public static string SetDeptCompletionRateSQL = @"
                                                            IF EXISTS (SELECT 1 FROM T_ST_BuildAlarmLevel WHERE F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyCode  ) 

@@ -37,5 +37,19 @@ namespace EMS.DAL.StaticResources.Alarm
 	                                                        WHERE Value > LimitValue
 	                                                        ORDER BY ID
                                                          ";
+
+        /// <summary>
+        /// 设置部门指定时间段内-用能告警阈值
+        /// </summary>
+        public static string SetDeptOverLimitValueSQL = @" 
+                                                       IF EXISTS (SELECT 1 FROM T_ST_DepartmentAlarmPlan WHERE F_DepartmentID= @DepartmentID AND F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyItemCode) 
+		                                                    UPDATE T_ST_DepartmentAlarmPlan 
+			                                                    SET F_StartTime = @StartTime , F_EndTime = @EndTime,F_IsOverDay=@isOverDay, F_LimitValue=@LimitValue 
+			                                                    WHERE F_DepartmentID= @DepartmentID AND F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyItemCode
+	                                                    ELSE
+		                                                    INSERT INTO T_ST_DepartmentAlarmPlan
+			                                                    (F_DepartmentID, F_BuildID, F_Year, F_Month,F_StartTime,F_EndTime,F_IsOverDay,F_LimitValue) VALUES
+			                                                    ( @DepartmentID,@BuildID,2018,1,@StartTime,@EndTime,@isOverDay,@LimitValue)
+                                                    ";
     }
 }

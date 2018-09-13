@@ -32,5 +32,15 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
+
+        [TestMethod]
+        public void TestSetAlarmDepartmentOverLimitUpdate()
+        {
+            AlarmDepartmentOverLimitService service = new AlarmDepartmentOverLimitService();
+            DateTime today = DateTime.Now.AddDays(-1);
+            int model = service.SetDeptOverLimitValue("000001G003", "01000", "000001G0030002","18:00","09:00",1,100);
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
     }
 }
