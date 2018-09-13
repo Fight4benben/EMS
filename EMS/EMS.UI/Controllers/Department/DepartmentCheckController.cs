@@ -1,4 +1,5 @@
 ﻿using EMS.DAL.Services;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,22 @@ namespace EMS.UI.Controllers
             try
             {
                 return service.GetViewModel(buildId,energyCode,type,date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
+        [HttpPost]
+        public object Set([FromBody] JObject obj)
+        {
+            try
+            {
+                decimal completionRate = Decimal.Parse(obj["completionRate"].ToString());
+                completionRate = completionRate > 0 ? completionRate : 0.01m;
+                return service.SetDeptCompletionRate(obj["buildId"].ToString(), obj["energyCode"].ToString(), completionRate);
             }
             catch (Exception e)
             {

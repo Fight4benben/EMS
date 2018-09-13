@@ -45,7 +45,7 @@ namespace EMS.DAL.Services
             else
                 energyCode = "";
 
-            List<DeptCompletionRate> deptCompletionRate = context.GetDeptComletionRateList(buildId);
+            List<DeptCompletionRate> deptCompletionRate = context.GetDeptCompletionRateList(buildId);
 
             List<CompareData> totalCompareData = context.GetDeptTotalValueCompareMonthList(buildId, energyCode, startDay, endDay);
             List<CompareData> areaAvgCompareData = context.GetDeptAreaAvgCompareMonthList(buildId, energyCode, startDay, endDay);
@@ -115,7 +115,7 @@ namespace EMS.DAL.Services
                     break;
             }
 
-            List<DeptCompletionRate> deptCompletionRate = context.GetDeptComletionRateList(buildId);
+            List<DeptCompletionRate> deptCompletionRate = context.GetDeptCompletionRateList(buildId);
             AlarmDepartmentCompletionRateViewModel viewModel = new AlarmDepartmentCompletionRateViewModel();
             viewModel.DeptCompletionRate = deptCompletionRate;
             viewModel.TotalCompareData = totalCompareData;
@@ -125,5 +125,11 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+
+        public int SetDeptCompletionRate(string buildId, string energyCode, decimal completionRate)
+        {
+            int result = context.SetDeptCompletionRateValue(buildId, energyCode, completionRate);
+            return result;
+        }
     }
 }

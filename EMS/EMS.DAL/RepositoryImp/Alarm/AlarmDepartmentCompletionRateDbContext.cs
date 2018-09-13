@@ -14,12 +14,22 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<DeptCompletionRate> GetDeptComletionRateList(string buildId)
+        public List<DeptCompletionRate> GetDeptCompletionRateList(string buildId)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId)
             };
             return _db.Database.SqlQuery<DeptCompletionRate>(AlarmDepartmentCompletionRateResources.GetDeptCompletionRateSQL, sqlParameters).ToList();
+        }
+
+        public int SetDeptCompletionRateValue(string buildId, string energyCode, decimal completeRate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyCode",energyCode),
+                new SqlParameter("@CompleteRate",completeRate)
+            };
+            return _db.Database.ExecuteSqlCommand(AlarmDepartmentCompletionRateResources.SetDeptCompletionRateSQL, sqlParameters);
         }
 
         /// <summary>

@@ -53,5 +53,17 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
+
+        [TestMethod]
+        public void TestSetDepartmentComletionRateUpadta()
+        {
+            DateTime today = DateTime.Now;
+            decimal Rate = 0.01m;
+            AlarmDepartmentCompletionRateService service = new AlarmDepartmentCompletionRateService();
+
+            int result = service.SetDeptCompletionRate("000001G003", "01000", Rate);
+
+            Console.WriteLine(UtilTest.GetJson(result));
+        }
     }
 }

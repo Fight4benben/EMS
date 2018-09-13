@@ -19,6 +19,19 @@ namespace EMS.DAL.StaticResources
                                                          ";
 
         /// <summary>
+        /// 设置部门告警等级值
+        /// </summary>
+        public static string SetDeptCompletionRateSQL = @"
+                                                           IF EXISTS (SELECT 1 FROM T_ST_BuildAlarmLevel WHERE F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyCode  ) 
+		                                                            UPDATE T_ST_BuildAlarmLevel SET F_DepartmentCompleteRate = @CompleteRate 
+                                                                            WHERE F_BuildID=@BuildID AND F_EnergyItemCode=@EnergyCode			
+	                                                            ELSE
+		                                                            INSERT INTO T_ST_BuildAlarmLevel
+			                                                            (F_BuildID, F_EnergyItemCode, F_Level1,F_Level2,F_DepartmentCompleteRate) VALUES
+			                                                            (@BuildID,@EnergyCode,0.2,0.5,@CompleteRate )
+                                                         ";
+
+        /// <summary>
         /// 部门-月度用能总量同比大于 -2%（下降小于2%）
         /// </summary>
         public static string DeptCompareMonthRateSQL = @"SELECT T1.ID AS ID,T1.Name AS Name,T1.TotalValue AS Value,T2.TotalValue AS LastValue ,

@@ -111,5 +111,11 @@ namespace EMS.DAL.Services
 
             return viewModel;
         }
+
+        public int SetDeptBuildAlarmLevel(string buildId, string energyCode, decimal level1, decimal level2)
+        {
+            int result= context.SetBuildAlarmLevel(buildId, energyCode, level1, level2);
+            return result;
+        }
     }
 }

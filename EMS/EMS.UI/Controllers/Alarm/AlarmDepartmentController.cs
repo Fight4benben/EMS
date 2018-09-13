@@ -1,4 +1,5 @@
 ﻿using EMS.DAL.Services;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,25 @@ namespace EMS.UI.Controllers
             try
             {
                 return service.GetViewModel(buildId, energyCode, type, date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [HttpPost]
+        public object Set([FromBody] JObject obj)
+        {
+            try
+            {
+                decimal level1 =Decimal.Parse( obj["level1"].ToString());
+                level1 = level1 >0 ? level1 : 0.01m ;
+
+                decimal level2 =Decimal.Parse( obj["level2"].ToString());
+                level2 = level2 > 0 ? level2 : 0.02m;
+
+                return service.SetDeptBuildAlarmLevel(obj["buildId"].ToString(), obj["energyCode"].ToString(), level1, level2);
             }
             catch (Exception e)
             {
