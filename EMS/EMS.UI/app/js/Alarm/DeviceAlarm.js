@@ -10,6 +10,8 @@ var DeviceAlarm = (function(){
 			getDataFromServer(url,"");
 		}
 
+		var alarmLevel={};
+
 		function initDom(){
 			//季度选择框默认不显示
 			showOrHideSeason(false);
@@ -82,6 +84,82 @@ var DeviceAlarm = (function(){
 				getDataFromServer(url,params);
 
 			});
+
+			$("#setModal").click(function(event) {
+				//event.preventDefault();
+				$("#setModal").attr('data-target','#myModal');
+			});
+
+			$("#myModal").on('shown.bs.modal',function(){
+				if(alarmLevel.hasOwnProperty('level1'))
+					$("#level1").val(alarmLevel.level1*100);
+				if(alarmLevel.hasOwnProperty('level2'))
+					$("#level2").val(alarmLevel.level2*100);
+			});
+
+			$("#myModal").on('hide.bs.modal',function(){
+				$("#setModal").removeAttr('data-target');
+			});
+
+			$("#saveBtn").click(function(event) {
+				var level1 = $("#level1").val();
+				var level2 = $("#level2").val();
+
+				var buildId = $("#buildinglist").val();
+				var energyCode = $("#energys").val();
+
+				var date; 
+
+				var type =$("#dateType").val();
+				if(type=="SS"){
+					var season = $("#season").val();
+					date = $("#daycalendarBox").val()+"-"+EMS.Tool.appendZero(parseInt(season));
+				}else
+					date = $("#daycalendarBox").val();
+
+				var url = "/api/AlarmDevice";
+				var params = "buildId="+buildId+"&date="+date+"&type="+type+"&energyCode="+energyCode;
+
+				if(!checkInput(level1,"等级1","level1"))
+					return;
+
+				if(!checkInput(level2,"等级2","level2"))
+					return;
+
+				if(alarmLevel.level1 == level1 && alarmLevel.level2 == level2)
+					return;
+
+				$.post('/api/AlarmDepartment', {
+					buildId:buildId,
+					energyCode:energyCode,
+					level1:level1/100,
+					level2:level2/100 }, function(data) {
+					if(data == "1"){
+						$("#myModal").modal('hide');
+						getDataFromServer(url,params);
+					}
+					else{
+						alert("插入失败！");
+						return;
+					}
+				});
+
+
+			});
+		}
+
+		function checkInput(levelValue,name,id){
+			if(isNaN(levelValue)){
+					alert(name+"请输入数字！");
+					return false;
+			}
+
+			if(!EMS.Tool.isInteger(levelValue)){
+				alert(name+"请输入正整数！");
+				return false;
+			}
+
+			return true;
 		}
 
 
@@ -92,6 +170,7 @@ var DeviceAlarm = (function(){
 				try{
 					showBuilds(data);
 					showEnergys(data);
+					setLevels(data);
 					showTable(data);
 				}catch(exception){
 
@@ -104,6 +183,21 @@ var DeviceAlarm = (function(){
 				EMS.Loading.hide();
 			});
 		};
+
+		function setLevels(data){
+			var buildId = $("#buildinglist").val();
+			var energyCode = $("#energys").val();
+			$.each(data.buildAlarmLevels, function(key, val) {
+				if(val.buildID == buildId && val.energyCode == val.energyCode){
+					if(val.hasOwnProperty('level1'))
+						alarmLevel.level1 = val.level1;
+
+					if(val.hasOwnProperty('level2'))
+						alarmLevel.level2 = val.level2;
+				}
+
+			});
+		}
 
 		function showBuilds(data){
 			if(!data.hasOwnProperty('builds'))

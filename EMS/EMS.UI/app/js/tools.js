@@ -38,6 +38,13 @@ var EMS = {
 			}]);
 
 			return array;
+		},
+		isInteger:function(num){
+			var regular = /^[0-9]*[1-9][0-9]*$/;
+			if(!regular.test(num)){
+				return false;
+			}else
+				return true;
 		}
 	},
 

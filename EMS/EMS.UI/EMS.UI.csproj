@@ -682,6 +682,7 @@
     <Content Include="Views\Alarm\DepartmentOutOfAlarm.cshtml" />
     <Content Include="Views\Department\Check.cshtml" />
     <Content Include="Views\Circuit\RingRatio.cshtml" />
+    <Content Include="Views\Setting\DepartmentOutOfWork.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

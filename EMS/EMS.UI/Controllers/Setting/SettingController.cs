@@ -14,5 +14,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult DepartmentOutOfWork()
+        {
+            return View();
+        }
     }
 }

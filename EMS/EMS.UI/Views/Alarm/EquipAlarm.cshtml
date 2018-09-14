@@ -40,10 +40,8 @@
             </select>
         </div>
         <button id="searchButton" type="button" class="btn-equip">查询</button>
-        <label class="check-label">软件开发部</label>
-        <button class="target" data-toggle="modal" data-target=".bs-example-modal-sm">
-            <i class="fa fa-area-chart"></i>
-           考核目标设置
+        <button id="setModal" class="target" data-toggle="modal">
+            <i class="fa fa-area-chart"></i>考核目标设置
         </button>
     </div>
     <div id="alarmTable" class="col-xs-12 R-Columnar">
@@ -59,11 +57,13 @@
             <h5 class="modal-title" id="myModalLabel">考核目标设置</h5>
           </div>
           <div class="modal-body">
-            <label>节能目标：</label>
-            <input type="text"/> %
+            <label>等级1：</label>
+            <input id="level1" type="text"/> %
+            <label>等级2：</label>
+            <input id="level2" type="text"/> %
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">确定</button>
+            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
           </div>
         </div>

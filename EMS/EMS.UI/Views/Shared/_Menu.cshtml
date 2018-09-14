@@ -203,9 +203,14 @@
                         <i class="fa fa-gears"></i><span class="title">系统设置 </span><span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" id="">
-                        <!-- rest/sysstatus -->
-                        <li id="connectStatus" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
-
+                        @if (menu.Menus.Contains("9.1") || menu.Menus.Contains("all"))
+                        {
+                            <li id="deviceLimit" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
+                        }
+                        @if (menu.Menus.Contains("9.2") || menu.Menus.Contains("all"))
+                        {
+                            <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>部门报警设置</a></li>
+                        }
                     </ul>
                 </li>
             }
