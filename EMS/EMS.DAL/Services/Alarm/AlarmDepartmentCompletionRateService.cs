@@ -29,7 +29,7 @@ namespace EMS.DAL.Services
         {
             DateTime today = DateTime.Now;
             string startDay = today.ToString("yyyy-MM-01");
-            string endDay = today.ToString("yyyy-MM-dd");
+            string endDay = today.AddMonths(1).AddDays(-today.Day).ToString("yyyy-MM-dd");
 
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
             string buildId;

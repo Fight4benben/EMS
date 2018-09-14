@@ -51,5 +51,45 @@ namespace EMS.DAL.StaticResources.Alarm
 			                                                    (F_DepartmentID, F_BuildID, F_Year, F_Month,F_StartTime,F_EndTime,F_IsOverDay,F_LimitValue) VALUES
 			                                                    ( @DepartmentID,@BuildID,2018,1,@StartTime,@EndTime,@isOverDay,@LimitValue)
                                                     ";
+        /// <summary>
+        /// 删除 部门指定时间段内-用能告警阈值
+        /// </summary>
+        public static string DeleteDeptOverLimitValueSQL = @" 
+                                                          DELETE FROM T_ST_DepartmentAlarmPlan 
+                            	                                 WHERE F_BuildID=@BuildID  AND F_DepartmentID=@DepartmentID AND F_EnergyItemCode=@EnergyItemCode
+                                                    ";
+
+
+
+
+        /// <summary>
+        /// 获取部门当前设定阈值
+        /// </summary>
+        public static string GetDeptAlarmLimitValueSQL = @" 
+                                                     SELECT DepartmentAlarmPlan.F_DepartmentID AS ID
+                                                              , F_DepartmentName AS Name
+                                                              , F_StartTime AS StartTime
+                                                              , F_EndTime AS EndTime
+                                                              , F_IsOverDay AS IsOverDay
+                                                              , F_EnergyItemCode AS EnergyCode
+                                                              , F_LimitValue AS LimitValue
+                                                          FROM T_ST_DepartmentAlarmPlan DepartmentAlarmPlan
+                                                          INNER JOIN T_ST_DepartmentInfo DepartmentInfo  ON DepartmentAlarmPlan.F_DepartmentID= DepartmentInfo.F_DepartmentID
+                                                          WHERE DepartmentAlarmPlan.F_BuildID = @BuildID
+                                                    ";
+        /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        public static string GetDeptTreeViewSQL = @" 
+                                                      SELECT DepartmentInfo.F_DepartmentID AS ID, F_DepartParentID AS ParentID,F_DepartmentName AS Name
+                                                            FROM T_ST_DepartmentInfo AS DepartmentInfo
+	                                                        INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
+	                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON DepartmentMeter.F_MeterID = Circuit.F_MeterID
+	                                                        INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+                                                            WHERE DepartmentInfo.F_BuildID=@BuildID
+	                                                        AND EnergyItem.F_EnergyItemCode=@EnergyItemCode
+	                                                        GROUP BY DepartmentInfo.F_DepartmentID,F_DepartParentID,F_DepartmentName
+                                                            ORDER BY ID
+                                                    ";
     }
 }
