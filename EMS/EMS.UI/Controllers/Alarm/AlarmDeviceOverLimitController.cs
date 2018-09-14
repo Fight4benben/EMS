@@ -31,38 +31,5 @@ namespace EMS.UI.Controllers
             }
         }
 
-        /// <summary>
-        /// 设备用能越限告警数据
-        /// 根据建筑ID和日期，获取指定建筑的用能越限告警数据
-        /// </summary>
-        /// <param name="buildId">建筑ID</param>
-        /// <param name="date">时间（"yyyy-MM-dd"）</param>
-        /// <returns>用能数据：</returns>
-        public object Get(string buildId, string date,string type)
-        {
-            try
-            {
-                switch (type)
-                {
-                    case "Limit":
-                        return service.GetViewModel(buildId, date);
-                    case "Day":
-                        return service.GetMomDayViewModel(buildId, date);
-                    case "Month":
-                        return service.GetCompareMonthViewModel(buildId, date);
-                    case "Dept":
-                        return service.GetCompareDeptMonthViewModel(buildId, date);
-                    default:
-                        return "null";
-                }
-                
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-        
     }
 }

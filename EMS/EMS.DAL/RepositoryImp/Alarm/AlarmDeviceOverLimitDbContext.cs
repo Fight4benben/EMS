@@ -21,59 +21,39 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@StartDay",date)
             };
-            return _db.Database.SqlQuery<EnergyAlarm>(AlarmDeviceOverLimitResources.OverLimitValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EnergyAlarm>(AlarmDeviceOverLimitResources.GetDeviceOverLimitValueSQL, sqlParameters).ToList();
         }
 
-        public List<CompareData> GetDayMomValueList(string buildId, string date)
+        public List<AlarmLimitValue> GetAlarmLimitValueList(string buildId)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId)
+            };
+            List<AlarmLimitValue> alarmLimitValues = _db.Database.SqlQuery<AlarmLimitValue>(AlarmDeviceOverLimitResources.GetDeviceLimitValueListSQL, sqlParameters).ToList();
+            return alarmLimitValues;
+        }
+
+        public int SetDeviceOverLimitValue(string buildId, string circuitID, string startTime, string endTime, int isOverDay, decimal limitValue)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@StartDay",date)
+                new SqlParameter("@CircuitID",circuitID),
+                new SqlParameter("@StartTime",startTime),
+                new SqlParameter("@EndTime",endTime),
+                new SqlParameter("@isOverDay",isOverDay),
+                new SqlParameter("@LimitValue",limitValue)
             };
-            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DayCompareValueSQL, sqlParameters).ToList();
+            return _db.Database.ExecuteSqlCommand(AlarmDeviceOverLimitResources.SetDeviceOverLimitValueSQL, sqlParameters);
         }
 
-        public List<CompareData> GetMonthMomValueList(string buildId, string startDay, string endDay)
+        public int DeleteDeviceOverLimitValue(string buildId,string circuitID)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@StartDay",startDay),
-                new SqlParameter("@EndDay",endDay)
+                new SqlParameter("@CircuitID",circuitID)
             };
-            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.MonthMomValueSQL, sqlParameters).ToList();
+            return _db.Database.ExecuteSqlCommand(AlarmDeviceOverLimitResources.DeleteDeviceOverLimitValueSQL, sqlParameters);
         }
-
-        public List<CompareData> GetMonthCompareValueList(string buildId, string startDay, string endDay)
-        {
-            SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@StartDay",startDay),
-                new SqlParameter("@EndDay",endDay)
-            };
-            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.MonthCompareValueSQL, sqlParameters).ToList();
-        }
-
-        public List<CompareData> GetDeptMomValueList(string buildId, string startDay, string endDay)
-        {
-            SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@StartDay",startDay),
-                new SqlParameter("@EndDay",endDay)
-            };
-            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DeptMomValueSQL, sqlParameters).ToList();
-        }
-
-        public List<CompareData> GetDeptCompareValueList(string buildId, string startDay, string endDay)
-        {
-            SqlParameter[] sqlParameters ={
-                new SqlParameter("@BuildID",buildId),
-                new SqlParameter("@StartDay",startDay),
-                new SqlParameter("@EndDay",endDay)
-            };
-            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DeptCompareValueSQL, sqlParameters).ToList();
-        }
-
-
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)
         {

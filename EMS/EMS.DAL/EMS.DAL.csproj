@@ -226,7 +226,7 @@
     <Compile Include="ViewModels\Department\DepartmentRankViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentReportViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDeviceViewModel.cs" />
-    <Compile Include="ViewModels\Alarm\EnergyAlarmViewModel.cs" />
+    <Compile Include="ViewModels\Alarm\AlarmDeviceOverLimitViewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemReportViewModel.cs" />
