@@ -10,6 +10,8 @@ var Check = (function(){
 			getDataFromServer(url,"");
 		}
 
+		var buildTarget;
+
 		function initDom(){
 			//季度选择框默认不显示
 			showOrHideSeason(false);
@@ -83,6 +85,69 @@ var Check = (function(){
 				getDataFromServer(url,params);
 
 			});
+
+			$("#setModal").click(function(event) {
+				//event.preventDefault();
+				$("#setModal").attr('data-target','#myModal');
+			});
+
+			$("#myModal").on('shown.bs.modal',function(){
+				$("#targetInput").val(buildTarget*100);
+			});
+
+			$("#myModal").on('hide.bs.modal',function(){
+				$("#setModal").removeAttr('data-target');
+			});
+
+			$("#saveBtn").click(function(){
+				var input = $("#targetInput").val();
+				var buildId = $("#buildinglist").val();
+				var energyCode = $("#energys").val();
+
+				var date; 
+
+				var type =$("#dateType").val();
+				if(type=="QQ"){
+					var season = $("#season").val();
+					date = $("#daycalendarBox").val()+"-"+EMS.Tool.appendZero(parseInt(season)*3);
+				}else if(type=="YY"){
+					date = $("#daycalendarBox").val()+"-01-01";
+				}else 
+					date = $("#daycalendarBox").val()+"-01";
+
+				if(input =="" || input == undefined){
+					alert("请输入需要设置的目标!");
+					return;
+				}
+
+				if(isNaN(input)){
+					alert("请输入数字！");
+					return;
+				}
+
+				if(!EMS.Tool.isInteger(input)){
+					alert("请输入正整数！");
+					return;
+				}
+
+				if(parseInt(input) === parseInt(buildTarget*100)){
+					return;
+				}
+
+				$.post('/api/DepartmentCheck/Set', {
+					"buildId":buildId,
+			        "energyCode":energyCode,
+			        "completionRate":parseInt(input)/100  }, function(data) {
+					if(data == "1"){
+						$("#myModal").modal('hide');
+						getDataFromServer("/api/DepartmentCheck","buildId="+buildId+"&date="+date+"&type="+type+"&energyCode="+energyCode);
+					}
+					else{
+						alert("插入失败！");
+						return;
+					}
+				});
+			});
 		}
 
 
@@ -93,6 +158,7 @@ var Check = (function(){
 				try{
 					showBuilds(data);
 					showEnergys(data);
+					setTarget(data);
 					showTable(data);
 				}catch{
 
@@ -105,6 +171,18 @@ var Check = (function(){
 				EMS.Loading.hide();
 			});
 		};
+
+		function setTarget(data){
+			if(!data.hasOwnProperty('deptCompletionRate'))
+				return;
+
+			var energyCode = $("#energys").val();
+
+			$.each(data.deptCompletionRate, function(key, val) {
+				if(val.energyCode === energyCode)
+					buildTarget = val.rate;
+			});
+		}
 
 		function showBuilds(data){
 			if(!data.hasOwnProperty('builds'))

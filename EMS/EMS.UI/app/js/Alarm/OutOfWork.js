@@ -6,7 +6,7 @@ var OutOfWork = (function(){
 			initDateTime();
 			initButton();
 
-			var url = "/api/EnergyAlarm";
+			var url = "/api/AlarmDeviceOverLimit";
 
 			getDataFromServer(url,"");
 		};
@@ -17,7 +17,7 @@ var OutOfWork = (function(){
 
 		function initButton(){
 			$("#Load").click(function(event) {
-				var url="/api/EnergyAlarm";
+				var url="/api/AlarmDeviceOverLimit";
 
 				var params = "buildId="+$("#buildinglist").val()+"&date="+
 				$("#daycalendarBox").val()+"&type=Limit";

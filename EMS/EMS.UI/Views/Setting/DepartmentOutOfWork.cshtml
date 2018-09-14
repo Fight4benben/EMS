@@ -1,0 +1,169 @@
+﻿<div class="container-fluid main-top">
+    <div class="col-xs-12">
+        <div class="filter-width">
+            建筑名称：
+        </div>
+        <div class="se-right">
+            <form role="form">
+                <div class="form-group">
+                    <select class="form-control" id="buildinglist"></select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="OutWork-left">
+        <div class="build-info OutWork-list">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-calendar-o"></i>列表
+                <span class="OWork-add">+ 添加</span>
+            </div>
+            <table id="statisticTable"
+                   class="table table-striped table-bordered table-hover count-table">
+                <thead>
+                    <tr>
+                        <th class='left' colspan="2" style="background: #0076D0;width:100px;">编号</th>
+                        <th class='left' style="background: #0076D0;">名称</th>
+                        <th class='left' style="background: #0076D0;">超始时间</th>
+                        <th class='left' style="background: #0076D0;">结束时间</th>
+                        <th class='left' style="background: #0076D0;">报警值</th>
+                        <th class='left' style="background: #0076D0;">编辑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td>
+                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-2 fa-pencil-square-o"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="OutWork-right">
+        <div class="build-info OutWork-message">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-calendar"></i>信息
+            </div>
+            <div class="se-yet OutWork-service">
+                <label>设&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 备：</label>
+                <select class="OutWork-select">
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                <label class="O-time">起始时间： </label>
+                <div id="StartDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input id="StartBox" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
+                </div>
+                <select id="StartHour" class="d-s-select">
+                    <option value="0">00</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select><label class="d-s-hour">时</label>
+                <select id="StartMinute" class="d-s-select">
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select> <label class="d-s-hour">分</label>
+                <label class="O-end">结束时间： </label>
+                <div id="EndDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input id="EndBox" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
+                </div>
+                <select id="EndHour" class="d-s-select">
+                    <option value="0">00</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select><label class="d-s-hour">时</label>
+                <select id="EndMinute" class="d-s-select">
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select><label class="d-s-hour">分</label>
+                <label class="O-alarm2">报  &nbsp;警   &nbsp;值：</label>
+                <input class="O-alarm" type="text" />
+                <button type="button" class="O-btn">保存</button>
+                <button type="button" class="O-btn-del">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -2,6 +2,9 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+.check-label,.target{
+    float:right;
+}
 .count-table tbody i{
     font-size: 25px;
     cursor: pointer;
@@ -58,7 +61,7 @@
 .O-btn-del:hover,.O-btn:hover,.target:hover,#Dept:hover,#Region:hover,#Circuit:hover,.Report-search:hover,.collect-top button:hover,.btn-equip:hover{
     background-color: #116db5;
 }
-.check-label,.target,.OutWork-service label,.OutWork-service select,.O-alarm,.OutWork-service button{
+.OutWork-service label,.OutWork-service select,.O-alarm,.OutWork-service button{
     float:left;
 }
 .OutWork-service .O-time{
@@ -1758,7 +1761,7 @@ to {top:-7px;}
     .fa-head2{margin-top: 1px;margin-right: 13px;}
 }
 @media (max-width:700px){
-    .check-label{
+    .target{
         clear:left;
         margin-left:0;
         margin-bottom:10px;
