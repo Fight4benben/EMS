@@ -87,6 +87,7 @@
     <Compile Include="Entities\HistoryParameterValue.cs" />
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
+    <Compile Include="Entities\AlarmLimitValue.cs" />
     <Compile Include="Entities\MeterParam.cs" />
     <Compile Include="Entities\MeterParamInfo.cs" />
     <Compile Include="Entities\ParamClassify.cs" />

@@ -47,6 +47,22 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
+        /// <summary>
+        /// 获取部门用能越限值列表
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <returns></returns>
+        public object Get(string buildId)
+        {
+            try
+            {
+                return service.GetAlarmLimitValueViewModel(buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
         /// <summary>
         /// 设置部门用能越限值（每天设定时间段内用能超过设定阈值）
@@ -79,6 +95,28 @@ namespace EMS.UI.Controllers
                 decimal limitValue = Decimal.Parse(obj["limitValue"].ToString());
 
                 return service.SetDeptOverLimitValue(buildId, energyCode, departmentID, startTime, endTime, isOverDay, limitValue);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        /// <summary>
+        /// 删除部门用能越限值
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public object Delete([FromBody] JObject obj)
+        {
+            try
+            {
+                string buildId = obj["buildId"].ToString()
+                     , energyCode = obj["energyCode"].ToString()
+                     , departmentID = obj["departmentID"].ToString();
+
+                return service.DeleteDeptOverLimitValue(buildId, energyCode, departmentID);
             }
             catch (Exception e)
             {
