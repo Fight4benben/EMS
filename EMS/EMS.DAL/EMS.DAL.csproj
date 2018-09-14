@@ -107,7 +107,7 @@
     <Compile Include="IRepository\Department\IDepartmentEnergyAverageDbContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentReportDbContext.cs" />
-    <Compile Include="IRepository\Alarm\IEnergyAlarmDbContext.cs" />
+    <Compile Include="IRepository\Alarm\IAlarmDeviceOverLimitDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemCompareDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemReportDbContext.cs" />
@@ -134,7 +134,7 @@
     <Compile Include="RepositoryImp\Department\DepartmentOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentRankDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentReportDbContext.cs" />
-    <Compile Include="RepositoryImp\Alarm\EnergyAlarmDbContext.cs" />
+    <Compile Include="RepositoryImp\Alarm\AlarmDeviceOverLimitDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemReportDbContext.cs" />
@@ -168,7 +168,7 @@
     <Compile Include="Services\Department\DepartmentOverviewService.cs" />
     <Compile Include="Services\Department\DepartmentRankService.cs" />
     <Compile Include="Services\Department\DepartmentReportService.cs" />
-    <Compile Include="Services\Alarm\EnergyAlarmService.cs" />
+    <Compile Include="Services\Alarm\AlarmDeviceOverLimitService.cs" />
     <Compile Include="Services\Item\EnergyItemCompareService.cs" />
     <Compile Include="Services\Item\EnergyItemOverviewService.cs" />
     <Compile Include="Services\Item\EnergyItemReportService.cs" />
@@ -195,7 +195,7 @@
     <Compile Include="StaticResources\Department\DepartmentOverviewResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentRankResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentReportResources.cs" />
-    <Compile Include="StaticResources\Alarm\EnergyAlarmResources.cs" />
+    <Compile Include="StaticResources\Alarm\AlarmDeviecOverLimitResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemOverviewResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemReportResources.cs" />

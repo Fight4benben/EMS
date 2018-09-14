@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Services
 {
-    public class EnergyAlarmService
+    public class AlarmDeviceOverLimitService
     {
-        private EnergyAlarmDbContext context;
+        private AlarmDeviceOverLimitDbContext context;
 
-        public EnergyAlarmService()
+        public AlarmDeviceOverLimitService()
         {
-            context = new EnergyAlarmDbContext();
+            context = new AlarmDeviceOverLimitDbContext();
         }
 
         /// <summary>

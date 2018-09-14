@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.RepositoryImp
 {
-    public class EnergyAlarmDbContext : IEnergyAlarmDbContext
+    public class AlarmDeviceOverLimitDbContext : IAlarmDeviceOverLimitDbContext
     {
         private EnergyDB _db = new EnergyDB();
 
@@ -21,7 +21,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@StartDay",date)
             };
-            return _db.Database.SqlQuery<EnergyAlarm>(EnergyAlarmResources.OverLimitValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<EnergyAlarm>(AlarmDeviceOverLimitResources.OverLimitValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetDayMomValueList(string buildId, string date)
@@ -30,7 +30,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@StartDay",date)
             };
-            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DayCompareValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DayCompareValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetMonthMomValueList(string buildId, string startDay, string endDay)
@@ -40,7 +40,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.MonthMomValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.MonthMomValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetMonthCompareValueList(string buildId, string startDay, string endDay)
@@ -50,7 +50,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.MonthCompareValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.MonthCompareValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetDeptMomValueList(string buildId, string startDay, string endDay)
@@ -60,7 +60,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DeptMomValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DeptMomValueSQL, sqlParameters).ToList();
         }
 
         public List<CompareData> GetDeptCompareValueList(string buildId, string startDay, string endDay)
@@ -70,7 +70,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
-            return _db.Database.SqlQuery<CompareData>(EnergyAlarmResources.DeptCompareValueSQL, sqlParameters).ToList();
+            return _db.Database.SqlQuery<CompareData>(AlarmDeviceOverLimitResources.DeptCompareValueSQL, sqlParameters).ToList();
         }
 
 

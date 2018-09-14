@@ -158,14 +158,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Alarm\AlarmCompareDeptController.cs" />
-    <Compile Include="Controllers\Alarm\AlarmCompareMonthController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDepartmentController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
-    <Compile Include="Controllers\Alarm\AlarmMomDayController.cs" />
-    <Compile Include="Controllers\Alarm\AlarmMomDeptController.cs" />
-    <Compile Include="Controllers\Alarm\AlarmMomMonthController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />
@@ -180,7 +175,7 @@
     <Compile Include="Controllers\Department\DeptCompareController.cs" />
     <Compile Include="Controllers\Department\DeptOverviewController.cs" />
     <Compile Include="Controllers\Department\DeptReportController.cs" />
-    <Compile Include="Controllers\Alarm\EnergyAlarmController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\History\HistoryParamController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Home\HomePageController.cs" />

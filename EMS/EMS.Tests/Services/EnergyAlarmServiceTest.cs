@@ -16,7 +16,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestEnergyAlarmByUserName()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
 
             EnergyAlarmViewModel model = service.GetViewModelByUserName("admin");
 
@@ -26,7 +26,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestEnergyAlarmByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
             DateTime today = DateTime.Now.AddDays(-8);
             EnergyAlarmViewModel model = service.GetViewModel("000001G001", today.ToString("yyyy-MM-dd"));
 
@@ -36,7 +36,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestMomDayByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
             
             EnergyAlarmViewModel model = service.GetMomDayViewModel("000001G001", "2018-08-20");
 
@@ -46,7 +46,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestMomMonthByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
 
             //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
             EnergyAlarmViewModel model = service.GetMomMonthViewModel("000001G001", "2018-08");
@@ -57,7 +57,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestCompareMonthByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
 
             EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-30");
 
@@ -67,7 +67,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestMomDeptByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
             EnergyAlarmViewModel model = service.GetMomDeptMonthViewModel("000001G001", "2018-08-30");
 
             Console.WriteLine(UtilTest.GetJson(model));
@@ -76,7 +76,7 @@ namespace EMS.Tests.Services
         [TestMethod]
         public void TestCompareDeptByBuildID_Date()
         {
-            EnergyAlarmService service = new EnergyAlarmService();
+            AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
 
             //EnergyAlarmViewModel model = service.GetCompareMonthViewModel("000001G001", "2018-08-20");
             EnergyAlarmViewModel model = service.GetCompareDeptMonthViewModel("000001G001", "2018-08");

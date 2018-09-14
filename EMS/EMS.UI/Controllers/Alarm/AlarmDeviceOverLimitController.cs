@@ -8,9 +8,9 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
-    public class EnergyAlarmController : ApiController
+    public class AlarmDeviceOverLimitController : ApiController
     {
-        EnergyAlarmService service = new EnergyAlarmService();
+        AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
 
         /// <summary>
         /// 设备用能越限告警数据

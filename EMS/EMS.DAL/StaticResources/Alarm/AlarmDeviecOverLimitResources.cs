@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.StaticResources
 {
-    public class EnergyAlarmResources
+    public class AlarmDeviceOverLimitResources
     {
         /// <summary>
         /// 获取设备用能越限告警

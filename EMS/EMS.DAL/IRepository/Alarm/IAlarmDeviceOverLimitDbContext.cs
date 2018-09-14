@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.IRepository
 {
-    public interface IEnergyAlarmDbContext
+    public interface IAlarmDeviceOverLimitDbContext
     {
         List<EnergyAlarm> GetEnergyOverLimitValueList(string buildId, string date);
         List<CompareData> GetDayMomValueList(string buildId, string startDay);
