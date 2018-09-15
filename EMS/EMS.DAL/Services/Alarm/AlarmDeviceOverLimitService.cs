@@ -117,7 +117,7 @@ namespace EMS.DAL.Services
         /// </summary>
         /// <param name="buildId"></param>
         /// <returns></returns>
-        public AlarmDeviceOverLimitViewModel GetAlarmLimitValueViewModel(string buildId)
+        public AlarmDeviceOverLimitViewModel GetSettingAlarmLimitValueViewModel(string buildId)
         {
             //已设置告警值列表
             List<AlarmLimitValue> alarmLimitValues = context.GetAlarmLimitValueList(buildId);
