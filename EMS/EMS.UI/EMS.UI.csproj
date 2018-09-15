@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Region\RegionController.cs" />
     <Compile Include="Controllers\Region\RegionMainController.cs" />
     <Compile Include="Controllers\Region\RegionReportController.cs" />
+    <Compile Include="Controllers\Setting\SettingAlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

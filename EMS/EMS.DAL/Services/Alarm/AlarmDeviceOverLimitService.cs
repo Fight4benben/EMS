@@ -41,7 +41,7 @@ namespace EMS.DAL.Services
                 energyCode = energys.First().EnergyItemCode;
             else
                 energyCode = "";
-            List<AlarmLimitValue> alarmLimitValues = context.GetAlarmLimitValueList(buildId);
+            //List<AlarmLimitValue> alarmLimitValues = context.GetAlarmLimitValueList(buildId);
 
             //List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
 
@@ -52,7 +52,7 @@ namespace EMS.DAL.Services
             AlarmDeviceOverLimitViewModel viewModel = new AlarmDeviceOverLimitViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
-            viewModel.AlarmLimitValues = alarmLimitValues;
+            //viewModel.AlarmLimitValues = alarmLimitValues;
             viewModel.EnergyAlarmData = energyAlarmValue;
 
             return viewModel;
@@ -73,19 +73,79 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+
         /// <summary>
-        /// 获取设备用能越限值列表
+        /// 获取设备用能越限告警设备列表（已设置告警值设备列表）
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public AlarmDeviceOverLimitViewModel GetSettingViewModelByUserName(string userName)
+        {
+            DateTime today = DateTime.Now;
+
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+            string buildId;
+            if (builds.Count > 0)
+                buildId = builds.First().BuildID;
+            else
+                buildId = "";
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+            //已设置告警值列表
+            List<AlarmLimitValue> alarmLimitValues = context.GetAlarmLimitValueList(buildId);
+            //未设置列表
+            List<TreeViewInfo> unSettingDevices = context.GetUnSettingDeviceList(buildId);
+
+            AlarmDeviceOverLimitViewModel viewModel = new AlarmDeviceOverLimitViewModel();
+            viewModel.Builds = builds;
+            viewModel.Energys = energys;
+            viewModel.AlarmLimitValues = alarmLimitValues;
+            viewModel.UnSettingDevices = unSettingDevices;
+
+            return viewModel;
+        }
+
+
+
+        /// <summary>
+        /// 获取设备用能越限值列表（已设置告警值设备列表）
         /// </summary>
         /// <param name="buildId"></param>
         /// <returns></returns>
         public AlarmDeviceOverLimitViewModel GetAlarmLimitValueViewModel(string buildId)
         {
+            //已设置告警值列表
             List<AlarmLimitValue> alarmLimitValues = context.GetAlarmLimitValueList(buildId);
+            //未设置列表
+            List<TreeViewInfo> unSettingDevices = context.GetUnSettingDeviceList(buildId);
+
             AlarmDeviceOverLimitViewModel viewModel = new AlarmDeviceOverLimitViewModel();
             viewModel.AlarmLimitValues = alarmLimitValues;
+            viewModel.UnSettingDevices = unSettingDevices;
 
             return viewModel;
         }
+
+        /// <summary>
+        /// 获取设备用能越限值列表（未设置告警值设备列表）
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <returns></returns>
+        public AlarmDeviceOverLimitViewModel GetUnsettingLimitValueViewModel(string buildId)
+        {
+            List<TreeViewInfo> unSettingDevices = context.GetUnSettingDeviceList(buildId);
+            AlarmDeviceOverLimitViewModel viewModel = new AlarmDeviceOverLimitViewModel();
+            viewModel.UnSettingDevices = unSettingDevices;
+
+            return viewModel;
+        }
+
+
 
         /// <summary>
         /// 设置设备-用能越限值（每天设定时间段内用能超过设定阈值）
@@ -111,7 +171,7 @@ namespace EMS.DAL.Services
         /// <param name="buildId"></param>
         /// <param name="departmentID"></param>
         /// <returns></returns>
-        public int DeleteDeptOverLimitValue(string buildId, string circuitID)
+        public int DeleteDeviceOverLimitValue(string buildId, string circuitID)
         {
             int result = context.DeleteDeviceOverLimitValue(buildId, circuitID);
 

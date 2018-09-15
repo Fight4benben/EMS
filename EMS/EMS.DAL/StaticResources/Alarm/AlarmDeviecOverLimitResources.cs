@@ -70,6 +70,16 @@ namespace EMS.DAL.StaticResources
         public static string DeleteDeviceOverLimitValueSQL = @" DELETE FROM T_ST_DeviceAlarmPlan WHERE F_CircuitID= @CircuitID AND F_BuildID=@BuildID
                                                     ";
 
-        
+        /// <summary>
+        /// 获取未设置报警值的支路列表
+        /// </summary>
+        public static string UnSettingTreeViewInfoSQL = @"SELECT F_CircuitID AS ID, null AS ParentID,F_CircuitName AS Name
+                                                                FROM T_ST_CircuitMeterInfo AS Circuit	
+                                                                WHERE Circuit.F_BuildID=@BuildID
+		                                                        AND Circuit.F_CircuitID NOT IN ( SELECT F_CircuitID FROM T_ST_DeviceAlarmPlan )
+                                                                ORDER BY ID ASC
+                                                        ";
+
+
     }
 }

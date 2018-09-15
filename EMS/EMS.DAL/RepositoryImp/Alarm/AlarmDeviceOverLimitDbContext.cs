@@ -77,7 +77,22 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EnergyItemCode",energyCode)
             };
-            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(HistoryParamResources.TreeViewInfoSQL, sqlParameters).ToList();
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(AlarmDeviceOverLimitResources.UnSettingTreeViewInfoSQL, sqlParameters).ToList();
+            return treeViewInfos;
+        }
+
+        /// <summary>
+        /// 获取支路列表
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <returns></returns>
+        public List<TreeViewInfo> GetUnSettingDeviceList(string buildId)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+            };
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(AlarmDeviceOverLimitResources.UnSettingTreeViewInfoSQL, sqlParameters).ToList();
             return treeViewInfos;
         }
     }
