@@ -87,14 +87,13 @@ namespace EMS.UI.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        [HttpPost]
-        public object Delete([FromBody] JObject obj)
+        [HttpDelete]
+        public object Delete([FromBody] JObject obj )
         {
             try
             {
-                string buildId = obj["buildId"].ToString()
-                     , circuitID = obj["circuitID"].ToString();
-
+                string buildId = obj["buildId"].ToString();
+                string circuitID = obj["circuitID"].ToString();
                 return service.DeleteDeviceOverLimitValue(buildId, circuitID);
             }
             catch (Exception e)

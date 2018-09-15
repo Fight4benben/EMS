@@ -55,6 +55,44 @@ var EMS = {
 					return pre + cur;
 			})
 			return sum;
+		},
+		getDateByString:function(timeString,format){
+			var datePart = timeString.split(' ')[0];
+			var timePart = timeString.split(' ')[1];
+			var year,month,date;
+			var hour,minute;
+			switch(format){
+				case "yyyy-MM-dd":
+					year = parseInt(datePart.split('-')[0]);
+					month = parseInt(datePart.split('-')[1])-1;
+					date = parseInt(datePart.split('-')[2]);
+				break;
+				case "yyyy/MM/dd":
+					year = parseInt(datePart.split('/')[0]);
+					month = parseInt(datePart.split('/')[1])-1;
+					date = parseInt(datePart.split('/')[2]);
+				break;
+			}
+
+			hour = parseInt(timePart.split(':')[0]);
+			minute = parseInt(timePart.split(':')[1]);
+
+			return new Date(year,month,date,hour,minute);
+		},
+		dateDiff:function(start,end){
+			var startYear = start.getFullYear();
+			var startMonth = start.getMonth();
+			var startDate = start.getDate();
+
+			var endYear = end.getFullYear();
+			var endMonth = end.getMonth();
+			var endDate = end.getDate();
+
+			var startValue=new Date(startYear,startMonth,startDate);
+			var endValue = new Date(endYear,endMonth,endDate);
+
+			var days = endValue.getTime()-startValue.getTime();
+			return parseInt(days/(1000*60*60*24));
 		}
 	},
 

@@ -75,6 +75,9 @@ var RingRatio = (function(){
 					EMS.Loading.hide();
 				}
 				
+			}).fail(function(e){
+				EMS.Tool.statusProcess(e.status);
+				EMS.Loading.hide();
 			});
 		};
 
