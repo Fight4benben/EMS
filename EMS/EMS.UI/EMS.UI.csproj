@@ -331,6 +331,7 @@
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />
     <Content Include="app\js\Region\Report.js" />
+    <Content Include="app\js\Setting\DepartmentLimitSetting.js" />
     <Content Include="app\js\Setting\DeviceAlarmLimitSetting.js" />
     <Content Include="app\js\tools.js" />
     <Content Include="Assets\css\animate.css" />

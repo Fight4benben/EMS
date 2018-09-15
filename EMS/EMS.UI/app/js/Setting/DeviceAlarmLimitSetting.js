@@ -73,7 +73,7 @@
 						EMS.Tool.appendZero(parseInt($("#EndMinute").val())),
 					isOverDay:isOverDay,
 					limitValue:input
-				}
+				};
 
 				$.post('/api/SettingAlarmDeviceOverLimit/Set', obj, function(data) {
 					if(data==1){
@@ -87,12 +87,12 @@
 			});
 		}
 
-		this.show=function(){
-			initDom();
-			var url="/api/SettingAlarmDeviceOverLimit";
+        this.show = function () {
+            initDom();
+            var url = "/api/SettingAlarmDeviceOverLimit";
 
-			getDataFromServer(url,"");
-		}
+            getDataFromServer(url, "");
+        };
 
 
 		function getDataFromServer(url,params){
@@ -105,7 +105,7 @@
 					unSelectedList = data.unSettingDevices;
 					showUnsetList(data.unSettingDevices);
 				}catch(e){
-
+                    console.log(e);
 				}finally{
 					EMS.Loading.hide();
 				}
@@ -181,7 +181,12 @@
 						$("#limitValue").val(row.limitValue);
 					break;
 					case 'delete':
-						$("#AddOrUpdate").html("保存");
+                        $("#AddOrUpdate").html("保存");
+
+                        var result = confirm("是否要删除" + row.name + "的报警值?");
+
+                        if (!result)
+                            return;
 
 						$.ajax({
 							url: '/api/SettingAlarmDeviceOverLimit/Delete',
@@ -194,7 +199,7 @@
 						})
 						.done(function(data) {
 							if(data ==1){
-								getDataFromServer("/api/SettingAlarmDeviceOverLimit","buildId="+$("#buildinglist").val())
+                                getDataFromServer("/api/SettingAlarmDeviceOverLimit", "buildId=" + $("#buildinglist").val());
 							}else{
 								alert("删除报警值失败！");
 							} 

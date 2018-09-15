@@ -86,7 +86,7 @@ namespace EMS.UI.Controllers
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpDelete]
         public object Delete([FromBody] JObject obj)
         {
             try
