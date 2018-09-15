@@ -1,5 +1,4 @@
-﻿using EMS.DAL.Entities;
-using EMS.DAL.Services;
+﻿using EMS.DAL.Services;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,9 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
-    public class SettingAlarmDeviceOverLimitController : ApiController
+    public class SettingAlarmDepartmentOverLimitController : ApiController
     {
-        AlarmDeviceOverLimitService service = new AlarmDeviceOverLimitService();
-
+        AlarmDepartmentOverLimitService service = new AlarmDepartmentOverLimitService();
         /// <summary>
         /// 设备用能越限告警数据
         /// 初始加载：获取用户名查询建筑列表，第一栋建筑对应的分类，第一个分类对应的所有设备
@@ -50,9 +48,8 @@ namespace EMS.UI.Controllers
             }
         }
 
-
         /// <summary>
-        /// 设置设备用能越限值（每天设定时间段内用能超过设定阈值）
+        /// 设置部门用能越限值（每天设定时间段内用能超过设定阈值）
         /// </summary>
         /// <param name="buildId"></param>
         /// <param name="energyCode"></param>
@@ -67,15 +64,16 @@ namespace EMS.UI.Controllers
         {
             try
             {
+                
                 string buildId = obj["buildId"].ToString()
-                     , circuitID = obj["circuitID"].ToString()
+                     , departmentID = obj["departmentID"].ToString()
                      , startTime = obj["startTime"].ToString()
                      , endTime = obj["endTime"].ToString();
 
                 int isOverDay = int.Parse(obj["isOverDay"].ToString());
                 decimal limitValue = Decimal.Parse(obj["limitValue"].ToString());
 
-                return service.SetDeviceOverLimitValue(buildId, circuitID, startTime, endTime, isOverDay, limitValue);
+                return service.SetDeptOverLimitValue(buildId, departmentID, startTime, endTime, isOverDay, limitValue);
             }
             catch (Exception e)
             {
@@ -84,7 +82,7 @@ namespace EMS.UI.Controllers
         }
 
         /// <summary>
-        /// 删除设备用能越限值
+        /// 删除部门用能越限值
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -94,14 +92,15 @@ namespace EMS.UI.Controllers
             try
             {
                 string buildId = obj["buildId"].ToString()
-                     , circuitID = obj["circuitID"].ToString();
+                     , departmentID = obj["departmentID"].ToString();
 
-                return service.DeleteDeviceOverLimitValue(buildId, circuitID);
+                return service.DeleteDeptOverLimitValue(buildId, departmentID);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
+
     }
 }

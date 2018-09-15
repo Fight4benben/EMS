@@ -15,6 +15,13 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
+        /// <summary>
+        /// 获取部门 非工作时间用能越限数据
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public List<EnergyAlarm> GetDeptOverLimitValueList(string buildId, string energyCode, string date)
         {
             SqlParameter[] sqlParameters ={
@@ -23,6 +30,20 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@StartDay",date)
             };
             return _db.Database.SqlQuery<EnergyAlarm>(AlarmDepartmentOverLimitResources.DeptOverLimitValueSQL, sqlParameters).ToList();
+        }
+
+
+        public int SetDeptOverLimitValue(string buildId, string departmentID, string startTime, string endTime, int isOverDay, decimal limitValue)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@DepartmentID",departmentID),
+                new SqlParameter("@StartTime",startTime),
+                new SqlParameter("@EndTime",endTime),
+                new SqlParameter("@isOverDay",isOverDay),
+                new SqlParameter("@LimitValue",limitValue)
+            };
+            return _db.Database.ExecuteSqlCommand(AlarmDepartmentOverLimitResources.SetDeptOverLimitValueSQL, sqlParameters);
         }
 
         public int SetDeptOverLimitValue(string buildId, string energyCode, string departmentID, string startTime, string endTime, int isOverDay, decimal limitValue)
@@ -39,6 +60,15 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.ExecuteSqlCommand(AlarmDepartmentOverLimitResources.SetDeptOverLimitValueSQL, sqlParameters);
         }
 
+        public int DeleteDeptOverLimitValue(string buildId, string departmentID)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@DepartmentID",departmentID),
+            };
+            return _db.Database.ExecuteSqlCommand(AlarmDepartmentOverLimitResources.DeleteDeptOverLimitValueSQL, sqlParameters);
+        }
+
         public int DeleteDeptOverLimitValue(string buildId, string energyCode, string departmentID)
         {
             SqlParameter[] sqlParameters ={
@@ -46,10 +76,10 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@EnergyItemCode",energyCode),
                 new SqlParameter("@DepartmentID",departmentID),
             };
-            return _db.Database.ExecuteSqlCommand(AlarmDepartmentOverLimitResources.DeleteDeptOverLimitValueSQL, sqlParameters);
+            return _db.Database.ExecuteSqlCommand(AlarmDepartmentOverLimitResources.DeleteDeptOverLimitValueByEnergyCodeSQL, sqlParameters);
         }
 
-        public List<AlarmLimitValue> GetAlarmLimitValueList(string buildId)
+        public List<AlarmLimitValue> GetSettingAlarmLimitValueList(string buildId)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId)
@@ -58,16 +88,26 @@ namespace EMS.DAL.RepositoryImp
             return alarmLimitValues;
         }
 
-        public List<TreeViewInfo> GetTreeViewInfoList(string buildId, string energyCode)
+        public List<TreeViewInfo> GetUnsettingDeptTreeViewInfoList(string buildId)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+            };
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(AlarmDepartmentOverLimitResources.GetUnsetDeptTreeViewSQL, sqlParameters).ToList();
+            return treeViewInfos;
+        }
+
+        /*
+        public List<TreeViewInfo> GetUnsettingDeptTreeViewInfoList(string buildId, string energyCode)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EnergyItemCode",energyCode)
             };
-            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(AlarmDepartmentOverLimitResources.GetDeptTreeViewSQL, sqlParameters).ToList();
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(AlarmDepartmentOverLimitResources.GetUnsetDeptTreeViewSQL, sqlParameters).ToList();
             return treeViewInfos;
         }
-
+        */
        
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)
