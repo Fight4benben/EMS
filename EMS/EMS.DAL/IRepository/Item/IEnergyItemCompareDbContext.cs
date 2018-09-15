@@ -10,5 +10,6 @@ namespace EMS.DAL.IRepository
     public interface IEnergyItemCompareDbContext
     {
         List<EnergyItemValue> GetEnergyItemCompareValueList(string buildId, string formulaId, string date);
+        List<EnergyItemValue> GetRingRatioValueList(string buildId, string formulaId, string date);
     }
 }

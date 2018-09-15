@@ -105,6 +105,10 @@
                         {
                             <li id="se_statistic" class=""><a href="/Item/Statistic"><i class="fa fa-caret-right"></i>分类分项统计报表</a></li>
                         }
+                        @if (menu.Menus.Contains("4.5") || menu.Menus.Contains("all"))
+                        {
+                            <li id="se_ringratio" class=""><a href="/Item/RingRatio"><i class="fa fa-caret-right"></i>日同环比分析</a></li>
+                        }
                     </ul>
                 </li>
             }

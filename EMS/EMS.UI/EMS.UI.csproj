@@ -164,6 +164,7 @@
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />
+    <Compile Include="Controllers\Item\ItemRingRatioController.cs" />
     <Compile Include="Controllers\Login\AccountController.cs" />
     <Compile Include="Controllers\Alarm\AlarmController.cs" />
     <Compile Include="Controllers\Circuit\CircuitCollectController.cs" />
@@ -322,6 +323,7 @@
     <Content Include="app\js\Item\Compare.js" />
     <Content Include="app\js\Item\Overview.js" />
     <Content Include="app\js\Item\Report.js" />
+    <Content Include="app\js\Item\RingRatio.js" />
     <Content Include="app\js\Item\Statistic.js" />
     <Content Include="app\js\map.js" />
     <Content Include="app\js\overallsearch.js" />
@@ -680,6 +682,7 @@
     <Content Include="Views\Department\Check.cshtml" />
     <Content Include="Views\Circuit\RingRatio.cshtml" />
     <Content Include="Views\Setting\DepartmentOutOfWork.cshtml" />
+    <Content Include="Views\Item\RingRatio.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -45,6 +45,16 @@ var EMS = {
 				return false;
 			}else
 				return true;
+		},
+		getSum:function(array){
+			var sum=0;
+			sum = array.reduce(function(pre,cur,index,array){
+				if(cur==undefined)
+					return pre;
+				else
+					return pre + cur;
+			})
+			return sum;
 		}
 	},
 

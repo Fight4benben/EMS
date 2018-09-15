@@ -89,7 +89,7 @@ var RingRatio = (function(){
 				var buildId = $(this).val();
 				
 				 //console.log($("#daycalendarBox").val());
-				getDataFromServer("/api/CircuitCompare","buildId="+buildId+"&date="+$("#calendarbox").val());
+				getDataFromServer("/api/CircuitRingRatio","buildId="+buildId+"&date="+$("#calendarbox").val());
 			});
 		};
 
@@ -128,7 +128,7 @@ var RingRatio = (function(){
 
 				if(isNotRepeat){
 					//发送请求
-					getDataFromServer("/api/CircuitCompare","buildId="+$("#buildinglist").val()+"&energyCode="+
+					getDataFromServer("/api/CircuitRingRatio","buildId="+$("#buildinglist").val()+"&energyCode="+
 						$current.attr('value')+"&date="+$("#calendarbox").val());
 				}
 			});
@@ -265,9 +265,6 @@ var RingRatio = (function(){
 				{field:'compare',title:'同比(%)'}
 			];
 			var rows=[];
-
-			
-
 			//$("#comparetable th").eq(1).text("["+$("#calendarbox").val()+"]"+name+"("+$(".btn-solar-selected").attr('unit')+")");
 			//$("#comparetable th").eq(2).text("["+splitArray[0]+"-"+splitArray[1]+"-"+lastDay+"]"+name+"("+$(".btn-solar-selected").attr('unit')+")");
 
@@ -277,12 +274,16 @@ var RingRatio = (function(){
 				row.today = (currentData[i]==undefined?'-':currentData[i]);
 				row.yesterday = (previousData[i]==undefined?'-':previousData[i]);
 				row.compare = ((currentData[i]==undefined)||(previousData[i]==undefined||(previousData[i]==0))?'-':((currentData[i]-previousData[i])*100/previousData[i]).toFixed(2)+"%");
-				// $("#comparetable tbody").append('<tr><td>'+(i).toString()+'时</td><td>'+
-				// 	(currentData[i]==undefined?'-':currentData[i])+'</td><td>'+
-				// 	(previousData[i]==undefined?'-':previousData[i])+'</td><td>'+
-				// 	((currentData[i]==undefined)||(previousData[i]==undefined||(previousData[i]==0))?'-':((currentData[i]-previousData[i])*100/previousData[i]).toFixed(2)+"%")+"</td></tr>");
+				
 				rows.push(row);
 			}
+
+			rows.push({
+				time:'环比',
+				today:EMS.Tool.getSum(currentData),
+				yesterday:EMS.Tool.getSum(previousData),
+				compare:((EMS.Tool.getSum(currentData)-EMS.Tool.getSum(previousData))*100/EMS.Tool.getSum(previousData)).toFixed(2)+'%'
+			});
 
 			var height = $("#comparetable").height();
 			$("#comparetable").html('<table></table>');
