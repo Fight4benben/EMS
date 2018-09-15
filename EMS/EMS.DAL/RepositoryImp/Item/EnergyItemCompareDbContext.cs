@@ -23,5 +23,15 @@ namespace EMS.DAL.RepositoryImp
             };
             return _db.Database.SqlQuery<EnergyItemValue>(EnergyItemCompareResources.EnergyItemCompareSQL, sqlParameters).ToList();
         }
+
+        public List<EnergyItemValue> GetRingRatioValueList(string buildId, string formulaId, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@FormulaID",formulaId),
+                new SqlParameter("@EndTime",date)
+            };
+            return _db.Database.SqlQuery<EnergyItemValue>(EnergyItemCompareResources.ItemDayRingRatioSQL, sqlParameters).ToList();
+        }
     }
 }

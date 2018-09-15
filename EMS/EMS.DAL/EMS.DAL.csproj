@@ -172,6 +172,7 @@
     <Compile Include="Services\Item\EnergyItemCompareService.cs" />
     <Compile Include="Services\Item\EnergyItemOverviewService.cs" />
     <Compile Include="Services\Item\EnergyItemReportService.cs" />
+    <Compile Include="Services\Item\EnergyItemRingRationService.cs" />
     <Compile Include="Services\Item\EnergyItemStatisticService.cs" />
     <Compile Include="Services\History\HistoryDataService.cs" />
     <Compile Include="Services\History\HistoryParamService.cs" />
