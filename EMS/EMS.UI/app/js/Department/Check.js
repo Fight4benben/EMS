@@ -160,7 +160,7 @@ var Check = (function(){
 					showEnergys(data);
 					setTarget(data);
 					showTable(data);
-				}catch{
+				}catch(e){
 
 				}finally{
 					EMS.Loading.hide();
