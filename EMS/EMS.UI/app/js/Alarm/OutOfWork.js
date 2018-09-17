@@ -64,7 +64,7 @@ var OutOfWork = (function(){
 		function showTable(data){
 
 			var columns=[
-				{field:'name',title:'名称'},
+				{field:'name',title:'名称',width:'250px'},
 				{field:'value',title:'实际值'},
 				{field:'limitValue',title:'设定值'},
 				{field:'diffValue',title:'差值'}

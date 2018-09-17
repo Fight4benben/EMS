@@ -47,10 +47,13 @@ namespace EMS.DAL.Services
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
             List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
 
-            DepartmentEnergyAverageViewModel viewModel = new DepartmentEnergyAverageViewModel();
+            //DepartmentEnergyAverageViewModel viewModel = new DepartmentEnergyAverageViewModel();
+            //viewModel.Builds = builds;
+            //viewModel.Energys = energys;
+            //viewModel.TreeView = treeViewModel;
+            DepartmentEnergyAverageViewModel viewModel = GetViewModel(buildId,energyCode,"MM",DateTime.Now.ToString("yyyy-MM-dd"));
             viewModel.Builds = builds;
             viewModel.Energys = energys;
-            viewModel.TreeView = treeViewModel;
 
             return viewModel;
         }

@@ -64,7 +64,7 @@ var OutOfWork = (function(){
 		function showTable(data){
 
 			var columns=[
-				{field:'name',title:'名称'},
+				{field:'name',title:'名称',width:'250px'},
 				{field:'value',title:'实际值'},
 				{field:'limitValue',title:'设定值'},
 				{field:'diffValue',title:'差值'}
@@ -87,6 +87,7 @@ var OutOfWork = (function(){
 			$("#alarmTable>table").attr('data-height',height);
 
 			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border'});
+
 		}
 
 

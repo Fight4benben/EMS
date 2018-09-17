@@ -129,6 +129,10 @@
                         {
                             <li id="de_count" class=""><a href="/Department/Report"><i class="fa fa-caret-right"></i>部门用能统计</a></li>
                         }
+                        @if (menu.Menus.Contains("5.6") || menu.Menus.Contains("all"))
+                        {
+                            <li id="de_average" class=""><a href="/Department/Average"><i class="fa fa-caret-right"></i>部门均值分析</a></li>
+                        }
                         @if (menu.Menus.Contains("5.3") || menu.Menus.Contains("all"))
                         {
                             <li id="de_compare" class=""><a href="/Department/Compare"><i class="fa fa-caret-right"></i>同比分析</a></li>
@@ -141,6 +145,7 @@
                         {
                             <li id="de_check" class=""><a href="/Department/Check"><i class="fa fa-caret-right"></i>节能考核</a></li>
                         }
+
                     </ul>
                 </li>
             }

@@ -162,6 +162,7 @@
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
+    <Compile Include="Controllers\Department\DepartmentAverageController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />
     <Compile Include="Controllers\Item\ItemRingRatioController.cs" />
@@ -312,6 +313,7 @@
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\Collect.js" />
     <Content Include="app\js\Circuit\RingRatio.js" />
+    <Content Include="app\js\Department\Average.js" />
     <Content Include="app\js\Department\Check.js" />
     <Content Include="app\js\Department\Compare.js" />
     <Content Include="app\js\Department\Main.js" />
@@ -685,6 +687,7 @@
     <Content Include="Views\Circuit\RingRatio.cshtml" />
     <Content Include="Views\Setting\DepartmentOutOfWork.cshtml" />
     <Content Include="Views\Item\RingRatio.cshtml" />
+    <Content Include="Views\Department\Average.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
