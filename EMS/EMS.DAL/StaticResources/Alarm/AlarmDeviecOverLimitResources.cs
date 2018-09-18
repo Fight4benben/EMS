@@ -11,28 +11,29 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         /// 获取设备用能越限告警
         /// </summary>
-        public static string GetDeviceOverLimitValueSQL = @" SELECT ID,Name,Value,LimitValue,DiffValue,Rate 
-	                                                        FROM
-		                                                        (SELECT AlarmPlan.F_CircuitID AS ID
-			                                                            ,MeterUseInfo.F_MeterName AS Name
-			                                                            ,SUM(HourResult.F_Value) AS Value
-			                                                            ,AlarmPlan.F_LimitValue AS LimitValue
-			                                                            ,SUM(HourResult.F_Value)-AlarmPlan.F_LimitValue AS DiffValue
-			                                                            ,CASE WHEN AlarmPlan.F_LimitValue = 0 THEN NULL ELSE (SUM(HourResult.F_Value)-AlarmPlan.F_LimitValue)/AlarmPlan.F_LimitValue*100 END Rate
-		                                                            FROM T_MC_MeterHourResult AS HourResult
-                                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
-			                                                        INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
-                                                                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
-			                                                        INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
-		                                                            INNER JOIN T_ST_DeviceAlarmPlan AS AlarmPlan ON Circuit.F_CircuitID=AlarmPlan.F_CircuitID
-		                                                           		                                                          
-                                                                    WHERE AlarmPlan.F_BuildID=@BuildID
-                                                                        AND ParamInfo.F_IsEnergyValue = 1
-			                                                            AND F_StartHour Between CONVERT(varchar(10), @StartDay+ AlarmPlan.F_StartTime,120)
-			                                                            AND (CASE WHEN AlarmPlan.F_IsOverDay =1 THEN DATEADD( DAY,1,CONVERT(varchar(10), @StartDay+ AlarmPlan.F_StartTime,120) )ELSE CONVERT(varchar(10), @StartDay+ AlarmPlan.F_StartTime,120) END)
-			                                                        GROUP BY AlarmPlan.F_CircuitID,MeterUseInfo.F_MeterName,AlarmPlan.F_LimitValue) T1
-	                                                        WHERE Value > LimitValue
-	                                                        ORDER BY ID
+        public static string GetDeviceOverLimitValueSQL = @" SELECT ID,Name,TimePeriod,Value,LimitValue,DiffValue,Rate 
+			                                                        FROM
+				                                                        (SELECT AlarmPlan.F_CircuitID AS ID
+						                                                        ,MeterUseInfo.F_MeterName AS Name
+						                                                        ,SUM(HourResult.F_Value) AS Value
+						                                                        ,AlarmPlan.F_LimitValue AS LimitValue
+						                                                        ,SUM(HourResult.F_Value)-AlarmPlan.F_LimitValue AS DiffValue
+						                                                        ,AlarmPlan.F_StartTime +'~'+AlarmPlan.F_EndTime TimePeriod
+						                                                        ,CASE WHEN AlarmPlan.F_LimitValue = 0 THEN NULL ELSE (SUM(HourResult.F_Value)-AlarmPlan.F_LimitValue)/AlarmPlan.F_LimitValue*100 END Rate
+					                                                        FROM T_MC_MeterHourResult AS HourResult
+					                                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
+					                                                        INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
+					                                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
+					                                                        INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+					                                                        INNER JOIN T_ST_DeviceAlarmPlan AS AlarmPlan ON Circuit.F_CircuitID=AlarmPlan.F_CircuitID                                                   		                                                          
+					                                                        WHERE AlarmPlan.F_BuildID=@BuildID
+						                                                        AND ParamInfo.F_IsEnergyValue = 1
+						                                                         AND F_StartHour BETWEEN (CASE WHEN AlarmPlan.F_IsOverDay =1 THEN DATEADD( DAY,-1,@StartDay+' '+ AlarmPlan.F_StartTime)
+                                                                                        ELSE @StartDay+' '+AlarmPlan.F_StartTime END) AND @StartDay+' '+AlarmPlan.F_EndTime 
+					                                                        GROUP BY AlarmPlan.F_CircuitID,MeterUseInfo.F_MeterName,AlarmPlan.F_LimitValue,AlarmPlan.F_StartTime +'~'+AlarmPlan.F_EndTime 
+					                                                        ) T1			
+			                                                        WHERE Value > LimitValue
+			                                                        ORDER BY ID
                                                     ";
         /// <summary>
         /// 设置 设备用能越限告警

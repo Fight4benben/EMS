@@ -10,6 +10,7 @@ namespace EMS.DAL.Entities
     {
         public string ID { get; set; }
         public string Name { get; set; }
+        public string TimePeriod { get; set; }
         public decimal? Value { get; set; }
         public decimal? LimitValue { get; set; }
         public decimal? DiffValue { get; set; }
