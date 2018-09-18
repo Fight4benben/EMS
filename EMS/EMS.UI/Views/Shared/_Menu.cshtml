@@ -198,7 +198,7 @@
                         }
                         @if (menu.Menus.Contains("8.4") || menu.Menus.Contains("all"))
                         {
-                            <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>办公室异常时段用能提示</a></li>
+                            <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>非工作时段智能报警</a></li>
                         }
                         
                     </ul>
@@ -207,14 +207,14 @@
 
             @if (menu.Menus.Contains("XP") || menu.Menus.Contains("all"))
             {
-                <li id="state" class="">
+                <li id="menu_state" class="">
                     <a href="javascript:;">
                         <i class="fa fa-signal"></i><span class="title">系统状态 </span><span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" id="">
                         @if (menu.Menus.Contains("X.1") || menu.Menus.Contains("all"))
                         {
-                            <li id="communicate" class=""><a href="#"><i class="fa fa-caret-right"></i>通讯状态</a></li>
+                            <li id="menu_communicate" class=""><a href="/Infomation/MeterStatus"><i class="fa fa-caret-right"></i>通讯状态</a></li>
                         }
                         
                     </ul>

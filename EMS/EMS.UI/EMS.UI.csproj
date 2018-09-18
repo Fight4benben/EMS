@@ -162,7 +162,8 @@
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
-    <Compile Include="Controllers\Circuit\MeterConnectStateController.cs" />
+    <Compile Include="Controllers\Infomation\InfomationController.cs" />
+    <Compile Include="Controllers\Infomation\MeterConnectStateController.cs" />
     <Compile Include="Controllers\Department\DepartmentAverageController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />
@@ -323,6 +324,7 @@
     <Content Include="app\js\equipment.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
+    <Content Include="app\js\Infomation\MeterStatus.js" />
     <Content Include="app\js\Item\Compare.js" />
     <Content Include="app\js\Item\Overview.js" />
     <Content Include="app\js\Item\Report.js" />
@@ -689,6 +691,7 @@
     <Content Include="Views\Setting\DepartmentOutOfWork.cshtml" />
     <Content Include="Views\Item\RingRatio.cshtml" />
     <Content Include="Views\Department\Average.cshtml" />
+    <Content Include="Views\Infomation\MeterStatus.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

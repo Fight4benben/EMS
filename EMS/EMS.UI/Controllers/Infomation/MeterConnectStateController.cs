@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace EMS.UI.Controllers.Circuit
+namespace EMS.UI.Controllers
 {
     [Authorize]
     public class MeterConnectStateController : ApiController
@@ -23,6 +23,30 @@ namespace EMS.UI.Controllers.Circuit
             {
                 string userName = User.Identity.Name;
                 return service.GetViewModelByUserName(userName);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public object Get(string buildId)
+        {
+            try
+            {
+                return service.GetViewModel(buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public object Get(string buildId,string energyCode)
+        {
+            try
+            {
+                return service.GetViewModel(buildId,energyCode);
             }
             catch (Exception e)
             {

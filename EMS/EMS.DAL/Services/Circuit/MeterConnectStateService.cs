@@ -25,8 +25,6 @@ namespace EMS.DAL.Services
         /// <returns>建筑ID，分类能耗，第一栋建筑的所有仪表状态</returns>
         public MeterConnectStateViewModel GetViewModelByUserName(string userName)
         {
-            DateTime today = DateTime.Now;
-
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
             string buildId;
             if (builds.Count > 0)
@@ -51,6 +49,37 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+        public MeterConnectStateViewModel GetViewModel(string buildId)
+        {
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<ConnectState> connectStates = context.GetMeterConnectStateList(buildId, energyCode);
+
+            MeterConnectStateViewModel viewModel = new MeterConnectStateViewModel();
+            viewModel.Energys = energys;
+            viewModel.ConnectStates = connectStates;
+
+            return viewModel;
+        }
+
+        public MeterConnectStateViewModel GetViewModel(string buildId,string energyCode)
+        {
+
+            List<ConnectState> connectStates = context.GetMeterConnectStateList(buildId, energyCode);
+
+            MeterConnectStateViewModel viewModel = new MeterConnectStateViewModel();
+            viewModel.ConnectStates = connectStates;
+
+            return viewModel;
+        }
+
+
+
         /// <summary>
         /// 获取仪表通讯状态
         /// </summary>
@@ -60,7 +89,11 @@ namespace EMS.DAL.Services
         /// <returns>累计中断时间 "DiffDate"格式为 "0:00:04" 表示 为0天0小时4分钟</returns>
         public MeterConnectStateViewModel GetViewModel(string buildId, string energyCode, string type)
         {
-            List<ConnectState> connectStates = context.GetMeterConnectStateList(buildId, energyCode,type);
+            List<ConnectState> connectStates;
+            if(type=="1")
+                connectStates = context.GetMeterConnectStateList(buildId, energyCode,type);
+            else
+                connectStates = context.GetMeterConnectStateList(buildId, energyCode);
 
             MeterConnectStateViewModel viewModel = new MeterConnectStateViewModel();
             viewModel.ConnectStates = connectStates;
