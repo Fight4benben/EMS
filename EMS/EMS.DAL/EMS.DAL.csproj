@@ -71,6 +71,7 @@
     <Compile Include="Entities\CollectValue.cs" />
     <Compile Include="Entities\CompareData.cs" />
     <Compile Include="Entities\BuildAlarmLevel.cs" />
+    <Compile Include="Entities\ConnectState.cs" />
     <Compile Include="Entities\DeptCompletionRate.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="RepositoryImp\Circuit\CircuitCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitReportDbContext.cs" />
+    <Compile Include="RepositoryImp\Circuit\MeterConnectStateDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentEnergyAverageDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentOverviewDbContext.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="StaticResources\Circuit\CircuitCompareResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitResources.cs" />
+    <Compile Include="StaticResources\Circuit\MeterConnectStateResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentCompareResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentEnergyAverageResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentOverviewResources.cs" />
