@@ -249,8 +249,8 @@ var RingRatio = (function () {
 
             rows.push({
                 time: '环比',
-                today: EMS.Tool.getSum(currentData),
-                yesterday: EMS.Tool.getSum(previousData),
+                today: EMS.Tool.getSum(currentData).toFixed(2),
+                yesterday: EMS.Tool.getSum(previousData).toFixed(2),
                 compare: ((EMS.Tool.getSum(currentData) - EMS.Tool.getSum(previousData)) * 100 / EMS.Tool.getSum(previousData)).toFixed(2) + '%'
             });
 

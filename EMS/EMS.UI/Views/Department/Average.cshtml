@@ -1,0 +1,52 @@
+﻿<div class="container-fluid main-top equipAlarm">
+    <div class="col-xs-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                建筑名称：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="buildinglist"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="equip-row">
+            <label class="equip-width">类型：</label>
+            <select id="dateType" class="equip-date">
+                <option value="MM">月</option>
+                <option value="QQ">季</option>
+                <option value="YY">年</option>
+            </select>
+        </div>
+        <div class="equip-row equip-row2">
+            <label class="equip-width">日期：</label>
+            <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+        <div class="Ranking-sort">
+            <label class="equip-width season-alarm">季度：</label>
+            <select id="season" class="form-control equip-right2 equip-right3 season-alarm">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label class="equip-width">分类：</label>
+            <select id="energys" class="form-control equip-right2"></select>
+        </div>
+        <button id="searchButton" type="button" class="btn-equip">查询</button>
+       
+    </div>
+    <div id="alarmTable" class="col-xs-12 R-Columnar">
+
+    </div>
+
+
+
+</div>
+<script src="~/app/js/Department/Average.js"></script>
+
