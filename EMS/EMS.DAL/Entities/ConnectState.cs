@@ -12,7 +12,7 @@ namespace EMS.DAL.Entities
         public string Name { get; set; }
         public string CollectionName { get; set; }
         public string States { get; set; }
-        public string DisConnectTime { get; set; }
+        public DateTime? DisConnectTime { get; set; }
         public string DiffDate { get; set; }
 
     }

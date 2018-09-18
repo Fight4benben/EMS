@@ -162,6 +162,7 @@
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
+    <Compile Include="Controllers\Circuit\MeterConnectStateController.cs" />
     <Compile Include="Controllers\Department\DepartmentAverageController.cs" />
     <Compile Include="Controllers\Department\DepartmentCheckController.cs" />
     <Compile Include="Controllers\Department\DepartmentRankController.cs" />

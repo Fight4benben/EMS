@@ -136,6 +136,7 @@
     <Compile Include="Services\HistoryParamServiceTest.cs" />
     <Compile Include="Services\HomeServiceTest.cs" />
     <Compile Include="Services\MapServiceTest.cs" />
+    <Compile Include="Services\MeterConnectStateServiceTest.cs" />
     <Compile Include="Services\OverAllSearchServerTest.cs" />
     <Compile Include="Services\PriceServiceTest.cs" />
     <Compile Include="Services\RegionCompareServiceTest.cs" />

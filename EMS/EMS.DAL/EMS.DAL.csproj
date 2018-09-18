@@ -165,6 +165,7 @@
     <Compile Include="Services\Circuit\CircuitOverviewService.cs" />
     <Compile Include="Services\Circuit\CircuitReportService.cs" />
     <Compile Include="Services\Circuit\CircuitRingRatioService.cs" />
+    <Compile Include="Services\Circuit\MeterConnectStateService.cs" />
     <Compile Include="Services\Department\DepartmentCompareService.cs" />
     <Compile Include="Services\Department\DepartmentEnergyAverageService.cs" />
     <Compile Include="Services\Department\DepartmentOverviewService.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="ViewModels\Circuit\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitOverviewViewModel.cs" />
+    <Compile Include="ViewModels\Circuit\MeterConnectStateViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentCompareViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentEnergyAverageViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentOverviewModel.cs" />
