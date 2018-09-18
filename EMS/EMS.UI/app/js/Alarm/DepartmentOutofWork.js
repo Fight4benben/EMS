@@ -65,9 +65,19 @@ var OutOfWork = (function(){
 
 			var columns=[
 				{field:'name',title:'名称',width:'250px'},
-				{field:'value',title:'实际值'},
-				{field:'limitValue',title:'设定值'},
-				{field:'diffValue',title:'差值'}
+				{field:'timePeriod',title:'非工作时间段'},
+				{field:'value',title:'能耗值'},
+				{field:'limitValue',title:'限定报警值'},
+				{field:'diffValue',title:'差值',cellStyle:function(value,row,index){
+
+					if(row.limitValue!=0){
+						var rate = row.diffValue/row.limitValue;
+						if(rate>0 && rate<=0.5)
+							return {classes:'warning'}
+						else if(rate>0.5)
+							return {classes:'danger'}
+					}
+				}}
 			];
 
 			var rows = [];
@@ -76,6 +86,7 @@ var OutOfWork = (function(){
 				var row={};
 				row.name = val.name;
 				row.value = val.value;
+				row.timePeriod = val.timePeriod;
 				row.limitValue = val.limitValue;
 				row.diffValue = val.diffValue;
 
@@ -88,6 +99,7 @@ var OutOfWork = (function(){
 
 			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border'});
 
+			$("table td").css('font-size','15px');
 		}
 
 

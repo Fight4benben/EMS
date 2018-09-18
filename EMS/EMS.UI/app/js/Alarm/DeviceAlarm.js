@@ -266,9 +266,9 @@ var DeviceAlarm = (function(){
 			$.each(data.compareDatas, function(key, val) {
 				var row={};
 				row.name = val.name;
-				row.value = val.value;
-				row.lastValue = val.lastValue;
-				row.diffValue = val.diffValue;
+				row.value = val.value.toFixed(2);
+				row.lastValue = val.lastValue.toFixed(2);
+				row.diffValue = val.diffValue.toFixed(2);
 				row.rate = val.rate.toFixed(2)+"%";
 				row.level = val.rate;
 
@@ -284,18 +284,17 @@ var DeviceAlarm = (function(){
 					var style={};
 
 					if(parseInt(row.level)>=(firstLevel*100) && parseInt(row.level)<=(secondLevel*100))
-						style={css:{'background-color':'#FFFF00'}};
+						style={classes:'warning'}//style={css:{'background-color':'#FFFF00'}};
 					else if(parseInt(row.level)>(secondLevel*100))
-						style={css:{'background-color':'#FF0000','color':'white'}};
+						style={classes:'danger'}//style={css:{'background-color':'#FF0000','color':'white'}};
 					else if(parseInt(row.level)>=-(secondLevel*100) && parseInt(row.level)<=-(firstLevel*100))
-						style={css:{'background-color':'#1E90FF','color':'white'}};
+						style={classes:'info'}//style={css:{'background-color':'#1E90FF','color':'white'}};
 					else if(parseInt(row.level)<-(secondLevel*100))
-						style={css:{'background-color':'#66CD00','color':'white'}};
-					   
+						style={classes:'success'}//style={css:{'background-color':'#66CD00','color':'white'}};
 		             return style;
 				}});
 
-
+			$("table td").css('font-size','15px');
 		}
 
 		function setRowColor(rowIndex){

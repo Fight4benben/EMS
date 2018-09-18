@@ -189,17 +189,18 @@ var DepartmentAlarm = (function(){
 					var style={};
 
 					if(parseInt(row.level)>=(firstLevel*100) && parseInt(row.level)<=(secondLevel*100))
-						style={css:{'background-color':'#FFFF00'}};
+						style={classes:'warning'}//style={css:{'background-color':'#FFFF00'}};
 					else if(parseInt(row.level)>(secondLevel*100))
-						style={css:{'background-color':'#FF0000','color':'white'}};
+						style={classes:'danger'}//style={css:{'background-color':'#FF0000','color':'white'}};
 					else if(parseInt(row.level)>=-(secondLevel*100) && parseInt(row.level)<=-(firstLevel*100))
-						style={css:{'background-color':'#1E90FF','color':'white'}};
+						style={classes:'info'}//style={css:{'background-color':'#1E90FF','color':'white'}};
 					else if(parseInt(row.level)<-(secondLevel*100))
-						style={css:{'background-color':'#66CD00','color':'white'}};
+						style={classes:'success'}//style={css:{'background-color':'#66CD00','color':'white'}};
 					   
 		             return style;
 				}});
 
+			$("table td").css('font-size','15px');
 
 		}
 
