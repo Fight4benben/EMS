@@ -86,12 +86,12 @@
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
+				//console.log(data);
 				try{
 					showBuilds(data);
 					showEnergys(data);
 					//setTarget(data);
-					//showTable(data);
+					showTable(data);
 				}catch(e){
 
 				}finally{
@@ -116,6 +116,37 @@
 				return;
 
 			EMS.DOM.initSelect(data.energys,$("#energys"),"energyItemName","energyItemCode");
+		}
+
+		function showTable(data){
+			var columns=[
+				{field:'name',title:'部门名称',width:'250px'},
+				{field:'totalValue',title:'总能耗'},
+				{field:'totalPeople',title:'部门人数'},
+				{field:'peopleAvg',title:'部门人均能耗'},
+				{field:'totalArea',title:'部门面积'},
+				{field:'areaAvg',title:'部门单位面积能耗'}
+			];
+			var rows = [];
+
+			$.each(data.averageData, function(key, val) {
+				var row={};
+				row.id = val.id;
+				row.name = val.name;
+				row.totalValue = val.totalValue;
+				row.totalPeople = val.totalPeople;
+				row.peopleAvg = val.peopleAvg.toFixed(2);
+				row.totalArea = val.totalArea.toFixed(2);
+				row.areaAvg = val.areaAvg.toFixed(2);
+
+				rows.push(row);	
+			});
+
+			var height = $("#alarmTable").height();
+			$("#alarmTable").html('<table></table>');
+			$("#alarmTable>table").attr('data-height',height);
+
+			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border'});
 		}
 
 	};
