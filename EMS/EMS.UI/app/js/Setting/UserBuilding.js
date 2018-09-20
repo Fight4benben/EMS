@@ -20,7 +20,6 @@
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
 				try{
 					showUsers(data);
 					showTable(data);
@@ -48,9 +47,10 @@
 				return;
 
 			var columns=[
+				{field:'binded',title:'是否绑定',checkbox:'true'},
 				{field:'buildID',title:'建筑编号'},
-				{field:'buildName',title:'建筑名称'},
-				{field:'binded',title:'是否绑定',checkbox:'true'}
+				{field:'buildName',title:'建筑名称'}
+				
 			];
 
 			var rows = [];
@@ -69,6 +69,8 @@
 			$("#selectedUserBuilding>table").attr('data-height',height);
 
 			EMS.DOM.showTable($("#selectedUserBuilding>table"),columns,rows,{striped:true,checkboxHeader:false,classes:'table table-border'});
+
+			$("table td").css('font-size','15px');
 
 			$("#mainTable").on('check.bs.table',function(event,row,$element){
 
