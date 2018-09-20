@@ -236,6 +236,10 @@
                         {
                             <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>办公室报警设置</a></li>
                         }
+                        @if (menu.Menus.Contains("9.3") || menu.Menus.Contains("all"))
+                        {
+                            <li id="menu_user_building" class=""><a href="~/Setting/UserBuilding"><i class="fa fa-caret-right"></i>用户建筑关联</a></li>
+                        }
                     </ul>
                 </li>
             }
