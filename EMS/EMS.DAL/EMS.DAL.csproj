@@ -95,6 +95,7 @@
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
+    <Compile Include="Entities\Setting\UserSet.cs" />
     <Compile Include="Entities\TreeView.cs" />
     <Compile Include="Entities\TreeViewInfo.cs" />
     <Compile Include="Entities\UserMenus.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
+    <Compile Include="RepositoryImp\Setting\UserSetDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentCompletionRateService.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
     <Compile Include="Services\Region\RegionReportService.cs" />
+    <Compile Include="Services\Setting\UserSetService.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentCompletionRateResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentOverLimitResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentResources.cs" />
@@ -214,6 +217,7 @@
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
     <Compile Include="StaticResources\Region\RegionReportResources.cs" />
+    <Compile Include="StaticResources\Setting\UserSetResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\BinaryToDouble.cs" />
@@ -246,6 +250,7 @@
     <Compile Include="ViewModels\Region\RegionCompareViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionMainViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionReportViewModel.cs" />
+    <Compile Include="ViewModels\Setting\UserSetViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

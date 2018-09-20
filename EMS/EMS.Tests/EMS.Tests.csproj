@@ -142,6 +142,7 @@
     <Compile Include="Services\RegionCompareServiceTest.cs" />
     <Compile Include="Services\RegionReportServiceTest.cs" />
     <Compile Include="Services\RegionServiceTest.cs" />
+    <Compile Include="Services\Setting\UserSetServiceTest.cs" />
     <Compile Include="Utils\UtilTest.cs" />
   </ItemGroup>
   <ItemGroup>
