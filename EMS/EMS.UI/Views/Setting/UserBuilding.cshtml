@@ -1,0 +1,43 @@
+﻿<div class="container-fluid main-top equipAlarm">
+    <div class="col-xs-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                用户列表：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="userlist"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="selectedUserBuilding" class="col-xs-12 R-Columnar">
+
+    </div>
+
+    <!--考核目标设置模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="myModalLabel">考核目标设置</h5>
+                </div>
+                <div class="modal-body">
+                    <label>等级1：</label>
+                    <input id="level1" type="text" /> %
+                    <label>等级2：</label>
+                    <input id="level2" type="text" /> %
+                </div>
+                <div class="modal-footer">
+                    <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/app/js/Setting/UserBuilding.js"></script>

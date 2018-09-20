@@ -199,6 +199,7 @@
     <Compile Include="Controllers\Setting\SettingAlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingAlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingController.cs" />
+    <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -338,6 +339,7 @@
     <Content Include="app\js\Region\Report.js" />
     <Content Include="app\js\Setting\DepartmentLimitSetting.js" />
     <Content Include="app\js\Setting\DeviceAlarmLimitSetting.js" />
+    <Content Include="app\js\Setting\UserBuilding.js" />
     <Content Include="app\js\tools.js" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />
@@ -692,6 +694,7 @@
     <Content Include="Views\Item\RingRatio.cshtml" />
     <Content Include="Views\Department\Average.cshtml" />
     <Content Include="Views\Infomation\MeterStatus.cshtml" />
+    <Content Include="Views\Setting\UserBuilding.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

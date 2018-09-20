@@ -19,5 +19,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult UserBuilding()
+        {
+            return View();
+        }
     }
 }

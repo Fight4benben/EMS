@@ -97,6 +97,7 @@
     <Compile Include="Entities\ReportValue.cs" />
     <Compile Include="Entities\TreeView.cs" />
     <Compile Include="Entities\TreeViewInfo.cs" />
+    <Compile Include="Entities\UserBuilding.cs" />
     <Compile Include="Entities\UserMenus.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="IRepository\Circuit\ICircuitCompareDbContext.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="IRepository\Region\IRegionReportDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
+    <Compile Include="IRepository\Setting\IUserBuildingDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentCompletionRateDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentOverLimitDbContext.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
+    <Compile Include="RepositoryImp\Setting\UserBuildingDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentCompletionRateService.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
     <Compile Include="Services\Region\RegionReportService.cs" />
+    <Compile Include="Services\Setting\UserBuildingService.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentCompletionRateResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentOverLimitResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentResources.cs" />
@@ -214,6 +218,7 @@
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
     <Compile Include="StaticResources\Region\RegionReportResources.cs" />
+    <Compile Include="StaticResources\Setting\UserBuildingResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\BinaryToDouble.cs" />
@@ -246,6 +251,7 @@
     <Compile Include="ViewModels\Region\RegionCompareViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionMainViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionReportViewModel.cs" />
+    <Compile Include="ViewModels\Setting\UserBuildingViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
