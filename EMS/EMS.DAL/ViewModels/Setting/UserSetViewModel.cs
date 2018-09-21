@@ -10,6 +10,6 @@ namespace EMS.DAL.ViewModels
     public class UserSetViewModel
     {
         public List<UserSet> UserSets { get; set; }
-
+        public  ResultState ResultState { get; set; }
     }
 }

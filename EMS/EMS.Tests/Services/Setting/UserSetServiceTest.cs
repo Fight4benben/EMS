@@ -21,5 +21,41 @@ namespace EMS.Tests.Services.Setting
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
+
+        [TestMethod]
+        public void TestAddUser()
+        {
+            UserSetService service = new UserSetService();
+            UserSetViewModel ViewModel = service.AddUser("tes2","","1");
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
+        public void TestUpdateUser_OK()
+        {
+            UserSetService service = new UserSetService();
+            UserSetViewModel ViewModel = service.UpdateUser("tes2", "a", "d41d8cd98f00b204e9800998ecf8427e", "2");
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
+        public void TestUpdateUser_NG()
+        {
+            UserSetService service = new UserSetService();
+            UserSetViewModel ViewModel = service.UpdateUser("tes2", "a","n", "2");
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
+        public void TestDeleteUser()
+        {
+            UserSetService service = new UserSetService();
+            UserSetViewModel ViewModel = service.DeleteUser("tes2");
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
+    <Compile Include="Entities\Setting\ResultState.cs" />
     <Compile Include="Entities\Setting\UserSet.cs" />
     <Compile Include="Entities\TreeView.cs" />
     <Compile Include="Entities\TreeViewInfo.cs" />
