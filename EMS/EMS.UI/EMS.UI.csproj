@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Alarm\AlarmDepartmentController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmDepartmentFreeTimeController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceFreeTimeController.cs" />

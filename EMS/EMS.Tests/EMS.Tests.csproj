@@ -116,6 +116,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Services\AlarmDepartmentCompletionRateServiceTest.cs" />
+    <Compile Include="Services\AlarmDepartmentFreeTimeServiceTest.cs" />
     <Compile Include="Services\AlarmDepartmentOverLimitServiceTest.cs" />
     <Compile Include="Services\AlarmDepartmentServiceTest.cs" />
     <Compile Include="Services\AlarmDeviceFreeTimeServiceTest.cs" />

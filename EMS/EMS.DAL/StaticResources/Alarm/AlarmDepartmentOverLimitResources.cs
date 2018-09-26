@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EMS.DAL.StaticResources.Alarm
+namespace EMS.DAL.StaticResources
 {
     public class AlarmDepartmentOverLimitResources
     {

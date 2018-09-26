@@ -1,6 +1,5 @@
 ﻿using EMS.DAL.Entities;
 using EMS.DAL.StaticResources;
-using EMS.DAL.StaticResources.Alarm;
 using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
