@@ -12,44 +12,40 @@ namespace EMS.DAL.StaticResources
         /// 获取设告警等级值
         /// </summary>
         public static string GetAlarmDeviceOverLimitFreeTimeSQL = @" SELECT T1.ID,T1.Name,TimePeriod,T1.F_StartHour AS 'Time',T1.Value,T2.Value AS LimitValue,T1.Value-T2.Value AS DiffValue
-		                                                            ,CASE WHEN T2.Value >0 THEN (T1.Value-T2.Value)/T2.Value*100 ELSE NULL END Rate 
-		                                                            FROM
-			                                                            (SELECT AlarmFreeTime.F_CircuitID AS ID
-					                                                            ,MeterUseInfo.F_MeterName AS Name
-					                                                            ,HourResult.F_StartHour 
-					                                                            ,SUM(HourResult.F_Value) AS Value
-					                                                            ,AlarmFreeTime.F_StartTime +'~'+AlarmFreeTime.F_EndTime TimePeriod
-				                                                            FROM T_MC_MeterHourResult AS HourResult
-				                                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
-				                                                            INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
-				                                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
-				                                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
-				                                                            INNER JOIN T_ST_DeviceAlarmFreeTime AS AlarmFreeTime ON Circuit.F_CircuitID=AlarmFreeTime.F_CircuitID                                                   		                                                          
-				                                                            WHERE AlarmFreeTime.F_BuildID=@BuildID
-					                                                            AND ParamInfo.F_IsEnergyValue = 1
-						                                                            AND F_StartHour BETWEEN (CASE WHEN AlarmFreeTime.F_IsOverDay =1 THEN DATEADD( DAY,-1,@StartDay+' '+ AlarmFreeTime.F_StartTime)
-                                                                                        ELSE @StartDay+' '+AlarmFreeTime.F_StartTime END) AND @StartDay+' '+AlarmFreeTime.F_EndTime 
-				                                                            GROUP BY AlarmFreeTime.F_CircuitID,MeterUseInfo.F_MeterName,HourResult.F_StartHour,AlarmFreeTime.F_StartTime +'~'+AlarmFreeTime.F_EndTime 
-				                                                            ) T1				
-                                                            INNER JOIN 
-
-			                                                            (SELECT AlarmFreeTime.F_CircuitID AS ID
-					                                                            ,SUM(HourResult.F_Value)*F_LimitValue AS Value
-				                                                            FROM T_MC_MeterHourResult AS HourResult
-				                                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
-				                                                            INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
-				                                                            INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
-				                                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
-				                                                            INNER JOIN T_ST_DeviceAlarmFreeTime AS AlarmFreeTime ON Circuit.F_CircuitID=AlarmFreeTime.F_CircuitID                                                   		                                                          
-				                                                            WHERE AlarmFreeTime.F_BuildID=@BuildID
-					                                                            AND ParamInfo.F_IsEnergyValue = 1
-						                                                            AND F_StartHour = DATEADD( DAY,-1,DATEADD( HOUR,-1,@StartDay+' '+ AlarmFreeTime.F_StartTime))
-				                                                            GROUP BY AlarmFreeTime.F_CircuitID,F_LimitValue
-				                                                            ) T2
-				
-			                                                             ON T2.ID=T1.ID
-		                                                            WHERE T1.Value > T2.Value
-		                                                            ORDER BY ID
+		                                                                    ,CASE WHEN T2.Value >0 THEN (T1.Value-T2.Value)/T2.Value*100 ELSE NULL END Rate 
+		                                                                    FROM
+			                                                                    (SELECT AlarmFreeTime.F_CircuitID AS ID
+					                                                                    ,MeterUseInfo.F_MeterName AS Name
+					                                                                    ,HourResult.F_StartHour 
+					                                                                    ,HourResult.F_Value AS Value
+					                                                                    ,AlarmFreeTime.F_StartTime +'~'+AlarmFreeTime.F_EndTime TimePeriod
+				                                                                    FROM T_MC_MeterHourResult AS HourResult
+				                                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
+				                                                                    INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
+				                                                                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
+				                                                                    INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+				                                                                    INNER JOIN T_ST_DeviceAlarmFreeTime AS AlarmFreeTime ON Circuit.F_CircuitID=AlarmFreeTime.F_CircuitID                                                   		                                                          
+				                                                                    WHERE AlarmFreeTime.F_BuildID=@BuildID
+					                                                                    AND ParamInfo.F_IsEnergyValue = 1
+						                                                                    AND F_StartHour BETWEEN (CASE WHEN AlarmFreeTime.F_IsOverDay =1 THEN DATEADD( DAY,-1,@StartDay+' '+ AlarmFreeTime.F_StartTime)
+                                                                                                ELSE @StartDay+' '+AlarmFreeTime.F_StartTime END) AND DATEADD( HOUR,-1,@StartDay+' '+AlarmFreeTime.F_EndTime )				
+				                                                                    ) T1				
+	                                                                    INNER JOIN 
+			                                                                    (SELECT AlarmFreeTime.F_CircuitID AS ID
+					                                                                    ,HourResult.F_Value*F_LimitValue AS Value
+				                                                                    FROM T_MC_MeterHourResult AS HourResult
+				                                                                    INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
+				                                                                    INNER JOIN T_ST_MeterUseInfo AS MeterUseInfo ON MeterUseInfo.F_MeterID=HourResult.F_MeterID
+				                                                                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
+				                                                                    INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
+				                                                                    INNER JOIN T_ST_DeviceAlarmFreeTime AS AlarmFreeTime ON Circuit.F_CircuitID=AlarmFreeTime.F_CircuitID                                                   		                                                          
+				                                                                    WHERE AlarmFreeTime.F_BuildID=@BuildID
+					                                                                    AND ParamInfo.F_IsEnergyValue = 1
+						                                                                    AND F_StartHour = DATEADD( DAY,-1,DATEADD( HOUR,-1,@StartDay+' '+ AlarmFreeTime.F_StartTime))				
+				                                                                    ) T2
+			                                                                     ON T2.ID=T1.ID
+		                                                                    WHERE T1.Value > T2.Value
+		                                                                    ORDER BY ID
                                                          ";
 
         /// <summary>
