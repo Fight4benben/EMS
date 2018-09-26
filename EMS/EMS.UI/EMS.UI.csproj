@@ -161,6 +161,7 @@
     <Compile Include="Controllers\Alarm\AlarmDepartmentController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDepartmentOverLimitController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
+    <Compile Include="Controllers\Alarm\AlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
     <Compile Include="Controllers\Infomation\InfomationController.cs" />
     <Compile Include="Controllers\Infomation\MeterConnectStateController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Controllers\Region\RegionMainController.cs" />
     <Compile Include="Controllers\Region\RegionReportController.cs" />
     <Compile Include="Controllers\Setting\SettingAlarmDepartmentOverLimitController.cs" />
+    <Compile Include="Controllers\Setting\SettingAlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Setting\SettingAlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingController.cs" />
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />

@@ -118,6 +118,7 @@
     <Compile Include="Services\AlarmDepartmentCompletionRateServiceTest.cs" />
     <Compile Include="Services\AlarmDepartmentOverLimitServiceTest.cs" />
     <Compile Include="Services\AlarmDepartmentServiceTest.cs" />
+    <Compile Include="Services\AlarmDeviceFreeTimeServiceTest.cs" />
     <Compile Include="Services\AlarmDeviceOverLimitServiceTest.cs" />
     <Compile Include="Services\CircuitCollectServiceTest.cs" />
     <Compile Include="Services\CircuitCompareServiceTest.cs" />

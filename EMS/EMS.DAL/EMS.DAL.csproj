@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AlarmFreeTime.cs" />
     <Compile Include="Entities\BuildExtendInfo.cs" />
     <Compile Include="Entities\BuildInfo.cs" />
     <Compile Include="Entities\BuildMap.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentOverLimitDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDeviceDbContext.cs" />
+    <Compile Include="RepositoryImp\Alarm\AlarmDeviceFreeTimeDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitReportDbContext.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Services\Alarm\AlarmDepartmentCompletionRateService.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentOverLimitService.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentService.cs" />
+    <Compile Include="Services\Alarm\AlarmDeviceFreeTimeService.cs" />
     <Compile Include="Services\Alarm\AlarmDeviceService.cs" />
     <Compile Include="Services\Circuit\CircuitCollectService.cs" />
     <Compile Include="Services\Circuit\CircuitCompareService.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="StaticResources\Alarm\AlarmDepartmentCompletionRateResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentOverLimitResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentResources.cs" />
+    <Compile Include="StaticResources\Alarm\AlarmDeviceFreeTimeResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDeviceResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitCollectResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitCompareResources.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="ViewModels\Alarm\AlarmDepartmentCompletionRateViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDepartmentOverLimitViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDepartmentViewModel.cs" />
+    <Compile Include="ViewModels\Alarm\AlarmDeviceFreeTimeViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitCollectViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitCompareViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitReportViewModel.cs" />
