@@ -43,7 +43,6 @@ namespace EMS.DAL.Services
 
             //List<AlarmFreeTime> energyAlarmValue = context.GetOverLimitValueList(buildId, today.ToString("yyyy-MM-dd"));
 
-
             AlarmDeviceFreeTimeViewModel viewModel = new AlarmDeviceFreeTimeViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
@@ -84,17 +83,17 @@ namespace EMS.DAL.Services
 
                 foreach (AlarmTempValue tempValue in tempList)
                 {
-
-                    energyAlarmValue.Add(new AlarmFreeTime
-                    {
-                        ID = item.ID,
-                        Name = tempValue.Name,
-                        TimePeriod = tempValue.TimePeriod,
-                        Time = tempValue.Time,
-                        Value = tempValue.Value,
-                        LimitValue = item.Value,
-                        DiffValue = tempValue.Value - item.Value
-                    });
+                    if(tempValue.Value>item.Value)
+                        energyAlarmValue.Add(new AlarmFreeTime
+                        {
+                            ID = item.ID,
+                            Name = tempValue.Name,
+                            TimePeriod = tempValue.TimePeriod,
+                            Time = tempValue.Time,
+                            Value = tempValue.Value,
+                            LimitValue = item.Value,
+                            DiffValue = tempValue.Value - item.Value
+                        });
                 }
             }
 

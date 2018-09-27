@@ -18,8 +18,8 @@ namespace EMS.Tests.Services
         {
             AlarmDeviceFreeTimeService service = new AlarmDeviceFreeTimeService();
             AlarmDeviceFreeTimeViewModel ViewModel = service.GetViewModelByUserName("admin");
-
-            Console.WriteLine(UtilTest.GetJson(ViewModel));
+            UtilTest.GetJson(ViewModel);
+            Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
         }
 
         [TestMethod]
