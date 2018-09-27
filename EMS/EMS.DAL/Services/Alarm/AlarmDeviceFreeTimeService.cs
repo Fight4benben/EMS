@@ -41,12 +41,13 @@ namespace EMS.DAL.Services
             else
                 energyCode = "";
 
-            List<AlarmFreeTime> energyAlarmValue = context.GetOverLimitValueList(buildId, today.ToString("yyyy-MM-dd"));
+            //List<AlarmFreeTime> energyAlarmValue = context.GetOverLimitValueList(buildId, today.ToString("yyyy-MM-dd"));
+
 
             AlarmDeviceFreeTimeViewModel viewModel = new AlarmDeviceFreeTimeViewModel();
             viewModel.Builds = builds;
             viewModel.Energys = energys;
-            viewModel.EnergyAlarmData = energyAlarmValue;
+            viewModel.EnergyAlarmData = GetAlarmValue(buildId, today.ToString("yyyy-MM-dd"));
 
             return viewModel;
         }
@@ -59,12 +60,47 @@ namespace EMS.DAL.Services
         /// <returns></returns>
         public AlarmDeviceFreeTimeViewModel GetViewModel(string buildId, string date)
         {
-            List<AlarmFreeTime> energyAlarmValue = context.GetOverLimitValueList(buildId, date);
 
             AlarmDeviceFreeTimeViewModel viewModel = new AlarmDeviceFreeTimeViewModel();
-            viewModel.EnergyAlarmData = energyAlarmValue;
+            viewModel.EnergyAlarmData = GetAlarmValue(buildId, date);
             return viewModel;
         }
+
+        private List<AlarmFreeTime> GetAlarmValue(string buildId,string date)
+        {
+            List<AlarmFreeTime> energyAlarmValue = new List<AlarmFreeTime>();
+
+            List<AlarmTempValue> T1 = context.GetOverLimitValueT1List(buildId, date);
+
+            List<AlarmTempValue> T2 = context.GetOverLimitValueT2List(buildId, date);
+
+
+            foreach (var item in T2)
+            {
+                List<AlarmTempValue> tempList = T1.FindAll(t => t.ID == item.ID);
+
+                if (tempList.Count == 0)
+                    continue;
+
+                foreach (AlarmTempValue tempValue in tempList)
+                {
+
+                    energyAlarmValue.Add(new AlarmFreeTime
+                    {
+                        ID = item.ID,
+                        Name = tempValue.Name,
+                        TimePeriod = tempValue.TimePeriod,
+                        Time = tempValue.Time,
+                        Value = tempValue.Value,
+                        LimitValue = item.Value,
+                        DiffValue = tempValue.Value - item.Value
+                    });
+                }
+            }
+
+            return energyAlarmValue;
+        }
+
 
         /// <summary>
         /// 获取设备用能越限告警设备列表（已设置和未设置的列表）

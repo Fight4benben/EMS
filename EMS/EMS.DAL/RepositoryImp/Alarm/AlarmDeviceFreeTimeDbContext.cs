@@ -30,6 +30,30 @@ namespace EMS.DAL.RepositoryImp
         }
 
         /// <summary>
+        /// 获取非工作时间 用能报警值临时表1
+        /// </summary>
+        public List<AlarmTempValue> GetOverLimitValueT1List(string buildId, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",date)
+            };
+            return _db.Database.SqlQuery<AlarmTempValue>(AlarmDeviceFreeTimeResources.GetAlarmDeviceT1SQL, sqlParameters).ToList();
+        }
+
+        /// <summary>
+        /// 获取非工作时间 用能报警值临时表1
+        /// </summary>
+        public List<AlarmTempValue> GetOverLimitValueT2List(string buildId, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@StartDay",date)
+            };
+            return _db.Database.SqlQuery<AlarmTempValue>(AlarmDeviceFreeTimeResources.GetAlarmDeviceT2SQL, sqlParameters).ToList();
+        }
+
+        /// <summary>
         /// 获取已设置的非工作时间，告警百分率 的设备
         /// </summary>
         /// <param name="buildId"></param>
