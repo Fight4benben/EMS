@@ -30,6 +30,32 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<AlarmFreeTime>(AlarmDepartmentFreeTimeResources.GetAlarmDeptOverLimitFreeTimeSQL, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 获取非工作时间 用能报警值临时表1(每个小时用能数据)
+        /// </summary>
+        public List<AlarmTempValue> GetOverLimitValueT1List(string buildId, string energyCode, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",date)
+            };
+            return _db.Database.SqlQuery<AlarmTempValue>(AlarmDepartmentFreeTimeResources.GetAlarmDeptT1SQL, sqlParameters).ToList();
+        }
+
+        /// <summary>
+        /// 获取非工作时间 用能报警值临时表2(用能参考值)
+        /// </summary>
+        public List<AlarmTempValue> GetOverLimitValueT2List(string buildId, string energyCode, string date)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",date)
+            };
+            return _db.Database.SqlQuery<AlarmTempValue>(AlarmDepartmentFreeTimeResources.GetAlarmDeptT2SQL, sqlParameters).ToList();
+        }
+
         public List<BuildViewModel> GetBuildsByUserName(string userName)
         {
             return _db.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL, new SqlParameter("@UserName", userName)).ToList();
