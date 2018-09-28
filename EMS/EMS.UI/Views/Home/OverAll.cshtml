@@ -10,6 +10,21 @@
         </div>
         <label class="Over-search">查询框：</label>
         <input id="search-keyword" type="text"  placeholder="请输入搜索内容"/>
+        <div class="equip-row">
+           <label class="equip-width">类型：</label>
+           <select id="dateType" class="equip-date">
+              <option value="DD">日</option>
+              <option value="MM">月</option>
+              <option value="SS">季度</option>
+           </select>
+       </div>
+       <div class="equip-row equip-row2">
+        <label class="equip-width">日期：</label>
+        <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+            <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+       </div>
         <button id="Dept" type="button" class="searchBtn"><i class="fa fa-group"></i> 部 门</button>
         <button id="Region" type="button" class="searchBtn"><i class="fa fa-flag"></i> 区 域</button>
         <button id="Circuit" type="button" class="searchBtn"><i class="fa fa-sitemap"></i> 支 路</button>
@@ -43,6 +58,35 @@
             </div>
             <div id="dayReport" class="col-lg-9 col-md-8 col-xs-12 OverAll-right">
                 
+            </div>
+            <div class="col-lg-9 col-md-8 col-xs-12 OverAll-right2">
+              <div class="col-md-3 col-xs-12">
+                <div class="month1">
+                    <p><span class="nameType">建筑</span>单位面积能耗</p>
+                    <img src="../app/img/month1.png"/>
+                    <h3>32567</h3>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <div class="year1">
+                <p><span class="nameType">建筑</span>单位面积能耗</p>
+                <img src="../app/img/year1.png"/>
+                <h3>24561</h3>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <div class="month1">
+                 <p><span class="nameType">建筑</span>人均能耗</p>
+                <img src="../app/img/month2.png"/>
+                <h3>4513</h3>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <div class="year1">
+                <p><span class="nameType">建筑</span>人均能耗</p>
+                <img src="../app/img/year2.png"/>
+                <h3>7915</h3>
+              </div>
             </div>
         </div>
     </div>

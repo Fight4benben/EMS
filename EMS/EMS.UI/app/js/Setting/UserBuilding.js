@@ -73,38 +73,49 @@
 			$("table td").css('font-size','15px');
 
 			$("#mainTable").on('check.bs.table',function(event,row,$element){
-
-				var userName =$("#userlist").find('option:selected').text();
-				$.post(baseUrl+"/AddBuild", {userName: userName,buildId:row.buildID}, function(data) {
+				$element.attr('disabled','disabled');
+				setTimeout(function(){
+					var userName =$("#userlist").find('option:selected').text();
+					$.post(baseUrl+"/AddBuild", {userName: userName,buildId:row.buildID}, function(data) {
 					//console.log(data);
-					if(data != 1){
-						console.log("绑定建筑失败,建筑编号为："+row.buildId);
-						$("#mainTable").bootstrapTable('uncheck',$element.attr('data-index'));
-					}
-				});
+						if(data != 1){
+							console.log("绑定建筑失败,建筑编号为："+row.buildId);
+							$("#mainTable").bootstrapTable('uncheck',$element.attr('data-index'));
+						}
+					});
+					$element.removeAttr('disabled');
+				},500);
+				
+
 			});
 
 			$("#mainTable").on('uncheck.bs.table',function(event,row,$element){
-				var userName =$("#userlist").find('option:selected').text();
-				$.ajax({
-                            url: baseUrl,
-                            type: 'delete',
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                userName: $("#userlist").find("option:selected").text(),
-                                buildId: row.buildID
-                            })
-                        }).done(function (data) {
-                            if (data != 1) {
-                                $("#mainTable").bootstrapTable('check',$element.attr('data-index'));
-                            } 
-                        })
-                        .fail(function () {
-                            console.log("error");
-                        })
-                        .always(function () {
-                            console.log("complete");
-                        });
+				$element.attr('disabled','disabled');
+				setTimeout(function(){
+					var userName =$("#userlist").find('option:selected').text();
+					$.ajax({
+	                            url: baseUrl,
+	                            type: 'delete',
+	                            contentType: 'application/json',
+	                            data: JSON.stringify({
+	                                userName: $("#userlist").find("option:selected").text(),
+	                                buildId: row.buildID
+	                            })
+	                        }).done(function (data) {
+	                            if (data != 1) {
+	                                $("#mainTable").bootstrapTable('check',$element.attr('data-index'));
+	                            } 
+	                            
+	                        })
+	                        .fail(function () {
+	                            console.log("error");
+	                        })
+	                        .always(function () {
+	                            console.log("complete");
+	                        });
+	                $element.removeAttr('disabled');
+				},500);
+				
 			});
 		}
 	};
