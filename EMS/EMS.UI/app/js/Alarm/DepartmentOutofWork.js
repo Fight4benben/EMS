@@ -6,7 +6,7 @@ var OutOfWork = (function(){
 			initDateTime();
 			initButton();
 
-			var url = "/api/AlarmDepartmentOverLimit";
+			var url = "/api/AlarmDepartmentFreeTime";
 
 			getDataFromServer(url,"");
 		};
@@ -17,10 +17,10 @@ var OutOfWork = (function(){
 
 		function initButton(){
 			$("#Load").click(function(event) {
-				var url="/api/AlarmDepartmentOverLimit";
+				var url="/api/AlarmDepartmentFreeTime";
 
 				var params = "buildId="+$("#buildinglist").val()+"&date="+
-				$("#daycalendarBox").val();
+				$("#daycalendarBox").val()+"&energyCode="+$("#energys").val();
 
 				getDataFromServer(url,params);
 			});
@@ -66,16 +66,19 @@ var OutOfWork = (function(){
 			var columns=[
 				{field:'name',title:'名称',width:'250px'},
 				{field:'timePeriod',title:'非工作时间段'},
+				{field:'time',title:'时间'},
 				{field:'value',title:'能耗值'},
 				{field:'limitValue',title:'限定报警值'},
 				{field:'diffValue',title:'差值',cellStyle:function(value,row,index){
-
-					if(row.limitValue!=0){
+					if(row.limitValue >=0){
 						var rate = row.diffValue/row.limitValue;
+
 						if(rate>0 && rate<=0.5)
 							return {classes:'warning'}
 						else if(rate>0.5)
 							return {classes:'danger'}
+					}else{
+						return
 					}
 				}}
 			];
@@ -86,6 +89,7 @@ var OutOfWork = (function(){
 				var row={};
 				row.name = val.name;
 				row.value = val.value;
+				row.time = val.time;
 				row.timePeriod = val.timePeriod;
 				row.limitValue = val.limitValue;
 				row.diffValue = val.diffValue;

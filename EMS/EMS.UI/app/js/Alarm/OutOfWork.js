@@ -30,7 +30,7 @@ var OutOfWork = (function(){
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
+				//console.log(data);
 				try{
 					showBuilds(data);
 					showEnergys(data);
@@ -102,8 +102,6 @@ var OutOfWork = (function(){
 			$("#alarmTable>table").attr('data-height',height);
 
 			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border'});
-
-			$("#alarmTable>table").bootstrapTable('mergeCells', {index: 0, field: 'name', rowspan: 2});
 
 			$("table td").css('font-size','15px');
 		}
