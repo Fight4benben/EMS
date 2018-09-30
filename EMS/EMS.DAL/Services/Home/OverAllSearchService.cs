@@ -1,5 +1,6 @@
 ﻿using EMS.DAL.Entities;
 using EMS.DAL.RepositoryImp;
+using EMS.DAL.Utils;
 using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -39,17 +40,19 @@ namespace EMS.DAL.Services
         /// <summary>
         /// 获取搜索结果
         /// </summary>
-        /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
         /// <param name="timeType">天："DD"；月份："MM"; 季度："QQ"</param>
+        /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
 
         /// <param name="keyWord">搜索内容</param>
         /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
         public OverAllSearchViewModel GetViewModel(string timeType, string type, string keyWord, string buildID, string energyCode, string date)
         {
-            DateTime inputDate = Convert.ToDateTime(date);
-
-            string startDay = inputDate.ToString("yyyy-MM-dd");
-            string endDay = inputDate.ToString("yyyy-MM-dd");
+            DateTime inputDate = Util.ConvertString2DateTime(date, "yyyy-MM-dd"); ;
+            
+            //每月第一天
+            string startDay = inputDate.ToString("yyyy-MM") + "-01";
+            //每月最后一天
+            string endDay = inputDate.AddMonths(1).AddDays(-inputDate.Day).ToString("yyyy-MM-dd");
 
             List<EMSValue> timeDataList = new List<EMSValue>();
             List<CompareData> momDataList = new List<CompareData>();
@@ -59,25 +62,28 @@ namespace EMS.DAL.Services
             switch (timeType)
             {
                 case "DD":
-                    timeDataList = context.GetDayList(type, keyWord, buildID, energyCode, endDay);
+
+                    timeDataList = context.GetDayList(type, keyWord, buildID, energyCode, inputDate.ToString("yyyy-MM-dd"));
                     momDataList = context.GetMomMonthList(type, keyWord, buildID, energyCode, startDay, endDay);
                     monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
-                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, inputDate.ToString("yyyy-01") + "-01", endDay);
                     break;
 
                 case "MM":
                     timeDataList = context.GetMonthList(type, keyWord, buildID, energyCode, endDay);
                     momDataList = context.GetMomMonthList(type, keyWord, buildID, energyCode, startDay, endDay);
                     monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
-                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, inputDate.ToString("yyyy-01") + "-01", endDay);
                     break;
 
                 case "QQ":
+                    startDay = inputDate.AddDays(-inputDate.Day + 1).AddMonths(-2).ToString("yyyy-MM-dd");
+                    endDay = inputDate.AddMonths(1).AddDays(-inputDate.Day).ToString("yyyy-MM-dd");
+
                     timeDataList = context.GetQuarterList(type, keyWord, buildID, energyCode, startDay, endDay);
                     momDataList = context.GetMomQuarterList(type, keyWord, buildID, energyCode, startDay, endDay);
-                    monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
-                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
-                    ;
+                    monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, inputDate.ToString("yyyy-MM") + "-01", endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, inputDate.ToString("yyyy-01") + "-01", endDay);
                     break;
 
                 default:

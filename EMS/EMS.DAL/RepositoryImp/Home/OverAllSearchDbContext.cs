@@ -268,6 +268,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@KeyWord",keyWord),
                 new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@EnergyItemCode",energyCode),
+                new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<EnergyAverage>(sql, sqlParameters).ToList();
@@ -309,6 +310,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@KeyWord",keyWord),
                 new SqlParameter("@BuildID",buildID),
                 new SqlParameter("@EnergyItemCode",energyCode),
+                 new SqlParameter("@StartDay",startDay),
                 new SqlParameter("@EndDay",endDay)
             };
             return _db.Database.SqlQuery<EnergyAverage>(sql, sqlParameters).ToList();

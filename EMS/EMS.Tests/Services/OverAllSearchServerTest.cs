@@ -14,7 +14,7 @@ namespace EMS.Tests.Services
     public class OverAllSearchServerTest
     {
         [TestMethod]
-        public void TestOverAllSearchGetCircuit()
+        public void TestOverAllSearchGetCircuit_Day()
         {
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
@@ -25,25 +25,91 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
-        public void TestOverAllSearchGetDetp()
+        public void TestOverAllSearchGetCircuit_Month()
         {
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            //OverAllSearchViewModel model = service.GetViewModel("Dept", "研发", "000001G003", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("MM", "Circuit", "层", "000001G002", "01000", today.ToString("yyyy-MM-dd"));
 
-            //Console.WriteLine(UtilTest.GetJson(model));
+            Console.WriteLine(UtilTest.GetJson(model));
         }
 
         [TestMethod]
-        public void TestOverAllSearchGetRegion()
+        public void TestOverAllSearchGetCircuit_Quarter()
         {
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            //OverAllSearchViewModel model = service.GetViewModel("Region", "老厂区", "000001G001", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("QQ", "Circuit", "电梯", "000001G002", "01000", today.ToString("yyyy-MM-dd"));
 
-            //Console.WriteLine(UtilTest.GetJson(model));
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetDetp_Day()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("DD", "Dept", "2F", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetDetp_Month()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("MM", "Dept", "2F", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetDetp_Quarter()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("QQ", "Dept", "2F", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetRegion_Day()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("DD", "Region", "11", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetRegion_Month()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("MM", "Region", "12", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
+        }
+
+        [TestMethod]
+        public void TestOverAllSearchGetRegion_Quarter()
+        {
+            OverAllSearchService service = new OverAllSearchService();
+            DateTime today = DateTime.Now;
+
+            OverAllSearchViewModel model = service.GetViewModel("QQ", "Region", "12", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(model));
         }
     }
 }

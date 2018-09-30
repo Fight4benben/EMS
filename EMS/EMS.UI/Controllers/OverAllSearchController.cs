@@ -12,7 +12,7 @@ namespace EMS.UI.Controllers
     {
         OverAllSearchService service = new OverAllSearchService();
         /// <summary>
-        /// 根据用户名获取建筑列表
+        /// 根据用户名获取建筑列表和分类能耗
         /// </summary>
         /// <returns></returns>
         public object Get()
@@ -31,7 +31,9 @@ namespace EMS.UI.Controllers
         /// <summary>
         /// 获取搜索结果
         /// </summary>
+        /// <param name="timeType">天："DD"；月份："MM"; 季度："QQ"</param>
         /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
+
         /// <param name="keyWord">搜索内容</param>
         /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
         public object Get(string timeType, string type, string keyWord, string buildID, string energyCode, string endDay)

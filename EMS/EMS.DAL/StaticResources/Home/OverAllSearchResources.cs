@@ -98,7 +98,7 @@ namespace EMS.DAL.StaticResources
 		                                            AND DepartmentInfo.F_DepartmentName =
 			                                            (SELECT TOP 1  T_ST_DepartmentInfo.F_DepartmentName FROM T_ST_DepartmentInfo 
 					                                            WHERE F_BuildID=@BuildID AND T_ST_DepartmentInfo.F_DepartmentName LIKE '%'+ @KeyWord +'%')
-		                                            AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10), @EndDay,120) AND  @EndDay
+		                                            AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10), @EndDay,120) AND  @EndDay+' 23:00'
 		                                            GROUP BY DepartmentInfo.F_DepartmentID, DepartmentInfo.F_DepartmentName, HourResult.F_StartHour
                                                     ";
 
@@ -171,7 +171,7 @@ namespace EMS.DAL.StaticResources
 		                                            AND Region.F_RegionName =
 			                                            (SELECT TOP 1  T_ST_Region.F_RegionName FROM T_ST_Region 
 					                                            WHERE F_BuildID=@BuildID AND T_ST_Region.F_RegionName LIKE '%'+ @KeyWord +'%')
-		                                            AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10), @EndDay,120) AND  @EndDay
+		                                            AND HourResult.F_StartHour BETWEEN CONVERT(VARCHAR(10), @EndDay,120) AND  @EndDay+' 23:00'
 		                                            GROUP BY Region.F_RegionID,Region.F_RegionName ,HourResult.F_StartHour
 		                                            ORDER BY Region.F_RegionID, 'Time' ASC
                                                 ";
@@ -513,7 +513,7 @@ namespace EMS.DAL.StaticResources
 				                                                WHERE F_BuildID=@BuildID AND T_ST_CircuitMeterInfo.F_CircuitName LIKE '%'+ @KeyWord +'%')
 	                                                AND DayResult.F_StartDay BETWEEN @StartDay AND  @EndDay
 	                                                GROUP BY Circuit.F_CircuitID,Circuit.F_CircuitName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
-		                                                ,DATEADD(MONTH,DATEDIFF(MONTH,0,DayResult.F_StartDay),0)
+		                                                ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)
 	                                                ORDER BY ID 
                                                     ";
 
