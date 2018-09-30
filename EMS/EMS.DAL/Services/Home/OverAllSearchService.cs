@@ -21,9 +21,17 @@ namespace EMS.DAL.Services
         public OverAllSearchViewModel GetViewModelByUserName(string userName)
         {
             List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
-            
+            string buildId;
+            if (builds.Count > 0)
+                buildId = builds.First().BuildID;
+            else
+                buildId = "";
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
             OverAllSearchViewModel viewModel = new OverAllSearchViewModel();
             viewModel.Builds = builds;
+            viewModel.Energys = energys;
             return viewModel;
 
         }
@@ -32,33 +40,56 @@ namespace EMS.DAL.Services
         /// 获取搜索结果
         /// </summary>
         /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
+        /// <param name="timeType">天："DD"；月份："MM"; 季度："QQ"</param>
+
         /// <param name="keyWord">搜索内容</param>
         /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
-        public OverAllSearchViewModel GetViewModel(string type, string keyWord, string buildID, string endDay)
+        public OverAllSearchViewModel GetViewModel(string timeType, string type, string keyWord, string buildID, string energyCode, string date)
         {
-            DateTime startTime = Convert.ToDateTime(endDay);
-             startTime = startTime.AddDays(-startTime.Day+1);
-            string startDay = startTime.ToString("yyyy-MM-dd");
+            DateTime inputDate = Convert.ToDateTime(date);
 
-            OverAllSearchViewModel viewModel = new OverAllSearchViewModel();
-            List<EMSValue> last31Day= context.GetLast31DayList(type, keyWord, buildID, endDay);
-            List<EMSValue> monthData = new List<EMSValue>();
-            if (last31Day != null && last31Day.Count > 0)
+            string startDay = inputDate.ToString("yyyy-MM-dd");
+            string endDay = inputDate.ToString("yyyy-MM-dd");
+
+            List<EMSValue> timeDataList = new List<EMSValue>();
+            List<CompareData> momDataList = new List<CompareData>();
+            List<EnergyAverage> monthAverageList = new List<EnergyAverage>();
+            List<EnergyAverage> yearAverageList = new List<EnergyAverage>();
+
+            switch (timeType)
             {
-                //var monthData = ( last31Day.Where(x=>x.Time > startTime));
-                foreach (var item in last31Day)
-                {
-                    if (item.Time >= startTime)
-                    {
-                        monthData.Add(item);
-                    }
-                }
+                case "DD":
+                    timeDataList = context.GetDayList(type, keyWord, buildID, energyCode, endDay);
+                    momDataList = context.GetMomMonthList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    break;
+
+                case "MM":
+                    timeDataList = context.GetMonthList(type, keyWord, buildID, energyCode, endDay);
+                    momDataList = context.GetMomMonthList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    break;
+
+                case "QQ":
+                    timeDataList = context.GetQuarterList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    momDataList = context.GetMomQuarterList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    monthAverageList = context.GetMonthAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    yearAverageList = context.GetYearAverageList(type, keyWord, buildID, energyCode, startDay, endDay);
+                    ;
+                    break;
+
+                default:
+                    return null;
+
             }
 
-            viewModel.Last31Day= context.GetLast31DayList(type, keyWord, buildID, endDay);
-            viewModel.MonthDate = monthData;
-            viewModel.MomData = context.GetMomMonthList(type,keyWord, buildID, startDay,endDay);
-            viewModel.CompareData = context.GetCompareMonthList(type, keyWord, buildID, startDay, endDay);
+            OverAllSearchViewModel viewModel = new OverAllSearchViewModel();
+            viewModel.TimeData = timeDataList;
+            viewModel.MomData = momDataList;
+            viewModel.MonthAverageData = monthAverageList;
+            viewModel.YearAverageData = yearAverageList;
 
             return viewModel;
         }

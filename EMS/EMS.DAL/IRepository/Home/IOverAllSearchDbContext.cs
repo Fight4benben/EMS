@@ -9,9 +9,14 @@ namespace EMS.DAL.IRepository
 {
     public interface IOverAllSearchDbContext
     {
-        List<EMSValue> GetLast31DayList(string type, string keyWord, string buildID, string endDay);
-        List<EMSValue> GetMonthList(string type, string keyWord, string buildID, string startDay, string endDay);
-        List<CompareData> GetMomMonthList(string type, string keyWord, string buildID, string startDay, string endDay);
-        List<CompareData> GetCompareMonthList(string type, string keyWord, string buildID, string startDay, string endDay);
+        List<EMSValue> GetDayList(string type, string keyWord, string buildID, string energyCode, string endDay);
+        List<EMSValue> GetMonthList(string type, string keyWord, string buildID, string energyCode, string endDay);
+        List<EMSValue> GetQuarterList(string type, string keyWord, string buildID, string energyCode, string startDay, string endDay);
+
+        List<CompareData> GetMomMonthList(string type, string keyWord, string buildID, string energyCode, string startDay, string endDay);
+        List<CompareData> GetMomQuarterList(string type, string keyWord, string buildID, string energyCode, string startDay, string endDay);
+
+        List<EnergyAverage> GetMonthAverageList(string type, string keyWord, string buildID, string energyCode, string startDay, string endDay);
+        List<EnergyAverage> GetYearAverageList(string type, string keyWord, string buildID, string energyCode, string startDay, string endDay);
     }
 }

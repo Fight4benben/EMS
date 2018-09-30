@@ -34,11 +34,11 @@ namespace EMS.UI.Controllers
         /// <param name="type">支路："Circuit"；部门："Dept";区域："Region"</param>
         /// <param name="keyWord">搜索内容</param>
         /// <param name="endDay">结束时间（"yyyy-MM-dd"）</param>
-        public object Get(string type, string keyWord, string buildID, string endDay)
+        public object Get(string timeType, string type, string keyWord, string buildID, string energyCode, string endDay)
         {
             try
             {
-                return service.GetViewModel(type,keyWord, buildID, endDay);
+                return service.GetViewModel(timeType, type, keyWord, buildID, energyCode, endDay);
             }
             catch (Exception e)
             {

@@ -10,9 +10,10 @@ namespace EMS.DAL.ViewModels
     public class OverAllSearchViewModel
     {
         public List<BuildViewModel> Builds { get; set; }
-        public List<EMSValue> Last31Day { get; set; }
-        public List<EMSValue> MonthDate { get; set; }
+        public List<EnergyItemDict> Energys { get; set; }
+        public List<EMSValue> TimeData { get; set; }
         public List<CompareData> MomData { get; set; }
-        public List<CompareData> CompareData { get; set; }
+        public List<EnergyAverage> MonthAverageData { get; set; }
+        public List<EnergyAverage> YearAverageData { get; set; }
     }
 }
