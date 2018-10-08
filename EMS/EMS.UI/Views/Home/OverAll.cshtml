@@ -1,4 +1,50 @@
-﻿<div class="container-fluid main-top">
+﻿<script type="text/javascript">
+        // JavaScript Document
+            (function flexible (window, document) {
+              var docEl = document.documentElement;     //获取文档根节点并保存到变量docEl中(相当于获取到html对象)
+              var dpr = window.devicePixelRatio || 1;   //获取像素比，如果window.devicePixelRatio为false是dpr为1，如果window.devicePixelRatio大于1，那么dpr赋值取大的数
+
+              function setBodyFontSize () {
+                if (document.body) { //获取到body对象是否存在，个人觉得啰嗦
+                  document.body.style.fontSize = (12 * dpr) + 'px';
+                }   
+                else {
+                  document.addEventListener('DOMContentLoaded', setBodyFontSize);
+                }
+              }
+              setBodyFontSize();
+
+              // set 1rem = viewWidth / 10
+              function setRemUnit () {
+                var rem = docEl.clientWidth / 10
+                docEl.style.fontSize = rem + 'px'
+              }
+
+              setRemUnit()
+
+              // reset rem unit on page resize
+              window.addEventListener('resize', setRemUnit)
+              window.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                  setRemUnit()
+                }
+              })
+
+              // detect 0.5px supports
+              if (dpr >= 2) {
+                var fakeBody = document.createElement('body')
+                var testElement = document.createElement('div')
+                testElement.style.border = '.5px solid transparent'
+                fakeBody.appendChild(testElement)
+                docEl.appendChild(fakeBody)
+                if (testElement.offsetHeight === 1) {
+                  docEl.classList.add('hairlines')
+                }
+                docEl.removeChild(fakeBody)
+              }
+            }(window, document))
+    </script>
+<div class="container-fluid main-top">
     <div class="col-xs-12 OverAll-top">
         <label>建筑名称：</label>
         <div class="Over-building">
@@ -10,12 +56,12 @@
         </div>
         <label class="Over-search">查询框：</label>
         <input id="search-keyword" type="text"  placeholder="请输入搜索内容"/>
-        <div class="equip-row">
+        <div class="equip-row OverAll-equip">
            <label class="equip-width">类型：</label>
            <select id="dateType" class="equip-date">
               <option value="DD">日</option>
               <option value="MM">月</option>
-              <option value="SS">季度</option>
+              <option value="QQ">季度</option>
            </select>
        </div>
        <div class="equip-row equip-row2">
@@ -25,6 +71,15 @@
             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
        </div>
+       <div class="Ranking-sort">
+            <label class="equip-width season-alarm">季度：</label>
+            <select id="season" class="form-control equip-right2 equip-right3 season-alarm">
+                <option value="3">1</option>
+                <option value="6">2</option>
+                <option value="9">3</option>
+                <option value="12">4</option>
+            </select>
+        </div>
         <button id="Dept" type="button" class="searchBtn"><i class="fa fa-group"></i> 部 门</button>
         <button id="Region" type="button" class="searchBtn"><i class="fa fa-flag"></i> 区 域</button>
         <button id="Circuit" type="button" class="searchBtn"><i class="fa fa-sitemap"></i> 支 路</button>
@@ -34,7 +89,7 @@
             <div class="build-info">
                 <div class="main-menu">
                     <hr>
-                    <i class="fa fa-bar-chart-o"></i>过去31天用能趋势
+                    <i class="fa fa-bar-chart-o"></i>用能趋势
                 </div>
                 <div id="history-line" class="col-xs-12 overall-column">
     
@@ -42,7 +97,7 @@
             </div>
         </div>
         <div class="OverAll-bottom">
-            <div class="col-lg-3 col-md-4 col-xs-12">
+            <div class="col-md-4 col-xs-12">
                 <div class="col-xs-12 OverAll-bottom-in">
                     <div class="Over-month purple">本月</div>
                     <div id="currentMonth" class="Over-month2 purple2">25435 kW.h </div>
@@ -56,36 +111,36 @@
                     <div id="ringRatio" class="Over-month2 green2">25435<img src="../app/img/Overall-down.png"/></div>
                 </div>
             </div>
-            <div id="dayReport" class="col-lg-9 col-md-8 col-xs-12 OverAll-right">
+            <div id="dayReport" class="col-md-8 col-xs-12 OverAll-right">
                 
             </div>
-            <div class="col-lg-9 col-md-8 col-xs-12 OverAll-right2">
-              <div class="col-md-3 col-xs-12">
-                <div class="month1">
-                    <p><span class="nameType">建筑</span>单位面积能耗</p>
+            <div class="col-md-8 col-xs-12 OverAll-right2">
+              <div class="col-md-3 col-xs-6">
+                <div id="square-month" class="month1">
+                    <p>单位面积能耗(月)</p>
                     <img src="../app/img/month1.png"/>
-                    <h3>32567</h3>
+                    <h3>-</h3>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-12">
-              <div class="year1">
-                <p><span class="nameType">建筑</span>单位面积能耗</p>
+            <div class="col-md-3 col-xs-6">
+              <div id="square-year" class="year1">
+                <p>单位面积能耗(年)</p>
                 <img src="../app/img/year1.png"/>
-                <h3>24561</h3>
+                <h3>-</h3>
               </div>
             </div>
-            <div class="col-md-3 col-xs-12">
-              <div class="month1">
-                 <p><span class="nameType">建筑</span>人均能耗</p>
+            <div  class="col-md-3 col-xs-6">
+              <div id="people-month" class="month1">
+                <p>人均能耗(月)</p>
                 <img src="../app/img/month2.png"/>
-                <h3>4513</h3>
+                <h3>-</h3>
               </div>
             </div>
-            <div class="col-md-3 col-xs-12">
-              <div class="year1">
-                <p><span class="nameType">建筑</span>人均能耗</p>
+            <div class="col-md-3 col-xs-6">
+              <div id="people-year" class="year1">
+                <p>人均能耗(年)</p>
                 <img src="../app/img/year2.png"/>
-                <h3>7915</h3>
+                <h3>-</h3>
               </div>
             </div>
         </div>

@@ -2,16 +2,24 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+.OverAll-bottom-in .Over-month2{
+  font-size: 0.2rem;
+}
 .OverAll-right2 .month1{
     background: #EEFAFF;
     border:1px solid #BDCED9;
     border-radius: 5px!important;
     -webkit-border-radius: 5px!important;
     -o-border-radius: 5px!important;
+    height:280px;
+}
+.OverAll-right2 .month1 img,.OverAll-right2 .year1 img{
+    width:60%;
 }
 .month1 h3{color: #529AE3;}
 .year1 h3{color: #E8782B;}
 .OverAll-right2 .year1{
+    height:280px;
     background: #FFF6F7;
     border:1px solid #BDCED9;
     border-radius: 5px!important;
@@ -67,6 +75,32 @@
 }
 .OWork-add:hover{
     color:#F08500;
+}
+@media (max-width:990px){
+ .OverAll-bottom-in .Over-month2{
+  font-size: 0.7rem;
+ }
+ .OverAll-right2 .month1 img, .OverAll-right2 .year1 img{
+    width:160px;
+  }
+  #dayReport{
+    margin-top:10px;
+  }
+  .OverAll-right2 .col-md-3:first-child,.OverAll-right2 .col-md-3:nth-child(2){
+    padding-bottom:0;
+  }
+  .OverAll-right2 .col-md-3:nth-child(3),.OverAll-right2 .col-md-3:nth-child(4){
+  margin-bottom:40px;
+  }
+}
+@media (max-width:1500px){
+   .OverAll-equip{
+    clear:left;
+    margin-top:10px;
+   }
+   .OverAll-top .equip-row2,.OverAll-top #Dept,.OverAll-top #Region,.OverAll-top #Circuit{
+    margin-top:10px;
+   }
 }
 /*重点设备报警设置*/
 .OutWork-list{
