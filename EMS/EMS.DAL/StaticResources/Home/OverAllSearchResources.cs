@@ -628,11 +628,6 @@ namespace EMS.DAL.StaticResources
 	                                                GROUP BY Region.F_RegionID,Region.F_RegionName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
 			                                                ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)
                                                     ";
-
-
-
-
-
         #endregion
     }
 }
