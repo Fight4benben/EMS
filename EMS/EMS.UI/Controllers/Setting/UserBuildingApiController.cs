@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace EMS.UI.Controllers.Setting
 {
+    [Authorize]
     public class UserBuildingApiController : ApiController
     {
         public UserBuildingService service = new UserBuildingService();
