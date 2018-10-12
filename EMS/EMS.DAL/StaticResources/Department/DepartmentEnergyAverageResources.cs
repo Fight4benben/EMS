@@ -26,8 +26,12 @@ namespace EMS.DAL.StaticResources
         public static string DeptMonthAvgSQL = @" SELECT DepartmentInfo.F_DepartmentID AS ID ,DepartmentInfo.F_DepartmentName AS Name 
 		                                            ,DepartmentExInfo.F_Area AS TotalArea ,DepartmentExInfo.F_People AS TotalPeople
 		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS TotalValue
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area AS  AreaAvg
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People AS  PeopleAvg
+		                                            ,CASE WHEN F_Area = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area) 
+                                                        END AS  AreaAvg
+		                                            ,CASE WHEN F_People = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People) 
+                                                        END AS  PeopleAvg
 		                                            FROM T_MC_MeterDayResult DayResult
 		                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
 		                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
@@ -48,8 +52,12 @@ namespace EMS.DAL.StaticResources
         public static string DeptQuarterAvgSQL = @" SELECT DepartmentInfo.F_DepartmentID AS ID ,DepartmentInfo.F_DepartmentName AS Name 
 		                                            ,DepartmentExInfo.F_Area AS TotalArea ,DepartmentExInfo.F_People AS TotalPeople
 		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS TotalValue
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area AS  AreaAvg
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People AS  PeopleAvg
+		                                           ,CASE WHEN F_Area = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area) 
+                                                        END AS  AreaAvg
+		                                            ,CASE WHEN F_People = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People) 
+                                                        END AS  PeopleAvg
 		                                            FROM T_MC_MeterDayResult DayResult
 		                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
 		                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
@@ -70,8 +78,12 @@ namespace EMS.DAL.StaticResources
         public static string DeptYearAvgSQL = @" SELECT DepartmentInfo.F_DepartmentID AS ID ,DepartmentInfo.F_DepartmentName AS Name 
 		                                            ,DepartmentExInfo.F_Area AS TotalArea ,DepartmentExInfo.F_People AS TotalPeople
 		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) AS TotalValue
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area AS  AreaAvg
-		                                            ,SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People AS  PeopleAvg
+		                                           ,CASE WHEN F_Area = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_Area) 
+                                                        END AS  AreaAvg
+		                                            ,CASE WHEN F_People = 0 THEN NULL 
+		                                                ELSE Convert(DECIMAL(18,2),SUM((CASE WHEN DepartmentMeter.F_Operator ='加' THEN 1 ELSE -1 END)*DayResult.F_Value * DepartmentMeter.F_Rate/100) /F_People) 
+                                                        END AS  PeopleAvg
 		                                            FROM T_MC_MeterDayResult DayResult
 		                                            INNER JOIN T_ST_CircuitMeterInfo Circuit ON DayResult.F_MeterID = Circuit.F_MeterID
 		                                            INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
