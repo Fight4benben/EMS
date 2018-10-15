@@ -77,9 +77,11 @@ namespace EMS.DAL.Services
             foreach (var item in T2)
             {
                 List<AlarmTempValue> tempList = T1.FindAll(t => t.ID == item.ID);
+               
 
                 if (tempList.Count == 0)
                     continue;
+
 
                 foreach (AlarmTempValue tempValue in tempList)
                 {
@@ -91,7 +93,7 @@ namespace EMS.DAL.Services
                             TimePeriod = tempValue.TimePeriod,
                             Time = tempValue.Time,
                             Value = tempValue.Value,
-                            LimitValue = item.Value,
+                            LimitValue = item.Value ,
                             DiffValue = tempValue.Value - item.Value
                         });
                 }

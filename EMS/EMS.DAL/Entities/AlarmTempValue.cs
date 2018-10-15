@@ -13,5 +13,6 @@ namespace EMS.DAL.Entities
         public string TimePeriod { get; set; }
         public DateTime? Time { get; set; }
         public decimal? Value { get; set; }
+        public decimal? Rate { get; set; }
     }
 }

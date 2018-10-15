@@ -83,6 +83,7 @@ namespace EMS.DAL.Services
                 if (tempList.Count == 0)
                     continue;
 
+
                 foreach (AlarmTempValue tempValue in tempList)
                 {
                     if (tempValue.Value > item.Value)

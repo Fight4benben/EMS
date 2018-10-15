@@ -40,7 +40,17 @@ var OverAll = (function(){
 		}
 
 		function showOrHideSeason(isShow){
-			isShow?$(".season-alarm").show():$(".season-alarm").hide();
+			if(isShow){
+				$(".season-alarm").show();
+				$("#currentMonth").prev('div').html("本季")
+				$("#lastMonth").prev('div').html("上季")
+			}else{
+				$(".season-alarm").hide();
+				$("#currentMonth").prev('div').html("本月")
+				$("#lastMonth").prev('div').html("上月")
+			}
+				
+
 		}
 
 		function initDate(type){
