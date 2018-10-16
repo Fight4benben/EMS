@@ -80,12 +80,19 @@ namespace EMS.DAL.Services
             {
                 List<AlarmTempValue> tempList = T1.FindAll(t => t.ID == item.ID);
 
+                decimal rate;
+                if (item.Rate == null)
+                    rate = 1;
+                else
+                    rate = (decimal)item.Rate;
+
                 if (tempList.Count == 0)
                     continue;
 
+
                 foreach (AlarmTempValue tempValue in tempList)
                 {
-                    if (tempValue.Value > item.Value)
+                    if (tempValue.Value > item.Value * rate)
                         energyAlarmValue.Add(new AlarmFreeTime
                         {
                             ID = item.ID,

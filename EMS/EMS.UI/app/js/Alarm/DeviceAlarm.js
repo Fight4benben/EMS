@@ -30,7 +30,7 @@ var DeviceAlarm = (function(){
 		function initDate(type){
 			switch(type){
 				case "DD"://日
-				EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(),$("#dayCalendar"),$("#daycalendarBox"));
+				EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(new Date()-24*60*60*1000),$("#dayCalendar"),$("#daycalendarBox"));
 				break;
 				case "MM"://月
 				EMS.DOM.initDateTimePicker('YEARMONTH',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy-mm',

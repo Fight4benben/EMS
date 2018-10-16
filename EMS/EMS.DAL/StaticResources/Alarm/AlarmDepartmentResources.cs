@@ -71,7 +71,7 @@ namespace EMS.DAL.StaticResources
 				                                                            WHERE ParamInfo.F_IsEnergyValue = 1
 				                                                            AND DepartmentInfo.F_BuildID=@BuildID
 				                                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
-				                                                            AND DayResult.F_StartDay BETWEEN DATEADD(YEAR, -1,  @StartDay) AND DATEADD(YEAR, -1,  @EndDay)
+				                                                            AND DayResult.F_StartDay BETWEEN DATEADD(DAY, -1,  @StartDay) AND DATEADD(DAY, -1,  @EndDay)
 				                                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DayResult.F_StartDay
 		                                                                ) T2 ON T1.ID = T2.ID 
 			                                                            WHERE ABS(CASE WHEN t2.F_Value = 0 THEN NULL ELSE (t1.F_Value - t2.F_Value)/t2.F_Value END)> T1.F_Level1

@@ -68,19 +68,32 @@ var OutOfWork = (function(){
 				{field:'timePeriod',title:'非工作时间段'},
 				{field:'time',title:'时间'},
 				{field:'value',title:'能耗值'},
-				{field:'limitValue',title:'限定报警值'},
-				{field:'diffValue',title:'差值',cellStyle:function(value,row,index){
-					if(row.limitValue >=0){
-						var rate = row.diffValue/row.limitValue;
+				// {field:'limitValue',title:'限定报警值'},
+				// {field:'diffValue',title:'差值',cellStyle:function(value,row,index){
+				// 	if(row.limitValue >=0){
+				// 		var rate = row.diffValue/row.limitValue;
 
-						if(rate>0 && rate<=0.5)
+				// 		if(rate>0 && rate<=0.5)
+				// 			return {classes:'warning'}
+				// 		else if(rate>0.5)
+				// 			return {classes:'danger'}
+				// 	}else{
+				// 		return
+				// 	}
+				// }},
+				{field:'rate',title:'百分比'/*,cellStyle:function(value,row,index){
+					if(row.rate !== '-'){
+						var rate = parseFloat(row.rate.replace('%',''));
+
+						if(rate>0 && rate<=50)
 							return {classes:'warning'}
-						else if(rate>0.5)
+						else if(rate>50)
 							return {classes:'danger'}
+
 					}else{
-						return
+						return {classes:''}
 					}
-				}}
+				}*/}
 			];
 
 			var rows = [];
@@ -92,7 +105,12 @@ var OutOfWork = (function(){
 				row.time = val.time;
 				row.timePeriod = val.timePeriod;
 				row.limitValue = val.limitValue;
-				row.diffValue = val.diffValue;
+				//row.diffValue = val.diffValue;
+
+				if(val.limitValue>0){
+					row.rate = ((val.value/val.limitValue)*100).toFixed(2) + '%';
+				}else
+					row.rate = '-';
 
 				rows.push(row);
 			});

@@ -204,6 +204,7 @@
     <Compile Include="Controllers\Setting\SettingController.cs" />
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
+    <Compile Include="Filters\ActionLogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
