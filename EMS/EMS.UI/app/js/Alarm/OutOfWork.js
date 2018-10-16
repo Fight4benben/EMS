@@ -81,7 +81,7 @@ var OutOfWork = (function(){
 				// 		return
 				// 	}
 				// }},
-				{field:'rate',title:'百分比',cellStyle:function(value,row,index){
+				{field:'rate',title:'百分比'/*,cellStyle:function(value,row,index){
 					if(row.rate !== '-'){
 						var rate = parseFloat(row.rate.replace('%',''));
 
@@ -93,7 +93,7 @@ var OutOfWork = (function(){
 					}else{
 						return {classes:''}
 					}
-				}}
+				}*/}
 			];
 
 			var rows = [];
@@ -108,7 +108,7 @@ var OutOfWork = (function(){
 				//row.diffValue = val.diffValue;
 
 				if(val.limitValue>0){
-					row.rate = ((val.diffValue/val.limitValue)*100).toFixed(2) + '%';
+					row.rate = ((val.value/val.limitValue)*100).toFixed(2) + '%';
 				}else
 					row.rate = '-';
 

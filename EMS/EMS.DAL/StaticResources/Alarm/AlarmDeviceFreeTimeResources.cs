@@ -72,7 +72,8 @@ namespace EMS.DAL.StaticResources
         /// 获取非工作时间 用能报警值临时表2
         /// </summary>
         public static string GetAlarmDeviceT2SQL = @" SELECT AlarmFreeTime.F_CircuitID AS ID
-					                                        ,Convert(decimal(18,2),HourResult.F_Value*F_LimitValue) AS Value
+					                                        ,Convert(decimal(18,2),HourResult.F_Value) AS Value
+                                                            ,F_LimitValue Rate
 				                                        FROM T_MC_MeterHourResult AS HourResult
 				                                        INNER JOIN T_ST_CircuitMeterInfo Circuit ON HourResult.F_MeterID = Circuit.F_MeterID
 				                                        INNER JOIN T_ST_MeterParamInfo ParamInfo ON HourResult.F_MeterParamID = ParamInfo.F_MeterParamID
@@ -81,7 +82,7 @@ namespace EMS.DAL.StaticResources
 				                                        WHERE AlarmFreeTime.F_BuildID=@BuildID
 					                                    AND ParamInfo.F_IsEnergyValue = 1
                                                         AND F_StartHour BETWEEN CONVERT(VARCHAR(10),DATEADD(DAY,-1,@StartDay),120)+' 00:00' AND CONVERT(VARCHAR(10),DATEADD(DAY,-1,@StartDay),120)+' 23:00'
-						                                        AND F_StartHour = DATEADD( DAY,-1,DATEADD( HOUR,-1,@StartDay+' '+ AlarmFreeTime.F_StartTime))				
+						                                        AND F_StartHour = DATEADD( DAY,-1,DATEADD( HOUR,0,@StartDay+' '+ AlarmFreeTime.F_StartTime))				
 				                                                                  
                                                          ";
 

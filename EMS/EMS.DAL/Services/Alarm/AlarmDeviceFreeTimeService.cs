@@ -77,7 +77,12 @@ namespace EMS.DAL.Services
             foreach (var item in T2)
             {
                 List<AlarmTempValue> tempList = T1.FindAll(t => t.ID == item.ID);
-               
+
+                decimal rate;
+                if (item.Rate == null)
+                    rate = 1;
+                else
+                    rate = (decimal)item.Rate;
 
                 if (tempList.Count == 0)
                     continue;
