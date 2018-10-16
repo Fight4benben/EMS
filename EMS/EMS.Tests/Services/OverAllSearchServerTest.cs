@@ -30,7 +30,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("MM", "Circuit", "层", "000001G002", "01000", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("MM", "Circuit", "层", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -41,7 +41,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("QQ", "Circuit", "电梯", "000001G002", "01000", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("QQ", "Circuit", "电梯", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -85,7 +85,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("DD", "Region", "11", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("DD", "Region", "办公", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -96,7 +96,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("MM", "Region", "12", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("MM", "Region", "食堂", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }
@@ -107,7 +107,7 @@ namespace EMS.Tests.Services
             OverAllSearchService service = new OverAllSearchService();
             DateTime today = DateTime.Now;
 
-            OverAllSearchViewModel model = service.GetViewModel("QQ", "Region", "12", "000001G001", "01000", today.ToString("yyyy-MM-dd"));
+            OverAllSearchViewModel model = service.GetViewModel("QQ", "Region", "宿舍", "000001G001", "01000", today.ToString("yyyy-09"));
 
             Console.WriteLine(UtilTest.GetJson(model));
         }

@@ -465,7 +465,7 @@ namespace EMS.DAL.StaticResources
         /// 支路-月度-单位面积用能-人均用能
         /// </summary>
         public static string CircuitMonthAvgSQL = @"
-                                                SELECT Circuit.F_CircuitID AS ID,Circuit.F_CircuitName AS Name 
+                                                SELECT BuildInfo.F_BuildID AS ID,BuildInfo.F_BuildName AS Name 
 	                                                ,BuildInfo.F_TotalArea AS TotalArea ,BuildInfo.F_NumberOfPeople AS TotalPeople
 	                                                ,Convert(DECIMAL(18,2),SUM(DayResult.F_Value)) AS TotalValue
 	                                                ,CASE WHEN BuildInfo.F_TotalArea = 0 THEN NULL 
@@ -480,20 +480,17 @@ namespace EMS.DAL.StaticResources
 	                                                WHERE Circuit.F_BuildID=@BuildID
 	                                                AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 	                                                AND ParamInfo.F_IsEnergyValue = 1
-	                                                AND Circuit.F_CircuitName =
-		                                                (SELECT TOP 1 T_ST_CircuitMeterInfo.F_CircuitName FROM T_ST_CircuitMeterInfo 
-				                                                WHERE F_BuildID=@BuildID AND T_ST_CircuitMeterInfo.F_CircuitName LIKE '%'+ @KeyWord +'%')
+	                                                AND Circuit.F_MainCircuit=1
 	                                                AND DayResult.F_StartDay BETWEEN @StartDay AND  @EndDay
-	                                                GROUP BY Circuit.F_CircuitID,Circuit.F_CircuitName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
-		                                                ,DATEADD(MONTH,DATEDIFF(MONTH,0,DayResult.F_StartDay),0)
-	                                                ORDER BY ID 
+	                                                GROUP BY BuildInfo.F_BuildID,BuildInfo.F_BuildName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
+		                                                ,DATEADD(MONTH,DATEDIFF(MONTH,0,DayResult.F_StartDay),0) 
                                                     ";
 
         /// <summary>
         /// 支路-年度-单位面积用能-人均用能
         /// </summary>
         public static string CircuitYearAvgSQL = @"
-                                                SELECT Circuit.F_CircuitID AS ID,Circuit.F_CircuitName AS Name 
+                                                SELECT BuildInfo.F_BuildID AS ID,BuildInfo.F_BuildName AS Name 
 	                                                ,BuildInfo.F_TotalArea AS TotalArea ,BuildInfo.F_NumberOfPeople AS TotalPeople
 	                                                ,Convert(DECIMAL(18,2),SUM(DayResult.F_Value)) AS TotalValue
 	                                                ,CASE WHEN BuildInfo.F_TotalArea = 0 THEN NULL 
@@ -508,13 +505,10 @@ namespace EMS.DAL.StaticResources
 	                                                WHERE Circuit.F_BuildID=@BuildID
 	                                                AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 	                                                AND ParamInfo.F_IsEnergyValue = 1
-	                                                AND Circuit.F_CircuitName =
-		                                                (SELECT TOP 1 T_ST_CircuitMeterInfo.F_CircuitName FROM T_ST_CircuitMeterInfo 
-				                                                WHERE F_BuildID=@BuildID AND T_ST_CircuitMeterInfo.F_CircuitName LIKE '%'+ @KeyWord +'%')
+	                                                AND Circuit.F_MainCircuit=1
 	                                                AND DayResult.F_StartDay BETWEEN @StartDay AND  @EndDay
-	                                                GROUP BY Circuit.F_CircuitID,Circuit.F_CircuitName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
-		                                                ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)
-	                                                ORDER BY ID 
+	                                                GROUP BY BuildInfo.F_BuildID,BuildInfo.F_BuildName,BuildInfo.F_TotalArea,BuildInfo.F_NumberOfPeople
+		                                                ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0) 
                                                     ";
 
         /// <summary>

@@ -210,7 +210,7 @@ namespace EMS.DAL.RepositoryImp
                     break;
 
                 case "Region":
-                    sql = OverAllSearchResources.RegionMomMonthSQL;
+                    sql = OverAllSearchResources.RegionMomQuarterSQL;
                     break;
 
                 default:
@@ -233,7 +233,8 @@ namespace EMS.DAL.RepositoryImp
         #region 单位面积能耗-人均能耗
 
         /// <summary>
-        /// 获取 月份-环比
+        /// 获取 月份-单位面积能耗-人均能耗
+        /// (支路和区域的平均能耗相同，均为 一个建筑总能耗/建筑总面积，一个建筑总能耗/建筑总人数)
         /// </summary>
         /// <param name="type"></param>
         /// <param name="keyWord"></param>
@@ -256,7 +257,7 @@ namespace EMS.DAL.RepositoryImp
                     break;
 
                 case "Region":
-                    sql = OverAllSearchResources.RegionMonthAvgSQL;
+                    sql = OverAllSearchResources.CircuitMonthAvgSQL;
                     break;
 
                 default:
@@ -275,7 +276,7 @@ namespace EMS.DAL.RepositoryImp
         }
 
         /// <summary>
-        /// 获取 月份-环比
+        /// 获取 年度-单位面积能耗-人均能耗
         /// </summary>
         /// <param name="type"></param>
         /// <param name="keyWord"></param>
@@ -298,7 +299,7 @@ namespace EMS.DAL.RepositoryImp
                     break;
 
                 case "Region":
-                    sql = OverAllSearchResources.RegionYearAvgSQL;
+                    sql = OverAllSearchResources.CircuitYearAvgSQL;
                     break;
 
                 default:
