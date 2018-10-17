@@ -133,32 +133,50 @@ var DepartmentAlarm = (function(){
 				});
 			}
 
+			var datebox = new Date($("#daycalendarBox").val().replace('-','/'));
+
+			var current;
+			var last;
+
 			var typeValue = $("#dateType").val();
 			var columns;
 			switch(typeValue){
 				case "DD"://日
+					current = datebox.getFullYear()+"年"+(datebox.getMonth()+1) +'月'+datebox.getDate()+'日';
+					datebox.setDate(datebox.getDate()-1);
+					last = datebox.getFullYear()+"年"+(datebox.getMonth()+1) +'月'+(datebox.getDate())+'日';
 					columns=[
 						{field:'name',title:'名称'},
-						{field:'value',title:'当日用能'},
-						{field:'lastValue',title:'前日用能'},
+						{field:'value',title:'('+current+')用能'},
+						{field:'lastValue',title:'('+last+')用能'},
 						{field:'diffValue',title:'差值'},
 						{field:'rate',title:'比例'}
 					];
 				break;
 				case "MM"://月
+					current = datebox.getFullYear()+"年"+(datebox.getMonth()+1) +'月';
+					datebox.setMonth(datebox.getMonth()-1);
+					last = datebox.getFullYear()+"年"+(datebox.getMonth()+1) +'月';
 					columns=[
 						{field:'name',title:'名称'},
-						{field:'value',title:'当前用能'},
-						{field:'lastValue',title:'上月同期'},
+						{field:'value',title:'('+current+')用能'},
+						{field:'lastValue',title:'('+last+')同期'},
 						{field:'diffValue',title:'差值'},
 						{field:'rate',title:'比例'}
 					];
 				break;
 				case "SS"://季度
+					current = datebox.getFullYear()+'年'+$("#season").val()/3 + '季';
+
+					if(parseInt($("#season").val())/3===1){
+						last = (datebox.getFullYear() -1 )+'年4季';
+					}else
+						last = datebox.getFullYear() + '年' + (parseInt($("#season").val())/3-1)+'季';
+
 					columns=[
 						{field:'name',title:'名称'},
-						{field:'value',title:'当前用能'},
-						{field:'lastValue',title:'去年同期'},
+						{field:'value',title:'('+current+')用能'},
+						{field:'lastValue',title:'('+last+')同期'},
 						{field:'diffValue',title:'差值'},
 						{field:'rate',title:'比例'}
 					];

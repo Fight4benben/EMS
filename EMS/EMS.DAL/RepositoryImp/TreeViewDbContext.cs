@@ -28,17 +28,18 @@ namespace EMS.DAL.RepositoryImp
             };
             List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildIDSQL, sqlParameters).ToList();
 
-            var parentItemCodes = treeViewInfos.Where(c => (c.ParentID == "-1"));
-            foreach (var parentItem in parentItemCodes)
-            {
-                TreeViewModel parentNode = new TreeViewModel();
-                List<TreeViewModel> children = GetChildrenNodes(treeViewInfos, parentItem);
-                parentNode.Id = parentItem.ID;
-                parentNode.Text = parentItem.Name;
-                if (children.Count != 0)
-                    parentNode.Nodes = children;
-                treeViewModel.Add(parentNode);
-            }
+            //var parentItemCodes = treeViewInfos.Where(c => (c.ParentID == "-1"));
+            //foreach (var parentItem in parentItemCodes)
+            //{
+            //    TreeViewModel parentNode = new TreeViewModel();
+            //    List<TreeViewModel> children = GetChildrenNodes(treeViewInfos, parentItem);
+            //    parentNode.Id = parentItem.ID;
+            //    parentNode.Text = parentItem.Name;
+            //    if (children.Count != 0)
+            //        parentNode.Nodes = children;
+            //    treeViewModel.Add(parentNode);
+            //}
+            treeViewModel = EMS.DAL.Utils.Util.GetTreeViewModel(treeViewInfos);
 
             return treeViewModel;
         }

@@ -119,7 +119,19 @@ var OutOfWork = (function(){
 			$("#alarmTable").html('<table></table>');
 			$("#alarmTable>table").attr('data-height',height);
 
-			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border'});
+			EMS.DOM.showTable($("#alarmTable>table"),columns,rows,{striped:true,classes:'table table-border',
+				rowStyle:function(row,index){
+					 if(row.rate=="-")
+					 	return  {classes:''};
+
+					var rate = parseFloat(row.rate.substring(0,row.rate.length-1));
+					var style={};
+
+					if(rate>50)
+						style={classes:'danger'}//style={css:{'background-color':'#FF0000','color':'white'}};
+					
+		             return style;
+				}});
 
 			$("table td").css('font-size','15px');
 		}

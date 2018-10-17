@@ -15,7 +15,7 @@ namespace EMS.DAL.StaticResources
                                                                 ,MAX(F_DepartmentName) AS Name
                                                                 FROM T_ST_DepartmentInfo AS DepartmentInfo
                                                                 INNER JOIN T_ST_DepartmentMeter DepartmentMeter ON DepartmentInfo.F_DepartmentID = DepartmentMeter.F_DepartmentID
-                                                                INNER JOIN T_ST_CircuitMeterInfo Circuit ON DepartmentMeter.F_MeterID = Circuit.F_MeterID
+                                                               INNER JOIN T_ST_CircuitMeterInfo Circuit ON DepartmentMeter.F_MeterID = Circuit.F_MeterID
                                                                 INNER JOIN T_DT_EnergyItemDict EnergyItem ON Circuit.F_EnergyItemCode = EnergyItem.F_EnergyItemCode
                                                                 WHERE DepartmentInfo.F_BuildID=@BuildID
                                                                 AND EnergyItem.F_EnergyItemCode =  @EnergyItemCode
