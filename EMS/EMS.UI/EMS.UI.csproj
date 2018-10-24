@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Setting\SettingAlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Setting\SettingAlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingController.cs" />
+    <Compile Include="Controllers\Setting\SystemLogApiController.cs" />
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
