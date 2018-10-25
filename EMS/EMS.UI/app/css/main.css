@@ -2,6 +2,40 @@
     font-family: "Microsoft YaHei";
 }
 /*2018综合修改*/
+.EA-green{
+    width:15px;
+    height:15px;
+    margin-bottom:0;
+    margin-right:5px;
+    vertical-align: -2px;
+    background-color:#dff0d8;
+}
+.EA-blue{
+    width:15px;
+    height:15px;
+    margin-bottom:0;
+    margin-right:5px;
+    margin-left:10px;
+    vertical-align: -2px;
+    background-color:#d9edf7;
+}
+.EA-red{
+    width:15px;
+    height:15px;
+    margin-bottom:0;
+    margin-right:5px;
+    vertical-align: -2px;
+    background-color:#f2dede;
+}
+.EA-yellow{
+    width:15px;
+    height:15px;
+    margin-bottom:0;
+    margin-right:5px;
+    margin-left:16px;
+    vertical-align: -2px;
+    background-color:#fcf8e3;
+}
 .OverAll-bottom-in .Over-month2{
   font-size: 0.2rem;
 }
@@ -1858,7 +1892,7 @@ to {top:-7px;}
 .fa-reorder{
     font-size: 22px!important;
 }
-@media (max-width:1600px){
+@media (max-width:1700px){
     .Ranking-sort{
         clear:left;
     }

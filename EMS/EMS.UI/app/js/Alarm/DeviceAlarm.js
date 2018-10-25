@@ -33,7 +33,7 @@ var DeviceAlarm = (function(){
 				EMS.DOM.initDateTimePicker('CURRENTDATE',new Date(new Date()-24*60*60*1000),$("#dayCalendar"),$("#daycalendarBox"));
 				break;
 				case "MM"://月
-				EMS.DOM.initDateTimePicker('YEARMONTH',new Date(),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy-mm',
+				EMS.DOM.initDateTimePicker('YEARMONTH',new Date(new Date().getFullYear(),new Date().getMonth()-1),$("#dayCalendar"),$("#daycalendarBox"),{format:'yyyy-mm',
 									        language: 'zh-CN',
 									        autoclose: 1,
 									        startView: 3,

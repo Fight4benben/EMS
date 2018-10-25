@@ -32,5 +32,28 @@ namespace EMS.Tests.DbContext
 
         }
 
+        [TestMethod]
+        public void TestHistoryParamBinary()
+        {
+            
+            HistoryParamDbContext context = new HistoryParamDbContext();
+            Acrel.HisDB.GetData getData = new Acrel.HisDB.GetData();
+
+            string circuitID = "000001G0010001";
+            string circuitPrame = "31000000000711,31000000000700,31000000000701,31000000000702";
+            string[] prame = circuitPrame.Split(',');
+
+            List<HistoryBinarys> list = context.GetHistoryBinaryString(circuitID,prame,DateTime.Now);
+
+            foreach (HistoryBinarys item in list)
+            {
+                Dictionary<DateTime,double> dic = getData.GetContinueBytesOfFive(item.Value,new DateTime(2018,10,25,0,0,0),new DateTime(2018,10,25,13,0,0),5);
+
+                Console.WriteLine(dic.Count);
+            }
+
+            Console.WriteLine(list.Count);
+        }
+
     }
 }
