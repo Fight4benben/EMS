@@ -11,7 +11,12 @@ namespace EMS.DAL.Entities
         public string ID { get; set; }
         public string Name { get; set; }
         public string ParamName { get; set; }
-        public DateTime? Time { get; set; }
-        public double? Value { get; set; }
+        public List<TimeValue> Values { get; set; }
+    }
+
+    public class TimeValue
+    {
+        public DateTime Time { get; set; }
+        public decimal Value { get; set; }
     }
 }

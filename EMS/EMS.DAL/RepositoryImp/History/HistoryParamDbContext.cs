@@ -17,57 +17,78 @@ namespace EMS.DAL.RepositoryImp
         private EnergyDB _EMSdb = new EnergyDB();
         private HistoryDB _db = new HistoryDB();
 
+
         /// <summary>
-        /// 获取每个参数的值
+        /// 获取单个支路的每个参数的值
         /// </summary>
-        /// <param name="circuitIDs">支路名称</param>
-        /// <param name="meterParamIds">仪表参数</param>
-        /// <param name="startTime">查询时间</param>
+        /// <param name="circuitID">支路编码</param>
+        /// <param name="meterParamIds">参数编码</param>
+        /// <param name="dateTime">查询时间（"yyyy-MM-dd"）</param>
         /// <param name="step">时间间隔（分钟）</param>
         /// <returns></returns>
-        public List<HistoryParameterValue> GetHistoryParamValue(string circuitID, string[] meterParamIds, DateTime startTime, int step)
+        public List<HistoryParameterValue> GetParamValue(string circuitID, string[] meterParamIds, string dateTime, int step)
         {
+            Acrel.HisDB.GetData getData = new Acrel.HisDB.GetData();
             List<HistoryParameterValue> historyValueList = new List<HistoryParameterValue>();
+            DateTime nowTime = DateTime.Now;
+            DateTime endTime;
+
+            DateTime startTime = Util.ConvertString2DateTime(dateTime, "yyyy-MM-dd");
+
+            //如果查询是的时间是今天，则结束时间为小于当前时间的为5的倍数的时间
+            if (nowTime.Day == startTime.Day && nowTime.Month == startTime.Month && nowTime.Year == startTime.Year)
+            {
+                endTime = startTime.AddHours(nowTime.Hour).AddMinutes(nowTime.Minute - nowTime.Minute % 5 - 5);
+            }
+            else
+            {
+                //获取某天的23:55:00
+                endTime = startTime.AddDays(1).AddMinutes(-5);
+            }
 
             List<HistoryBinarys> historyBinarys = GetHistoryBinaryString(circuitID, meterParamIds, startTime);
 
-            foreach (var item in historyBinarys)
+            foreach (HistoryBinarys item in historyBinarys)
             {
-                for (int hour = 0; hour < 24; hour++)
-                {
-                    for (int minute = 0; minute < 56; minute = minute + step)
-                    {
-                        HistoryParameterValue historyValue = new HistoryParameterValue();
-                        historyValue.ID = item.CircuitID;
-                        historyValue.Name = item.CircuitName;
-                        historyValue.ParamName = item.ParamName;
+                HistoryParameterValue historyValue = new HistoryParameterValue();
+                historyValue.ID = item.CircuitID;
+                historyValue.Name = item.CircuitName;
+                historyValue.ParamName = item.ParamName;
+                historyValue.Values = ConvertDicToList(getData.GetContinueBytesOfFive(item.Value, startTime, endTime, step));
 
-                        historyValue.Time = new DateTime(startTime.Year, startTime.Month, startTime.Day, hour, minute, 0);
-                        double value = BinaryToDouble.GetParamValue(item.Value, startTime.Day, hour, minute);
-                        if (-9999 != value)
-                        {
-                            historyValue.Value = value;
-                            historyValueList.Add(historyValue);
-                        }
-                    }
-                }
+                historyValueList.Add(historyValue);
             }
 
             return historyValueList;
         }
 
+        public List<TimeValue> ConvertDicToList(Dictionary<DateTime, double> dic)
+        {
+            List<TimeValue> resultList = new List<TimeValue>();
+
+            foreach (var item in dic)
+            {
+                TimeValue value = new TimeValue();
+                value.Time = item.Key;
+                value.Value = decimal.Round(Convert.ToDecimal(item.Value), 2);
+                resultList.Add(value);
+            }
+            return resultList;
+        }
+
+
         /// <summary>
         /// 获取原始数据
         /// </summary>
-        /// <param name="meterIds"></param>
+        /// <param name="circuitID"></param>
         /// <param name="meterParamIds"></param>
-        /// <param name="time"></param>
+        /// <param name="time">时间格式："yyyy-MM"</param>
         /// <returns></returns>
         public List<HistoryBinarys> GetHistoryBinaryString(string circuitID, string[] meterParamIds, DateTime time)
         {
             string month = time.Month.ToString("00");
 
-           
+
             string meterparams = "('" + string.Join("','", meterParamIds) + "')";
 
             string sql = @"SELECT Circuit.F_CircuitID AS CircuitID, F_CircuitName AS CircuitName
@@ -99,7 +120,7 @@ namespace EMS.DAL.RepositoryImp
             return treeViewInfos;
         }
 
-        
+
         /// <summary>
         /// 获取仪表参数分类信息
         /// </summary>

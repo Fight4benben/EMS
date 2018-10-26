@@ -80,8 +80,8 @@ namespace EMS.UI.Controllers
             try
             {
                 string[] paramIDs= meterParamIDs.Split(',');
-                DateTime start = Util.ConvertString2DateTime(startTime, "yyyy-MM-dd HH:mm:ss");
-                return service.GetViewModel(circuitID, paramIDs, start,step);
+                //DateTime start = Util.ConvertString2DateTime(startTime, "yyyy-MM-dd HH:mm:ss");
+                return service.GetViewModel(circuitID, paramIDs, startTime, step);
             }
             catch (Exception e)
             {
