@@ -97,6 +97,7 @@
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
+    <Compile Include="Entities\Setting\BuildInfoSet.cs" />
     <Compile Include="Entities\Setting\LogInfo.cs" />
     <Compile Include="Entities\Setting\ResultState.cs" />
     <Compile Include="Entities\Setting\UserSet.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
+    <Compile Include="RepositoryImp\Setting\BuildSetDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\SystemLogDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserSetDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserBuildingDbContext.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
     <Compile Include="StaticResources\Region\RegionReportResources.cs" />
+    <Compile Include="StaticResources\Setting\BuildSetResources.cs" />
     <Compile Include="StaticResources\Setting\SystemLogResources.cs" />
     <Compile Include="StaticResources\Setting\UserSetResources.cs" />
     <Compile Include="StaticResources\Setting\UserBuildingResources.cs" />
