@@ -12,5 +12,7 @@ namespace EMS.DAL.Entities
         public string ParamCode { get; set; }
         public string ParamName { get; set; }
         public int ParamOrder { get; set; }
+        public string ParamType { get; set; }
+        public string ParamUnit { get; set; }
     }
 }

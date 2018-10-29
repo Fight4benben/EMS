@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Acrel.HisDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Acrel.HisDB.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -97,6 +101,7 @@
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
+    <Compile Include="Entities\Setting\BuildInfoSet.cs" />
     <Compile Include="Entities\Setting\LogInfo.cs" />
     <Compile Include="Entities\Setting\ResultState.cs" />
     <Compile Include="Entities\Setting\UserSet.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
+    <Compile Include="RepositoryImp\Setting\BuildSetDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\SystemLogDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserSetDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserBuildingDbContext.cs" />
@@ -233,6 +239,7 @@
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
     <Compile Include="StaticResources\Region\RegionReportResources.cs" />
+    <Compile Include="StaticResources\Setting\BuildSetResources.cs" />
     <Compile Include="StaticResources\Setting\SystemLogResources.cs" />
     <Compile Include="StaticResources\Setting\UserSetResources.cs" />
     <Compile Include="StaticResources\Setting\UserBuildingResources.cs" />

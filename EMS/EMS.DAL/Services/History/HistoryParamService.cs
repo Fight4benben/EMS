@@ -81,19 +81,33 @@ namespace EMS.DAL.Services
             return viewMode;
         }
 
+        /// <summary>
+        /// 获取支路包含的所有参数
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="energyCode"></param>
+        /// <param name="circuitID"></param>
+        /// <returns></returns>
         public HistoryParamViewModel GetViewModel(string buildId, string energyCode, string circuitID)
         {
-            List<ParamClassify> paramClassifyList = context.GetMeterParamClassify(buildId, circuitID);
+            //List<ParamClassify> paramClassifyList = context.GetMeterParamClassify(buildId, circuitID);
             List<MeterParam> meterParamList = context.GetMeterParam(buildId, circuitID);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
-            viewMode.ParamClassify = paramClassifyList;
             viewMode.MeterParam = meterParamList;
 
             return viewMode;
         }
 
-        public HistoryParamViewModel GetViewModel(string circuitID, string[] meterParamIDs, DateTime startTime, int step)
+        /// <summary>
+        /// 获取单个支路中的多个参数的值
+        /// </summary>
+        /// <param name="circuitID"></param>
+        /// <param name="meterParamIDs"></param>
+        /// <param name="startTime"></param>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        public HistoryParamViewModel GetViewModel(string circuitID, string[] meterParamIDs, string startTime, int step)
         {
             switch (step)
             {
@@ -117,7 +131,7 @@ namespace EMS.DAL.Services
                     break;
             }
 
-            List<HistoryParameterValue> parameterValue = context.GetHistoryParamValue(circuitID, meterParamIDs, startTime, step);
+            List<HistoryParameterValue> parameterValue = context.GetParamValue(circuitID, meterParamIDs, startTime, step);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
             viewMode.Data = parameterValue;

@@ -654,13 +654,13 @@ namespace EMS.Tests.DbContext
                         historyValue.Name = item.CircuitName;
                         historyValue.ParamName = item.ParamName;
 
-                        historyValue.Time = new DateTime(startTime.Year, startTime.Month, startTime.Day, hour, minute, 0);
-                        double value = GetHistoryValue(item.Value, startTime.Day, hour, minute);
-                        if (-9999 != value)
-                        {
-                            historyValue.Value = value;
-                            historyValueList.Add(historyValue);
-                        }
+                        //historyValue.Time = new DateTime(startTime.Year, startTime.Month, startTime.Day, hour, minute, 0);
+                        //double value = GetHistoryValue(item.Value, startTime.Day, hour, minute);
+                        //if (-9999 != value)
+                        //{
+                        //    historyValue.Value = value;
+                        //    historyValueList.Add(historyValue);
+                        //}
 
                     }
                 }

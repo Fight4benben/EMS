@@ -26,6 +26,7 @@ namespace EMS.DAL.StaticResources
         /// </summary>
         public static string MeterParamSQL = @"SELECT ParamInfo.F_MeterParamID AS ParamID,ParamInfo.F_MeterParaCode AS ParamCode
 	                                                , ParamInfo.F_MeterParamName AS ParamName,F_Order AS ParamOrder
+                                                    ,F_ParamType AS ParamType,ParamInfo.F_ParamUnit AS ParamUnit
                                                     FROM T_ST_CircuitMeterInfo Circuit
                                                     INNER JOIN T_ST_MeterUseInfo Meter ON Circuit.F_MeterID = Meter.F_MeterID
                                                     INNER JOIN T_ST_MeterParamInfo ParamInfo ON Meter.F_MeterProdID = ParamInfo.F_MeterProdID
