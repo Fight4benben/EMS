@@ -192,6 +192,7 @@
     <Compile Include="Services\Department\DepartmentRankService.cs" />
     <Compile Include="Services\Department\DepartmentReportService.cs" />
     <Compile Include="Services\Alarm\AlarmDeviceOverLimitService.cs" />
+    <Compile Include="Services\History\THParamService.cs" />
     <Compile Include="Services\Item\EnergyItemCompareService.cs" />
     <Compile Include="Services\Item\EnergyItemOverviewService.cs" />
     <Compile Include="Services\Item\EnergyItemReportService.cs" />
