@@ -62,9 +62,10 @@ namespace EMS.Tests.Services
 
             string circuitID = "000001G0010001";
             string[] paramIDs = new string[] { "31000000000700", "31000000000701", "31000000000702", "31000000000709", "31000000000711" };
+            //string[] paramIDs = new string[] { "31000000000201", "31000000000202" };
             DateTime today = DateTime.Now;
 
-            HistoryParamViewModel model = service.GetViewModel(circuitID, paramIDs, today.ToString("yyyy-MM-dd"),10);
+            HistoryParamViewModel model = service.GetViewModel(circuitID, paramIDs, "2018-10-30",10);
 
             Console.WriteLine(UtilTest.GetJson(model));
         }

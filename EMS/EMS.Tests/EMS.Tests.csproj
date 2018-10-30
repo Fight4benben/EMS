@@ -150,6 +150,7 @@
     <Compile Include="Services\RegionServiceTest.cs" />
     <Compile Include="Services\Setting\SystemLogServiceTest.cs" />
     <Compile Include="Services\Setting\UserSetServiceTest.cs" />
+    <Compile Include="Services\THParamServiceTest.cs" />
     <Compile Include="Utils\UtilTest.cs" />
   </ItemGroup>
   <ItemGroup>

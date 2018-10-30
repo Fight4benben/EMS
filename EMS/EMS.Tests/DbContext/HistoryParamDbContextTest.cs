@@ -26,7 +26,7 @@ namespace EMS.Tests.DbContext
             string circuitPrame = "31000000000711,31000000000700,31000000000701,31000000000702";
             string[] prame = circuitPrame.Split(',');
 
-            List<HistoryParameterValue> historyParameterValueList = context.GetHistoryParamValue(circuitID, prame,today,60);
+            List<HistoryParameterValue> historyParameterValueList = context.GetParamValue(circuitID, prame,today.ToString("yyyy-MM-dd"),60);
 
             Console.WriteLine(UtilTest.GetJson(historyParameterValueList));
 
