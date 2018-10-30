@@ -702,6 +702,7 @@
     <Content Include="Views\Department\Average.cshtml" />
     <Content Include="Views\Infomation\MeterStatus.cshtml" />
     <Content Include="Views\Setting\UserBuilding.cshtml" />
+    <Content Include="Views\Circuit\Param.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
