@@ -79,6 +79,12 @@ var EMS = {
 
 			return new Date(year,month,date,hour,minute);
 		},
+		toTimeString:function(date){
+			var hour = EMS.Tool.appendZero(date.getHours());
+			var minute = EMS.Tool.appendZero(date.getMinutes());
+
+			return hour+":"+minute;
+		},
 		dateDiff:function(start,end){
 			var startYear = start.getFullYear();
 			var startMonth = start.getMonth();
