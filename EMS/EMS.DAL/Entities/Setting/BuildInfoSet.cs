@@ -17,7 +17,7 @@ namespace EMS.DAL.Entities
         public string DistrictCode { get; set; }
         public string BuildAddr { get; set; }
         public decimal? BuildLong { get; set; }
-        public decimal? F_BuildLat { get; set; }
+        public decimal? BuildLat { get; set; }
         public int? BuildYear { get; set; }
         public int? UpFloor { get; set; }
         public int? DownFloor { get; set; }

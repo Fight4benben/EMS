@@ -22,7 +22,7 @@ namespace EMS.DAL.StaticResources
                                                 MAX(EnergyItemDict.F_EnergyItemUnit) EnergyItemUnit
                                                 FROM T_ST_CircuitMeterInfo Circuit
                                                 INNER JOIN T_DT_EnergyItemDict EnergyItemDict ON Circuit.F_EnergyItemCode = EnergyItemDict.F_EnergyItemCode
-                                                WHERE F_BuildID=@BuildId
+                                                WHERE F_BuildID=@BuildId AND EnergyItemDict.F_EnergyItemCode <>'84000'
                                                 GROUP BY EnergyItemDict.F_EnergyItemCode";
 
         /// <summary>

@@ -96,7 +96,7 @@ namespace EMS.DAL.Services
             List<HistoryParameterValue> parameterValue = context.GetParamValue(circuitID, paramIDs.ToArray(), startTime, 5);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
-            viewMode.MeterParam = meterParamList;
+            //viewMode.MeterParam = meterParamList;
             viewMode.Data = parameterValue;
 
             return viewMode;
@@ -116,7 +116,6 @@ namespace EMS.DAL.Services
             List<HistoryParameterValue> parameterValue = context.GetParamValue(circuitID, paramIDs.ToArray(), startTime, 5);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
-            viewMode.MeterParam = meterParamList;
             viewMode.Data = parameterValue;
 
             return viewMode;
@@ -157,7 +156,6 @@ namespace EMS.DAL.Services
             List<HistoryParameterValue> parameterValue = context.GetParamValue(circuitID, paramIDs.ToArray(), startTime, step);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
-            viewMode.MeterParam = meterParamList;
             viewMode.Data = parameterValue;
 
             return viewMode;
