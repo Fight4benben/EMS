@@ -11,5 +11,7 @@ namespace EMS.DAL.ViewModels
     {
         public List<BuildViewModel> Builds { get; set; }
         public List<BuildInfoSet> BuildInfo { get; set; }
+        public ResultState ResultState { get; set; }
+
     }
 }

@@ -148,6 +148,7 @@
     <Compile Include="Services\RegionCompareServiceTest.cs" />
     <Compile Include="Services\RegionReportServiceTest.cs" />
     <Compile Include="Services\RegionServiceTest.cs" />
+    <Compile Include="Services\Setting\BuildSetServiceTest.cs" />
     <Compile Include="Services\Setting\SystemLogServiceTest.cs" />
     <Compile Include="Services\Setting\UserSetServiceTest.cs" />
     <Compile Include="Services\THParamServiceTest.cs" />

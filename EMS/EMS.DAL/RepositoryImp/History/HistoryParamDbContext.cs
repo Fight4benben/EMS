@@ -159,5 +159,10 @@ namespace EMS.DAL.RepositoryImp
         {
             return _EMSdb.Database.SqlQuery<EnergyItemDict>(SharedResources.EnergyItemDictSQL, new SqlParameter("@BuildId", buildId)).ToList();
         }
+
+        public List<EnergyItemDict> GetTHEnergyItemDictByBuild(string buildId)
+        {
+            return _EMSdb.Database.SqlQuery<EnergyItemDict>(HistoryParamResources.THEnergyItemSQL, new SqlParameter("@BuildId", buildId)).ToList();
+        }
     }
 }

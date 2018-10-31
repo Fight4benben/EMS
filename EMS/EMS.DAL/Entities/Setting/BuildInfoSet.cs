@@ -13,7 +13,7 @@ namespace EMS.DAL.Entities
         public string BuildName { get; set; }
         public string AliasName { get; set; }
         public string BuildOwner { get; set; }
-        public int State { get; set; }
+        public Int16 State { get; set; }
         public string DistrictCode { get; set; }
         public string BuildAddr { get; set; }
         public decimal? BuildLong { get; set; }
@@ -34,7 +34,7 @@ namespace EMS.DAL.Entities
         public string WallWinType { get; set; }
         public string GlassType { get; set; }
         public string WinFrameType { get; set; }
-        public int IsStandard { get; set; }
+        public bool IsStandard { get; set; }
         public string DesignDept { get; set; }
         public string WorkDept { get; set; }
         public DateTime? CreateTime { get; set; }
@@ -43,13 +43,13 @@ namespace EMS.DAL.Entities
         public DateTime? AcceptDate { get; set; }
         public int? NumberOfPeople { get; set; }
         public decimal? SPArea { get; set; }
-        public string Image { get; set; }
+        public Byte[] Image { get; set; }
         public int? TransCount { get; set; }
-        public decimal? InstallCapacity { get; set; }
-        public decimal? OperateCapacity { get; set; }
+        public int? InstallCapacity { get; set; }
+        public int? OperateCapacity { get; set; }
         public int? DesignMeters { get; set; }
-        public int? Mobiles { get; set; }
-        public int? ModelID { get; set; }
+        public string Mobiles { get; set; }
+        public Int16 ModelID { get; set; }
 	
     }
 }

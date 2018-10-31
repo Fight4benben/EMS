@@ -43,5 +43,39 @@ namespace EMS.DAL.Services
 
             return viewModel;
         }
+
+        public BuildSetViewModel SetBuild(BuildInfoSet buildInfoSet)
+        {
+            int result = context.SetBuildInfo(buildInfoSet);
+
+            BuildSetViewModel viewModel = new BuildSetViewModel();
+            if (result == 1)
+            {
+                viewModel.ResultState.State = 0;
+            }
+            else
+            {
+                viewModel.ResultState.State = 1;
+            }
+
+            return viewModel;
+        }
+
+        public BuildSetViewModel DeleteBuild(string buildId)
+        {
+            int result = context.DeleteBuild(buildId);
+
+            BuildSetViewModel viewModel = new BuildSetViewModel();
+            if (result == 1)
+            {
+                viewModel.ResultState.State = 0;
+            }
+            else
+            {
+                viewModel.ResultState.State = 1;
+            }
+
+            return viewModel;
+        }
     }
 }

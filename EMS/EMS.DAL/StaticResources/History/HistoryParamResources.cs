@@ -43,5 +43,14 @@ namespace EMS.DAL.StaticResources
                                                         WHERE Circuit.F_BuildID=@BuildID
 	                                                    AND F_EnergyItemCode=@EnergyItemCode
                                                         ORDER BY ID ASC ";
+        /// <summary>
+        /// 获取参数查询的支路列表
+        /// </summary>
+        public static string THEnergyItemSQL = @" SELECT EnergyItemDict.F_EnergyItemCode EnergyItemCode,MAX(EnergyItemDict.F_EnergyItemName) EnergyItemName,
+                                                MAX(EnergyItemDict.F_EnergyItemUnit) EnergyItemUnit
+                                                FROM T_ST_CircuitMeterInfo Circuit
+                                                INNER JOIN T_DT_EnergyItemDict EnergyItemDict ON Circuit.F_EnergyItemCode = EnergyItemDict.F_EnergyItemCode
+                                                WHERE F_BuildID=@BuildId
+                                                GROUP BY EnergyItemDict.F_EnergyItemCode ";
     }
 }

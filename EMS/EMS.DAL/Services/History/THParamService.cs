@@ -43,7 +43,7 @@ namespace EMS.DAL.Services
             else
                 energyCode = "";
 
-            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, "84000");
             //List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();
@@ -65,7 +65,7 @@ namespace EMS.DAL.Services
             else
                 energyCode = "";
 
-            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, "84000");
             //List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
 
             HistoryParamViewModel viewMode = new HistoryParamViewModel();

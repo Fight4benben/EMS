@@ -62,7 +62,7 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.ExecuteSqlCommand(BuildSetResources.SetBuildInfo, sqlParameters);
         }
 
-        public int DeleteBuild(string buildId, string circuitID)
+        public int DeleteBuild(string buildId)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildId),
