@@ -107,6 +107,38 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
+        public void TestAddBuild_OK2()
+        {
+            BuildSetService service = new BuildSetService();
+
+            BuildSetViewModel ViewModel = service.GetAllBuilds();
+            BuildViewModel lasstbuild = ViewModel.Builds.Last();
+          
+
+            BuildInfoSet buildInfoSet = new BuildInfoSet();
+
+         
+         
+            buildInfoSet.BuildName = "TestName" + (DateTime.Now).ToString();
+            buildInfoSet.AliasName = "TestName" + (DateTime.Now).ToString();
+
+            buildInfoSet.BuildOwner = "TestOwner" + (DateTime.Now).ToString();
+
+        
+
+            //BuildID,DataCenterID,BuildName,AliasName,BuildOwner
+            //,DistrictCode,BuildAddr,BuildLong,BuildLat,BuildYear
+            //,UpFloor,DownFloor,BuildFunc,TotalArea,AirArea
+            //,DesignDept,WorkDept,CreateTime,CreateUser,MonitorDate
+            //,AcceptDate,NumberOfPeople,SPArea,Image,TransCount
+            //,InstallCapacity,OperateCapacity,DesignMeters,Mobiles
+
+            ViewModel = service.AddBuild(buildInfoSet);
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
         public void TestUpdataBuild_OK()
         {
             BuildSetService service = new BuildSetService();
@@ -114,7 +146,7 @@ namespace EMS.Tests.Services
             BuildSetViewModel ViewModel = service.GetAllBuilds();
             BuildViewModel lasstbuild = ViewModel.Builds.Last();
          
-            string newBuildID="000001G004";
+            string newBuildID="000001G005";
          
 
             BuildInfoSet buildInfoSet = new BuildInfoSet();
