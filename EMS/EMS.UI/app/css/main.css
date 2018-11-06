@@ -1,6 +1,44 @@
 *{
     font-family: "Microsoft YaHei";
 }
+.param .energy{
+    width: 200px;
+    float:left;
+}
+.param .count-info-te .row .select-width{
+    margin-top:0!important;
+}
+.param #treeview{
+    height:300px!important;
+    overflow-y:scroll;
+}
+.paramlist p{
+    padding:10px 10px 10px 30px;
+    margin-top:10px;
+    margin-bottom:0;
+    color:#007cde;
+    background:#F4F4F4;
+}
+.paramlist .list{
+    width:auto;
+    height:221px;
+    overflow:auto;
+    border: 1px solid #eee;
+}
+.param .graph{
+    width:auto;
+    border:1px solid #eee;
+    height:230px;
+}
+
+.param  .param-table{
+    width:auto;
+    border:1px solid #eee;
+    height:458px;
+}
+.param .title{
+    padding-top:10px;
+}
 /*2018综合修改*/
 .EA-green{
     width:15px;
@@ -225,6 +263,9 @@
     margin-bottom:0;
 }
 @media (max-width:1024px){
+    .param .count-info{
+      clear:both;
+    }
      .OutWork-left,.OutWork-right,.OutWork-left .OutWork-list{width:100%;}
      .OutWork-message{
         background: url(../img/alarm.png) no-repeat bottom right;

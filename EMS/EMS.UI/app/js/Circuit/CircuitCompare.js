@@ -201,7 +201,7 @@ var CircuitCompare = (function(){
 
 			showChart(currentData,previousData);
 
-			console.log();
+			//console.log();
 
 			showTable(currentData,previousData);
 			

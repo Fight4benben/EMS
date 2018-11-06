@@ -331,6 +331,7 @@
     <Content Include="app\js\Department\Report.js" />
     <Content Include="app\js\equipment.js" />
     <Content Include="app\js\History\Environment.js" />
+    <Content Include="app\js\History\Param.js" />
     <Content Include="app\js\home.js" />
     <Content Include="app\js\index.js" />
     <Content Include="app\js\Infomation\MeterStatus.js" />

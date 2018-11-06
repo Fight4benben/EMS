@@ -53,6 +53,7 @@ namespace EMS.DAL.RepositoryImp
                 HistoryParameterValue historyValue = new HistoryParameterValue();
                 historyValue.ID = item.CircuitID;
                 historyValue.Name = item.CircuitName;
+                historyValue.ParamCode = item.ParamCode;
                 historyValue.ParamName = item.ParamName;
                 historyValue.Values = ConvertDicToList(getData.GetContinueBytesOfFive(item.Value, startTime, endTime, step));
 
@@ -92,7 +93,7 @@ namespace EMS.DAL.RepositoryImp
             string meterparams = "('" + string.Join("','", meterParamIds) + "')";
 
             string sql = @"SELECT Circuit.F_CircuitID AS CircuitID, F_CircuitName AS CircuitName
-                                , ParamInfo.F_MeterParamName AS ParamName
+                                , ParamInfo.F_MeterParamName AS ParamName,ParamInfo.F_MeterParaCode ParamCode
                                 , F_Month" + month +
                                 @" AS Value FROM HistoryData WITH(NOLOCK)
                                 INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID=HistoryData.F_MeterID
