@@ -14,12 +14,17 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
+        public List<BuildViewModel> GetBuildList()
+        {
+            return _db.Database.SqlQuery<BuildViewModel>(BuildSetResources.GetBuildList).ToList();
+        }
+
         public List<BuildInfoSet> GetBuildInfoList(string buildID)
         {
             return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildInfo, new SqlParameter("@BuildID", buildID)).ToList();
         }
 
-        public int SetBuildInfo(BuildInfoSet buildInfoSet)
+        public int AddBuildInfo(BuildInfoSet buildInfoSet)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildID",buildInfoSet.BuildID),
@@ -49,17 +54,54 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@AcceptDate",buildInfoSet.AcceptDate),
                 new SqlParameter("@NumberOfPeople",buildInfoSet.NumberOfPeople),
                 new SqlParameter("@SPArea",buildInfoSet.SPArea),
-                new SqlParameter("@Image",buildInfoSet.Image),
                 new SqlParameter("@TransCount",buildInfoSet.TransCount),
 
                 new SqlParameter("@InstallCapacity",buildInfoSet.InstallCapacity),
                 new SqlParameter("@OperateCapacity",buildInfoSet.OperateCapacity),
                 new SqlParameter("@DesignMeters",buildInfoSet.DesignMeters),
                 new SqlParameter("@Mobiles",buildInfoSet.Mobiles)
-
-               
             };
-            return _db.Database.ExecuteSqlCommand(BuildSetResources.SetBuildInfo, sqlParameters);
+            return _db.Database.ExecuteSqlCommand(BuildSetResources.AddBuildInfo, sqlParameters);
+        }
+
+        public int UpdateBuildInfo(BuildInfoSet buildInfoSet)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildInfoSet.BuildID),
+                new SqlParameter("@DataCenterID",buildInfoSet.DataCenterID),
+                new SqlParameter("@BuildName",buildInfoSet.BuildName),
+                new SqlParameter("@AliasName",buildInfoSet.AliasName),
+                new SqlParameter("@BuildOwner",buildInfoSet.BuildOwner),
+
+                new SqlParameter("@DistrictCode",buildInfoSet.DistrictCode),
+                new SqlParameter("@BuildAddr",buildInfoSet.BuildAddr),
+                new SqlParameter("@BuildLong",buildInfoSet.BuildLong),
+                new SqlParameter("@BuildLat",buildInfoSet.BuildLat),
+                new SqlParameter("@BuildYear",buildInfoSet.BuildYear),
+
+                new SqlParameter("@UpFloor",buildInfoSet.UpFloor),
+                new SqlParameter("@DownFloor",buildInfoSet.DownFloor),
+                new SqlParameter("@BuildFunc",buildInfoSet.BuildFunc),
+                new SqlParameter("@TotalArea",buildInfoSet.TotalArea),
+                new SqlParameter("@AirArea",buildInfoSet.AirArea),
+
+                new SqlParameter("@DesignDept",buildInfoSet.DesignDept),
+                new SqlParameter("@WorkDept",buildInfoSet.WorkDept),
+                new SqlParameter("@CreateTime",buildInfoSet.CreateTime),
+                new SqlParameter("@CreateUser",buildInfoSet.CreateUser),
+                new SqlParameter("@MonitorDate",buildInfoSet.MonitorDate),
+
+                new SqlParameter("@AcceptDate",buildInfoSet.AcceptDate),
+                new SqlParameter("@NumberOfPeople",buildInfoSet.NumberOfPeople),
+                new SqlParameter("@SPArea",buildInfoSet.SPArea),
+                new SqlParameter("@TransCount",buildInfoSet.TransCount),
+
+                new SqlParameter("@InstallCapacity",buildInfoSet.InstallCapacity),
+                new SqlParameter("@OperateCapacity",buildInfoSet.OperateCapacity),
+                new SqlParameter("@DesignMeters",buildInfoSet.DesignMeters),
+                new SqlParameter("@Mobiles",buildInfoSet.Mobiles)
+            };
+            return _db.Database.ExecuteSqlCommand(BuildSetResources.UpdateBuildInfo, sqlParameters);
         }
 
         public int DeleteBuild(string buildId)
