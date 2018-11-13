@@ -1,6 +1,21 @@
 *{
     font-family: "Microsoft YaHei";
 }
+.indexmax{
+    float:right;
+    margin-right:10px;
+}
+.indexmax img{
+    margin-top:-5px;
+}
+.indexmax ul{
+    display: inline-block;
+    padding-left:0;
+}
+.indexmax ul li{
+    display: inline-block;
+    margin-right:10px;
+    }
 .param .energy{
     width: 200px;
     float:left;
