@@ -111,7 +111,7 @@
 			});
 
 			EMS.Chart.showLine(echarts,$("#temperature"),undefined,tempTimes,{type:'line',data:tempValues});
-			EMS.Chart.showLine(echarts,$("#humidity"),undefined,tempTimes,{type:'line',data:tempValues});
+			EMS.Chart.showLine(echarts,$("#humidity"),undefined,humiTimes,{type:'line',data:humiValues});
 		}
 
 	}

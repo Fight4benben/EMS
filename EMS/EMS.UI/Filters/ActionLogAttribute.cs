@@ -13,9 +13,10 @@ namespace EMS.UI.Filters
     public class ActionLogAttribute : ActionFilterAttribute
     {
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            Console.WriteLine("当前操作：" + actionExecutedContext.ActionContext.ActionDescriptor.ActionName + ",用户名：" + actionExecutedContext.ActionContext.RequestContext.Principal.Identity.Name);
+            base.OnActionExecuting(actionContext);
+            
         }
     }
 }

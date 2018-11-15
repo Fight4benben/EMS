@@ -104,5 +104,25 @@ namespace EMS.DAL.RepositoryImp
             else
                 return list[0];
         }
+
+        public bool IsMDShow()
+        {
+            string sql = @"SELECT F_ParamValue Value FROM T_SYS_Param
+                        where F_ParamName = '_ShowMD'";
+
+            List<string> value = _db.Database.SqlQuery<string>(sql).ToList();
+
+            if (value.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                if (value[0] == "true")
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }

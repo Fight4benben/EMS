@@ -7,6 +7,7 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
+    [ActionLog]
     public class HomePageController : ApiController
     {
         HomeServices service = new HomeServices();

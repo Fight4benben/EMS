@@ -74,6 +74,7 @@ var Home = (function(){
 				  showEnergyClassifyTable(data);
 				  showEnergyItemPie(data);
 				  showCompareEnergyButtonAndShowLineAndCompare(data);
+				  showMD(data);
 			  }catch(e){
 
 			  }finally{
@@ -431,8 +432,6 @@ var Home = (function(){
 		    var myLine = echarts.init($("#main_line").get(0),'macarons');
 
 		    myLine.setOption(options);
-
-
 		}
 
 		function showCompareValue(data){
@@ -490,6 +489,16 @@ var Home = (function(){
 					$("#hb_yesterday").prev('div').text('昨日同期(单位kW·h)');
 				break;
 			}
+		}
+
+		function showMD(data){
+			if(!data.hasOwnProperty('showMD')){
+				$("#index_md").hide();
+				return;
+			}
+
+			$("#index_md img").hide();
+			$("#index_md ul").html("");
 		}
 
 	};

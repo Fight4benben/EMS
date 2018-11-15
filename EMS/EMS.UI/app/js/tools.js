@@ -240,6 +240,7 @@ var EMS = {
 			    color:['#FF0000','#FF8C00', '#1E90FF', '#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
 			};
 
+			$Pie.removeAttr('_echarts_instance_');
 			charts.init($Pie.get(0),'macarons').setOption(option);
 		},
 		showLine:function(charts,$Line,legendData,xData,series){
@@ -274,9 +275,12 @@ var EMS = {
 
         	if(legendData != undefined)
         		option.legend =  {
+        					type:'scroll',
 			                data: legendData,
 			                bottom:'bottom'
 			            };
+
+			$Line.removeAttr('_echarts_instance_');
 
         	charts.init($Line.get(0),'macarons').setOption(option);
 		},
@@ -317,6 +321,7 @@ var EMS = {
 			if(defaultColor != undefined)
 				delete option.color;
 
+			$Bar.removeAttr('_echarts_instance_');
 
         	charts.init($Bar.get(0),'macarons').setOption(option);
 		},
@@ -363,7 +368,7 @@ var EMS = {
 			if(dataZoom != undefined)
 				option.dataZoom = dataZoom
 
-
+			$Bar.removeAttr('_echarts_instance_');
         	charts.init($Bar.get(0),'macarons').setOption(option);
 		},
 		showStackBar:function(charts,$Pie,names,xData,series,unit,legendFlag){
@@ -402,6 +407,7 @@ var EMS = {
 			    color:['#1E90FF','#FF8C00','#FF0000','#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
 			}
 
+			$Pie.removeAttr('_echarts_instance_');
 			charts.init($Pie.get(0),'macarons').setOption(option);
 		}
 	}

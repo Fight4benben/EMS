@@ -164,6 +164,7 @@
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
+    <Compile Include="Controllers\Common\AuthController.cs" />
     <Compile Include="Controllers\History\THParamController.cs" />
     <Compile Include="Controllers\Infomation\InfomationController.cs" />
     <Compile Include="Controllers\Infomation\MeterConnectStateController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
+    <Compile Include="Filters\SoftAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -707,6 +709,7 @@
     <Content Include="Views\Setting\UserBuilding.cshtml" />
     <Content Include="Views\Circuit\Param.cshtml" />
     <Content Include="Views\Circuit\Environment.cshtml" />
+    <Content Include="Views\Auth\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

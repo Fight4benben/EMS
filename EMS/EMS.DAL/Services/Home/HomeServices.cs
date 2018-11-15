@@ -32,11 +32,12 @@ namespace EMS.DAL.Services
             List<HourValue> todayValues = context.GetHourValues(firstBuildId,today.ToString("yyyy-MM-dd HH:00:00"));
             List<HourValue> yesterdayValues = context.GetHourValues(firstBuildId, today.AddDays(-1).ToString("yyyy-MM-dd 23:00:00"));
             string lineMode = context.GetExetendFunc(firstBuildId);
+            bool showMD = context.IsMDShow();
 
             HomeViewModel homeViewModel = new HomeViewModel(currentBuild,builds,
                 TransferEnergyClassifyToViewModel(energyClassifyList),energyItemList,
                 new HourValueViewModel(todayValues,yesterdayValues),
-                GetCompareViewModelByHourValueList(todayValues,yesterdayValues), lineMode);
+                GetCompareViewModelByHourValueList(todayValues,yesterdayValues), lineMode, showMD);
 
             return homeViewModel;
         }
@@ -69,6 +70,7 @@ namespace EMS.DAL.Services
             List<HourValue> todayValues = context.GetHourValues(buildId, date.ToString("yyyy-MM-dd HH:00:00"));
             List<HourValue> yesterdayValues = context.GetHourValues(buildId, date.AddDays(-1).ToString("yyyy-MM-dd 23:00:00"));
             string lineMode = context.GetExetendFunc(buildId);
+            bool showMD = context.IsMDShow();
 
             HomeViewModel homeViewModel = new HomeViewModel();
             homeViewModel.CurrentBuild = currentBuild;
@@ -77,6 +79,7 @@ namespace EMS.DAL.Services
             homeViewModel.HourValues = new HourValueViewModel(todayValues, yesterdayValues);
             homeViewModel.CompareValues = GetCompareViewModelByHourValueList(todayValues, yesterdayValues);
             homeViewModel.LineMode = lineMode;
+            homeViewModel.ShowMD = showMD;
 
             return homeViewModel;
         }

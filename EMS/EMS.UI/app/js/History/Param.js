@@ -254,7 +254,7 @@
 					if(key==0)
 						times.push(EMS.Tool.toTimeString(new Date(paramValue.time)));
 
-					if(data.value==-9999){
+					if(paramValue.value==-9999){
 						series.data.push('-');
 					}else{
 						series.data.push(paramValue.value);
@@ -274,13 +274,13 @@
 					});
 
 					if(filters.length > 0){
-						if(data.value==-9999){
+						if(paramValue.value==-9999){
 							rows[filterIndex][val.paramCode] ='-';
 						}else{
 							rows[filterIndex][val.paramCode] = paramValue.value;
 						}
 					}else{
-						if(data.value==-9999){
+						if(paramValue.value==-9999){
 							var row={name:val.name,time:paramValue.time};
 							row[val.paramCode]='-';
 							rows.push(row)
