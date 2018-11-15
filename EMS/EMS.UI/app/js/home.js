@@ -75,6 +75,7 @@ var Home = (function(){
 				  showEnergyItemPie(data);
 				  showCompareEnergyButtonAndShowLineAndCompare(data);
 				  showMD(data);
+				  showMdValues(data);
 			  }catch(e){
 
 			  }finally{
@@ -215,9 +216,9 @@ var Home = (function(){
 				$.each(energyArray, function(key, val) {
 					if(val.code == $this.attr("value")){
 						if(lineMode=="Special")
-							showPreviewLine(energyArray[0]);
+							showPreviewLine(energyArray[key]);
 						else
-							showLine(energyArray[0]);
+							showLine(energyArray[key]);
 						showCompareValue(val);
 					}
 				});
@@ -494,11 +495,31 @@ var Home = (function(){
 		function showMD(data){
 			if(!data.hasOwnProperty('showMD')){
 				$("#index_md").hide();
+				$("#index_md img").hide();
 				return;
 			}
 
-			$("#index_md img").hide();
 			$("#index_md ul").html("");
+		}
+
+		function showMdValues(data){
+			$("#index_md ul").html("");
+
+			if(!data.hasOwnProperty('mdValues'))
+				return;
+
+			if(data.mdValues.length == 0){
+				$("#index_md").hide();
+				$("#index_md img").hide();
+			}else{
+				$("#index_md").show();
+				$("#index_md img").show();
+			}
+
+
+			$.each(data.mdValues, function(key, val) {
+				$("#index_md ul").append('<li>'+val.name+":"+val.value + "kW</li>");
+			});
 		}
 
 	};

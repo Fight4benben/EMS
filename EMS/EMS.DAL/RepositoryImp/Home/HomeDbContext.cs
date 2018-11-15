@@ -124,5 +124,16 @@ namespace EMS.DAL.RepositoryImp
                     return false;
             }
         }
+
+        public List<ReportValue> GetMDValues(string buildId)
+        {
+            HistoryDB _historyDB = new HistoryDB();
+            SqlParameter[] sqlParameters = {
+                new SqlParameter("@BuildID",buildId)
+            };
+
+            return _historyDB.Database.SqlQuery<ReportValue>(HomeResources.MDSQL, sqlParameters).ToList();
+
+        }
     }
 }

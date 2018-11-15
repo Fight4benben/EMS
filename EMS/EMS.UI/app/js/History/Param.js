@@ -181,7 +181,6 @@
 					});
 				}
 				
-
 				showCurrentParamList(filters);
 			}
 			
@@ -208,7 +207,9 @@
 
 			$.each(paramlist, function(key, val) {
 				$("#paramdetail>ul").append('<li><input type="checkbox" checked="true" name="param" value="'+
-					val.paramID+'">'+val.paramCode+"|"+val.paramName+"|"+val.paramUnit+'</li>')
+					val.paramID+'">'+val.paramCode+"|"+val.paramName+
+					(val.paramUnit==undefined ? "" : "|"+val.paramUnit)
+					+'</li>')
 			});
 
 		}

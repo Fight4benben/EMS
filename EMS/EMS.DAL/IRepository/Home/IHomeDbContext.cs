@@ -25,5 +25,7 @@ namespace EMS.DAL.IRepository
         List<HourValue> GetHourValues(string buildId,string date);
         string GetExetendFunc(string buildId);
         bool IsMDShow();
+
+        List<ReportValue> GetMDValues(string buildId);
     }
 }

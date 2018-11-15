@@ -76,5 +76,11 @@ namespace EMS.DAL.StaticResources
                                             GROUP BY EnergyItem.F_EnergyItemCode,F_StartHour
                                             ORDER BY EnergyItemCode ASC,ValueTime ASC";
 
+        public static string MDSQL = @"SELECT Meter.F_MeterName Name,F_RecentTime 'Time',F_RecentData  Value
+                                        FROM HistoryData
+                                        INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID = HistoryData.F_MeterID
+                                        WHERE HistoryData.F_BuildID = @BuildID
+                                        AND F_TagName LIKE '%_MD'";
+
     }
 }

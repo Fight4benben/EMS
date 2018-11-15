@@ -70,7 +70,7 @@ namespace EMS.DAL.ViewModels
         { }
 
         public HomeViewModel(BuildInfo buildInfo, List<BuildViewModel> builds, List<EnergyClassifyViewModel> energyClassify,
-            List<EnergyItem> energyItems, HourValueViewModel hourValues, List<CompareViewModel> compareValues,string lineMode,bool showMD)
+            List<EnergyItem> energyItems, HourValueViewModel hourValues, List<CompareViewModel> compareValues,string lineMode,bool showMD,List<ReportValue> mdList)
         {
             this.Builds = builds;
             this.CurrentBuild = buildInfo;
@@ -80,6 +80,7 @@ namespace EMS.DAL.ViewModels
             this.CompareValues = compareValues;
             this.LineMode = lineMode;
             this.ShowMD = showMD;
+            this.MdValues = mdList;
         }
         public BuildInfo CurrentBuild { get; set; }
         public List<BuildViewModel> Builds{ get; set; }
@@ -89,5 +90,6 @@ namespace EMS.DAL.ViewModels
         public List<CompareViewModel> CompareValues { get; set; }
         public string LineMode { get; set; }
         public bool ShowMD { get; set; }
+        public List<ReportValue> MdValues { get; set; }
     }
 }
