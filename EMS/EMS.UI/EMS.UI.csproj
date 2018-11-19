@@ -287,10 +287,13 @@
     <Content Include="app\img\logo.ico" />
     <Content Include="app\img\map.png" />
     <Content Include="app\img\mapCon.png" />
+    <Content Include="app\img\max.png" />
     <Content Include="app\img\menu1.png" />
     <Content Include="app\img\menu2.png" />
     <Content Include="app\img\menu3.png" />
     <Content Include="app\img\menu4.png" />
+    <Content Include="app\img\month1.png" />
+    <Content Include="app\img\month2.png" />
     <Content Include="app\img\Overall-down.png" />
     <Content Include="app\img\Overall-up.png" />
     <Content Include="app\img\people.png" />
@@ -318,6 +321,8 @@
     <Content Include="app\img\user.jpg" />
     <Content Include="app\img\water.png" />
     <Content Include="app\img\water2.png" />
+    <Content Include="app\img\year1.png" />
+    <Content Include="app\img\year2.png" />
     <Content Include="app\js\Alarm\DepartmentAlarm.js" />
     <Content Include="app\js\Alarm\DepartmentOutofWork.js" />
     <Content Include="app\js\Alarm\DeviceAlarm.js" />
