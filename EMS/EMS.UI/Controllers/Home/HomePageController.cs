@@ -32,6 +32,22 @@ namespace EMS.UI.Controllers
             return homeViewModel; 
         }
 
+        public object GetHome(string buildId)
+        {
+            HomeViewModel homeViewModel = new HomeViewModel();
+            string userName = User.Identity.Name;
+
+            try
+            {
+                homeViewModel = service.GetModelByBuildId(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            return homeViewModel;
+        }
+
         public object GetHome(string buildId, string date)
         {
             HomeViewModel homeViewModel = new HomeViewModel();

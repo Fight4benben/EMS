@@ -44,6 +44,12 @@
 				var marker = markerArr[key];
 				var buildId = buildArr[key].id;
 
+				marker.addEventListener('click',function(){
+					$.cookie('buildId',buildId,{path:'/'});
+					
+					location.href="/Home";
+				});
+
 				bmap.addOverlay(marker);
 				marker.setLabel(labelArr[key]);
 

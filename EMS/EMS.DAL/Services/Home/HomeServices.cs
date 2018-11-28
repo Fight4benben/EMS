@@ -43,6 +43,29 @@ namespace EMS.DAL.Services
             return homeViewModel;
         }
 
+        public HomeViewModel GetModelByBuildId(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now.AddHours(-1);
+
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            BuildInfo currentBuild = context.GetBuildById(buildId);
+            List<EnergyClassify> energyClassifyList = context.GetEnergyClassifyValues(buildId, DateTime.Now.ToShortDateString());
+            List<EnergyItem> energyItemList = context.GetEnergyItemValues(buildId, DateTime.Now.ToShortDateString());
+            List<HourValue> todayValues = context.GetHourValues(buildId, today.ToString("yyyy-MM-dd HH:00:00"));
+            List<HourValue> yesterdayValues = context.GetHourValues(buildId, today.AddDays(-1).ToString("yyyy-MM-dd 23:00:00"));
+            string lineMode = context.GetExetendFunc(buildId);
+            bool showMD = context.IsMDShow();
+            List<ReportValue> mdValues = context.GetMDValues(buildId);
+
+            HomeViewModel homeViewModel = new HomeViewModel(currentBuild, builds,
+                TransferEnergyClassifyToViewModel(energyClassifyList), energyItemList,
+                new HourValueViewModel(todayValues, yesterdayValues),
+                GetCompareViewModelByHourValueList(todayValues, yesterdayValues), lineMode, showMD, mdValues);
+
+            return homeViewModel;
+        }
+
         public HomeViewModel GetHomeViewModel(string buildId,string date)
         {
             DateTime today = Util.ConvertString2DateTime(date,"yyyy-MM-dd");

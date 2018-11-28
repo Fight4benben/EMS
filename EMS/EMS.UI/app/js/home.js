@@ -16,7 +16,11 @@ var Home = (function(){
 		};
 		
 		this.showHome=function(url,params){
-			getDataFromServer(url,params);
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,params);
+			else
+				getDataFromServer(url,"buildId="+buildId);
 		};
 
 		function initDateTimePicker(){
@@ -88,6 +92,7 @@ var Home = (function(){
 
 		//显示建筑列表
 		function showBuildList(data){
+			$.cookie('buildId',null,{path:'/'});
 
 			if(!data.hasOwnProperty('builds'))
 				return;
@@ -115,6 +120,9 @@ var Home = (function(){
 			$("#InstallCap h4").text(currentBuild.installCapacity);
 			$("#OperateCap h4").text(currentBuild.operateCapacity);
 			$("#metersTotal h4").text(currentBuild.designMeters);
+
+			$("#buildinglist").val(currentBuild.buildId);
+
 		};
 
 		//显示分类能耗表格

@@ -279,8 +279,14 @@
 }
 @media (max-width:1024px){
     .param .count-info{
-      clear:both;
+      clear:both!important;
     }
+    .param .count-info-te-calc{
+        margin-top:655px;
+        padding-right:0;
+        margin-bottom:40px;
+    }
+    .param .dis-tree{display: block;}
      .OutWork-left,.OutWork-right,.OutWork-left .OutWork-list{width:100%;}
      .OutWork-message{
         background: url(../img/alarm.png) no-repeat bottom right;
@@ -1589,6 +1595,9 @@ to {top:-7px;}
     height: 390px;
 }
 @media (max-width:768px){
+    .param{
+        padding-right:10px;
+    }
     .chart{
       height: 460px;
     }
