@@ -207,6 +207,7 @@
     <Compile Include="Controllers\Setting\SettingController.cs" />
     <Compile Include="Controllers\Setting\SystemLogApiController.cs" />
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
+    <Compile Include="Controllers\Setting\UserMenuApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
     <Compile Include="Filters\SoftAuthAttribute.cs" />

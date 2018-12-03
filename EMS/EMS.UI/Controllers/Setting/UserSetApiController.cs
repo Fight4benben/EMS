@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace EMS.UI.Controllers
 {
-    public class UserSetApiController
+    public class UserSetApiController : ApiController
     {
         public UserSetService service = new UserSetService();
 
