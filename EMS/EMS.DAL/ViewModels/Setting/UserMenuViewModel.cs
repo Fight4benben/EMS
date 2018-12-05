@@ -11,7 +11,7 @@ namespace EMS.DAL.ViewModels
     {
         public List<UserSet> Users { get; set; }
         public List<User2Menu> adminMenu { get; set; }
-        public List<User2Menu> userMenu { get; set; }
+        public string[] userMenu { get; set; }
         public ResultState ResultState { get; set; }
 
     }

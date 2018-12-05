@@ -15,12 +15,13 @@ namespace EMS.UI.Controllers
         /// <summary>
         /// 默认或者管理员关联的菜单
         /// </summary>
-        /// <returns></returns>
+        /// <returns>返回：系统中所以用户；当前登录管理员关联菜单</returns>
         public object Get()
         {
             try
             {
-                return service.GetUserMenuViewModel();
+                string userName = User.Identity.Name;
+                return service.GetAdminMenuViewModel(userName);
             }
             catch (Exception e)
             {
@@ -32,7 +33,7 @@ namespace EMS.UI.Controllers
         /// 根据用户ID获取用户的菜单
         /// </summary>
         /// <param name="userID"></param>
-        /// <returns></returns>
+        /// <returns>返回：传入用户的菜单ID数组</returns>
         public object Get(string userID)
         {
             try
@@ -49,7 +50,7 @@ namespace EMS.UI.Controllers
         /// 设置用户关联的菜单
         /// </summary>
         /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <returns>返回：State数值，0代表操作成功；1代表操作失败</returns>
         [HttpPost]
         public object SetUserMenu([FromBody] JObject obj)
         {

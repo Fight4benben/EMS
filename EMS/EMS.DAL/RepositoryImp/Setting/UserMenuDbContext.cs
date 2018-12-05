@@ -30,10 +30,18 @@ namespace EMS.DAL.RepositoryImp
             };
             return _db.Database.SqlQuery<UserMenus>(UserMenuResources.GetOneUserMenu, sqlParameters).ToList();
         }
-
+        
         public List<UserMenus> GetAdminMenu()
         {
             return _db.Database.SqlQuery<UserMenus>(UserMenuResources.GetAdminMenu).ToList();
+        }
+
+        public List<UserMenus> GetAdminMenuByUserName(string userName)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName)
+            };
+            return _db.Database.SqlQuery<UserMenus>(UserMenuResources.GetAdminMenuByName, sqlParameters).ToList();
         }
 
         public List<MenuInfo> GetMenuInfo()

@@ -27,6 +27,17 @@ namespace EMS.DAL.StaticResources
                                                   Where F_UserName ='admin'
                                             ";
         /// <summary>
+        ///获取管理关联菜单
+        /// </summary>
+        public static string GetAdminMenuByName = @"
+                                             SELECT Users.F_UserID AS Id
+                                                      ,F_MenuItems AS Menus
+                                                  FROM T_SYS_User_Menus UserMenus
+                                                  INNER JOIN T_SYS_Users Users ON Users.F_UserID=UserMenus.F_UserID
+                                                  Where F_UserName =@UserName
+                                            ";
+
+        /// <summary>
         ///获取全部用户及每个用户关联的菜单
         /// </summary>
         public static string GetAllUserMenu = @"

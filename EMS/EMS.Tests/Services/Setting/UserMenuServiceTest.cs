@@ -15,10 +15,10 @@ namespace EMS.Tests.Services.Setting
     {
 
         [TestMethod]
-        public void TestGetAllUser()
+        public void TestGetAdminUserMenu()
         {
             UserMenuService service = new UserMenuService();
-            UserMenuViewModel ViewModel = service.GetUserMenuViewModel();
+            UserMenuViewModel ViewModel = service.GetAdminMenuViewModel("admin");
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
@@ -37,8 +37,9 @@ namespace EMS.Tests.Services.Setting
         public void TestSetUserMenu()
         {
             UserMenuService service = new UserMenuService();
-            int userID = 2;
-            UserMenuViewModel ViewModel = service.GetUserMenuViewModel(userID);
+            int userID = 23;
+            string menuIDs= "1P|3P|4P|4.1|4.2|4.3|4.4|5P|5.1|5.2|5.3|6P|6.1|6.2|6.3|6.4";
+            UserMenuViewModel ViewModel = service.SetUserMenu(userID, menuIDs);
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
