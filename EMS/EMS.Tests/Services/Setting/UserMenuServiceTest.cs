@@ -36,7 +36,7 @@ namespace EMS.Tests.Services.Setting
         public void TestGetUserMenu()
         {
             UserMenuService service = new UserMenuService();
-            int userID = 23;
+            int userID = 2;
             UserMenuViewModel ViewModel = service.GetUserMenuViewModel(userID);
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
