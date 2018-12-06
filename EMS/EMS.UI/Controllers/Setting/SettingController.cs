@@ -24,5 +24,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult UserMenu()
+        {
+            return View();
+        }
     }
 }

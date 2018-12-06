@@ -716,6 +716,7 @@
     <Content Include="Views\Circuit\Param.cshtml" />
     <Content Include="Views\Circuit\Environment.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Setting\UserMenu.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
