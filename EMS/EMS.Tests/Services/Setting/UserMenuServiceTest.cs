@@ -24,10 +24,19 @@ namespace EMS.Tests.Services.Setting
         }
 
         [TestMethod]
+        public void TestGetAdminUserMenu2()
+        {
+            UserMenuService service = new UserMenuService();
+            UserMenuViewModel ViewModel = service.GetAdminMenuViewModel("aa");
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
         public void TestGetUserMenu()
         {
             UserMenuService service = new UserMenuService();
-            int userID = 17;
+            int userID = 23;
             UserMenuViewModel ViewModel = service.GetUserMenuViewModel(userID);
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
