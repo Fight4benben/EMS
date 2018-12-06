@@ -50,11 +50,15 @@ namespace EMS.DAL.Services
                 string[] adminMenuArray = admin.Menus.Split('|');
                 foreach (var menuId in adminMenuArray)
                 {
-                    User2Menu user2m = new User2Menu();
-                    user2m.MenuName = menuInfo.Find(x => x.MenuID.Equals(menuId)).MenuName;
-                    user2m.MenuID = menuId;
-                    user2m.isUsing = true;
-                    admin2Menu.Add(user2m);
+                    if (menuInfo.Exists(x => x.MenuID.Equals(menuId)))
+                    {
+                        User2Menu user2m = new User2Menu();
+                        user2m.MenuName = menuInfo.Find(x => x.MenuID.Equals(menuId)).MenuName;
+                        user2m.MenuID = menuId;
+                        user2m.isUsing = true;
+                        admin2Menu.Add(user2m);
+                    }
+                   
                 }
             }
 
