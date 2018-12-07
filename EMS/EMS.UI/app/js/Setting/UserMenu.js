@@ -133,6 +133,14 @@ var UserMenu=(function(){
 				$("#table-user-menus>table").attr('data-height',height);
 
 			EMS.DOM.showTable($("#table-user-menus>table"),columns,rows,{striped:true,checkboxHeader:false,classes:'table table-border'});
+
+			$("#mainTable").on('check.bs.table',function(event,row,$element){
+				console.log($("#mainTable").bootstrapTable('getData'));
+			});
+
+			$("#mainTable").on('uncheck.bs.table',function(event,row,$element){
+
+			});
 		}
 
 		function generateUserList(defualtmenus,rows,currentUserMenus,data){
