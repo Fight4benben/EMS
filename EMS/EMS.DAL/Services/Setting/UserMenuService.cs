@@ -80,24 +80,23 @@ namespace EMS.DAL.Services
 
             //其他用户关联的菜单
             UserMenus userM = new UserMenus();
-            List<User2Menu> user2Menu = new List<User2Menu>();
-            string[] userMenuArray= { };
+            List<string> userMenuList = new List<string>();
             if (userMenu.Count > 0)
             {
                 userM = userMenu.First();
 
                 if (userM.Menus.Equals("all"))
                 {
-                    userMenuArray[0] = "all" ;
+                    userMenuList.Add("all");
                 }
                 else
                 {
-                    userMenuArray = userM.Menus.Split('|');
+                    userMenuList.AddRange(userM.Menus.Split('|'));
                 }
             }
 
             UserMenuViewModel viewModel = new UserMenuViewModel();
-            viewModel.userMenu = userMenuArray;
+            viewModel.userMenu = userMenuList.ToArray();
 
             return viewModel;
         }
