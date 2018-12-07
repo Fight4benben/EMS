@@ -15,7 +15,7 @@ var UserMenu=(function(){
 			});
 
 			$("#searchButton").click(function(event) {
-				console.log(currentUserMenus);
+				
 				var selectedRows = $("#mainTable").bootstrapTable('getSelections');
 				var menus = [];
 				$.each(selectedRows, function(index, val) {
@@ -39,7 +39,19 @@ var UserMenu=(function(){
 					}
 				}
 
-				alert("提交更改！");
+				
+
+				$.post(baseUrl+'/SetUserMenu', {userID: $("#userlist").val(),
+					menuIDs:menus.join('|')
+				}, function(data, textStatus, xhr) {
+					if(data.resultState.details=="成功"){
+						alert("修改"+$("#userlist").find("option:selected").text()+"菜单成功！");
+						currentUserMenus = menus;
+					}else{
+						alert("修改"+$("#userlist").find("option:selected").text()+"菜单失败！");
+						getDataFromServer(baseUrl,"userID="+$("#userlist").val());
+					}
+				});
 			});
 		}
 
@@ -51,7 +63,7 @@ var UserMenu=(function(){
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
+				
 				try{
 					showUsers(data);
 					appendTotalMenu(data);
@@ -98,15 +110,10 @@ var UserMenu=(function(){
 							currentUserMenus.push(val.menuID);
 						});
 					}else{
-						$.each(fullMenus, function(key, val) {
-							var flag;
-							$.inArray(val.menuID, data.userMenu)>-1 ? flag=true:flag=false;
-							rows.push({menuID:val.menuID,menuName:val.menuName,isUsing:flag});
-							if(flag){
-								currentUserMenus.push(val.menuID);
-							}
-						});
+						generateUserList(fullMenus,rows,currentUserMenus,data);
 					}
+				}else{
+					generateUserList(fullMenus,rows,currentUserMenus,data);
 				}
 
 			}else if(data.hasOwnProperty('adminMenu')){
@@ -126,6 +133,17 @@ var UserMenu=(function(){
 				$("#table-user-menus>table").attr('data-height',height);
 
 			EMS.DOM.showTable($("#table-user-menus>table"),columns,rows,{striped:true,checkboxHeader:false,classes:'table table-border'});
+		}
+
+		function generateUserList(defualtmenus,rows,currentUserMenus,data){
+			$.each(defualtmenus, function(key, val) {
+				var flag;
+				$.inArray(val.menuID, data.userMenu)>-1 ? flag=true:flag=false;
+				rows.push({menuID:val.menuID,menuName:val.menuName,isUsing:flag});
+				if(flag){
+					currentUserMenus.push(val.menuID);
+				}
+			});
 		}
 
 	}
