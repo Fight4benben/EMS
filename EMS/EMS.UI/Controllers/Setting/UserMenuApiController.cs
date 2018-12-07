@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace EMS.UI.Controllers
 {
+    [Authorize]
     public class UserMenuApiController : ApiController
     {
         public UserMenuService service = new UserMenuService();

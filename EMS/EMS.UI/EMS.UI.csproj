@@ -358,6 +358,7 @@
     <Content Include="app\js\Setting\DepartmentLimitSetting.js" />
     <Content Include="app\js\Setting\DeviceAlarmLimitSetting.js" />
     <Content Include="app\js\Setting\UserBuilding.js" />
+    <Content Include="app\js\Setting\UserMenu.js" />
     <Content Include="app\js\tools.js" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />

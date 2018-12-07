@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace EMS.UI.Controllers
 {
+    [Authorize]
     public class SettingController : Controller
     {
         // GET: Setting
