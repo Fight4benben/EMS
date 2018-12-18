@@ -129,6 +129,7 @@
     <Compile Include="Services\CircuitCompareServiceTest.cs" />
     <Compile Include="Services\CircuitOverviewServiceTest.cs" />
     <Compile Include="Services\CircuitServiceTest.cs" />
+    <Compile Include="Services\DepartmentAreaAvgRankServiceTest.cs" />
     <Compile Include="Services\DepartmentCompareServiceTest.cs" />
     <Compile Include="Services\DepartmentEnergyAverageServiceTest.cs" />
     <Compile Include="Services\DepartmentOverviewServiceTest.cs" />
