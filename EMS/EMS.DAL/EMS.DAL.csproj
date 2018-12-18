@@ -78,6 +78,7 @@
     <Compile Include="Entities\CompareData.cs" />
     <Compile Include="Entities\BuildAlarmLevel.cs" />
     <Compile Include="Entities\ConnectState.cs" />
+    <Compile Include="Entities\DeptAreaAvgRank.cs" />
     <Compile Include="Entities\DeptCompletionRate.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="IRepository\Circuit\ICircuitCompareDbContext.cs" />
     <Compile Include="IRepository\Circuit\ICircuitReportDbContext.cs" />
     <Compile Include="IRepository\Circuit\ICircuitOverviewDbContext.cs" />
+    <Compile Include="IRepository\Department\IDepartmentAreaAvgRank.cs" />
     <Compile Include="IRepository\Department\IDepartmentRankDbContext.cs" />
     <Compile Include="IRepository\ICommonContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentCompareDbContext.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="RepositoryImp\Circuit\CircuitOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\CircuitReportDbContext.cs" />
     <Compile Include="RepositoryImp\Circuit\MeterConnectStateDbContext.cs" />
+    <Compile Include="RepositoryImp\Department\DepartmentAreaAvgRankDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentEnergyAverageDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentOverviewDbContext.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Services\Circuit\CircuitReportService.cs" />
     <Compile Include="Services\Circuit\CircuitRingRatioService.cs" />
     <Compile Include="Services\Circuit\MeterConnectStateService.cs" />
+    <Compile Include="Services\Department\DepartmentAreaAvgRankService.cs" />
     <Compile Include="Services\Department\DepartmentCompareService.cs" />
     <Compile Include="Services\Department\DepartmentEnergyAverageService.cs" />
     <Compile Include="Services\Department\DepartmentOverviewService.cs" />
@@ -226,6 +230,7 @@
     <Compile Include="StaticResources\Circuit\CircuitOverviewResources.cs" />
     <Compile Include="StaticResources\Circuit\CircuitResources.cs" />
     <Compile Include="StaticResources\Circuit\MeterConnectStateResources.cs" />
+    <Compile Include="StaticResources\Department\DepartmentAreaAvgResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentCompareResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentEnergyAverageResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentOverviewResources.cs" />
@@ -264,6 +269,7 @@
     <Compile Include="ViewModels\Circuit\CircuitReportViewModel.cs" />
     <Compile Include="ViewModels\Circuit\CircuitOverviewViewModel.cs" />
     <Compile Include="ViewModels\Circuit\MeterConnectStateViewModel.cs" />
+    <Compile Include="ViewModels\Department\DepartmentAreaAvgRankViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentCompareViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentEnergyAverageViewModel.cs" />
     <Compile Include="ViewModels\Department\DepartmentOverviewModel.cs" />
