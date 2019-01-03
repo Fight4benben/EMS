@@ -31,6 +31,18 @@ namespace EMS.UI.Controllers.Department
             }
         }
 
+        public object Get(string buildId, string date)
+        {
+            try
+            {
+                return service.GetViewModel(buildId, date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         public object Get(string buildId, string energyCode, string date)
         {
             try

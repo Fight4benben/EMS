@@ -54,6 +54,30 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+        public DepartmentAreaAvgRankViewModel GetViewModel(string buildId, string date)
+        {
+            DateTime dateTime;
+            string startDay, endDay;
+            List<EnergyAverage> averageData = new List<EnergyAverage>();
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            dateTime = Util.ConvertString2DateTime(date, "yyyy-MM-dd");
+            startDay = dateTime.AddDays(-dateTime.Day + 1).ToString("yyyy-MM-dd");
+            endDay = dateTime.AddMonths(1).AddDays(-dateTime.Day).ToString("yyyy-MM-dd");
+            averageData = context.GetDeptMonthEnergyAverageList(buildId, energyCode, startDay, endDay);
+
+            DepartmentAreaAvgRankViewModel viewModel = new DepartmentAreaAvgRankViewModel();
+            viewModel.AverageData = averageData;
+
+            return viewModel;
+        }
+
         /// <summary>
         /// 部门 月份 单位面积能耗
         /// </summary>

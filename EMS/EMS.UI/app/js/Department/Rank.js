@@ -4,7 +4,7 @@ var Rank = (function (){
 
 		this.show = function(){
 			initDom();
-			var url = "/api/DepartmentRank";
+			var url = "/api/DepartmentAreaAvgRank";
 
 			getDataFromServer(url,"");
 		}
@@ -14,7 +14,7 @@ var Rank = (function (){
 
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
-				var url = "/api/DepartmentRank";
+				var url = "/api/DepartmentAreaAvgRank";
 				var date = $("#daycalendarBox").val();
 				var params = "buildId="+buildId+"&date="+date;
 
@@ -24,7 +24,7 @@ var Rank = (function (){
 			$("#energys").change(function(event) {
 				var energyCode = $(this).val();
 				var buildId = $("#buildinglist").val();
-				var url = "/api/DepartmentRank";
+				var url = "/api/DepartmentAreaAvgRank";
 				var date = $("#daycalendarBox").val();
 				var params = "buildId="+buildId+"&date="+date+"&energyCode="+energyCode;
 
@@ -44,7 +44,7 @@ var Rank = (function (){
 			$("#daycalendarBox").change(function(event) {
 				var energyCode = $("#energys").val();
 				var buildId = $("#buildinglist").val();
-				var url = "/api/DepartmentRank";
+				var url = "/api/DepartmentAreaAvgRank";
 				var date = $("#daycalendarBox").val();
 				var params = "buildId="+buildId+"&date="+date+"&energyCode="+energyCode;
 
@@ -55,7 +55,7 @@ var Rank = (function (){
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				//console.log(data);
+				console.log(data);
 				try{
 					showBuilds(data);
 					showEnergys(data);
@@ -88,9 +88,11 @@ var Rank = (function (){
 
 		function showRankData(data){
 
-			var rankData = data.rankValues.sort(function(a,b){
+			var rankData = data.averageData.sort(function(a,b){
 
-				return a.value>=b.value ? -1 : 1;
+				if(a.areaAvg == undefined)
+
+				return a.areaAvg>=b.areaAvg ? -1 : 1;
 
 			});
 
@@ -104,7 +106,7 @@ var Rank = (function (){
 
 			$.each(rankData, function(key, val) {
 				name.push(val.name);
-				value.push(val.value);
+				value.push(val.totalValue);
 			});
 
 
@@ -118,7 +120,8 @@ var Rank = (function (){
 		function showTable(rankData){
 			var columns = [
 				{field:'name',title:'部门名称'},
-				{field:'value',title:'用能值'},
+				{field:'totalValue',title:'用能值'},
+				{field:'areaAvg',title:'单位面积用能'},
 				{field:'number',title:'名次'}
 			];
 			var rows = [];
@@ -126,7 +129,8 @@ var Rank = (function (){
 			$.each(rankData, function(index, val) {
 				var row={};
 				row.name = val.name;
-				row.value = val.value;
+				row.totalValue = val.totalValue;
+				row.areaAvg = val.areaAvg;
 				row.number = index+1;
 				rows.push(row);
 			});
