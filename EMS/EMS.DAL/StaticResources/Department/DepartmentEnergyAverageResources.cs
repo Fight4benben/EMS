@@ -44,7 +44,8 @@ namespace EMS.DAL.StaticResources
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
-				                                            ,DATEADD(MONTH,DATEDIFF(MONTH,0,DayResult.F_StartDay),0)";
+				                                            ,DATEADD(MONTH,DATEDIFF(MONTH,0,DayResult.F_StartDay),0)
+                                                    ORDER BY AreaAvg DESC";
 
         /// <summary>
         /// 部门-季度人均用能
@@ -70,7 +71,8 @@ namespace EMS.DAL.StaticResources
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
-				                                            ,DATEADD(QUARTER,DATEDIFF(QUARTER,0,DayResult.F_StartDay),0)";
+				                                            ,DATEADD(QUARTER,DATEDIFF(QUARTER,0,DayResult.F_StartDay),0) 
+                                                    ORDER BY AreaAvg DESC";
 
         /// <summary>
         /// 部门-年度人均用能
@@ -96,7 +98,8 @@ namespace EMS.DAL.StaticResources
 		                                            AND EnergyItem.F_EnergyItemCode = @EnergyItemCode
 		                                            AND DayResult.F_StartDay BETWEEN @StartDay AND @EndDay 
 		                                            GROUP BY DepartmentInfo.F_DepartmentID,DepartmentInfo.F_DepartmentName,DepartmentExInfo.F_People,DepartmentExInfo.F_Area
-				                                            ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)";
+				                                            ,DATEADD(YEAR,DATEDIFF(YEAR,0,DayResult.F_StartDay),0)
+                                                    ORDER BY AreaAvg DESC";
 
         
 
