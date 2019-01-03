@@ -55,7 +55,7 @@ var Rank = (function (){
 		function getDataFromServer(url,params){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
-				console.log(data);
+				
 				try{
 					showBuilds(data);
 					showEnergys(data);
@@ -89,9 +89,6 @@ var Rank = (function (){
 		function showRankData(data){
 
 			var rankData = data.averageData.sort(function(a,b){
-
-				if(a.areaAvg == undefined)
-
 				return a.areaAvg>=b.areaAvg ? -1 : 1;
 
 			});
