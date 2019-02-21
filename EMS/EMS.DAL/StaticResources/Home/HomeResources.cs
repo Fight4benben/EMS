@@ -80,7 +80,8 @@ namespace EMS.DAL.StaticResources
                                         FROM HistoryData
                                         INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID = HistoryData.F_MeterID
                                         WHERE HistoryData.F_BuildID = @BuildID
-                                        AND F_TagName LIKE '%_MD'";
+                                        AND F_TagName LIKE '%_MD'
+                                        AND F_Year = YEAR(GETDATE())";
 
     }
 }
