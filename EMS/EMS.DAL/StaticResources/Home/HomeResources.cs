@@ -44,7 +44,8 @@ namespace EMS.DAL.StaticResources
         /// 查询当月分项用能数据
         /// </summary>
         public static string EnergyItemSQL = @"SELECT Formula.F_BuildID BuildID,Formula.F_EnergyItemCode EnergyItemCode,
-                                                MAX(EnergyItem.F_EnergyItemName) EnergyItemName,SUM(DayResult.F_Value) Value
+                                                MAX(EnergyItem.F_EnergyItemName) EnergyItemName,
+                                                SUM((CASE FormulaMeter.F_Operator WHEN '加' THEN 1 WHEN '减' THEN -1 END)*FormulaMeter.F_Rate*DayResult.F_Value/100) Value
                                                 FROM T_ST_CalcFormula Formula
                                                 INNER JOIN T_ST_CalcFormulaMeter FormulaMeter ON Formula.F_FormulaID = FormulaMeter.F_FormulaID
                                                 INNER JOIN T_ST_MeterUseInfo Meter ON Meter.F_MeterID = FormulaMeter.F_MeterID
