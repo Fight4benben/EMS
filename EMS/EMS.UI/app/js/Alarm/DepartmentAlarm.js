@@ -133,7 +133,7 @@ var DepartmentAlarm = (function(){
 				});
 			}
 
-			var datebox = new Date($("#daycalendarBox").val().replace('-','/'));
+			var datebox = new Date($("#daycalendarBox").val().replace(new RegExp('-','g'),'/'));
 
 			var current;
 			var last;

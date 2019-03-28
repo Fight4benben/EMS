@@ -208,7 +208,7 @@
                         {
                             <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>非工作时段智能报警</a></li>
                         }
-                        
+
                     </ul>
                 </li>
             }
@@ -224,8 +224,17 @@
                         {
                             <li id="menu_communicate" class=""><a href="/Infomation/MeterStatus"><i class="fa fa-caret-right"></i>通讯状态</a></li>
                         }
-                        
+
                     </ul>
+                </li>
+            }
+            @if (menu.Menus.Contains("XIP") || menu.Menus.Contains("all"))
+            {
+                <li id="fistpage" class="">
+                    <a href="/Home/SvgView">
+                        <i class="fa fa-code-fork"></i>
+                        <span class="title">配电监测</span>
+                    </a>
                 </li>
             }
 
@@ -237,13 +246,13 @@
                     </a>
                     <ul class="sub-menu" id="">
                         @*@if (menu.Menus.Contains("9.1") || menu.Menus.Contains("all"))
-        {
-            <li id="deviceLimit" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
-        }
-        @if (menu.Menus.Contains("9.2") || menu.Menus.Contains("all"))
-        {
-            <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>办公室报警设置</a></li>
-        }*@
+                    {
+                        <li id="deviceLimit" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
+                    }
+                    @if (menu.Menus.Contains("9.2") || menu.Menus.Contains("all"))
+                    {
+                        <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>办公室报警设置</a></li>
+                    }*@
                         @if (menu.Menus.Contains("9.3") || menu.Menus.Contains("all"))
                         {
                             <li id="menu_user_building" class=""><a href="~/Setting/UserBuilding"><i class="fa fa-caret-right"></i>用户建筑关联</a></li>

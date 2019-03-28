@@ -37,5 +37,10 @@ namespace EMS.UI.Controllers
 
             return View();
         }
+
+        public ActionResult SvgView()
+        {
+            return View();
+        }
     }
 }

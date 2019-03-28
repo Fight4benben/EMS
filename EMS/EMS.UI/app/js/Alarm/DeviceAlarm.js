@@ -230,7 +230,7 @@ var DeviceAlarm = (function(){
 			var typeValue = $("#dateType").val();
 			var columns;
 
-			var datebox = new Date($("#daycalendarBox").val().replace('-','/'));
+			var datebox = new Date($("#daycalendarBox").val().replace(new RegExp('-','g'),'/'));
 
 			var current;
 			var last;

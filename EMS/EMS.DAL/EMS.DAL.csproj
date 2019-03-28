@@ -118,6 +118,7 @@
     <Compile Include="IRepository\Circuit\ICircuitOverviewDbContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentAreaAvgRank.cs" />
     <Compile Include="IRepository\Department\IDepartmentRankDbContext.cs" />
+    <Compile Include="IRepository\Home\ISvgDbContext.cs" />
     <Compile Include="IRepository\ICommonContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentCompareDbContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentEnergyAverageDbContext.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="RepositoryImp\Department\DepartmentRankDbContext.cs" />
     <Compile Include="RepositoryImp\Department\DepartmentReportDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDeviceOverLimitDbContext.cs" />
+    <Compile Include="RepositoryImp\Home\SvgDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemOverviewDbContext.cs" />
     <Compile Include="RepositoryImp\Item\EnergyItemReportDbContext.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Services\Department\DepartmentReportService.cs" />
     <Compile Include="Services\Alarm\AlarmDeviceOverLimitService.cs" />
     <Compile Include="Services\History\THParamService.cs" />
+    <Compile Include="Services\Home\SvgService.cs" />
     <Compile Include="Services\Item\EnergyItemCompareService.cs" />
     <Compile Include="Services\Item\EnergyItemOverviewService.cs" />
     <Compile Include="Services\Item\EnergyItemReportService.cs" />
@@ -237,6 +240,7 @@
     <Compile Include="StaticResources\Department\DepartmentRankResources.cs" />
     <Compile Include="StaticResources\Department\DepartmentReportResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDeviecOverLimitResources.cs" />
+    <Compile Include="StaticResources\Home\SvgResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemCompareResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemOverviewResources.cs" />
     <Compile Include="StaticResources\Item\EnergyItemReportResources.cs" />
@@ -277,6 +281,8 @@
     <Compile Include="ViewModels\Department\DepartmentReportViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDeviceViewModel.cs" />
     <Compile Include="ViewModels\Alarm\AlarmDeviceOverLimitViewModel.cs" />
+    <Compile Include="ViewModels\Home\SvgDataViewModel.cs" />
+    <Compile Include="ViewModels\Home\SvgViewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemCompareViewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemOverviewModel.cs" />
     <Compile Include="ViewModels\Item\EnergyItemReportViewModel.cs" />

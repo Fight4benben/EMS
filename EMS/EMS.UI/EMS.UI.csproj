@@ -167,6 +167,7 @@
     <Compile Include="Controllers\Common\AuthController.cs" />
     <Compile Include="Controllers\Department\DepartmentAreaAvgRankController.cs" />
     <Compile Include="Controllers\History\THParamController.cs" />
+    <Compile Include="Controllers\Home\SvgController.cs" />
     <Compile Include="Controllers\Infomation\InfomationController.cs" />
     <Compile Include="Controllers\Infomation\MeterConnectStateController.cs" />
     <Compile Include="Controllers\Department\DepartmentAverageController.cs" />
@@ -326,8 +327,10 @@
     <Content Include="app\img\year1.png" />
     <Content Include="app\img\year2.png" />
     <Content Include="app\js\Alarm\DepartmentAlarm.js" />
+    <Content Include="app\js\Alarm\DepartmentLimitValueAlarm.js" />
     <Content Include="app\js\Alarm\DepartmentOutofWork.js" />
     <Content Include="app\js\Alarm\DeviceAlarm.js" />
+    <Content Include="app\js\Alarm\DeviceLimitValueAlarm.js" />
     <Content Include="app\js\Alarm\OutOfWork.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
@@ -361,6 +364,8 @@
     <Content Include="app\js\Setting\UserBuilding.js" />
     <Content Include="app\js\Setting\UserMenu.js" />
     <Content Include="app\js\tools.js" />
+    <Content Include="app\js\topology.js" />
+    <Content Include="App_Data\SvgFiles\000001G003-01.svg" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />
     <Content Include="Assets\css\bootstrap-datetimepicker.css" />
@@ -719,6 +724,7 @@
     <Content Include="Views\Circuit\Environment.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Setting\UserMenu.cshtml" />
+    <Content Include="Views\Home\SvgView.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
