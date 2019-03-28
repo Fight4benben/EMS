@@ -26,7 +26,7 @@ namespace EMS.UI.Controllers.Home
             {
                 svgViewModel = service.GetSvgViewModelByName(userName);
 
-                if (svgViewModel.SvgView != "not exist")
+                if (svgViewModel.SvgView != null)
                 {
                     string fileName = path + "\\" + svgViewModel.SvgView;
 

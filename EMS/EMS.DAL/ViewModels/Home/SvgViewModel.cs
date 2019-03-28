@@ -31,5 +31,6 @@ namespace EMS.DAL.ViewModels.Home
         public List<BuildViewModel> Builds { get; set; }
         public List<SvgInfo> Svgs { get; set; }
         public string SvgView { get; set; }
+        public SvgDataViewModel Data { get; set; }
     }
 }

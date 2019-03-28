@@ -41,6 +41,8 @@ namespace EMS.DAL.Services.Home
 
             viewModel.SvgView = path;
 
+            viewModel.Data = GetSvgData(buildId, svgs.First().SvgID);
+
             return viewModel;
         }
 
@@ -59,6 +61,8 @@ namespace EMS.DAL.Services.Home
 
             viewModel.SvgView = path;
 
+            viewModel.Data = GetSvgData(buildId, svgs.First().SvgID);
+
             return viewModel;
         }
 
@@ -69,6 +73,8 @@ namespace EMS.DAL.Services.Home
             string path = context.GetSvgViewById(svgId);
 
             viewModel.SvgView = path;
+
+            viewModel.Data = GetSvgData(buildId, svgId);
 
             return viewModel;
         }
