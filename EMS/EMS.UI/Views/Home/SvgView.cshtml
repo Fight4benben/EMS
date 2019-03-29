@@ -12,17 +12,27 @@
                 </form>
             </div>
         </div>
-        <div class="equip-row">
-            <select id="svglist" class="equip-date">
-                
-            </select>
+        <div class="equip-row" style="margin-left:100px">
+            <span>一次图名：</span>
+            <select id="svglist" class="equip-date"></select>
         </div>
-        
     </div>
-
+    <div class="all">
     <div id="svg-content" class="col-xs-12 R-Columnar">
-
+    </div>
     </div>
 
 </div>
 <script type="text/javascript" src="~/app/js/topology.js"></script>
+<style>
+    .all{
+        width:100%;
+        heigth:100%;
+    }
+    .equip-date{
+        width:150px;
+    }
+    .R-Columnar{
+        overflow:auto
+    }
+</style>
