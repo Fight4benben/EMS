@@ -57,6 +57,43 @@ namespace EMS.DAL.Services
             return model;
         }
 
+        public RegionMainViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            RegionMainViewModel model = new RegionMainViewModel();
+
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            string showMode;
+            BuildExtendInfo filterType = context.GetExtendInfoByBuildId(buildId);
+
+            if (filterType == null)
+                showMode = "Publish";
+            else
+                showMode = filterType.ShowMode;
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<EMSValue> compareValues = context.GetRegionMainCompareValueList(buildId, DateTime.Now.ToShortDateString(), energyCode, showMode);
+            List<RankValue> rankValues = context.GetRegionMainRankValueList(buildId, DateTime.Now.ToString("yyyy-MM-dd"), energyCode, showMode);
+            List<EMSValue> pieValues = context.GetRegionPieValueList(buildId, DateTime.Now.ToShortDateString(), energyCode, showMode);
+            List<EMSValue> stackValues = context.GetRegionStackValueList(buildId, DateTime.Now.ToShortDateString(), energyCode, showMode);
+
+            model.Builds = builds;
+            model.Energys = energys;
+            model.CompareValues = compareValues;
+            model.RankValues = rankValues;
+            model.PieValues = pieValues;
+            model.StackValues = stackValues;
+
+            return model;
+        }
+
         public RegionMainViewModel GetViewModel(string buildId)
         {
             RegionMainViewModel model = new RegionMainViewModel();

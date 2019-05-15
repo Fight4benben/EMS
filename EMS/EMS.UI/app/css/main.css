@@ -1,6 +1,10 @@
 *{
     font-family: "Microsoft YaHei";
 }
+    .OverAll-top #Dept,.OverAll-top #Region,.OverAll-top #Circuit{
+        margin-top:0;
+        font-size:14px;
+    }
 .indexmax{
     float:right;
     margin-right:10px;
@@ -318,6 +322,7 @@
 }
 /*能耗报警提示*/
 .equip-date{
+    font-size:14px;
     height:35px;
     border:1px solid #e5e5e5;
     width:50px;
@@ -329,6 +334,8 @@
 }
 .OverAll-top input{
     height: 35px;
+    font-size:14px;
+    padding:0 5px;
     width:200px;
     float:left;
     margin-right: 5px;
@@ -640,6 +647,11 @@ to {top:-7px;}
     padding-right: 5px;
 }
 @media (max-width:414px){
+    .navbar-static-top{height:45px;overflow:hidden;}
+    .header .navbar-toggle{margin:0 14px 0 6px;padding-top:0;}
+    .header-inner{height:45px;}
+    .fa-reorder{margin-top:14px;}
+    .filter-width{margin-left:5px;}
     .status-building{overflow: hidden;clear: both;}
     .status-energy{z-index:999;clear: both;}
 }
@@ -710,8 +722,10 @@ to {top:-7px;}
     font-size: 15px;
     border: 1px solid #969696;
     width: 58px;
-    line-height: 45px;
-    padding: 6px 0px 5px 6px;
+    height: 58px;
+    line-height: 15px;
+    padding: 20px 0px 5px 3px;
+    text-align: center;
     margin-left: 8px;
     margin-bottom: 10px;
     color: #969696;
@@ -725,7 +739,7 @@ to {top:-7px;}
     font-size: 14px;
     width: 58px;
     border: 1px solid #F08500;
-    padding: 6px 0px 5px 12px;
+    padding: 20px 0px 5px 8px;
     margin-left: 8px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -924,7 +938,19 @@ to {top:-7px;}
     margin-right: 15px;
 }
 @media (max-width:414px){    
-    .count-data{float: inherit;width: 230px;margin-bottom: 10px;}
+    .count-data{float: inherit;width: 230px;margin-bottom:5px;}
+    .Envir-w{width: calc(100% - 15px);clear:both;float:left;}
+    .Envir-w .main-menu hr{margin:0 -15px 0 -30px;}
+    .Envir-w .main-menu{margin-right:-15px;}
+    #setModal{float:left;clear:both;}
+    .onepic{margin-left:0!important;}
+    .onepic #svglist{margin-bottom:5px;}
+    .btn-usermenu{margin-bottom:5px;}
+    .OverAll-equip{margin-top:2px;}
+    .OverAll-top .Over-building #buildinglist{margin-bottom:5px;}
+    .OverAll-top .equip-row2{margin-top:5px;}
+    .report-w,.report-add{width: calc(100% - 15px);}
+    .status-form-group{margin-bottom:0;}
 }
 .count-table td{
     word-break: keep-all;
@@ -1941,6 +1967,10 @@ to {top:-7px;}
 }
 @media (max-width:414px){
     .fa-head2{margin-top: 1px;margin-right: 13px;}
+    .OverAll-equip #dateType{float:left;margin-top:5px;}
+    .OverAll-equip .equip-width{margin-top:5px;}
+    .OverAll-top #Dept,.OverAll-top #Region,.OverAll-top #Circuit{margin-top:0;}
+    .le-time{height:80px;}
 }
 @media (max-width:700px){
     .target{

@@ -51,6 +51,27 @@ namespace EMS.UI.Controllers
             }
         }
 
-       
+        /// <summary>
+        /// 分项用能概况：
+        /// 根据用户传入的建筑ID，查找该建筑包含的分类能耗，所有完整的分项用能数据
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="date">传入的日期("yyyy-MM-dd HH:mm:ss")</param>
+        /// <returns>返回完整的数据：完整的分项用能数据</returns>
+        public object Get(string buildId,string a)
+        {
+            try
+            {
+                string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
+                string userName = User.Identity.Name;
+                return service.GetEnergyItemOverviewViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
     }
 }

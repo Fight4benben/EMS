@@ -45,6 +45,30 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+        public CircuitCollectViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
+            DateTime endTime = DateTime.Now;
+            DateTime startTime = endTime.Date;
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
+
+            viewModel.Builds = builds;
+            viewModel.Energys = energys;
+            viewModel.TreeView = treeView;
+
+            return viewModel;
+        }
+
         public CircuitCollectViewModel GetViewModel(string buildId)
         {
             CircuitCollectViewModel viewModel = new CircuitCollectViewModel();

@@ -62,6 +62,37 @@ namespace EMS.DAL.Services
             return reportView;
         }
 
+        public DepartmentReportViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            //增加分类能耗过滤信息
+            //修改方法参数，修改SQL语句
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            ITreeViewDbContext treeViewDb = new TreeViewDbContext();
+            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId, energyCode);
+            string[] departmentIDs = treeViewDb.GetDepartmentIDs(buildId, energyCode);
+            List<ReportValue> reportValue = context.GetReportValueList(energyCode, departmentIDs, today.ToString("yyyy-MM-dd 00:00:00"), "DD");
+
+            DepartmentReportViewModel reportView = new DepartmentReportViewModel();
+            reportView.Builds = builds;
+            reportView.Energys = energys;
+            reportView.TreeView = treeView;
+            reportView.Data = reportValue;
+            reportView.ReportType = "DD";
+
+            return reportView;
+        }
+
         /// <summary>
         /// 部门用能统计报表
         /// 根据建筑ID和日期，获取能源按钮列表，部门列表，以及用能数据天报表

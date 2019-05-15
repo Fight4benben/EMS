@@ -64,6 +64,45 @@ namespace EMS.DAL.Services
             return OverviewViewModel;
         }
 
+        public DepartmentOverviewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            string showMode;
+            BuildExtendInfo filterType = context.GetExtendInfoByBuildId(buildId);
+
+            if (filterType == null)
+                showMode = "Publish";
+            else
+                showMode = filterType.ShowMode;
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<EMSValue> momDay = context.GetMomDayValueList(buildId, today.ToString("yyyy-MM-dd 00:00:00"), energyCode, showMode);
+            List<EMSValue> rankByYear = context.GetRankByYearValueList(buildId, today.ToString("yyyy-MM-dd 00:00:00"), energyCode, showMode);
+            List<EMSValue> planValue = context.GetPlanValueList(buildId, today.ToString("yyyy-MM-dd 00:00:00"), energyCode, showMode);
+            List<EMSValue> last31DayPieChart = context.GetLast31DayPieChartValueList(buildId, today.ToString("yyyy-MM-dd 00:00:00"), energyCode, showMode);
+            List<EMSValue> last31Day = context.GetLast31DayValueList(buildId, today.ToString("yyyy-MM-dd 00:00:00"), energyCode, showMode);
+
+            DepartmentOverviewModel OverviewViewModel = new DepartmentOverviewModel();
+            OverviewViewModel.Builds = builds;
+            OverviewViewModel.Energys = energys;
+            OverviewViewModel.MomDay = momDay;
+            OverviewViewModel.RankByYear = rankByYear;
+            OverviewViewModel.PlanValue = planValue;
+            OverviewViewModel.Last31DayPieChart = last31DayPieChart;
+            OverviewViewModel.Last31Day = last31Day;
+
+            return OverviewViewModel;
+        }
+
         public DepartmentOverviewModel GetViewModel(string buildId)
         {
             DateTime today = DateTime.Now;

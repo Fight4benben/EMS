@@ -40,6 +40,27 @@ namespace EMS.DAL.Services
             return energyItemOverviewView;
         }
 
+        public EnergyItemOverviewModel GetEnergyItemOverviewViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemValue> momDay = context.GetEnergyItemMomDayValueList(buildId, today.ToString());
+            List<EnergyItemValue> rankByMonth = context.GetEnergyItemRankByMonthValueList(buildId, today.ToString());
+            List<EnergyItemValue> last31DayPieChart = context.GetEnergyItemLast31DayPieChartValueList(buildId, today.ToString());
+            List<EnergyItemValue> last31Day = context.GetEnergyItemLast31DayValueList(buildId, today.ToString());
+
+            EnergyItemOverviewModel energyItemOverviewView = new EnergyItemOverviewModel();
+            energyItemOverviewView.Builds = builds;
+            energyItemOverviewView.EnergyItemMomDay = momDay;
+            energyItemOverviewView.EnergyItemRankByMonth = rankByMonth;
+            energyItemOverviewView.EnergyItemLast31DayPieChart = last31DayPieChart;
+            energyItemOverviewView.EnergyItemLast31Day = last31Day;
+
+            return energyItemOverviewView;
+        }
+
         public EnergyItemOverviewModel GetEnergyItemOverviewViewModel(string buildId, string date)
         {
             List<EnergyItemValue> momDay = context.GetEnergyItemMomDayValueList(buildId, date);

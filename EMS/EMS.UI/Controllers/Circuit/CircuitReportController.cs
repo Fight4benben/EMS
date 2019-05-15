@@ -23,6 +23,13 @@ namespace EMS.UI.Controllers
             return service.GetViewModel(userName);
         }
 
+        public object GetReport(string buildId)
+        {
+            string userName = User.Identity.Name;
+
+            return service.GetViewModel(userName,buildId);
+        }
+
         public object GetReport(string buildId,string type,string date)
         {
             return service.GetViewModel(buildId,type,date);

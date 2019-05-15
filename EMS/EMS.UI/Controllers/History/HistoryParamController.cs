@@ -38,6 +38,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId,string a,string b,string c,string d)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         public object Get(string buildId, string energyCode)
         {
             try

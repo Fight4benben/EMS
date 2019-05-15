@@ -54,6 +54,31 @@ namespace EMS.DAL.Services
             return energyItemReportView;
         }
 
+        public EnergyItemReportViewModel GetEnergyItemReportViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
+            List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
+
+            List<EnergyItemInfo> EnergyItemInfos = energyItemtreeView.GetEnergyItemInfoList(buildId);
+            string[] formulaIDs = GetEnergyItemCodes(EnergyItemInfos);
+            List<ReportValue> reportValue = context.GetReportValueList(formulaIDs, today.ToString(), "DD");
+
+            EnergyItemReportViewModel energyItemReportView = new EnergyItemReportViewModel();
+            energyItemReportView.Builds = builds;
+            energyItemReportView.Energys = energys;
+            energyItemReportView.TreeView = treeView;
+            energyItemReportView.Data = reportValue;
+            energyItemReportView.ReportType = "DD";
+
+            return energyItemReportView;
+        }
+
         /// <summary>
         /// 分项用能统计
         /// 根据建筑ID和日期，获取第一个分类对应的所有分项当日的用能概况

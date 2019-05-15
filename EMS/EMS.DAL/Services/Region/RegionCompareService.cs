@@ -63,6 +63,38 @@ namespace EMS.DAL.Services
             return ViewModel;
         }
 
+        public RegionCompareViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
+            string regionID;
+            if (treeViewInfos.Count > 0)
+                regionID = treeViewInfos.First().ID;
+            else
+                regionID = "";
+
+            List<EMSValue> compareValue = context.GetCompareValueList(energyCode, regionID, today.ToString("yyyy-MM-dd"));
+
+            RegionCompareViewModel ViewModel = new RegionCompareViewModel();
+            ViewModel.Builds = builds;
+            ViewModel.Energys = energys;
+            ViewModel.TreeView = treeViewModel;
+            ViewModel.CompareData = compareValue;
+
+            return ViewModel;
+        }
+
         public RegionCompareViewModel GetViewModel(string buildId,string date)
         {
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);

@@ -31,6 +31,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId,string a,string b)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// 部门用能概况
         /// 根据建筑ID和时间，获取该建筑包含部门天用能同比，部门计划/实际用能对比，最近31天用能拼图及趋势

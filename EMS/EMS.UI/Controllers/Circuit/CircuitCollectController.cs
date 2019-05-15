@@ -53,6 +53,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId,string a,string b)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// 根据用户传入的建筑ID和能耗分类，查找该建筑第一个分类对应的全部回路当日0点0分至查询当时的集抄数据
         /// </summary>

@@ -32,6 +32,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId,string a,string b,string c)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetEnergyItemCompareViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// 分项用能同比：
         /// </summary>

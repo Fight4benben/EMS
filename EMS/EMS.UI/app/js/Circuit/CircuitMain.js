@@ -4,7 +4,12 @@ var CircuitMain = (function(){
 
 		this.show = function(){
 			var url = "/api/circuitoverview";
-			getDataFromServer(url,"");
+
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=&b=&c=");
 		}
 
 		this.init = function(){
@@ -46,8 +51,12 @@ var CircuitMain = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
-				
+				var buildId = $("#buildinglist").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				var url = "/api/circuitoverview";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val())
 			});

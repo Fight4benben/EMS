@@ -98,6 +98,38 @@ namespace EMS.DAL.Services
             return circuitOverviewView;
         }
 
+        public CircuitOverviewViewModel GetCircuitOverviewViewModelByName(string buildId, string date,string name)
+        {
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(name);
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            string energyCode = energys.First().EnergyItemCode;
+            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string circuitId = circuits.First().CircuitId;
+            List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, date);
+            List<CircuitValue> dayData = context.GetCircuitMomDayValueList(buildId, circuitId, date);
+            List<CircuitValue> monthData = context.GetCircuitMomMonthValueList(buildId, circuitId, date);
+            List<CircuitValue> last48HoursData = context.GetCircuit48HoursValueList(buildId, circuitId, date);
+            List<CircuitValue> last31DayData = context.GetCircuit31DaysValueList(buildId, circuitId, date);
+            List<CircuitValue> last12MonthData = context.GetCircuit12MonthValueList(buildId, circuitId, date);
+            List<CircuitValue> last3YearData = context.GetCircuit3YearValueList(buildId, circuitId, date);
+
+            CircuitOverviewViewModel circuitOverviewView = new CircuitOverviewViewModel();
+            circuitOverviewView.Builds = builds;
+            circuitOverviewView.Energys = energys;
+            circuitOverviewView.Circuits = circuits;
+            circuitOverviewView.LoadData = loadData;
+            circuitOverviewView.MomDayData = dayData;
+            circuitOverviewView.MomMonthData = monthData;
+            circuitOverviewView.Last48HoursData = last48HoursData;
+            circuitOverviewView.Last31DaysData = last31DayData;
+            circuitOverviewView.Last12MonthData = last12MonthData;
+            circuitOverviewView.Last3YearData = last3YearData;
+
+            return circuitOverviewView;
+        }
+
 
         /// <summary>
         /// 根据用户传入的建筑ID和分类能耗代码，

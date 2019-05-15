@@ -31,6 +31,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId, string a)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetEnergyItemReportViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// 分项用能报表：
         /// 根据用户传入的建筑ID，查找该建筑包含的分类能耗，所有支路以及第一支路的用能数据

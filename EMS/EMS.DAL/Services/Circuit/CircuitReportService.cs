@@ -54,7 +54,34 @@ namespace EMS.DAL.Services
 
             return circuitReportView;
         }
-    
+
+        public CircuitReportViewModel GetViewModel(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode = energys.First().EnergyItemCode;
+            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+
+            string[] circuitIds = GetCircuitIds(circuits);
+
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
+
+            List<ReportValue> data = context.GetReportValueList(circuitIds, today.ToShortDateString(), "DD");
+
+            CircuitReportViewModel circuitReportView = new CircuitReportViewModel();
+            circuitReportView.Builds = builds;
+            circuitReportView.Energys = energys;
+            circuitReportView.TreeView = treeView;
+            circuitReportView.Data = data;
+            circuitReportView.ReportType = "DD";
+
+            return circuitReportView;
+        }
+
         /// <summary>
         /// 修改建筑名称返回对应数据
         /// </summary>

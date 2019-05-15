@@ -37,6 +37,7 @@ var Home = (function(){
 			$("#buildinglist").change(function(){
 				var buildId = $(this).val();
 				var date = $("#box").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				initChartLine();
 				getDataFromServer("/api/homepage/home","buildId="+buildId+"&date="+date);
 			});
@@ -92,12 +93,12 @@ var Home = (function(){
 
 		//显示建筑列表
 		function showBuildList(data){
-			$.cookie('buildId',null,{path:'/'});
 
 			if(!data.hasOwnProperty('builds'))
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+
 		};
 
 		function getCurrentBuildId(){

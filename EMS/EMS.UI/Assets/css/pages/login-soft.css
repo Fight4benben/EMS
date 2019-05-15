@@ -3,6 +3,11 @@ Login page
 ***/
 /*登录界面*/
 @media (max-width:414px){
+    .login-user{
+      margin-top:50px;
+      height:51px;
+    }
+    .login-password{margin-top:20px;}
     .content-top>img{display: none;}
     .content-top h4{background: url(../../img/logo6.png) no-repeat center top;background-size: 130px;padding-top: 45px;}
 }
@@ -17,14 +22,19 @@ Login page
     background-color: #DFDEDD;
 }
 @media (max-width:414px){
-    .login-bg {background: url(../../img/login-phone.jpg) no-repeat;}
+    .login .content .form-actions .btn{
+      right:0!important;
+      position: relative!important;
+      margin-right:0!important;
+    }
+    .login-bg {background: url(../../img/login-phone.jpg) no-repeat;background-size:100% 100%!important;}
     .content-top{background: transparent!important;}
     .login .login-bg .content{background: transparent;box-shadow: none;margin-right: 54px;margin-top: 20px;}
     .content-top h4{color: #393939;font-size: 25px;}   
     .login .content .form-title{color: #fff;}
     .form-actions .btn.blue{background-color: transparent;border:1px solid rgb(124, 186, 61);border-radius:8px!important;-moz-border-radius:25px;width: 120px;height:42px;font-size: 18px;font-family: 'Microsoft YaHei', sans-serif;}
     .content-top h4 {font-size: 300px;}
-    .input-icon i{display: none;}
+    .input-icon i{display: block;}
     .form-control{border: none;border-bottom: 1px solid #393939;}
     .form-group{margin-bottom: 0;} 
     .login-bottom{margin-top: -40px;color: #fff;}
@@ -172,7 +182,7 @@ Login page
 }
 @media (max-width:1366px){.login .content .form-actions .btn {margin-top: -90px;margin-left: 90px;}}
 @media (max-width:414px){
-    .login .content .form-actions{padding: 30px 88px 25px 30px;}
+    .login .content .form-actions{padding: 0 88px 25px 30px;}
     .weixin{display: none;}
 }
 .login .content .forget-password {

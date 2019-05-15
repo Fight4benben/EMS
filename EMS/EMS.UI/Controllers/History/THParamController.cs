@@ -46,6 +46,24 @@ namespace EMS.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// 根据传入的建筑ID，获取所有的温湿度支路列表
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <returns></returns>
+        public object Get(string buildId,string a,string b,string c,string d)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
         /// <summary>
         /// 获取单个支路包含的参数和当天的数据

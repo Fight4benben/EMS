@@ -52,6 +52,33 @@ namespace EMS.DAL.Services
             return model;
         }
 
+        public DepartmentRankViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            DateTime monthBegin = new DateTime(today.Year, today.Month, 1);
+            DateTime monthEnd = monthBegin.AddMonths(1).AddDays(-1);
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<EMSValue> list = context.GetRankList(buildId, monthBegin.ToString("yyyy-MM-dd"), monthEnd.ToString("yyyy-MM-dd"), energyCode);
+
+            DepartmentRankViewModel model = new DepartmentRankViewModel();
+            model.Builds = builds;
+            model.Energys = energys;
+            model.RankValues = list;
+
+            return model;
+        }
+
         public DepartmentRankViewModel GetViewModel(string buildId,string date)
         {
             DateTime monthBegin = Utils.Util.ConvertString2DateTime(date+"-01","yyyy-MM-dd");

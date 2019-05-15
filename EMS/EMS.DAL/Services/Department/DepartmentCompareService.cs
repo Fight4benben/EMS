@@ -55,6 +55,35 @@ namespace EMS.DAL.Services
             return CompareViewModel;
         }
 
+        public DepartmentCompareViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            ITreeViewDbContext treeViewDb = new TreeViewDbContext();
+            List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId, energyCode);
+            string departmentID = treeView.First().Id;
+
+            List<EMSValue> CompareValue = context.GetDepartmentCompareValueList(buildId, energyCode, departmentID, today.ToString("yyyy-MM-dd"));
+
+            DepartmentCompareViewModel CompareViewModel = new DepartmentCompareViewModel();
+            CompareViewModel.Builds = builds;
+            CompareViewModel.Energys = energys;
+            CompareViewModel.TreeView = treeView;
+            CompareViewModel.CompareData = CompareValue;
+
+            return CompareViewModel;
+        }
+
         /// <summary>
         /// 部门用能同比分析
         /// 根据建筑ID和时间，获取该建筑对应的能源按钮列表，第一个部门用能数据

@@ -21,6 +21,20 @@ namespace EMS.UI.Controllers
             catch (Exception e)
             {
                 return e.Message;
+
+            }
+        }
+
+        public object Get(string buildId)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 

@@ -172,7 +172,11 @@ var CircuitReport = (function(){
 		};
 		//公开暴露的方法：页面加载后生成默认数据
 		this.showReport = function(url,params){
-			getDataFromServer(url,params);
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,params);
+			else
+				getDataFromServer(url,"buildId="+buildId);
 		};
 
 		//从服务器获取json数据
@@ -223,11 +227,12 @@ var CircuitReport = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
 
 			$("#buildinglist").change(function(event) {
-				var buildId = $(this).val();
-				
-				 //console.log($("#daycalendarBox").val());
+				var buildId = $("#buildinglist").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				getDataFromServer("/api/CircuitReport/report","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 			});
 		};

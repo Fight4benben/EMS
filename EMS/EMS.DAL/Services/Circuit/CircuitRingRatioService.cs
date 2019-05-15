@@ -50,6 +50,29 @@ namespace EMS.DAL.Services
             return circuitCompareView;
         }
 
+        public CircuitCompareViewModel GetDayRingRationViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            string energyCode = energys.First().EnergyItemCode;
+            List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
+
+            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            string circuitId = circuits.First().CircuitId;
+            List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, today.ToString());
+
+            CircuitCompareViewModel circuitCompareView = new CircuitCompareViewModel();
+            circuitCompareView.Builds = builds;
+            circuitCompareView.Energys = energys;
+            circuitCompareView.TreeView = treeView;
+            circuitCompareView.CompareData = compareData;
+
+            return circuitCompareView;
+        }
+
         /// <summary>
         /// 根据用户传入的建筑ID，查找该建筑包含的分类能耗，所有支路以及第一支路的用能数据
         /// </summary>

@@ -55,6 +55,35 @@ namespace EMS.DAL.Services
             return energyItemCompareView;
         }
 
+        public EnergyItemCompareViewModel GetEnergyItemCompareViewModelByBuild(string userName,string buildId)
+        {
+            DateTime today = DateTime.Now;
+            IHomeDbContext homeContext = new HomeDbContext();
+            List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
+            //string energyCode = energys.First().EnergyItemCode;
+
+            IEnergyItemTreeViewDbContext energyItemtreeView = new EnergyItemTreeViewDbContext();
+            List<TreeViewModel> treeView = energyItemtreeView.GetEnergyItemTreeViewList(buildId);
+
+            string treeId;
+            if (treeView.Count == 0)
+                treeId = "";
+            else
+                treeId = treeView.First().Id;
+
+            List<EnergyItemValue> energyItemCompareValue = context.GetEnergyItemCompareValueList(buildId, treeId, today.ToString());
+
+            EnergyItemCompareViewModel energyItemCompareView = new EnergyItemCompareViewModel();
+            energyItemCompareView.Builds = builds;
+            energyItemCompareView.Energys = energys;
+            energyItemCompareView.TreeView = treeView;
+            energyItemCompareView.CompareData = energyItemCompareValue;
+
+            return energyItemCompareView;
+        }
+
         /// <summary>
         /// 分项用能同比分析
         /// </summary>

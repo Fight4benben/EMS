@@ -31,6 +31,19 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object Get(string buildId)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModelByBuild(userName,buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         /// <summary>
         /// 部门用能同比分析
         /// 根据建筑ID和时间，获取该建筑对应的能源按钮列表，第一个部门用能数据

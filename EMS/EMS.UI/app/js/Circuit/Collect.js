@@ -4,7 +4,11 @@ var Collect = (function(){
 		this.show = function(){
 			var url = "/api/CircuitCollect/";
 
-			getDataFromServer(url,"","GET");
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,params,"GET");
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=&b=","GET");
 		};
 
 		this.initDom = function(){
@@ -159,14 +163,15 @@ var Collect = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
 
 			$("#buildinglist").change(function(event) {
 
 				clearData();
 
-				var buildId = $(this).val();
-				
-				 //console.log($("#daycalendarBox").val());
+				var buildId = $("#buildinglist").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				getDataFromServer("/api/CircuitCollect","buildId="+buildId);
 			});
 		};

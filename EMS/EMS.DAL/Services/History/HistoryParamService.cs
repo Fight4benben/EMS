@@ -51,6 +51,28 @@ namespace EMS.DAL.Services
             return viewMode;
         }
 
+        public HistoryParamViewModel GetViewModelByBuild(string userName,string buildId)
+        {
+            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
+
+            List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
+            string energyCode;
+            if (energys.Count > 0)
+                energyCode = energys.First().EnergyItemCode;
+            else
+                energyCode = "";
+
+            List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
+            List<TreeViewModel> treeViewModel = Util.GetTreeViewModel(treeViewInfos);
+
+            HistoryParamViewModel viewMode = new HistoryParamViewModel();
+            viewMode.Builds = builds;
+            viewMode.Energys = energys;
+            viewMode.TreeView = treeViewModel;
+
+            return viewMode;
+        }
+
         public HistoryParamViewModel GetViewModel(string buildId)
         {
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);

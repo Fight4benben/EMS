@@ -6,9 +6,11 @@ var RingRatio = (function(){
 		this.show = function(){
 
 			var url="/api/CircuitRingRatio";
-
-
-			getDataFromServer(url);
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url);
+			else
+				getDataFromServer(url,"buildId="+buildId);
 
 		};
 
@@ -88,10 +90,13 @@ var RingRatio = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
 				
-				 //console.log($("#daycalendarBox").val());
+				$.cookie("buildId",buildId,{path:'/'});
 				getDataFromServer("/api/CircuitRingRatio","buildId="+buildId+"&date="+$("#calendarbox").val());
 			});
 		};

@@ -52,6 +52,13 @@ namespace EMS.UI.Controllers
             }
         }
 
+        public object GetByName(string buildId,string a,string b,string c)
+        {
+            string userName = User.Identity.Name;
+            string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:00");
+            return service.GetCircuitOverviewViewModelByName(buildId,date,userName);
+        }
+
         /// <summary>
         /// 根据用户传入的建筑ID和分类能耗代码，
         /// 获取该建筑的分类能耗包含的所有支路以及第一支路的用能数据
