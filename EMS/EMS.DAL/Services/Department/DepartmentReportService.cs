@@ -102,6 +102,7 @@ namespace EMS.DAL.Services
         /// <returns>返回完整的数据：能源按钮列表，部门列表，以及用能数据天报表</returns>
         public DepartmentReportViewModel GetViewModel(string buildId, string date,string type)
         {
+            type = type.ToUpper();
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
 
             string energyCode;
@@ -126,6 +127,7 @@ namespace EMS.DAL.Services
 
         public DepartmentReportViewModel GetViewModel(string buildId, string date,string energyCode,string type)
         {
+            type = type.ToUpper();
             ITreeViewDbContext treeViewDb = new TreeViewDbContext();
             List<TreeViewModel> treeView = treeViewDb.GetDepartmentTreeViewList(buildId,energyCode);
             string[] departmentIDs = treeViewDb.GetDepartmentIDs(buildId,energyCode);
@@ -160,7 +162,7 @@ namespace EMS.DAL.Services
             //{
             //    date += "-01-01";
             //}
-
+            type = type.ToUpper();
             List<ReportValue> reportValue = context.GetReportValueList(energyCode, departmentIDs, date, type);
 
             DepartmentReportViewModel reportView = new DepartmentReportViewModel();
@@ -172,6 +174,7 @@ namespace EMS.DAL.Services
 
         public Excel ExportReportToExcel(string basePath, string buildId,string energyCode, string[] formulaIDs, string date, string type)
         {
+            type = type.ToUpper();
             string templatePath = basePath + "/DayReportTemplate.xls";
             string reportType = " 日报(" + date + ")";
             if (type == "MM")

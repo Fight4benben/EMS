@@ -95,6 +95,7 @@ namespace EMS.DAL.Services
 
         public RegionReportViewModel GetViewModel(string buildId,string date,string type)
         {
+            type = type.ToUpper();
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
             string energyCode;
             if (energys.Count > 0)
@@ -126,6 +127,7 @@ namespace EMS.DAL.Services
         /// <returns>返回完整的数据：能源按钮列表，区域列表，以及用能数据天报表</returns>
         public RegionReportViewModel GetViewModel(string buildId, string energyCode,string date,string type)
         {
+            type = type.ToUpper();
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
 
             List<TreeViewInfo> treeViewInfos = context.GetTreeViewInfoList(buildId, energyCode);
@@ -156,6 +158,7 @@ namespace EMS.DAL.Services
         /// <returns>返回：指定用能数据</returns>
         public RegionReportViewModel GetViewModel(string buildId,string energyCode, string[] RegionIDs, string date, string type)
         {
+            type = type.ToUpper();
             //if (type == "MM")
             //{
             //    date += "-01";
@@ -176,6 +179,8 @@ namespace EMS.DAL.Services
 
         public Excel ExportReportToExcel(string basePath, string buildId, string energyCode,string[] regionIds, string date, string type)
         {
+            type = type.ToUpper();
+
             string templatePath = basePath + "/DayReportTemplate.xls";
             string reportType = " 日报(" + date + ")";
             if (type == "MM")

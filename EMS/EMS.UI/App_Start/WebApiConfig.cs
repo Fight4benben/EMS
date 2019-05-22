@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using EMS.UI.Filters;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace EMS.UI
             json.SerializerSettings.DateFormatString = "yyyy/MM/dd HH:mm:ss";
             json.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.MicrosoftDateFormat;
             json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            config.Filters.Add(new AntiSqlInjectAttribute());
         }
     }
 }

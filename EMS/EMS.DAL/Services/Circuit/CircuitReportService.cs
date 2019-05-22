@@ -91,6 +91,8 @@ namespace EMS.DAL.Services
         /// <returns>返回信息不包含建筑列表（建筑列表已经填充）</returns>
         public CircuitReportViewModel GetViewModel(string buildId,string type,string date)
         {
+            type = type.ToUpper();
+
             if (type == "MM")
             {
                 date += "-01";
@@ -130,6 +132,8 @@ namespace EMS.DAL.Services
         /// <returns>前端已有建筑列表与能源按钮列表，无需再次上传这些数据，只要上传树状结构数据，和报表数据</returns>
         public CircuitReportViewModel GetViewModel(string buildId,string energyCode, string type, string date)
         {
+            type = type.ToUpper();
+
             if (type == "MM")
             {
                 date += "-01";
@@ -167,6 +171,8 @@ namespace EMS.DAL.Services
         /// <returns>只返回数据即可</returns>
         public CircuitReportViewModel GetViewModel(string buildId, string energyCode, string circuits,string type, string date)
         {
+            type = type.ToUpper();
+
             if (type == "MM")
             {
                 date += "-01";
@@ -267,6 +273,7 @@ namespace EMS.DAL.Services
         /// <returns>Excel实体类，包含Excel文件的byte数组与Excel文件的名称</returns>
         public Excel ExportCircuitReportToExcel(string basePath,string buildId, string energyCode, string[] circuits, string type, string date)
         {
+            type = type.ToUpper();
             string templatePath=basePath +"/DayReportTemplate.xls";
             string reportType = " 日报(" + date + ")";
             if (type == "MM")

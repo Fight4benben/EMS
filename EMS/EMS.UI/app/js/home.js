@@ -188,16 +188,19 @@ var Home = (function(){
 				switch(val.energyItemCode){
 					case "01000":
 						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="电"><button class="btn btn-elc" value="01000" type="button"></button></acronym></div>');
-					break;
+					    break;
 					case "02000":
 						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="水"><button class="btn btn-water" value="02000" type="button"></button></acronym></div>');
-					break;
+					    break;
 					case "03000":
 						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="燃气"><button class="btn btn-gas" value="03000" type="button"></button></acronym></div>');
-					break;
+					    break;
 					case "13000":
 						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="光伏"><button class="btn btn-solar" value="13000" type="button"></button></acronym></div>');
-					break;
+                        break;
+                    case "05000":
+                        $("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="集中供冷"><button class="btn btn-empty" value="05000" type="button">冷量</button></acronym></div>');
+                        break;
 				}
 
 				var hourToday = data.hourValues.todayValues.filter(function(hourValue){

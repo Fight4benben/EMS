@@ -1,4 +1,5 @@
 ﻿using EMS.DAL.Services;
+using EMS.UI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,7 @@ namespace EMS.UI.Controllers
         {
             try
             {
+                
                 return service.GetViewModel(buildId, circuitID);
             }
             catch (Exception e)

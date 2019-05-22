@@ -19,13 +19,13 @@ namespace EMS.DAL.RepositoryImp
                 password = "";
 
             bool result = false;
-            byte[] raw = Encoding.Default.GetBytes(password.Trim());
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] computedPass = md5.ComputeHash(raw);
+            //byte[] raw = Encoding.Default.GetBytes(password.Trim());
+            //MD5 md5 = new MD5CryptoServiceProvider();
+            //byte[] computedPass = md5.ComputeHash(raw);
 
-            string mdHash = BitConverter.ToString(computedPass).Replace("-","").ToLower();
+            //string mdHash = BitConverter.ToString(computedPass).Replace("-","").ToLower();
 
-            int count = _db.User.Where(user => user.UserName == userName && user.Password == mdHash).Count();
+            int count = _db.User.Where(user => user.UserName == userName && user.Password == password).Count();
 
             if (count == 1)
                 result = true;

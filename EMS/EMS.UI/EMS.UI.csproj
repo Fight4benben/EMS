@@ -212,6 +212,7 @@
     <Compile Include="Controllers\Setting\UserMenuApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
+    <Compile Include="Filters\AntiSqlInjectAttribute.cs" />
     <Compile Include="Filters\SoftAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -551,6 +552,7 @@
     <Content Include="Assets\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Assets\plugins\jquery.blockui.min.js" />
     <Content Include="Assets\plugins\jquery.cokie.min.js" />
+    <Content Include="Assets\plugins\jquery.md5.js" />
     <Content Include="Assets\plugins\loadash\lodash.core.min.js" />
     <Content Include="Assets\plugins\respond.min.js" />
     <Content Include="Assets\plugins\tableExport\jquery.base64.js" />

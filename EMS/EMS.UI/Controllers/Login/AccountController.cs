@@ -55,6 +55,7 @@ namespace EMS.UI.Controllers
         {
             HttpContext.Request.Cookies.Remove(FormsAuthentication.FormsCookieName);
             FormsAuthentication.SignOut();
+            Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
     }

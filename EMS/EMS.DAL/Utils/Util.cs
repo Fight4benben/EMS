@@ -132,10 +132,52 @@ namespace EMS.DAL.Utils
             int weeknow = Convert.ToInt32(datetime.DayOfWeek);
             weeknow = (weeknow == 0 ? 7 : weeknow);
             int daydiff = (7 - weeknow);
-
+            
             //本周最后一天  
             string LastDay = datetime.AddDays(daydiff).ToString("yyyy-MM-dd");
             return Convert.ToDateTime(LastDay);
+        }
+
+        public static string FilterSql(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return string.Empty;
+            s = s.Trim().ToLower();
+
+            if(s.IndexOf("=") >0)
+                s = s.Remove(s.IndexOf("="));
+            //s = s.Replace("=", "");
+            if (s.IndexOf("'") > 0)
+                s = s.Remove(s.IndexOf("'"));
+            if (s.IndexOf(";") > 0)
+                s = s.Remove(s.IndexOf(";"));
+            if (s.IndexOf(" and ") > 0)
+                s = s.Remove(s.IndexOf(" and "));
+            if (s.IndexOf(" or ") > 0)
+                s = s.Remove(s.IndexOf(" or "));
+            if (s.IndexOf("select") > 0)
+                s = s.Remove(s.IndexOf("select"));
+            if (s.IndexOf("update") > 0)
+                s = s.Remove(s.IndexOf("update"));
+            if (s.IndexOf("insert") > 0)
+                s = s.Remove(s.IndexOf("insert"));
+            if (s.IndexOf("delete") > 0)
+                s = s.Remove(s.IndexOf("delete"));
+            if (s.IndexOf("declare") > 0)
+                s = s.Remove(s.IndexOf("declare"));
+            if (s.IndexOf("exec") > 0)
+                s = s.Remove(s.IndexOf("exec"));
+            if (s.IndexOf("drop") > 0)
+                s = s.Remove(s.IndexOf("drop"));
+            if (s.IndexOf("create") > 0)
+                s = s.Remove(s.IndexOf("create"));
+            if (s.IndexOf("alter") > 0)
+                s = s.Remove(s.IndexOf("alter"));
+            if (s.IndexOf("%") > 0)
+                s = s.Remove(s.IndexOf("%"));
+            if (s.IndexOf("--") > 0)
+                s = s.Remove(s.IndexOf("--"));
+ 
+            return s;
         }
     }
 }
