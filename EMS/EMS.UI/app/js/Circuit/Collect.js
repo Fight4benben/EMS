@@ -6,7 +6,7 @@ var Collect = (function(){
 
 			var buildId=$.cookie('buildId');
 			if(buildId==undefined || buildId==null || buildId == "null")
-				getDataFromServer(url,params,"GET");
+				getDataFromServer(url,"","GET");
 			else
 				getDataFromServer(url,"buildId="+buildId+"&a=&b=","GET");
 		};

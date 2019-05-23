@@ -1,4 +1,6 @@
 ﻿using EMS.DAL.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +41,30 @@ namespace EMS.UI.Filters
                     //result.Contains("+") || result.Contains("-") || result.ToLower().Contains("select") || result.ToLower().Contains("delete") ||
                     //result.ToLower().Contains("update") || result.ToLower().Contains("insert"))
                     //    actionContext.Response = actionContext.Request.CreateResponse(System.Net.HttpStatusCode.OK,new { Error="检测到SQL注入攻击！"});
-                    actionContext.ActionArguments[p.ParameterName] = 
+                    actionContext.ActionArguments[p.ParameterName] =
                     Util.FilterSql(value.ToString());
+                }
+                else
+                {
+                    if (value is JObject)
+                    {
+                        JObject obj = (JObject)value;
+
+                        foreach (var child in obj.Children())
+                        {
+                            Console.WriteLine(child.ToString());
+
+                            string result = obj[child.Path].ToString();
+
+                            obj[child.Path] = Util.FilterSql(result);
+ 
+                        }
+
+                        actionContext.ActionArguments[p.ParameterName] = obj;
+
+
+                    }
+
                 }
 
 
