@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using EMS.UI.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace EMS.UI
@@ -8,6 +9,7 @@ namespace EMS.UI
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new NoCacheAttribute());
         }
     }
 }

@@ -51,12 +51,13 @@ namespace EMS.UI.Controllers
             return View(new LoginViewModel());
         }
 
-        public ActionResult Logout()
+        public void Logout()
         {
             HttpContext.Request.Cookies.Remove(FormsAuthentication.FormsCookieName);
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Login", "Account");
+            Response.Write("<script>window.location.href='Login'</script>");
+
         }
     }
 }

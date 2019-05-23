@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
     <Compile Include="Filters\AntiSqlInjectAttribute.cs" />
+    <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Filters\SoftAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
