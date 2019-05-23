@@ -152,8 +152,12 @@ namespace EMS.DAL.Utils
                 s = s.Remove(s.IndexOf(";"));
             if (s.IndexOf(" and ") > 0)
                 s = s.Remove(s.IndexOf(" and "));
+            if (s.IndexOf("and") > 0)
+                s = s.Remove(s.IndexOf("and"));
             if (s.IndexOf(" or ") > 0)
                 s = s.Remove(s.IndexOf(" or "));
+            if (s.IndexOf("or") > 0)
+                s = s.Remove(s.IndexOf("or"));
             if (s.IndexOf("select") > 0)
                 s = s.Remove(s.IndexOf("select"));
             if (s.IndexOf("update") > 0)
@@ -174,6 +178,8 @@ namespace EMS.DAL.Utils
                 s = s.Remove(s.IndexOf("alter"));
             if (s.IndexOf("%") > 0)
                 s = s.Remove(s.IndexOf("%"));
+            if (s.IndexOf("+") > 0)
+                s = s.Remove(s.IndexOf("+"));
             if (s.IndexOf("--") > 0)
                 s = s.Remove(s.IndexOf("--"));
  
