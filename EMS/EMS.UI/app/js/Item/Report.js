@@ -4,7 +4,14 @@ var ItemReport = (function(){
 
 		this.show=function(){
 			var url ="/api/ItemReport";
-			getDataFromServer(url,"");
+
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=");
+
 		}
 		//公开暴露的方法:初始化页面
 		this.initDom = function(){
@@ -209,9 +216,12 @@ var ItemReport = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
-				
+				$.cookie("buildId",buildId,{path:'/'});
 				 //console.log($("#daycalendarBox").val());
 				getDataFromServer("/api/ItemReport","buildId="+buildId+"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val());
 			});

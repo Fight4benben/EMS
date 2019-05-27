@@ -101,7 +101,16 @@ var CircuitMain = (function(){
 				$("#te_surveyBtns button").css('background-color','#969696');
 				var $this = $(this);
 				$this.css('background-color','#F08500');
-
+				if($this.attr('code') == "13000"){
+					$("#today span").html('当日发电')
+					$("#curMonth span").html("当月发电")
+				}else if($this.attr('code') == "01000"){
+					$("#today span").html('当日用电')
+					$("#curMonth span").html("当月用电")
+				}else{
+					$("#today span").html('当日能耗')
+					$("#curMonth span").html("当月能耗")
+				}
 				var url = "/api/circuitoverview";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+$this.attr('code'))
 			});

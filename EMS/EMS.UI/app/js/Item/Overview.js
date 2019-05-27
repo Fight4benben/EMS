@@ -4,7 +4,14 @@ var ItemMain = (function(){
 
 		this.show = function(){
 			var url = "/api/ItemOverview";
-			getDataFromServer(url,"");
+
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=");
+
 		};
 
 		var rankData={};
@@ -42,7 +49,13 @@ var ItemMain = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
+				var buildId = $(this).val();
+
+				$.cookie("buildId",buildId,{path:'/'});
 				
 				var url = "/api/ItemOverview";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val())

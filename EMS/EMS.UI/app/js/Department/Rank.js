@@ -5,8 +5,11 @@ var Rank = (function (){
 		this.show = function(){
 			initDom();
 			var url = "/api/DepartmentAreaAvgRank";
-
-			getDataFromServer(url,"");
+			var buildId=$.cookie('buildId');
+			if(buildId == undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+			else
+				getDataFromServer(url,"buildId="+buildId);
 		}
 
 		function initDom(){
@@ -14,6 +17,7 @@ var Rank = (function (){
 
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
+				$.cookie("buildId",buildId,{path:'/'})
 				var url = "/api/DepartmentAreaAvgRank";
 				var date = $("#daycalendarBox").val();
 				var params = "buildId="+buildId+"&date="+date;
@@ -77,6 +81,9 @@ var Rank = (function (){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+			if($.cookie("buildId")!=undefined && $.cookie("buildId")!= null)
+				$("#buildinglist").val($.cookie("buildId"));
+			
 		}
 
 		function showEnergys(data){

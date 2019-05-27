@@ -9,8 +9,12 @@ var Compare = (function(){
 
 			var url="/api/ItemCompare";
 
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
 
-			getDataFromServer(url);
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=&b=&c=");
 
 		};
 
@@ -93,9 +97,12 @@ var Compare = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
-				
+				$.cookie("buildId",buildId,{path:'/'});
 				 //console.log($("#daycalendarBox").val());
 				getDataFromServer("/api/ItemCompare","buildId="+buildId+"&date="+$("#calendarbox").val());
 			});

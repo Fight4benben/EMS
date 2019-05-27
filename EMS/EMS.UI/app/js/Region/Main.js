@@ -5,7 +5,12 @@ var RegionMain = (function(){
 		this.show=function(){
 			var url = "/api/RegionMain";
 
-			getDataFromServer(url,"");
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=&b=");
+
 		};
 
 		this.initDom = function(){
@@ -62,8 +67,12 @@ var RegionMain = (function(){
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
-				
+				var buildId = $("#buildinglist").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				var url = "/api/RegionMain";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val())
 			});

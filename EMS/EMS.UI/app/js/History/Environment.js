@@ -4,7 +4,13 @@
 		this.show = function(){
 			init();
 			var url = "/api/THParam";
-			getData(url,"");
+
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getData(url,"");
+
+			else
+				getData(url,"buildId="+buildId+"&a=&b=&c=&d=");
 
 		}
 
@@ -48,8 +54,13 @@
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
 				var buildId = $(this).val();
+
+				$.cookie("buildId",buildId,{path:'/'});
 				var url="/api/THParam";
 				var params = "buildId="+buildId;
 

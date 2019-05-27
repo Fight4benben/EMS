@@ -60,7 +60,13 @@
 
 		this.show = function(){
 			initDom();
-			getData(baseUrl,"");
+
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getData(baseUrl,"");
+
+			else
+				getData(baseUrl,"buildId="+buildId+"&a=&b=&c=&d=");
 		}
 
 		function getData(url,params){
@@ -93,8 +99,13 @@
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
 
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
+
 			$("#buildinglist").change(function(event) {
+
 				var buildId = $(this).val();
+				$.cookie("buildId",buildId,{path:'/'});
 				var params = "buildId="+buildId;
 
 				getData(baseUrl,params);

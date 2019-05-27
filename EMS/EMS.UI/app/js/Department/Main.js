@@ -5,7 +5,11 @@ var DepartmentMain = (function(){
 		this.show=function(){
 			var url = "/api/DeptOverview";
 
-			getDataFromServer(url,"");
+			var buildId=$.cookie('buildId');
+			if(buildId==undefined || buildId==null || buildId == "null")
+				getDataFromServer(url,"");
+			else
+				getDataFromServer(url,"buildId="+buildId+"&a=&b=");
 		};
 
 		this.initDom = function(){
@@ -61,9 +65,12 @@ var DepartmentMain = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+			if($.cookie('buildId') != undefined && $.cookie('buildId')!=null)
+				$("#buildinglist").val($.cookie("buildId"));
 
 			$("#buildinglist").change(function(event) {
-				
+				var buildId = $("#buildinglist").val();
+				$.cookie("buildId",buildId,{path:'/'});
 				var url = "/api/DeptOverview";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val())
 			});

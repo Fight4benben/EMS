@@ -66,6 +66,7 @@ var Check = (function(){
 			$("#searchButton").click(function(event) {
 				
 				var buildId = $("#buildinglist").val();
+				//$.cookie("buildId",buildId,{path:'/'})
 				var date; 
 
 				var type =$("#dateType").val();
@@ -189,6 +190,9 @@ var Check = (function(){
 				return;
 
 			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+
+			// if($.cookie("buildId")!=undefined && $.cookie("buildId")!= null)
+			// 	$("#buildinglist").val($.cookie("buildId"));
 		}
 
 		function showEnergys(data){
