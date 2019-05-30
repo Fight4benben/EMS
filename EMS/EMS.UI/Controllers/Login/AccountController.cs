@@ -25,7 +25,7 @@ namespace EMS.UI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
             if (model.Password == null)
