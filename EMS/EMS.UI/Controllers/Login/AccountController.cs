@@ -26,6 +26,7 @@ namespace EMS.UI.Controllers
         /// <returns></returns>
         [HttpPost]
         //[ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
             if (model.Password == null)
@@ -44,7 +45,15 @@ namespace EMS.UI.Controllers
             if (result)
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, false);
-                return RedirectToAction("Index", "Home");
+
+                if (string.IsNullOrEmpty(model.Type))
+                    return RedirectToAction("Index", "Home");
+                else
+                {
+                    
+                    return Json(new { result=true,url="http://energy.acrel.cn/Home/Index"});
+                }
+                    
             }
 
             ModelState.AddModelError("", "账号或用户名有误");

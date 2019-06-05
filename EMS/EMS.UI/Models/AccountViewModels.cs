@@ -17,6 +17,8 @@ namespace EMS.UI.Models
         //[Required(ErrorMessage = "密码不能为空")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string Type { get; set; }
     }
 
 }
