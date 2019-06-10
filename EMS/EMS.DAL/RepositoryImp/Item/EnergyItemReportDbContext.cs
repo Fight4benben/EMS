@@ -24,7 +24,7 @@ namespace EMS.DAL.RepositoryImp
         public List<ReportValue> GetReportValueList(string[] energyCodes, string date, string type)
         {
             string sql;
-            switch (type)
+            switch (type.ToUpper())
             {
                 case "DD":
                     sql = string.Format(EnergyItemReportResources.DayReportSQL, "'" + string.Join("','", energyCodes) + "'");

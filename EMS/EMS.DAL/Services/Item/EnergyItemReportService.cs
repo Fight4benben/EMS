@@ -144,11 +144,11 @@ namespace EMS.DAL.Services
         /// <returns>返回完整的数据：能源按钮列表，分项列表，以及第一分类的当日用能数据</returns>
         public EnergyItemReportViewModel GetEnergyItemReportViewModel(string[] formulaIDs, string date, string type)
         {
-            if (type == "MM")
+            if (type.ToUpper() == "MM")
             {
                 date += "-01";
             }
-            else if (type == "YY")
+            else if (type.ToUpper() == "YY")
             {
                 date += "-01-01";
             }
@@ -156,7 +156,7 @@ namespace EMS.DAL.Services
 
             EnergyItemReportViewModel energyItemReportView = new EnergyItemReportViewModel();
             energyItemReportView.Data = reportValue;
-            energyItemReportView.ReportType = type;
+            energyItemReportView.ReportType = type.ToUpper();
 
             return energyItemReportView;
         }
@@ -176,6 +176,7 @@ namespace EMS.DAL.Services
 
         public Excel ExportReportToExcel(string basePath, string buildId,string[] formulaIDs, string date, string type)
         {
+            type = type.ToUpper();
             string templatePath = basePath + "/DayReportTemplate.xls";
             string reportType = " 日报(" + date + ")";
             if (type == "MM")
