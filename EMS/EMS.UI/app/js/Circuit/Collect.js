@@ -311,7 +311,7 @@ var Collect = (function(){
 				{field:'name',title:'回路名称'},
 				{field:'startValue',title:'起始数值'},
 				{field:'endValue',title:'截止数值'},
-				{field:'diffValue',title:'差值'},
+				{field:'diffValue',title:'差值'}
 			];
 
 			var rows=[];

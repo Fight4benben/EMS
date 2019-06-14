@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EMS.DAL.Entities.Setting;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,10 +18,8 @@ namespace EMS.DAL.Entities
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<EnergyItemDict> EnergyItemDict { get; set; }
         public virtual DbSet<BuildExtendInfo> BuildExtendInfo { get; set; }
-
-
-        
-
+        public virtual DbSet<Svg> Svg { get; set; }
+        public virtual DbSet<SvgBinding> SvgBinding { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

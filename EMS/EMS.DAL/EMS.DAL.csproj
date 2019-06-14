@@ -106,6 +106,8 @@
     <Compile Include="Entities\Setting\LogInfo.cs" />
     <Compile Include="Entities\Setting\MenuInfo.cs" />
     <Compile Include="Entities\Setting\ResultState.cs" />
+    <Compile Include="Entities\Setting\Svg.cs" />
+    <Compile Include="Entities\Setting\SvgBinding.cs" />
     <Compile Include="Entities\Setting\User2Menu.cs" />
     <Compile Include="Entities\Setting\UserSet.cs" />
     <Compile Include="Entities\TreeView.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="IRepository\Region\IRegionReportDbContext.cs" />
     <Compile Include="IRepository\ITreeViewDbContext.cs" />
     <Compile Include="IRepository\IUserContext.cs" />
+    <Compile Include="IRepository\Setting\ISvgSettingContext.cs" />
     <Compile Include="IRepository\Setting\IUserBuildingDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentCompletionRateDbContext.cs" />
     <Compile Include="RepositoryImp\Alarm\AlarmDepartmentDbContext.cs" />
@@ -176,6 +179,7 @@
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionReportDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\BuildSetDbContext.cs" />
+    <Compile Include="RepositoryImp\Setting\SvgSettingContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserMenuDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\SystemLogDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserSetDbContext.cs" />
@@ -218,6 +222,7 @@
     <Compile Include="Services\Region\RegionMainService.cs" />
     <Compile Include="Services\Region\RegionReportService.cs" />
     <Compile Include="Services\Setting\BuildSetService.cs" />
+    <Compile Include="Services\Setting\SvgSettingService.cs" />
     <Compile Include="Services\Setting\SystemLogService.cs" />
     <Compile Include="Services\Setting\UserMenuService.cs" />
     <Compile Include="Services\Setting\UserSetService.cs" />
@@ -255,6 +260,7 @@
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
     <Compile Include="StaticResources\Region\RegionReportResources.cs" />
     <Compile Include="StaticResources\Setting\BuildSetResources.cs" />
+    <Compile Include="StaticResources\Setting\SvgSettingResources.cs" />
     <Compile Include="StaticResources\Setting\SystemLogResources.cs" />
     <Compile Include="StaticResources\Setting\UserMenuResources.cs" />
     <Compile Include="StaticResources\Setting\UserSetResources.cs" />
@@ -297,6 +303,7 @@
     <Compile Include="ViewModels\Region\RegionMainViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionReportViewModel.cs" />
     <Compile Include="ViewModels\Setting\BuildSetViewModel.cs" />
+    <Compile Include="ViewModels\Setting\SvgSettingViewModel.cs" />
     <Compile Include="ViewModels\Setting\SystemLogViewModel.cs" />
     <Compile Include="ViewModels\Setting\UserMenuViewModel.cs" />
     <Compile Include="ViewModels\Setting\UserSetViewModel.cs" />

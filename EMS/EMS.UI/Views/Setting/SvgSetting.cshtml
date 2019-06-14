@@ -1,0 +1,120 @@
+﻿<div class="container-fluid main-top equipAlarm">
+    <div class="col-xs-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                建筑名称：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="buildinglist"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="float:right">
+            <button id="addModal" class="btn btn-primary" data-toggle="modal">
+                <i class=""></i>新增
+            </button>
+            <button id="edtModal" class="btn btn-warning" data-toggle="modal">
+                <i class=""></i>修改
+            </button>
+            <button id="delModal" class="btn btn-danger" data-toggle="modal">
+                <i class=""></i>删除
+            </button>
+        </div>
+        
+    </div>
+
+    <div id="selectedSvg" class="col-xs-12 R-Columnar">
+
+    </div>
+
+    <!--新增模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">新增</h5>
+          </div>
+          <div class="modal-body">
+            <label>建筑名称：</label>
+            <input id="level2" type="text"/>
+            <label>一次图名：</label>
+            <input id="level2" type="text"/>
+          </div>
+          <div class="modal-footer">
+            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--修改模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">修改</h5>
+          </div>
+          <div class="modal-body">
+            <label>图片编号：</label>
+            <input id="level1" disabled type="text"/>
+            <label>建筑名称：</label>
+            <input id="level2" type="text"/>
+            <label>一次图名：</label>
+            <input id="level2" type="text"/>
+          </div>
+          <div class="modal-footer">
+            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--删除模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">删除</h5>
+          </div>
+          <div class="modal-body">
+            <h6>是否要删除此行？</h6>
+          </div>
+          <div class="modal-footer">
+            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--上传模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">上传</h5>
+          </div>
+          <div class="modal-body">
+            <input type="file" id="exampleInputFile">
+          </div>
+          <div class="modal-footer">
+            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+<script src="~/app/js/Setting/SvgSetting.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>

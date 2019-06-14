@@ -207,6 +207,8 @@
     <Compile Include="Controllers\Setting\SettingAlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Setting\SettingAlarmDeviceOverLimitController.cs" />
     <Compile Include="Controllers\Setting\SettingController.cs" />
+    <Compile Include="Controllers\Setting\SvgFileController.cs" />
+    <Compile Include="Controllers\Setting\SvgSettingController.cs" />
     <Compile Include="Controllers\Setting\SystemLogApiController.cs" />
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Controllers\Setting\UserMenuApiController.cs" />
@@ -728,6 +730,7 @@
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Setting\UserMenu.cshtml" />
     <Content Include="Views\Home\SvgView.cshtml" />
+    <Content Include="Views\Setting\SvgSetting.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
