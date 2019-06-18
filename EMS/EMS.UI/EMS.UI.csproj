@@ -665,6 +665,7 @@
     <Content Include="Assets\plugins\jquery-busyLoading\src\sass\_pump.scss" />
     <Content Include="Assets\plugins\jquery-busyLoading\src\sass\_utils.scss" />
     <Content Include="Assets\plugins\jquery-busyLoading\src\template\index.ejs" />
+    <Content Include="Controllers\Setting\SvgSetting.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -85,10 +85,11 @@ var SvgSetting=(function(){
                 'padding-right':'8px',
             });
             $trs.css('background','bluesky').removeClass('currentSelect');
-            $("#selectedSvg>table").on('check.bs.table',function(){
+
+            $("#mainTable").on('click-row.bs.table',function(e,row,$element){
                 $(".currentSelect").css('background','white').removeClass('currentSelect');
-                selectedInfo = $("#selectedSvg>table").bootstrapTable('getSelections');
-                getSelectedInfo(selectedInfo);
+                $element.css('background','#cee4f9').addClass('currentSelect')
+                selectedInfo = row
                 console.log(selectedInfo)
             })
         }
@@ -105,8 +106,66 @@ var SvgSetting=(function(){
         $('.upload').click(function(event){
             $(".upload").attr('data-target','#myModal4');
         });
-	}
+        
+        //新增
+        $("#addBtn").click(function(e){
+            var buildid = $("#buildinglist").val();
+            var svgName = $("#svgName").val();
+            $.ajax({
+                type: "post",
+                url: baseUrl,
+                data: {
+                    buildid:buildid,
+                    svgname:svgName
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+                error:function(){
 
+                }
+            });
+        });
+        //修改
+        $("#myModal2").on('shown.bs.modal',function (e) { 
+            var selectRow = selectedInfo;
+            var svgid = $("#svgid").val(selectRow.svgId)
+            var svgname = $("#svgname").val(selectRow.svgName)
+        });
+        $("#edtBtn").click(function(){
+            var svgid = $("#svgid").val();
+            var svgname = $("svgname").val();
+            //var data = "svgid="+svgid+"&"
+            $.ajax({
+                type: "PUT",
+                url: baseUrl,
+                data: ,
+                success: function (response) {
+                    
+                }
+            });
+        })
+        //删除
+        $("#delBtn").click(function(event){
+            var selectRow = selectedInfo;
+            var svgid = selectRow.svgId;
+            var buildId = $("#buildinglist").val();
+            $.ajax({
+                type: "DELETE",
+                url: baseUrl,
+                data: {
+                    svgid:svgid
+                },
+                success: function (response) {
+                    if(response.flag == true){
+                        alert('删除一次图成功！！')
+                        getDataFromServer("/api/SvgSetting","buildId="+buildId);
+                        $("#myModal3").modal('hide')  
+                    }
+                }
+            });
+        })
+	}
 	return _svgSetting;
 
 })();

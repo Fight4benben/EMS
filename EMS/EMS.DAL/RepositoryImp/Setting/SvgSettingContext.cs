@@ -64,11 +64,17 @@ namespace EMS.DAL.RepositoryImp.Setting
             {
                 try
                 {
-                    _db.Svg.Remove(svg);
-                    count += _db.SaveChanges();
-
-                    _db.SvgBinding.Remove(svgBinding);
-                    count += _db.SaveChanges();
+                    if (svg != null)
+                    {
+                        _db.Svg.Remove(svg);
+                        count += _db.SaveChanges();
+                    }
+                    
+                    if(svgBinding != null)
+                    {
+                        _db.SvgBinding.Remove(svgBinding);
+                        count += _db.SaveChanges();
+                    }
 
                     trans.Commit();
                 }
