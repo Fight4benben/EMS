@@ -103,7 +103,7 @@ namespace EMS.DAL.RepositoryImp
             return treeViewList;
         }
 
-        List<TreeViewModel> GetChildrenNodes(List<Circuit> circuits, Circuit circuit)
+        List<TreeViewModel> GetChildrenNodes(List<EMS.DAL.Entities.CircuitList> circuits, EMS.DAL.Entities.CircuitList circuit)
         {
             string parentId = circuit.CircuitId;
             List<TreeViewModel> circuitList = new List<TreeViewModel>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EMS.DAL.Entities
 {
-    public class Circuit
+    public class CircuitList
     {
         public string CircuitId { get; set; }
         public string CircuitName { get; set; }

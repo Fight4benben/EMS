@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 using EMS.DAL.StaticResources;
 using System.Data.SqlClient;
 
+
 namespace EMS.DAL.RepositoryImp
 {
     public class CircuitReportDbContext : ICircuitReportDbContext
     {
         private EnergyDB _db = new EnergyDB();
 
-        public List<Circuit> GetCircuitListByBIdAndEItemCode(string buildId,string energyItemCode)
+        public List<EMS.DAL.Entities.CircuitList> GetCircuitListByBIdAndEItemCode(string buildId,string energyItemCode)
         {
             SqlParameter[] sqlParameters ={
                 new SqlParameter("@BuildId",buildId),
                 new SqlParameter("@EnergyItemCode",energyItemCode)
             };
-            return _db.Database.SqlQuery<Circuit>(CircuitResources.CircuitSQL,sqlParameters).ToList();
+            return _db.Database.SqlQuery<CircuitList>(CircuitResources.CircuitSQL,sqlParameters).ToList();
         }
 
         public List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId)

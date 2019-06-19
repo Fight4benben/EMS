@@ -37,7 +37,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
 
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyCode);
 
             string[] circuitIds = GetCircuitIds(circuits);
 
@@ -64,7 +64,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
 
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string[] circuitIds = GetCircuitIds(circuits);
 
@@ -105,7 +105,7 @@ namespace EMS.DAL.Services
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
 
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string[] circuitIds = GetCircuitIds(circuits);
 
@@ -144,7 +144,7 @@ namespace EMS.DAL.Services
             }
             DateTime now = Utils.Util.ConvertString2DateTime(date, "yyyy-MM-dd");
            
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string[] circuitIds = GetCircuitIds(circuits);
 
@@ -206,7 +206,7 @@ namespace EMS.DAL.Services
         /// <returns>树状结构</returns>
         public List<TreeViewModel> GetTreeListViewModel(string buildId, string energyItemCode)
         {
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyItemCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode(buildId,energyItemCode);
             var parentCircuits = circuits.Where(c=>(c.ParentId=="-1"||string.IsNullOrEmpty(c.ParentId)));
             List<TreeViewModel> treeList = new List<TreeViewModel>();
 
@@ -230,7 +230,7 @@ namespace EMS.DAL.Services
         /// <param name="circuits"></param>
         /// <param name="circuit"></param>
         /// <returns></returns>
-        List<TreeViewModel> GetChildrenNodes(List<Circuit> circuits, Circuit circuit)
+        List<TreeViewModel> GetChildrenNodes(List<EMS.DAL.Entities.CircuitList> circuits, EMS.DAL.Entities.CircuitList circuit)
         {
             string parentId = circuit.CircuitId;
             List<TreeViewModel> circuitList = new List<TreeViewModel>();
@@ -250,7 +250,7 @@ namespace EMS.DAL.Services
             return circuitList;
         }
 
-        string[] GetCircuitIds(List<Circuit> circuits)
+        string[] GetCircuitIds(List<EMS.DAL.Entities.CircuitList> circuits)
         {
             List<string> list = new List<string>();
             foreach (var circuit in circuits)

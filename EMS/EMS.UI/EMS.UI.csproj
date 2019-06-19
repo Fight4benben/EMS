@@ -164,6 +164,7 @@
     <Compile Include="Controllers\Alarm\AlarmDeviceController.cs" />
     <Compile Include="Controllers\Alarm\AlarmDeviceFreeTimeController.cs" />
     <Compile Include="Controllers\Circuit\CircuitRingRatioController.cs" />
+    <Compile Include="Controllers\Circuit\MultiRateController.cs" />
     <Compile Include="Controllers\Common\AuthController.cs" />
     <Compile Include="Controllers\Department\DepartmentAreaAvgRankController.cs" />
     <Compile Include="Controllers\History\THParamController.cs" />

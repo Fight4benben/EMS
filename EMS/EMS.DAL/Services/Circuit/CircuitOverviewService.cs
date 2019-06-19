@@ -35,7 +35,7 @@ namespace EMS.DAL.Services
             string buildId = builds.First().BuildID;
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, today.ToString());
@@ -73,7 +73,7 @@ namespace EMS.DAL.Services
         {
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, date);
@@ -104,7 +104,7 @@ namespace EMS.DAL.Services
             List<BuildViewModel> builds = homeContext.GetBuildsByUserName(name);
             List<EnergyItemDict> energys = reportContext.GetEnergyItemDictByBuild(buildId);
             string energyCode = energys.First().EnergyItemCode;
-            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, date);
@@ -142,7 +142,7 @@ namespace EMS.DAL.Services
         public CircuitOverviewViewModel GetCircuitOverviewViewModel(string buildId, string energyCode, string date)
         {
             
-            List<Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
 
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> loadData = context.GetCircuitLoadValueList(buildId, circuitId, date);

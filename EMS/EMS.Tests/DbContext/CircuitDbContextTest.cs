@@ -15,7 +15,7 @@ namespace EMS.Tests.DbContext
         {
             ICircuitReportDbContext context = new CircuitReportDbContext();
 
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001","01000");
+            List<CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001","01000");
 
             foreach (var circuit in circuits)
             {
@@ -43,7 +43,7 @@ namespace EMS.Tests.DbContext
         {
             ICircuitReportDbContext context = new CircuitReportDbContext();
 
-            List<Circuit> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001", "01000");
+            List<CircuitList> circuits = context.GetCircuitListByBIdAndEItemCode("000001G001", "01000");
 
             List<string> circuitList = new List<string>();
 

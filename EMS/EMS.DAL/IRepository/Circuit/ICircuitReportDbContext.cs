@@ -9,7 +9,7 @@ namespace EMS.DAL.IRepository
 {
     public interface ICircuitReportDbContext
     {
-        List<Circuit> GetCircuitListByBIdAndEItemCode(string buildId, string energyItemCode);
+        List<EMS.DAL.Entities.CircuitList> GetCircuitListByBIdAndEItemCode(string buildId, string energyItemCode);
 
         List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId);
 

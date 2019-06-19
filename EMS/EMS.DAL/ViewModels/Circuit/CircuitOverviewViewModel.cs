@@ -11,7 +11,7 @@ namespace EMS.DAL.ViewModels
     {
         public List<BuildViewModel> Builds { get; set; }
         public List<EnergyItemDict> Energys { get; set; }
-        public List<Circuit> Circuits { get; set; }
+        public List<CircuitList> Circuits { get; set; }
         public List<CircuitValue> LoadData { get; set; }
         public List<CircuitValue> MomDayData { get; set; }
         public List<CircuitValue> MomMonthData { get; set; }

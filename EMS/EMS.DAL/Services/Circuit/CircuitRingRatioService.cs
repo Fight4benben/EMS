@@ -37,7 +37,7 @@ namespace EMS.DAL.Services
             string energyCode = energys.First().EnergyItemCode;
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
 
-            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, today.ToString());
 
@@ -60,7 +60,7 @@ namespace EMS.DAL.Services
             string energyCode = energys.First().EnergyItemCode;
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
 
-            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, today.ToString());
 
@@ -85,7 +85,7 @@ namespace EMS.DAL.Services
             string energyCode = energys.First().EnergyItemCode;
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
 
-            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, date);
 
@@ -107,7 +107,7 @@ namespace EMS.DAL.Services
         public CircuitCompareViewModel GetDayRingRationViewModel(string buildId, string energyCode, string date)
         {
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
-            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyCode);
             string circuitId = circuits.First().CircuitId;
             List<CircuitValue> compareData = context.GetDayRingCompareValueList(buildId, circuitId, date);
 
@@ -148,7 +148,7 @@ namespace EMS.DAL.Services
         /// <returns>树状结构</returns>
         public List<TreeViewModel> GetTreeListViewModel(string buildId, string energyItemCode)
         {
-            List<EMS.DAL.Entities.Circuit> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyItemCode);
+            List<EMS.DAL.Entities.CircuitList> circuits = reportContext.GetCircuitListByBIdAndEItemCode(buildId, energyItemCode);
             var parentCircuits = circuits.Where(c => (c.ParentId == "-1" || string.IsNullOrEmpty(c.ParentId)));
             List<TreeViewModel> treeList = new List<TreeViewModel>();
 
@@ -172,7 +172,7 @@ namespace EMS.DAL.Services
         /// <param name="circuits"></param>
         /// <param name="circuit"></param>
         /// <returns></returns>
-        List<TreeViewModel> GetChildrenNodes(List<EMS.DAL.Entities.Circuit> circuits, EMS.DAL.Entities.Circuit circuit)
+        List<TreeViewModel> GetChildrenNodes(List<EMS.DAL.Entities.CircuitList> circuits, EMS.DAL.Entities.CircuitList circuit)
         {
             string parentId = circuit.CircuitId;
             List<TreeViewModel> circuitList = new List<TreeViewModel>();
@@ -192,7 +192,7 @@ namespace EMS.DAL.Services
             return circuitList;
         }
 
-        string[] GetCircuitIds(List<EMS.DAL.Entities.Circuit> circuits)
+        string[] GetCircuitIds(List<EMS.DAL.Entities.CircuitList> circuits)
         {
             List<string> list = new List<string>();
             foreach (var circuit in circuits)
