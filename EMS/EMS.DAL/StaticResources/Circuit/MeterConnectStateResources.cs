@@ -14,7 +14,7 @@ namespace EMS.DAL.StaticResources
         public static string MeterAllStateSQL = @"
                                                SELECT  MeterUseInfo.F_MeterID AS ID, F_MeterName AS Name
                                                     ,DataCollectionInfo.F_CollectionName AS CollectionName
-                                                    ,CASE WHEN  DATEDIFF(MINUTE,DataCollectionInfo.F_LastUpTime,GETDATE()) > 15 OR ( F_DisConnect = 1 OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())>15 )THEN '通讯中断' ELSE '通讯正常' END AS States
+                                                    ,CASE WHEN  DATEDIFF(MINUTE,DataCollectionInfo.F_LastUpTime,GETDATE()) > 20 OR ( F_DisConnect = 1 OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())>10 )THEN '通讯中断' ELSE '通讯正常' END AS States
                                                     ,CASE WHEN F_DisConnectTime IS NULL  OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())<15 THEN NULL ELSE F_DisConnectTime END  AS DisConnectTime 
                                                     ,CASE WHEN DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())<15 THEN NULL ELSE  CAST(DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())/1440 as varchar(5)) 
 	                                                    +'天'+CAST( DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())/60 as varchar(5)) 
@@ -32,7 +32,7 @@ namespace EMS.DAL.StaticResources
         public static string MeterOfflineStateSQL = @"
                                                      SELECT  MeterUseInfo.F_MeterID AS ID, F_MeterName AS Name
                                                         ,DataCollectionInfo.F_CollectionName AS CollectionName
-                                                        ,CASE WHEN  DATEDIFF(MINUTE,DataCollectionInfo.F_LastUpTime,GETDATE()) > 15 OR ( F_DisConnect = 1 OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())>15 )THEN '通讯中断' ELSE '通讯正常' END AS States
+                                                        ,CASE WHEN  DATEDIFF(MINUTE,DataCollectionInfo.F_LastUpTime,GETDATE()) > 20 OR ( F_DisConnect = 1 OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())>10 )THEN '通讯中断' ELSE '通讯正常' END AS States
                                                         ,CASE WHEN F_DisConnectTime IS NULL  OR DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())<15 THEN NULL ELSE F_DisConnectTime END  AS DisConnectTime 
                                                         ,CASE WHEN DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())<15 THEN NULL ELSE  CAST(DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())/1440 as varchar(5)) 
 	                                                        +'天'+CAST( DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())/60 as varchar(5)) 
