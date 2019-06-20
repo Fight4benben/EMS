@@ -339,6 +339,7 @@
     <Content Include="app\js\Alarm\OutOfWork.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
+    <Content Include="app\js\Circuit\CircuitPayRate.js" />
     <Content Include="app\js\Circuit\Collect.js" />
     <Content Include="app\js\Circuit\RingRatio.js" />
     <Content Include="app\js\Department\Average.js" />
@@ -534,6 +535,7 @@
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.css" />
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\fonts\icomoon.svg" />
+    <Content Include="Assets\plugins\jqx\css\jqx.base.css" />
     <Content Include="Assets\plugins\jquery-busyLoading\js\app.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\js\jquery-1.11.0.min.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\related\1.jpg" />
@@ -558,6 +560,14 @@
     <Content Include="Assets\plugins\jquery.blockui.min.js" />
     <Content Include="Assets\plugins\jquery.cokie.min.js" />
     <Content Include="Assets\plugins\jquery.md5.js" />
+    <Content Include="Assets\plugins\jqx\css\jqx.light.css" />
+    <Content Include="Assets\plugins\jqx\js\jqxbuttons.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxcore.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxdata.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxmenu.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxpivot.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxpivotgrid.js" />
+    <Content Include="Assets\plugins\jqx\js\jqxscrollbar.js" />
     <Content Include="Assets\plugins\loadash\lodash.core.min.js" />
     <Content Include="Assets\plugins\respond.min.js" />
     <Content Include="Assets\plugins\tableExport\jquery.base64.js" />

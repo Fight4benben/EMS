@@ -63,14 +63,14 @@
           </div>
           <div class="modal-body">
             <label>图片编号：</label>
-            <input id="level1" disabled type="text"/>
-            <label>建筑名称：</label>
-            <input id="level2" type="text"/>
+            <input id="svgid" disabled type="text"/>
+            <!-- <label>建筑名称：</label>
+            <input id="level2" type="text"/> -->
             <label>一次图名：</label>
-            <input id="level2" type="text"/>
+            <input id="svgname" type="text"/>
           </div>
           <div class="modal-footer">
-            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button id="edtBtn" type="button" class="btn btn-primary">确定</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
           </div>
         </div>
@@ -105,10 +105,33 @@
             <h5 class="modal-title" id="myModalLabel">上传</h5>
           </div>
           <div class="modal-body">
-            <input type="file" id="exampleInputFile">
+            <form action="/upload" enctype="multipart/form-data" method="post">
+            <input type="text" id="svgid" style="display: none"/>
+            <input type="file" id="inputFile">
           </div>
           <div class="modal-footer">
-            <button id="saveBtn" type="button" class="btn btn-primary">确定</button>
+            <button id="uploadBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  <!--绑定模态框-->
+    <div class="modal fade bs-example-modal-sm" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">绑定</h5>
+          </div>
+          <div class="modal-body">
+            <div id="meter" style="height:150px"></div>
+            <div id="params" style="height:150px"></div>
+          </div>
+          <div class="modal-footer">
+            <button id="bindBtn" type="button" class="btn btn-primary">确定</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
           </div>
         </div>
