@@ -11,5 +11,7 @@ namespace EMS.DAL.IRepository
     {
         PageInfo GetPageInfoList(string userName, int pageSize);
         List<MeterAlarmInfo> GetMeterAlarmingList(string userName, int pageIndex, int pageSize);
+        int SetConfirmMeterAlarm(string userName, string describe, string[] ids);
+        int SetConfirmAllMeterAlarm(string userName, string describe);
     }
 }

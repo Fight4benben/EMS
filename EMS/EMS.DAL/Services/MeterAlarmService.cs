@@ -36,9 +36,53 @@ namespace EMS.DAL.Services
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
 
             viewModel.PageInfos = context.GetPageInfoList(userName, pageSize);
+            viewModel.PageInfos.CurrentPage = pageIndex;
+            viewModel.PageInfos.PageSize = pageSize;
             viewModel.Data = context.GetMeterAlarmingList(userName, pageIndex, pageSize);
 
             return viewModel;
+        }
+
+        public object SetConfirmMeterAlarm(string userName, string describe, string ids)
+        {
+            ResultState resultState = new ResultState();
+
+            string[] idsArry = ids.Split(',');
+
+            int result = context.SetConfirmMeterAlarm(userName, describe, idsArry);
+
+            if (result > 0)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK ：操作成功";
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG ：确认失败！！！";
+            }
+
+            return resultState;
+        }
+
+        public object SetConfirmAllMeterAlarm(string userName, string describe)
+        {
+            ResultState resultState = new ResultState();
+
+            int result = context.SetConfirmAllMeterAlarm(userName, describe);
+
+            if (result > 0)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK ：操作成功";
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG ：确认失败！！！";
+            }
+
+            return resultState;
         }
 
     }

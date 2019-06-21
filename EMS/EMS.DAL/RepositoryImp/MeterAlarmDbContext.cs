@@ -36,6 +36,28 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<MeterAlarmInfo>(MeterAlarmResources.SELECT_AlarmingMeter, sqlParameters).ToList();
         }
 
+        public int SetConfirmMeterAlarm(string userName, string describe, string[] ids)
+        {
+            string sql = string.Format(MeterAlarmResources.UPDATE_ConfirmOne, "'" + string.Join("','", ids) + "'");
+
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@Describe",describe)
+            };
+
+            return _db.Database.ExecuteSqlCommand(sql, sqlParameters);
+        }
+
+        public int SetConfirmAllMeterAlarm(string userName, string describe)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@Describe",describe)
+            };
+
+            return _db.Database.ExecuteSqlCommand(MeterAlarmResources.UPDATE_ConfirmAll, sqlParameters);
+        }
+
 
 
     }

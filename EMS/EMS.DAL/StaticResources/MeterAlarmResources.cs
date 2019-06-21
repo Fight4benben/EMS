@@ -37,5 +37,34 @@ namespace EMS.DAL.StaticResources
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE 
 	            pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
+
+
+        public static string UPDATE_ConfirmOne =
+           @"UPDATE T_MA_MeterAlarmLog SET F_IsConfirm=1,F_ConfirmUser=@UserName,
+	            F_ConfirmTime=GETDATE(),F_Describe =@Describe
+	            FROM T_MA_MeterAlarmLog
+	            INNER JOIN T_MA_MeterALarming ON T_MA_MeterAlarmLog.F_BuildID=T_MA_MeterALarming.F_BuildID
+		            AND T_MA_MeterAlarmLog.F_MeterID=T_MA_MeterALarming.F_MeterID
+		            AND T_MA_MeterAlarmLog.F_MeterParamID=T_MA_MeterALarming.F_MeterParamID
+		            AND T_MA_MeterAlarmLog.F_Type=T_MA_MeterALarming.F_Type
+	            WHERE T_MA_MeterALarming.F_ID IN ( {0} )
+	            AND T_MA_MeterAlarmLog.F_IsConfirm =0
+	            AND T_MA_MeterAlarmLog.F_ConfirmTime IS NULL
+
+	            DELETE T_MA_MeterALarming 
+	            WHERE F_ID IN ( {0} ) ";
+
+        public static string UPDATE_ConfirmAll =
+           @"UPDATE T_MA_MeterAlarmLog SET F_IsConfirm=1,F_ConfirmUser=@UserName,
+	            F_ConfirmTime=GETDATE(),F_Describe =@Describe
+	            FROM T_MA_MeterAlarmLog
+	            INNER JOIN T_MA_MeterALarming ON T_MA_MeterAlarmLog.F_BuildID=T_MA_MeterALarming.F_BuildID
+		            AND T_MA_MeterAlarmLog.F_MeterID=T_MA_MeterALarming.F_MeterID
+		            AND T_MA_MeterAlarmLog.F_MeterParamID=T_MA_MeterALarming.F_MeterParamID
+		            AND T_MA_MeterAlarmLog.F_Type=T_MA_MeterALarming.F_Type
+	            WHERE T_MA_MeterAlarmLog.F_IsConfirm =0
+	            AND T_MA_MeterAlarmLog.F_ConfirmTime IS NULL
+
+	            DELETE FROM T_MA_MeterALarming  ";
     }
 }
