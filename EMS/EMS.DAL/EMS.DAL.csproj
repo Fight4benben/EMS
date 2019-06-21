@@ -97,6 +97,7 @@
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\AlarmLimitValue.cs" />
     <Compile Include="Entities\MeterAlarmInfo.cs" />
+    <Compile Include="Entities\MeterAlarmLog.cs" />
     <Compile Include="Entities\MeterParam.cs" />
     <Compile Include="Entities\MeterParamInfo.cs" />
     <Compile Include="Entities\MultiRateData.cs" />

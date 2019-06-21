@@ -11,6 +11,7 @@ namespace EMS.DAL.ViewModels
     {
         public PageInfo PageInfos { get; set; }
         public List<MeterAlarmInfo> Data { get; set; }
+        public List<MeterAlarmLog> AlarmLogs { get; set; }
 
     }
 }

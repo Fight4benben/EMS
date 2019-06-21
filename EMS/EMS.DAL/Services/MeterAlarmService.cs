@@ -85,5 +85,22 @@ namespace EMS.DAL.Services
             return resultState;
         }
 
+
+        public MeterAlarmViewModel GetAlarmLogViewModel(string userName, int pageIndex = 1, int pageSize = 100)
+        {
+            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
+
+            string beginDate = DateTime.Now.ToString("yyyy-MM-dd 00:00");
+            string endDate = DateTime.Now.ToString("yyyy-MM-dd 23:59");
+
+            viewModel.PageInfos = context.GetPageInfoList(userName, pageSize);
+            viewModel.PageInfos.CurrentPage = pageIndex;
+            viewModel.PageInfos.PageSize = pageSize;
+
+            viewModel.AlarmLogs = context.GetAlarmLogList(userName, pageIndex, pageSize, beginDate, endDate);
+
+            return viewModel;
+        }
+
     }
 }

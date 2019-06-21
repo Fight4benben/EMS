@@ -36,6 +36,126 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<MeterAlarmInfo>(MeterAlarmResources.SELECT_AlarmingMeter, sqlParameters).ToList();
         }
 
+        /// <summary>
+        /// 根据 用户，获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public PageInfo GetAlarmLogPageInfo(string userName, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByUser, sqlParameters).First();
+        }
+
+        public List<MeterAlarmLog> GetAlarmLogList(string userName, int pageIndex, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@PageIndex",pageIndex),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<MeterAlarmLog>(MeterAlarmResources.SELECT_AlarmLogByUser, sqlParameters).ToList();
+        }
+
+        /// <summary>
+        /// 根据 用户，建筑ID，获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="buildID"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public PageInfo GetAlarmLogPageInfo(string userName, string buildID, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByBuildIDTotalPage, sqlParameters).First();
+        }
+
+        public List<MeterAlarmLog> GetAlarmLogList(string userName, string buildID, int pageIndex, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@PageIndex",pageIndex),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<MeterAlarmLog>(MeterAlarmResources.SELECT_AlarmLogByBuildID, sqlParameters).ToList();
+        }
+
+
+        /// <summary>
+        /// 根据 用户，建筑ID，仪表ID,获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="buildID"></param>
+        /// <param name="meterID"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public PageInfo GetAlarmLogPageInfo(string userName, string buildID, string meterID, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@MeterID",meterID),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByMeterIDTotalPage, sqlParameters).First();
+        }
+
+        public List<MeterAlarmLog> GetAlarmLogList(string userName, string buildID, string meterID, int pageIndex, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@MeterID",meterID),
+                new SqlParameter("@PageIndex",pageIndex),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<MeterAlarmLog>(MeterAlarmResources.SELECT_AlarmLogByMeterID, sqlParameters).ToList();
+        }
+
+
+
+
+
+        /// <summary>
+        /// 报警确认
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="describe"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         public int SetConfirmMeterAlarm(string userName, string describe, string[] ids)
         {
             string sql = string.Format(MeterAlarmResources.UPDATE_ConfirmOne, "'" + string.Join("','", ids) + "'");
