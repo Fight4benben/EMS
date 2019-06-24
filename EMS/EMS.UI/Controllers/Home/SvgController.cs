@@ -30,7 +30,10 @@ namespace EMS.UI.Controllers.Home
                 {
                     string fileName = path + "\\" + svgViewModel.SvgView;
 
-                    svgViewModel.SvgView = File.ReadAllText(fileName, Encoding.UTF8);
+                    if (File.Exists(fileName))
+                        svgViewModel.SvgView = File.ReadAllText(fileName, Encoding.UTF8);
+                    else
+                        svgViewModel.SvgView = null;
                 }
                 
             }

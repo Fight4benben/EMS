@@ -107,7 +107,11 @@
 
 
 
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
+
+    $("#svgview").attr("class", "start active");
+    $("#svgview").attr("class", "active");
+
     var topology = new Topology();
 
     topology.showSvg();

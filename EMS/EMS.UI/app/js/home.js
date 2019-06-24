@@ -147,7 +147,7 @@ var Home = (function(){
 
 		//显示饼图
 		function showEnergyItemPie(data){
-
+			
 			initChart();
 
 			if(!data.hasOwnProperty('energyItems'))

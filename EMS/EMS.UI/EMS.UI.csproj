@@ -535,6 +535,16 @@
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.css" />
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\fonts\icomoon.svg" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-down.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-left.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-menu-small.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-right.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-sort-asc.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-sort-desc.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-sort-remove.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon-up.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon_collapse.png" />
+    <Content Include="Assets\plugins\jqx\css\images\icon_expand.png" />
     <Content Include="Assets\plugins\jqx\css\jqx.base.css" />
     <Content Include="Assets\plugins\jquery-busyLoading\js\app.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\js\jquery-1.11.0.min.js" />
@@ -560,7 +570,6 @@
     <Content Include="Assets\plugins\jquery.blockui.min.js" />
     <Content Include="Assets\plugins\jquery.cokie.min.js" />
     <Content Include="Assets\plugins\jquery.md5.js" />
-    <Content Include="Assets\plugins\jqx\css\jqx.light.css" />
     <Content Include="Assets\plugins\jqx\js\jqxbuttons.js" />
     <Content Include="Assets\plugins\jqx\js\jqxcore.js" />
     <Content Include="Assets\plugins\jqx\js\jqxdata.js" />

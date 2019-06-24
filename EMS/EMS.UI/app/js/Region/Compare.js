@@ -281,10 +281,26 @@ var Compare = (function(){
 			$("#comparetable th").eq(2).text("["+(parseInt($("#calendarbox").val())-1).toString()+"]"+name+"("+$(".btn-solar-selected").attr('unit')+")");
 
 			for (var i = 0; i < 12; i++) {
-				$("#comparetable tbody").append('<tr><td>'+(i+1).toString()+'月</td><td>'+
+				var pp = previousData[11];
+				if(i==0 && pp != undefined){
+					$("#comparetable tbody").append('<tr><td>'+(i+1).toString()+'月</td><td>'+
 					(currentData[i]==undefined?'-':currentData[i])+'</td><td>'+
 					(previousData[i]==undefined?'-':previousData[i])+'</td><td>'+
-					((currentData[i]==undefined)||(previousData[i]==undefined||(previousData[i]==0))?'-':((currentData[i]-previousData[i])*100/previousData[i]).toFixed(2)+"%")+"</td></tr>");
+					((currentData[i]==undefined)||(previousData[i]==undefined||(previousData[i]==0))?'-':
+					((currentData[i]-previousData[i])*100/previousData[i]).toFixed(2)+"%")+"</td><td>"+
+					
+					((currentData[i]==undefined)||((previousData[previousData.length-1]==undefined))?'-':
+					((currentData[i]-pp)*100/currentData[i]).toFixed(2)+"%")+"</td></tr>");
+					
+				}else{
+					$("#comparetable tbody").append('<tr><td>'+(i+1).toString()+'月</td><td>'+
+					(currentData[i]==undefined?'-':currentData[i])+'</td><td>'+
+					(previousData[i]==undefined?'-':previousData[i])+'</td><td>'+
+					((currentData[i]==undefined)||(previousData[i]==undefined||(previousData[i]==0))?'-':
+					((currentData[i]-previousData[i])*100/previousData[i]).toFixed(2)+"%")+"</td><td>"+
+
+					((currentData[i]==undefined)?'-':((currentData[i]-currentData[i-1])*100/currentData[i]).toFixed(2)+"%")+"</td></tr>");
+				}
 			}
 		}
 

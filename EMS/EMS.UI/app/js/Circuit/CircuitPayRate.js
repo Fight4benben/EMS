@@ -144,7 +144,7 @@ var CircuitPay = (function(){
 
 					getDataFromServer("/api/MultiRate",{
 						buildId:$("#buildinglist").val(),
-						circuits:getCheckedTreeIdArray().join(','),type:"MM",date:$("#daycalendarBox").val()
+						circuits:getCheckedTreeIdArray().join(','),type:"MM",date:$("#daycalendarBox").val()+'-01'
 					},'POST');
 				}
 			});
@@ -165,7 +165,7 @@ var CircuitPay = (function(){
 					//发送请求
 					getDataFromServer("/api/MultiRate",{
 						buildId:$("#buildinglist").val(),
-						circuits:getCheckedTreeIdArray().join(','),type:"YY",date:$("#daycalendarBox").val()
+						circuits:getCheckedTreeIdArray().join(','),type:"YY",date:$("#daycalendarBox").val()+'-01-01'
 					},'POST');
 				}
 			});
@@ -204,7 +204,6 @@ var CircuitPay = (function(){
 			if($current[0].id == id){
 				return false;
 			}
-
 			$current.parent('ul').children('li').removeClass('current');
 
 			$current.addClass('current');
@@ -220,9 +219,9 @@ var CircuitPay = (function(){
 					buildId:$("#buildinglist").val(),
 					circuits:getCheckedTreeIdArray().join(','),type:getTypeByReportSelected(),date:$("#daycalendarBox").val()
 				},'POST');
-			});
-
-			//导出的Excel
+            });
+            
+            //导出的Excel
 			$("#dayExport").click(function(event) {
 				var circuitsArray=[];
 				$.each(getCheckedTreeIdArray(), function(key, val) {
@@ -230,31 +229,24 @@ var CircuitPay = (function(){
 				});
 				
 				window.location = "/Circuit/GetExcel?buildId="+$("#buildinglist").val()+
-				"&energyCode="+$('.btn-solar-selected').attr('value')+
 				"&circuits="+circuitsArray.join(',')+
 				"&type="+getTypeByReportSelected()+"&date="+$("#daycalendarBox").val()
-			});
-
+            });
+            
 			$("#treeSearch").click(function(){
 				var inputValue = $("#search-input").val().trim();
 
 				if(inputValue==="")
 					return;
-
 				$("#treeview").treeview('uncheckAll',{silent:true})
-
 				var nodes = EMS.Tool.searchTree($("#treeview"),inputValue);
-
 				if(nodes.length===0){
 					alert("查不到当前回路名称，请重新输入名称！");
 					return;
 				}
-
 				$.each(nodes, function(index, val) {
 					$('#treeview').treeview('checkNode', [ val.nodeId, { silent: true } ]);
 				});
-
-
 				getDataFromServer("/api/MultiRate",{
 					buildId:$("#buildinglist").val(),
 					circuits:getCheckedTreeIdArray().join(','),type:getTypeByReportSelected(),date:$("#daycalendarBox").val()
@@ -263,72 +255,42 @@ var CircuitPay = (function(){
         };
         //根据数据显示表格内容
 		function showTable(data){
-            var times=[];
-			var names=[];
-			var dataList=[];
-            if(data.reportType=="DD"){
+            var dataList = data.data;
+            
+            if(data.reportType=="dd"||data.reportType =="DD"){
 				report="时";
 				$("#dayReportClick").addClass('current');
-				color = '#F08500';
+                color = '#F08500';
+                dataList.map(item =>{
+                    if(item.time != '') {
+                        item.time = item.time.substring(11,13)+'时';
+                    }
+                    return item;
+                })
 			}
-			else if(data.reportType=="MM"){
+			else if(data.reportType=="MM"||data.reportType=="mm"){
                 report="日";
                 $("#monthReportClick").addClass('current');
-				color = '#74B000';
+                color = '#74B000';
+                dataList.map(item =>{
+                    if(item.time != '') {
+                        item.time = item.time.substring(8,10)+'日';
+                    }
+                    return item;
+                })
 			}
-			else {
-				report ="月";
-				color = '#0076D0';
+			else if(data.reportType=='yy'|| data.reportType=="YY") {
+                report ="月";
+                $("#yearReportClick").addClass('current')
+                color = '#0076D0';
+                dataList.map(item =>{
+                    if(item.time != '') {
+                        item.time = item.time.substring(5,7)+'月';
+                    }
+                    return item;
+                })
             }
-            $.each(data.data, function(index, val) {
-				
-				var date = new Date(val.time);
-				var time;
-				switch(data.reportType){
-					case "DD":
-						time = date.getHours();
-					break;
-					case "MM":
-						time = date.getDate();
-					break;
-					case "YY":
-						time = date.getMonth()+1;
-					break;
-				}
-
-				if( $.inArray(time, times)==-1){
-					times.push(time);
-				}
-
-				if( $.inArray(val.name, names) != -1){
-                    
-					dataList[$.inArray(val.name, names)].data.push({time:time,value:val.value.toFixed(2)});
-				}else{
-					names.push(val.name);
-					dataList.push({name:val.name,paramName:val.paramName,data:[{time:time,value:val.value.toFixed(2)}]});
-				}
-            });
-            var columns = [{field:'name',title:'回路名称'},{field:'paramName',title:'分类名称'}];
-            var rows =[];
-
-			$.each(times, function(index, val) {
-				columns.push({field:val,title:EMS.Tool.appendZero(val)+report});
-            });
-            var totalRow={};
-            $.each(dataList, function(index, val) {
-				var row={};
-				row.name = val.name;
-                row.paramName = val.paramName
-                $.each(val.data, function(key,value){
-					row[value.time] = value.value;
-				});
-				rows.push(row);
-            });
-            rows.push(totalRow);
-
-          
-            $("#dayReport").html('<table></table>');
-			var windowWidth = $(window).width();
+            var windowWidth = $(window).width();
 			var totalHeight;
 			if(windowWidth>1024)
 				totalHeight = $("#main-content").height() - 127;
@@ -336,16 +298,48 @@ var CircuitPay = (function(){
 				totalHeight = $(".report-modify").height()-50;
 			else if(windowWidth<=500)
 				totalHeight = $(".report-modify").height()-127;
-			
-			$("#dayReport").height(totalHeight);
-			$("#dayReport>table").attr('data-height',totalHeight);
+            $("#divPivotGrid").height(totalHeight);
+            
 
-			EMS.DOM.showTable($("#dayReport>table"),columns,rows,{striped:true,classes:'table table-border'});
-			$("#dayReport table th").css({
-				'background-color':color,
-				'color':'white'});
-
-			$("thead>tr>th").eq(0).css('minWidth','250px');
+            if(dataList.length!=0){
+                var source =
+                {
+                    localdata: data.data,
+                    datatype: "array",
+                    datafields:
+                    [
+                        { name: 'name', type: 'string' },
+                        { name: 'paramName', type: 'string' },
+                        { name: 'time', type: 'string' },
+                        { name: 'value', type: 'number' },
+                        { name: 'cost', type: 'number' },
+                    ]
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                dataAdapter.dataBind();
+                var pivotAdapter = new $.jqx.pivot(
+                    dataAdapter,
+                    {
+                        pivotValuesOnRows: false,
+                        rows: [{ dataField: 'name' }, { dataField: 'paramName'}],
+                        columns: [{ dataField: 'time' }],
+                        values: [
+                            { dataField: 'cost', 'function': 'sum', text: '电费' },
+                            { dataField: 'value', 'function': 'sum', text: '电量' },
+                        ]
+                 });
+                 $('#divPivotGrid').jqxPivotGrid({
+                    source: pivotAdapter,
+                    treeStyleRows: false,
+                    selectionEnabled: true,
+                });
+                var pivotGrid = $('#divPivotGrid').jqxPivotGrid('getInstance');
+                var pivotRows = pivotGrid.getPivotRows();
+                for(var i=0;i<pivotRows.items.length;i++){
+                    pivotRows.items[i].expand();
+                }
+                pivotGrid.refresh();
+            }
         }
 	};
 
