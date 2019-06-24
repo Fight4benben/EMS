@@ -96,9 +96,12 @@
     <Compile Include="Entities\HistoryValue.cs" />
     <Compile Include="Entities\HourValue.cs" />
     <Compile Include="Entities\AlarmLimitValue.cs" />
+    <Compile Include="Entities\MeterAlarmInfo.cs" />
+    <Compile Include="Entities\MeterAlarmLog.cs" />
     <Compile Include="Entities\MeterParam.cs" />
     <Compile Include="Entities\MeterParamInfo.cs" />
     <Compile Include="Entities\MultiRateData.cs" />
+    <Compile Include="Entities\PageInfo.cs" />
     <Compile Include="Entities\ParamClassify.cs" />
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="IRepository\History\IHistoryParamDbContext.cs" />
     <Compile Include="IRepository\Home\IMapDbContext.cs" />
     <Compile Include="IRepository\Home\IOverAllSearchDbContext.cs" />
+    <Compile Include="IRepository\IMeterAlarmDbContext.cs" />
     <Compile Include="IRepository\Region\IPriceDbContext.cs" />
     <Compile Include="IRepository\Region\IRegionCompareDbContext.cs" />
     <Compile Include="IRepository\Region\IRegionMainDbContext.cs" />
@@ -177,6 +181,7 @@
     <Compile Include="RepositoryImp\Home\MapDbContext.cs" />
     <Compile Include="RepositoryImp\MenuDbContext.cs" />
     <Compile Include="RepositoryImp\Home\OverAllSearchDbContext.cs" />
+    <Compile Include="RepositoryImp\MeterAlarmDbContext.cs" />
     <Compile Include="RepositoryImp\Region\PriceDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
@@ -221,6 +226,7 @@
     <Compile Include="Services\Home\HomeServices.cs" />
     <Compile Include="Services\Home\MapService.cs" />
     <Compile Include="Services\Home\OverAllSearchService.cs" />
+    <Compile Include="Services\MeterAlarmService.cs" />
     <Compile Include="Services\Region\PriceService.cs" />
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
@@ -260,6 +266,7 @@
     <Compile Include="StaticResources\Home\HomeResources.cs" />
     <Compile Include="StaticResources\Home\MapResources.cs" />
     <Compile Include="StaticResources\Home\OverAllSearchResources.cs" />
+    <Compile Include="StaticResources\MeterAlarmResources.cs" />
     <Compile Include="StaticResources\Region\PriceResouces.cs" />
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
@@ -304,6 +311,7 @@
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Home\MapViewModel.cs" />
     <Compile Include="ViewModels\Home\OverAllSearchViewModel.cs" />
+    <Compile Include="ViewModels\MeterAlarmViewModel.cs" />
     <Compile Include="ViewModels\Region\PriceViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionCompareViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionMainViewModel.cs" />
