@@ -53,7 +53,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@EndDate",endDate)
             };
 
-            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByUser, sqlParameters).First();
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByUserTotalPage, sqlParameters).First();
         }
 
         public List<MeterAlarmLog> GetAlarmLogList(string userName, int pageIndex, int pageSize, string beginDate, string endDate)

@@ -197,7 +197,8 @@
     <Compile Include="Controllers\Map\MapController.cs" />
     <Compile Include="Controllers\Item\ItemStatisticController.cs" />
     <Compile Include="Controllers\Map\MapViewController.cs" />
-    <Compile Include="Controllers\MeterAlarmController.cs" />
+    <Compile Include="Controllers\MeterAlarmingController.cs" />
+    <Compile Include="Controllers\MeterAlarmLogController.cs" />
     <Compile Include="Controllers\OverAllSearchController.cs" />
     <Compile Include="Controllers\Region\PriceController.cs" />
     <Compile Include="Controllers\Region\RegionCompareController.cs" />

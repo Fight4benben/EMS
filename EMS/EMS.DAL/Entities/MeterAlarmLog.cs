@@ -22,10 +22,10 @@ namespace EMS.DAL.Entities
         public DateTime AlarmTime { get; set; }
         public int IsConfirm { get; set; }
 
-        public decimal RecoverValue { get; set; }
-        public DateTime RecoverTime { get; set; }
+        public decimal? RecoverValue { get; set; }
+        public DateTime? RecoverTime { get; set; }
         public string ConfirmUser { get; set; }
-        public DateTime ConfirmTime { get; set; }
+        public DateTime? ConfirmTime { get; set; }
         public string Describe { get; set; }
         
 

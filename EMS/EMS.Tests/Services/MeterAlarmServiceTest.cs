@@ -16,7 +16,7 @@ namespace EMS.Tests.Services
         public void TestGetViewModelBy_userName()
         {
             MeterAlarmService service = new MeterAlarmService();
-            var viewModel = service.GetViewModel("Admin");
+            var viewModel = service.GetAlarmingViewModel("Admin");
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
@@ -25,7 +25,7 @@ namespace EMS.Tests.Services
         public void TestGetViewModelBy_userName_Pages()
         {
             MeterAlarmService service = new MeterAlarmService();
-            var viewModel = service.GetViewModel("Admin",3,50);
+            var viewModel = service.GetAlarmingViewModel("Admin",3,50);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
@@ -47,6 +47,26 @@ namespace EMS.Tests.Services
             MeterAlarmService service = new MeterAlarmService();
 
             var viewModel = service.SetConfirmAllMeterAlarm("Admin", "test by admin all");
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
+
+        [TestMethod]
+        public void TestGet_AlarmLog_User()
+        {
+            MeterAlarmService service = new MeterAlarmService();
+
+            var viewModel = service.GetAlarmLogViewModel("Admin");
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
+
+        [TestMethod]
+        public void TestGet_AlarmLog_ByUser_Date()
+        {
+            MeterAlarmService service = new MeterAlarmService();
+
+            var viewModel = service.GetAlarmLogViewModel("Admin","2019-06-22","2019-06-23",1,50);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
