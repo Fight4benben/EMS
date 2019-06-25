@@ -15,6 +15,15 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
+        public int GetIsAlarming(string userName)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName)
+            };
+
+            return _db.Database.SqlQuery<int>(MeterAlarmResources.SELECT_IsAlarming, sqlParameters).First();
+        }
+
         public PageInfo GetPageInfoList(string userName, int pageSize)
         {
             SqlParameter[] sqlParameters ={

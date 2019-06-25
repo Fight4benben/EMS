@@ -13,6 +13,15 @@ namespace EMS.Tests.Services
     public class MeterAlarmServiceTest
     {
         [TestMethod]
+        public void TestGetIsAlarmingBy_userName()
+        {
+            MeterAlarmService service = new MeterAlarmService();
+            var viewModel = service.GetIsAlarming("Admin");
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
+
+        [TestMethod]
         public void TestGetViewModelBy_userName()
         {
             MeterAlarmService service = new MeterAlarmService();
