@@ -340,6 +340,7 @@
     <Content Include="app\js\Alarm\DeviceAlarm.js" />
     <Content Include="app\js\Alarm\DeviceLimitValueAlarm.js" />
     <Content Include="app\js\Alarm\OutOfWork.js" />
+    <Content Include="app\js\Alarm\OverlimitAlarm.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\CircuitPayRate.js" />
@@ -594,6 +595,7 @@
     <Content Include="Assets\plugins\uniform\images\sprite_original.png" />
     <Content Include="Assets\plugins\uniform\jquery.uniform.min.js" />
     <Content Include="Assets\scripts\app.js" />
+    <Content Include="Assets\scripts\bootstrap-pagination.min.js" />
     <Content Include="Assets\scripts\calendar.js" />
     <Content Include="Assets\scripts\Chart.min.js" />
     <Content Include="Assets\scripts\charts.js" />
