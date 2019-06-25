@@ -191,5 +191,9 @@ namespace EMS.DAL.StaticResources
 	                INNER JOIN T_SYS_User_Buildings on T_MA_MeterALarming.F_BuildID=T_SYS_User_Buildings.F_BuildID
 	                INNER JOIN T_SYS_Users on T_SYS_User_Buildings.F_UserName=T_SYS_Users.F_UserName
 	                WHERE T_SYS_Users.F_UserName=@UserName  ";
+
+        public static string SELECT_AlarmType =
+           @"SELECT F_Type ID, F_Name TypeName
+                FROM T_MA_MeterAlarmType ";
     }
 }

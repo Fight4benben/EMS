@@ -9,6 +9,7 @@ namespace EMS.DAL.IRepository
 {
     public interface IMeterAlarmDbContext
     {
+        List<AlarmType> GetAlarmType();
         int GetIsAlarming(string userName);
         PageInfo GetPageInfoList(string userName, int pageSize);
         List<MeterAlarmInfo> GetMeterAlarmingList(string userName, int pageIndex, int pageSize);

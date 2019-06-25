@@ -15,6 +15,11 @@ namespace EMS.DAL.RepositoryImp
     {
         private EnergyDB _db = new EnergyDB();
 
+        public List<AlarmType> GetAlarmType()
+        {
+            return _db.Database.SqlQuery<AlarmType>(MeterAlarmResources.SELECT_AlarmType).ToList();
+        }
+
         public int GetIsAlarming(string userName)
         {
             SqlParameter[] sqlParameters ={

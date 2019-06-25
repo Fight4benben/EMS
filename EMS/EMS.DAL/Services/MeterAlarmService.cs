@@ -127,6 +127,9 @@ namespace EMS.DAL.Services
             string beginDate = DateTime.Now.ToString("yyyy-MM-dd 00:00");
             string endDate = DateTime.Now.ToString("yyyy-MM-dd 23:59");
 
+
+            viewModel.AlarmType = context.GetAlarmType();
+
             viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, pageSize, beginDate, endDate);
             viewModel.PageInfos.CurrentPage = pageIndex;
             viewModel.PageInfos.PageSize = pageSize;
