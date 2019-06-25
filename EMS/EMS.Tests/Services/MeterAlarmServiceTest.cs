@@ -34,7 +34,7 @@ namespace EMS.Tests.Services
         public void TestSetConfirm_MeterAlarm()
         {
             MeterAlarmService service = new MeterAlarmService();
-            string ids = "1309";
+            string ids = "1979";
 
             var viewModel = service.SetConfirmMeterAlarm("Admin", "test by admin", ids);
 
