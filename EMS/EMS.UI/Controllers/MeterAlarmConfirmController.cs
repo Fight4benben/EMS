@@ -9,22 +9,23 @@ using System.Web.Http;
 namespace EMS.UI.Controllers
 {
     [Authorize]
-    public class MeterAlarmingController : ApiController
+    public class MeterAlarmConfirmController : ApiController
     {
         MeterAlarmService service = new MeterAlarmService();
 
         /// <summary>
-        /// 获取登录用户关联的所有报警，（默认第一页，每页100条）
+        /// 确认所有报警
         /// </summary>
+        /// <param name="describe">备注</param>
         /// <returns></returns>
         [HttpGet]
-
-        public object GetMeterAlarming()
+        public object SetConfirmAlarm(string describe)
         {
             try
             {
                 string userName = User.Identity.Name;
-                return service.GetAlarmingViewModel(userName);
+
+                return service.SetConfirmAllMeterAlarm(userName, describe);
             }
             catch (Exception e)
             {
@@ -33,26 +34,30 @@ namespace EMS.UI.Controllers
         }
 
         /// <summary>
-        /// 根据用户名，分页 获取登录用户关联的报警
+        /// 确认选择的报警
         /// </summary>
-        /// <param name="pageIndex">页码（第几页）</param>
-        /// <param name="pageSize">每页显示个数</param>
+        /// <param name="obj">
+        /// ids：报警ID；
+        /// describe：备注
+        /// </param>
         /// <returns></returns>
-        [HttpGet]
-        public object GetMeterAlarming(string pageIndex, string pageSize)
+        [HttpPost]
+        public object SetConfirmAlarm([FromBody] JObject obj)
         {
             try
             {
                 string userName = User.Identity.Name;
 
-                return service.GetAlarmingViewModel(userName, Convert.ToInt32(pageIndex), Convert.ToInt32(pageSize));
+                string ids = obj["ids"].ToString();
+                string describe = obj["describe"].ToString();
+
+                return service.SetConfirmMeterAlarm(userName, describe, ids);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
-
 
     }
 }
