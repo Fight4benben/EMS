@@ -85,10 +85,14 @@
                     }catch(e){
                         console.log(e);
                     }
-                    
                 }
             }
-        }
+        };
+        //一次图名change事件
+        $("#svglist").change(function (){
+
+            getDataFromServer()
+        });
         //定时器
         setInterval(refreshSvg,180000);
         function refreshSvg(){
@@ -103,8 +107,6 @@
 	};
 	return _topology;
 })();
-
-
 
 
 jQuery(document).ready(function ($) {
