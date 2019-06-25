@@ -19,7 +19,7 @@ namespace EMS.UI.Controllers
         /// <param name="describe">备注</param>
         /// <returns></returns>
         [HttpGet]
-        public object SetConfirmAlarm(string describe)
+        public object SetConfirmAlarm(string describe = "")
         {
             try
             {

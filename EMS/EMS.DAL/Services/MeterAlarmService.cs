@@ -31,6 +31,21 @@ namespace EMS.DAL.Services
         }
         */
 
+        public string GetIsAlarming(string userName)
+        {
+            string result = "";
+            if (context.GetIsAlarming(userName) > 0)
+            {
+                result = "IsAlarming:true";
+                return result;
+            }
+            else
+            {
+                result = "IsAlarming:false";
+                return result;
+            }
+        }
+
         public MeterAlarmViewModel GetAlarmingViewModel(string userName, int pageIndex = 1, int pageSize = 100)
         {
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();

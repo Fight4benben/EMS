@@ -8,6 +8,13 @@ namespace EMS.DAL.StaticResources
 {
     public class MeterAlarmResources
     {
+        public static string SELECT_IsAlarming =
+           @"SELECT COUNT(*) TotalNumber 
+	            FROM T_MA_MeterALarming
+	            INNER JOIN T_SYS_User_Buildings on T_MA_MeterALarming.F_BuildID=T_SYS_User_Buildings.F_BuildID
+	            INNER JOIN T_SYS_Users on T_SYS_User_Buildings.F_UserName=T_SYS_Users.F_UserName
+	            WHERE T_SYS_Users.F_UserName=@UserName ";
+
         public static string SELECT_AlarmingMeterTotalPage =
            @"SELECT COUNT(*) TotalNumber,COUNT(*)/@PageSize+1 TotalPage 
 	            FROM T_MA_MeterALarming
@@ -173,9 +180,16 @@ namespace EMS.DAL.StaticResources
 		            AND T_MA_MeterAlarmLog.F_MeterID=T_MA_MeterALarming.F_MeterID
 		            AND T_MA_MeterAlarmLog.F_MeterParamID=T_MA_MeterALarming.F_MeterParamID
 		            AND T_MA_MeterAlarmLog.F_Type=T_MA_MeterALarming.F_Type
-	            WHERE T_MA_MeterAlarmLog.F_IsConfirm =0
+				INNER JOIN T_SYS_User_Buildings on T_MA_MeterALarming.F_BuildID=T_SYS_User_Buildings.F_BuildID
+				INNER JOIN T_SYS_Users on T_SYS_User_Buildings.F_UserName=T_SYS_Users.F_UserName
+	            WHERE T_SYS_Users.F_UserName=@UserName
+				AND T_MA_MeterAlarmLog.F_IsConfirm =0
 	            AND T_MA_MeterAlarmLog.F_ConfirmTime IS NULL
 
-	            DELETE FROM T_MA_MeterALarming  ";
+	            DELETE FROM T_MA_MeterALarming 
+	                FROM T_MA_MeterALarming
+	                INNER JOIN T_SYS_User_Buildings on T_MA_MeterALarming.F_BuildID=T_SYS_User_Buildings.F_BuildID
+	                INNER JOIN T_SYS_Users on T_SYS_User_Buildings.F_UserName=T_SYS_Users.F_UserName
+	                WHERE T_SYS_Users.F_UserName=@UserName  ";
     }
 }

@@ -13,18 +13,30 @@ namespace EMS.UI.Controllers
     {
         MeterAlarmService service = new MeterAlarmService();
 
+
         /// <summary>
         /// 获取登录用户关联的所有报警，（默认第一页，每页100条）
         /// </summary>
+        /// <param name="type"> 
+        /// A:是否有报警
+        /// B:报警信息</param>
         /// <returns></returns>
         [HttpGet]
 
-        public object GetMeterAlarming()
+        public object GetMeterAlarming(string type = "A")
         {
             try
             {
                 string userName = User.Identity.Name;
-                return service.GetAlarmingViewModel(userName);
+                switch (type.ToUpper())
+                {
+                    case "A":
+                        return service.GetIsAlarming(userName);
+                    case "B":
+                        return service.GetAlarmingViewModel(userName);
+                }
+
+                return service.GetIsAlarming(userName);
             }
             catch (Exception e)
             {

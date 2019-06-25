@@ -13,6 +13,15 @@ namespace EMS.Tests.Services
     public class MeterAlarmServiceTest
     {
         [TestMethod]
+        public void TestGetIsAlarmingBy_userName()
+        {
+            MeterAlarmService service = new MeterAlarmService();
+            var viewModel = service.GetIsAlarming("Admin");
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
+
+        [TestMethod]
         public void TestGetViewModelBy_userName()
         {
             MeterAlarmService service = new MeterAlarmService();
@@ -34,7 +43,7 @@ namespace EMS.Tests.Services
         public void TestSetConfirm_MeterAlarm()
         {
             MeterAlarmService service = new MeterAlarmService();
-            string ids = "1309";
+            string ids = "1979";
 
             var viewModel = service.SetConfirmMeterAlarm("Admin", "test by admin", ids);
 
