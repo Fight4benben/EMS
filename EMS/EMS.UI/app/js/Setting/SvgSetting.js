@@ -243,7 +243,7 @@ var SvgSetting=(function(){
             });
         });
         function showBDtable(data){
-            console.log(data)
+
             var columns = [{field:'binded',title:'是否绑定',checkbox:'true'},{field:'name',title:'仪表名称'}];
             var columnparam = [{field:'binded',title:'是否绑定',checkbox:'true'},{field:'name',title:'参数名称'}];
             var tableRows = [];
@@ -264,8 +264,10 @@ var SvgSetting=(function(){
                     row.name = val.name;
                     row.id = val.id;
                     for(var i=0;i<selectMeter.length;i++){
-                        if(selectMeter[i] == val.id){
+                        if(val.id == selectMeter[i]){
                             row.binded = true
+                            tableRows.push(row)
+                            return
                         }else{
                             row.binded = false
                         }
@@ -284,8 +286,10 @@ var SvgSetting=(function(){
                     row.name = val.name;
                     row.id = val.id;
                     for(var i=0;i<selectParams.length;i++){
-                        if(selectParams[i] == val.id){
+                        if(val.id == selectParams[i]){
                             row.binded = true
+                            rows.push(row)
+                            return
                         }else{
                             row.binded = false
                         }
@@ -301,6 +305,7 @@ var SvgSetting=(function(){
         };
         //修改或者绑定数据到对应的一次图：
         $("#bindBtn").click(function(event){
+            var buildId = $("#buildinglist").val();
             var selectRow = selectedInfo;
             var svgId = selectRow.svgId
             var getMeterRows = $("#meterTable").bootstrapTable('getSelections');
@@ -324,7 +329,8 @@ var SvgSetting=(function(){
                 success: function (response) {
                     if(response.flag == true){
                         alert("一次图绑定信息成功！！");
-                        //$("#myModal5").modal('hide')
+                        getDataFromServer("/api/SvgSetting","buildId="+buildId);
+                        $("#myModal5").modal('hide')
                     }
                 }
             });
