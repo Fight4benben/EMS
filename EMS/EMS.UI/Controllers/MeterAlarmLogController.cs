@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace EMS.UI.Controllers
 {
+    [Authorize]
     public class MeterAlarmLogController : ApiController
     {
         MeterAlarmService service = new MeterAlarmService();
