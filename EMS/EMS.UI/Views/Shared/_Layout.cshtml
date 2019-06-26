@@ -106,8 +106,8 @@
     <div class="modal fade bs-example-modal-sm" id="myModalAlarm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-header" style="background:#ffffff">
+            <button type="button" class="close" style="color:black" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <!-- <h5 class="modal-title" id="myModalLabel">事件</h5> -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active" data-id="tabContent1"><a href="#">参数越限</a></li>
@@ -121,9 +121,10 @@
                 <div class="tab-content" id="tabContent2">222</div>
             </div>
                 <!-- <div id="pagination"></div> -->
-                <nav>
+                <nav style="float:left">
                     <ul id="pagination" class="pagination margin-top-10 margin-bottom-10 "></ul>
                 </nav>
+                <button type="button" id="OkAll" class="btn btn-info" style="float:left;margin-left:430px;margin-top:10px">全部确认</button>
             </div>
           </div>
         </div>

@@ -28,5 +28,10 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult AlarmRecord()
+        {
+            return View();
+        }
     }
 }

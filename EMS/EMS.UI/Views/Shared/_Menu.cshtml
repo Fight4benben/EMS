@@ -212,6 +212,10 @@
                         {
                             <li id="deptOutofworkAlarm" class=""><a href="/Alarm/DepartmentOutOfAlarm"><i class="fa fa-caret-right"></i>非工作时段智能报警</a></li>
                         }
+                        @if (menu.Menus.Contains("8.5") || menu.Menus.Contains("all"))
+                        {
+                            <li id="alarmrecord" class=""><a href="/Alarm/AlarmRecord"><i class="fa fa-caret-right"></i>报警记录</a></li>
+                        }
 
                     </ul>
                 </li>
