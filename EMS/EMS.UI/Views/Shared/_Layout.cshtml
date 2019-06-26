@@ -31,6 +31,7 @@
     <link href="~/Assets/plugins/jquery-busyLoading/dist/app.min.css" rel="stylesheet" type="text/css"/>
 
     <link href="~/Assets/plugins/jqx/css/jqx.base.css" rel="stylesheet" type="text/css"/>
+    <link href="~/Assets/plugins/jqueryPagination/jquery.pagination.css" rel="stylesheet" type="text/css"/>
 
 </head>
 <body class="page-header-fixed page-sidebar-fixed page-footer-fixed">
@@ -74,6 +75,7 @@
     <script src="/Assets/plugins/jqx/js/jqxscrollbar.js"></script>
 
     <script src="/Assets/scripts/bootstrap-pagination.min.js" type="text/javascript"></script>
+    <script src="/Assets/plugins/jqueryPagination/jquery.pagination.min.js"></script>
     @RenderPage("~/Views/Shared/_Header.cshtml")
     <div class="clearfix"></div>
 
@@ -98,7 +100,7 @@
     <div class="footer" align="center">
         <div class="footer-inner">@DateTime.Now.Year &copy;Acrel</div>
         <div class="footer-tools">
-            <span class="go-top" data-toggle="modal"><i class="fa fa-angle-up"></i></span>
+            <span class="go-top" id="ImgClick" data-toggle="modal"><img id="AlarmImgID" src="/Assets/img/jing.png"/></span>
         </div>
     </div>
 
@@ -124,7 +126,7 @@
                 <nav style="float:left">
                     <ul id="pagination" class="pagination margin-top-10 margin-bottom-10 "></ul>
                 </nav>
-                <button type="button" id="OkAll" class="btn btn-info" style="float:left;margin-left:430px;margin-top:10px">全部确认</button>
+                <button type="button" id="OkAll" class="btn btn-info" style="float:left;margin-left:0%;margin-top:10px">全部确认</button>
             </div>
           </div>
         </div>

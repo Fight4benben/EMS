@@ -334,6 +334,7 @@
     <Content Include="app\img\water2.png" />
     <Content Include="app\img\year1.png" />
     <Content Include="app\img\year2.png" />
+    <Content Include="app\js\Alarm\AlarmRecord.js" />
     <Content Include="app\js\Alarm\DepartmentAlarm.js" />
     <Content Include="app\js\Alarm\DepartmentLimitValueAlarm.js" />
     <Content Include="app\js\Alarm\DepartmentOutofWork.js" />
@@ -433,6 +434,7 @@
     <Content Include="Assets\img\bg\2.jpg" />
     <Content Include="Assets\img\bg\3.jpg" />
     <Content Include="Assets\img\bg\4.jpg" />
+    <Content Include="Assets\img\dong.gif" />
     <Content Include="Assets\img\hor-menu-red-arrow.png" />
     <Content Include="Assets\img\hor-menu-search-close-white.png" />
     <Content Include="Assets\img\hor-menu-search-close.png" />
@@ -444,6 +446,7 @@
     <Content Include="Assets\img\icon-img-up.png" />
     <Content Include="Assets\img\inbox-nav-arrow-blue.png" />
     <Content Include="Assets\img\input-spinner.gif" />
+    <Content Include="Assets\img\jing.png" />
     <Content Include="Assets\img\loading.gif" />
     <Content Include="Assets\img\lock.png" />
     <Content Include="Assets\img\login-phone.jpg" />
@@ -539,6 +542,8 @@
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.css" />
     <Content Include="Assets\plugins\jquery-busyLoading\dist\app.min.js" />
     <Content Include="Assets\plugins\jquery-busyLoading\fonts\icomoon.svg" />
+    <Content Include="Assets\plugins\jqueryPagination\jquery.pagination.css" />
+    <Content Include="Assets\plugins\jqueryPagination\jquery.pagination.min.js" />
     <Content Include="Assets\plugins\jqx\css\images\icon-down.png" />
     <Content Include="Assets\plugins\jqx\css\images\icon-left.png" />
     <Content Include="Assets\plugins\jqx\css\images\icon-menu-small.png" />

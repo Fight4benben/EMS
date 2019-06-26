@@ -11,7 +11,8 @@ var test = {
             success: function (response) {
                 if(response.state == 0){
                     console.log($('#'+id))
-                    $('#'+id).text("已确认")
+                    $('#'+id).text("已确认");
+                    $('#'+id).attr('class','btn btn-info')
                 }
             }
         });
@@ -106,18 +107,15 @@ var OverAlarm = (function(){
 
         };
         function  showPagtion(data){
-            BootstrapPagination($("#pagination"), {
-                layoutScheme: "prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage",
-                total: data.totalNumber,
-                pageSize: data.pageSize,
-                pageIndex: data.currentPage,
-                pageGroupSize: 5,
-                // pageInputTimeout: 800,
-                // pageSizeList: [5, 10, 20, 50, 100],
-                //当分页更改后引发此事件。
-                pageChanged: function (pageIndex, pageSize) {
+            
+            $("#pagination").pagination({
+                currentPage:data.currentPage,
+                totalPage:data.totalPage,
+                isShow:false,
+                count:10,
+                callback: function(current) {
                     var url = "/api/MeterAlarming";
-                    var pageIndex = pageIndex;
+                    var pageIndex = current;
                     var params =  "&pageIndex="+pageIndex+"&pageSize="+10;
                     $.ajax({
                         type :"GET",
@@ -133,7 +131,7 @@ var OverAlarm = (function(){
                             showData(data);
                     }
                 }
-            });
+            })
         }
         //确认全部
         $("#OkAll").click(function(){
@@ -151,8 +149,10 @@ var OverAlarm = (function(){
         setInterval(refreshAlarm,60000);
         function refreshAlarm(){
             $.getJSON(url,"",function(data){
-                if(data.IsAlarming == true)
-                    return
+                if(data==='IsAlarming:true')
+                    $("#AlarmImgID").attr('src','/Assets/img/dong.gif');
+                else
+                    $("#AlarmImgID").attr('src','/Assets/img/jing.png');
             })
         }
 	};
@@ -165,4 +165,15 @@ var OverAlarm = (function(){
 jQuery(document).ready(function($) {
 
     var overAlarm = new OverAlarm();
+     //定时任务
+     setTimeout(checkAlarm,1000);
+     function checkAlarm(){
+        var url = '/api/MeterAlarmConfirm';
+        $.getJSON(url,"",function(data){
+            if(data==='IsAlarming:true')
+                $("#AlarmImgID").attr('src','/Assets/img/dong.gif');
+            else
+                $("#AlarmImgID").attr('src','/Assets/img/jing.png');
+        })
+     }
 });
