@@ -121,6 +121,80 @@ namespace EMS.DAL.RepositoryImp
 
 
         /// <summary>
+        /// 根据 报警类型， 获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="alarmType"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public PageInfo GetAlarmLogByAlarmTypePageInfo(string userName, string alarmType, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@AlarmType",alarmType),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByAlarmTypeTotalPage, sqlParameters).First();
+        }
+
+        public List<MeterAlarmLog> GetAlarmLogByAlarmTypeList(string userName, string alarmType, int pageIndex, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@AlarmType",alarmType),
+                new SqlParameter("@PageIndex",pageIndex),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<MeterAlarmLog>(MeterAlarmResources.SELECT_AlarmLogByAlarmType, sqlParameters).ToList();
+        }
+
+        /// <summary>
+        /// 根据 建筑ID，报警类型，获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="alarmType"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public PageInfo GetAlarmLogByBuildIDAlarmTypePageInfo(string userName, string buildID, string alarmType, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                  new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@AlarmType",alarmType),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<PageInfo>(MeterAlarmResources.SELECT_AlarmLogByBuildIDAlarmTypeTotalPage, sqlParameters).First();
+        }
+        public List<MeterAlarmLog> GetAlarmLogByBuildIDAlarmTypeList(string userName, string buildID, string alarmType, int pageIndex, int pageSize, string beginDate, string endDate)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@UserName",userName),
+                new SqlParameter("@BuildID",buildID),
+                new SqlParameter("@AlarmType",alarmType),
+                new SqlParameter("@PageIndex",pageIndex),
+                new SqlParameter("@PageSize",pageSize),
+                new SqlParameter("@BeginDate",beginDate),
+                new SqlParameter("@EndDate",endDate)
+            };
+
+            return _db.Database.SqlQuery<MeterAlarmLog>(MeterAlarmResources.SELECT_AlarmLogByBuildIDAlarmType, sqlParameters).ToList();
+        }
+
+
+        /// <summary>
         /// 根据 用户，建筑ID，仪表ID,获取报警记录
         /// </summary>
         /// <param name="userName"></param>

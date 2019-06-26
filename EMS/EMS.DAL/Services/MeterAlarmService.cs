@@ -13,10 +13,12 @@ namespace EMS.DAL.Services
     public class MeterAlarmService
     {
         private IMeterAlarmDbContext context;
+        private ITreeViewDbContext tvContext;
 
         public MeterAlarmService()
         {
             context = new MeterAlarmDbContext();
+            tvContext = new TreeViewDbContext();
         }
 
         /*
@@ -121,61 +123,23 @@ namespace EMS.DAL.Services
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public MeterAlarmViewModel GetAlarmLogViewModel(string userName, int pageIndex = 1, int pageSize = 100)
+        public MeterAlarmViewModel GetAlarmLogViewModel(string userName)
         {
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
+
+            int pageIndex = 1;
+            int pageSize = 100;
             string beginDate = DateTime.Now.ToString("yyyy-MM-dd 00:00");
             string endDate = DateTime.Now.ToString("yyyy-MM-dd 23:59");
-
-
+            string buildID = "";
+            viewModel.Builds = tvContext.GetBuildsByUserName(userName);
             viewModel.AlarmType = context.GetAlarmType();
 
-            viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, pageSize, beginDate, endDate);
-            viewModel.PageInfos.CurrentPage = pageIndex;
-            viewModel.PageInfos.PageSize = pageSize;
+            if (viewModel.Builds.Count > 0)
+            {
+                buildID = viewModel.Builds.First().BuildID;
+            }
 
-            viewModel.AlarmLogs = context.GetAlarmLogList(userName, pageIndex, pageSize, beginDate, endDate);
-
-            return viewModel;
-        }
-
-
-        /// <summary>
-        /// 根据用户和时间，获取报警记录
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="beginDate"></param>
-        /// <param name="endDate"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public MeterAlarmViewModel GetAlarmLogViewModel(string userName, string beginDate, string endDate, int pageIndex = 1, int pageSize = 100)
-        {
-            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
-
-            viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, pageSize, beginDate, endDate);
-            viewModel.PageInfos.CurrentPage = pageIndex;
-            viewModel.PageInfos.PageSize = pageSize;
-
-            viewModel.AlarmLogs = context.GetAlarmLogList(userName, pageIndex, pageSize, beginDate, endDate);
-
-            return viewModel;
-        }
-
-
-        /// <summary>
-        /// 根据 用户、建筑ID ，获取报警记录
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="buildID"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        public MeterAlarmViewModel GetAlarmLogViewModel(string userName, string buildID, int pageIndex = 1, int pageSize = 100)
-        {
-            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
-            string beginDate = DateTime.Now.ToString("yyyy-MM-dd 00:00");
-            string endDate = DateTime.Now.ToString("yyyy-MM-dd 23:59");
 
             viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, buildID, pageSize, beginDate, endDate);
             viewModel.PageInfos.CurrentPage = pageIndex;
@@ -200,6 +164,8 @@ namespace EMS.DAL.Services
         {
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
 
+            viewModel.AlarmType = context.GetAlarmType();
+
             viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, buildID, pageSize, beginDate, endDate);
             viewModel.PageInfos.CurrentPage = pageIndex;
             viewModel.PageInfos.PageSize = pageSize;
@@ -208,6 +174,91 @@ namespace EMS.DAL.Services
 
             return viewModel;
         }
+
+        /// <summary>
+        /// 根据建筑ID，报警类型,获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="buildID"></param>
+        /// <param name="alarmType"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public MeterAlarmViewModel GetAlarmLogViewModel(string userName, string buildID, string alarmType, string beginDate, string endDate, int pageIndex = 1, int pageSize = 100)
+        {
+            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
+
+            viewModel.Builds = tvContext.GetBuildsByUserName(userName);
+            viewModel.AlarmType = context.GetAlarmType();
+
+            viewModel.PageInfos = context.GetAlarmLogByBuildIDAlarmTypePageInfo(userName, buildID, alarmType, pageSize, beginDate, endDate);
+            viewModel.PageInfos.CurrentPage = pageIndex;
+            viewModel.PageInfos.PageSize = pageSize;
+
+            viewModel.AlarmLogs = context.GetAlarmLogByBuildIDAlarmTypeList(userName, buildID, alarmType, pageIndex, pageSize, beginDate, endDate);
+
+            return viewModel;
+        }
+
+
+
+        /// <summary>
+        /// 根据报警类型，获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="alarmType"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public MeterAlarmViewModel GetAlarmLogViewModelByAlarmType(string userName, string alarmType, string beginDate, string endDate, int pageIndex = 1, int pageSize = 100)
+        {
+            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
+
+            viewModel.Builds = tvContext.GetBuildsByUserName(userName);
+            viewModel.AlarmType = context.GetAlarmType();
+
+            viewModel.PageInfos = context.GetAlarmLogByAlarmTypePageInfo(userName, alarmType, pageSize, beginDate, endDate);
+            viewModel.PageInfos.CurrentPage = pageIndex;
+            viewModel.PageInfos.PageSize = pageSize;
+
+            viewModel.AlarmLogs = context.GetAlarmLogByAlarmTypeList(userName, alarmType, pageIndex, pageSize, beginDate, endDate);
+
+            return viewModel;
+        }
+
+
+        /// <summary>
+        /// 根据建筑ID，报警类型,获取报警记录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="buildID"></param>
+        /// <param name="alarmType"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public MeterAlarmViewModel GetAlarmLogViewModelByAlarmType(string userName, string buildID, string alarmType, string beginDate, string endDate, int pageIndex = 1, int pageSize = 100)
+        {
+            MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
+
+            viewModel.Builds = tvContext.GetBuildsByUserName(userName);
+            viewModel.AlarmType = context.GetAlarmType();
+
+            viewModel.PageInfos = context.GetAlarmLogByBuildIDAlarmTypePageInfo(userName, buildID, alarmType, pageSize, beginDate, endDate);
+            viewModel.PageInfos.CurrentPage = pageIndex;
+            viewModel.PageInfos.PageSize = pageSize;
+
+            viewModel.AlarmLogs = context.GetAlarmLogByBuildIDAlarmTypeList(userName, buildID, alarmType, pageIndex, pageSize, beginDate, endDate);
+
+            return viewModel;
+        }
+
+
 
         /// <summary>
         /// 根据用户，建筑ID，仪表ID，获取报警记录
