@@ -85,7 +85,7 @@ namespace EMS.Tests.Services
         {
             MeterAlarmService service = new MeterAlarmService();
 
-            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2","2019-06-22", "2019-06-26", 1, 50);
+            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2","2019-06-26", "2019-06-26", 1, 50);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
