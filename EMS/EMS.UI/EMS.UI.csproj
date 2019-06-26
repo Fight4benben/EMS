@@ -759,6 +759,7 @@
     <Content Include="Views\Home\SvgView.cshtml" />
     <Content Include="Views\Setting\SvgSetting.cshtml" />
     <Content Include="Views\Circuit\MultiRate.cshtml" />
+    <Content Include="Views\Alarm\AlarmRecord.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

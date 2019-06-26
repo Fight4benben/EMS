@@ -1,12 +1,28 @@
+var test = {
+    click:function(id){
 
+        var url = '/api/MeterAlarmConfirm';
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {ids:id,
+                describe:'',
+                },
+            success: function (response) {
+                if(response.state == 0){
+                    console.log($('#'+id))
+                    $('#'+id).text("已确认")
+                }
+            }
+        });
+    }
+}
 var OverAlarm = (function(){
 
     function _overAlarm(){
         var url = "/api/MeterAlarming";
         var params = "&pageIndex="+1+"&pageSize="+10;
-        this.show = function(){
-            
-        }
+        var ids = [];
         $('.go-top').click(function(){
 
             $(".go-top").attr('data-target','#myModalAlarm');
@@ -64,6 +80,7 @@ var OverAlarm = (function(){
             if(data.data!=null && data.data.length>0){
                 $.each(data.data, function (index, val) { 
                      var row = {};
+                     ids.push(val.id)
                      row.id = val.id;
                      row.buildName = val.buildName;
                      row.meterName = val.meterName;
@@ -73,7 +90,7 @@ var OverAlarm = (function(){
                      row.alarmTime = val.alarmTime;
                      row.alarmValue = val.alarmValue
                      if(val.isConfirm == 0){
-                         row.isConfirm = '<button class="btn btn-warning " value="'+ val.id +'">确认</button>';
+                         row.isConfirm = '<button class="btn btn-warning " id="'+ val.id +'" onClick="test.click(\''+val.id+'\')">确认</button>';
                      }
                      tableRows.push(row)
                 });
@@ -86,6 +103,7 @@ var OverAlarm = (function(){
             EMS.DOM.showTable($("#tabContent1>table"),columns,tableRows,{striped:true,classes:'table table-border'});
 
             showPagtion(data.pageInfos);
+
         };
         function  showPagtion(data){
             BootstrapPagination($("#pagination"), {
@@ -117,10 +135,25 @@ var OverAlarm = (function(){
                 }
             });
         }
+        //确认全部
+        $("#OkAll").click(function(){
+            var allIDs = ids.join(',');
+            var url = '/api/MeterAlarmConfirm';
+            $.getJSON(url,allIDs,function(data){
+               if(data.state == 0){
+                   for(var i=0;i<ids.length;i++){
+                    $('#'+ids[i]).text("已确认")
+                   }  
+               }
+            })
+        })
         //定时任务
-        setInterval(refreshAlarm,5000);
+        setInterval(refreshAlarm,60000);
         function refreshAlarm(){
-            
+            $.getJSON(url,"",function(data){
+                if(data.IsAlarming == true)
+                    return
+            })
         }
 	};
 	return _overAlarm;
@@ -132,5 +165,4 @@ var OverAlarm = (function(){
 jQuery(document).ready(function($) {
 
     var overAlarm = new OverAlarm();
-    overAlarm.show();
 });
