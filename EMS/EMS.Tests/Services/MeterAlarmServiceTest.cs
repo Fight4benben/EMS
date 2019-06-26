@@ -71,11 +71,21 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
-        public void TestGet_AlarmLog_ByUser_Date()
+        public void TestGet_AlarmLog_ByUser_BuildID()
         {
             MeterAlarmService service = new MeterAlarmService();
 
-            var viewModel = service.GetAlarmLogViewModel("Admin","2019-06-22","2019-06-23",1,50);
+            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2019-06-22", "2019-06-26", 1, 50);
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
+
+        [TestMethod]
+        public void TestGet_AlarmLog_ByUser_BuildID_AlarmType()
+        {
+            MeterAlarmService service = new MeterAlarmService();
+
+            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2","2019-06-22", "2019-06-26", 1, 50);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }

@@ -199,7 +199,6 @@
     <Compile Include="Controllers\Map\MapViewController.cs" />
     <Compile Include="Controllers\MeterAlarmConfirmController.cs" />
     <Compile Include="Controllers\MeterAlarmingController.cs" />
-    <Compile Include="Controllers\MeterAlarmLogByAlarmTypeController.cs" />
     <Compile Include="Controllers\MeterAlarmLogController.cs" />
     <Compile Include="Controllers\OverAllSearchController.cs" />
     <Compile Include="Controllers\Region\PriceController.cs" />

@@ -132,6 +132,7 @@ namespace EMS.DAL.Services
             string beginDate = DateTime.Now.ToString("yyyy-MM-dd 00:00");
             string endDate = DateTime.Now.ToString("yyyy-MM-dd 23:59");
             string buildID = "";
+
             viewModel.Builds = tvContext.GetBuildsByUserName(userName);
             viewModel.AlarmType = context.GetAlarmType();
 
@@ -164,8 +165,6 @@ namespace EMS.DAL.Services
         {
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
 
-            viewModel.AlarmType = context.GetAlarmType();
-
             viewModel.PageInfos = context.GetAlarmLogPageInfo(userName, buildID, pageSize, beginDate, endDate);
             viewModel.PageInfos.CurrentPage = pageIndex;
             viewModel.PageInfos.PageSize = pageSize;
@@ -189,9 +188,6 @@ namespace EMS.DAL.Services
         public MeterAlarmViewModel GetAlarmLogViewModel(string userName, string buildID, string alarmType, string beginDate, string endDate, int pageIndex = 1, int pageSize = 100)
         {
             MeterAlarmViewModel viewModel = new MeterAlarmViewModel();
-
-            viewModel.Builds = tvContext.GetBuildsByUserName(userName);
-            viewModel.AlarmType = context.GetAlarmType();
 
             viewModel.PageInfos = context.GetAlarmLogByBuildIDAlarmTypePageInfo(userName, buildID, alarmType, pageSize, beginDate, endDate);
             viewModel.PageInfos.CurrentPage = pageIndex;
