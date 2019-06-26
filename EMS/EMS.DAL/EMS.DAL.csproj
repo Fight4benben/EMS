@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Entities\AlarmFreeTime.cs" />
     <Compile Include="Entities\AlarmTempValue.cs" />
+    <Compile Include="Entities\AlarmType.cs" />
     <Compile Include="Entities\BuildExtendInfo.cs" />
     <Compile Include="Entities\BuildInfo.cs" />
     <Compile Include="Entities\BuildMap.cs" />

@@ -1,4 +1,5 @@
-﻿using EMS.DAL.ViewModels;
+﻿using EMS.DAL.Entities;
+using EMS.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,10 @@ namespace EMS.DAL.IRepository
         List<TreeViewModel> GetRegionTreeViewList(string buildId);
         List<TreeViewModel> GetRegionTreeViewList(string buildId, string energyItemCode);
         string[] GetRegionIDs(string buildId);
+
+        //获取建筑列表
+        List<BuildViewModel> GetBuildsByUserName(string userName);
+        //获取分类能耗
+        List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId);
     }
 }

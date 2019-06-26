@@ -14,6 +14,27 @@ namespace EMS.DAL.RepositoryImp
     public class TreeViewDbContext:ITreeViewDbContext
     {
         private EnergyDB _db = new EnergyDB();
+
+        /// <summary>
+        /// 根据当前登录用户获取建筑列表
+        /// </summary>
+        /// <param name="userName">登陆用户名</param>
+        /// <returns>建筑列表</returns>
+        public List<BuildViewModel> GetBuildsByUserName(string userName)
+        {
+            return _db.Database.SqlQuery<BuildViewModel>(SharedResources.BuildListSQL, new SqlParameter("@UserName", userName)).ToList();
+        }
+
+        /// <summary>
+        /// 根据建筑ID ，获取该建筑关联的分类能耗
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <returns></returns>
+        public List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId)
+        {
+            return _db.Database.SqlQuery<EnergyItemDict>(SharedResources.EnergyItemDictSQL, new SqlParameter("@BuildId", buildId)).ToList();
+        }
+
         /// <summary>
         /// 获取部门树状结构
         /// </summary>
