@@ -23,5 +23,15 @@ namespace EMS.Tests.DbContext
             List<TreeViewModel> treeViewModel = context.GetDepartmentTreeViewList("000001G001","01000");
             Console.WriteLine( UtilTest.GetJson(treeViewModel));
         }
+
+        [TestMethod]
+        public void TestGetCircuitTreeView()
+        {
+            ITreeViewDbContext context = new TreeViewDbContext();
+
+            var treeViewModel = context.GetCircuitTreeListViewModel("000001G001", "01000");
+
+            Console.WriteLine(UtilTest.GetJson(treeViewModel));
+        }
     }
 }

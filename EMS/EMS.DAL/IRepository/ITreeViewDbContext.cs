@@ -21,5 +21,7 @@ namespace EMS.DAL.IRepository
         List<BuildViewModel> GetBuildsByUserName(string userName);
         //获取分类能耗
         List<EnergyItemDict> GetEnergyItemDictByBuild(string buildId);
+        //获取支路树状结构
+        List<TreeViewModel> GetCircuitTreeListViewModel(string buildId, string energyCode);
     }
 }

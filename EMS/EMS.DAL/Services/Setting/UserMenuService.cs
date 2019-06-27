@@ -47,7 +47,7 @@ namespace EMS.DAL.Services
             }
             else
             {
-                string[] adminMenuArray = admin.Menus.Split('|');
+                string[] adminMenuArray = admin.Menus.ToUpper().Split('|');
                 foreach (var menuId in adminMenuArray)
                 {
                     if (menuInfo.Exists(x => x.MenuID.Equals(menuId)))
@@ -91,7 +91,7 @@ namespace EMS.DAL.Services
                 }
                 else
                 {
-                    userMenuList.AddRange(userM.Menus.Split('|'));
+                    userMenuList.AddRange( userM.Menus.ToUpper().Split('|'));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace EMS.DAL.Services
         {
             ResultState resultState = new ResultState();
 
-            int result = context.SetUserMenu(userID, menuIDs);
+            int result = context.SetUserMenu(userID, menuIDs.ToUpper());
 
             if (result > 0)
             {
