@@ -146,6 +146,7 @@
     <Compile Include="Services\MeterAlarmServiceTest.cs" />
     <Compile Include="Services\MeterConnectStateServiceTest.cs" />
     <Compile Include="Services\MultiRateServiceTest.cs" />
+    <Compile Include="Services\NoWorkDayServiceTest.cs" />
     <Compile Include="Services\OverAllSearchServerTest.cs" />
     <Compile Include="Services\PriceServiceTest.cs" />
     <Compile Include="Services\RegionCompareServiceTest.cs" />

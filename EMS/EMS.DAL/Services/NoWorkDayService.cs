@@ -32,7 +32,11 @@ namespace EMS.DAL.Services
             IHomeDbContext homeContext = new HomeDbContext();
             List<BuildViewModel> builds = homeContext.GetBuildsByUserName(userName);
 
-            string buildID = builds.First().BuildID;
+            string buildID = "";
+            if (builds.Count > 0)
+            {
+                buildID = builds.First().BuildID;
+            }
 
 
             List<EnergyItemDict> energys = tvcontext.GetEnergyItemDictByBuild(buildID);

@@ -20,9 +20,17 @@ namespace EMS.UI.Controllers.Circuit
         /// <returns></returns>
         public object GetReport()
         {
-            string userName = User.Identity.Name;
+            try
+            {
+                string userName = User.Identity.Name;
 
-            return service.GetViewModel(userName);
+                return service.GetViewModel(userName);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
         }
 
         /// <summary>
@@ -32,9 +40,16 @@ namespace EMS.UI.Controllers.Circuit
         /// <returns></returns>
         public object GetReport(string buildId)
         {
-            string userName = User.Identity.Name;
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.GetViewModel(userName, buildId);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
 
-            return service.GetViewModel(userName, buildId);
         }
 
         /// <summary>
@@ -46,19 +61,36 @@ namespace EMS.UI.Controllers.Circuit
         /// <returns>返回：复费率报表</returns>
         public object GetReport(string buildId, string type, string date)
         {
-            return service.GetViewModel(buildId, type, date);
+            try
+            {
+                return service.GetViewModel(buildId, type, date);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
         }
-        
+
 
         [HttpPost]
         public object Report([FromBody] JObject obj)
         {
-            string buildId = obj["buildId"].ToString();
-            string type = obj["type"].ToString();
-            string date = obj["date"].ToString();
-            string circuits = obj["circuits"].ToString();
+            try
+            {
+                string buildId = obj["buildId"].ToString();
+                string type = obj["type"].ToString();
+                string date = obj["date"].ToString();
+                string circuits = obj["circuits"].ToString();
 
-            return service.GetViewModel(buildId, type, date, circuits);
+                return service.GetViewModel(buildId, type, date, circuits);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+
         }
 
     }

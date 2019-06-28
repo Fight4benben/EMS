@@ -200,6 +200,7 @@
     <Compile Include="Controllers\MeterAlarmConfirmController.cs" />
     <Compile Include="Controllers\MeterAlarmingController.cs" />
     <Compile Include="Controllers\MeterAlarmLogController.cs" />
+    <Compile Include="Controllers\NoWorkDayController.cs" />
     <Compile Include="Controllers\OverAllSearchController.cs" />
     <Compile Include="Controllers\Region\PriceController.cs" />
     <Compile Include="Controllers\Region\RegionCompareController.cs" />
