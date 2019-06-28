@@ -36,6 +36,31 @@ namespace EMS.DAL.RepositoryImp
         }
 
         /// <summary>
+        /// 根据建筑ID，和能源类型获取树状结构
+        /// </summary>
+        /// <param name="buildId">建筑ID</param>
+        /// <param name="energyItemCode">能源类型</param>
+        /// <returns>树状结构</returns>
+        public List<TreeViewModel> GetCircuitTreeListViewModel(string buildId, string energyCode)
+        {
+
+            List<TreeViewModel> treeViewModel = new List<TreeViewModel>();
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@EnergyItemCode",energyCode)
+            };
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.CircuitTreeViewByBuildIDEnergyCode_SQL, sqlParameters).ToList();
+
+           
+            treeViewModel = EMS.DAL.Utils.Util.GetTreeViewModel(treeViewInfos);
+
+            return treeViewModel;
+
+        }
+
+
+
+        /// <summary>
         /// 获取部门树状结构
         /// </summary>
         /// <param name="buildId"></param>
@@ -47,7 +72,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EnergyItemCode",energyCode)
             };
-            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildIDSQL, sqlParameters).ToList();
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildID_SQL, sqlParameters).ToList();
 
             //var parentItemCodes = treeViewInfos.Where(c => (c.ParentID == "-1"));
             //foreach (var parentItem in parentItemCodes)
@@ -77,7 +102,7 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildID",buildId),
                 new SqlParameter("@EnergyItemCode",energyCode)
             };
-            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildIDSQL, sqlParameters).ToList();
+            List<TreeViewInfo> treeViewInfos = _db.Database.SqlQuery<TreeViewInfo>(TreeViewResources.DepartmentTreeViewByBuildID_SQL, sqlParameters).ToList();
 
             return GetIDs(treeViewInfos);
         }
@@ -124,7 +149,7 @@ namespace EMS.DAL.RepositoryImp
             return treeViewList;
         }
 
-        List<TreeViewModel> GetChildrenNodes(List<EMS.DAL.Entities.CircuitList> circuits, EMS.DAL.Entities.CircuitList circuit)
+        List<TreeViewModel> GetChildrenNodes(List<CircuitList> circuits, CircuitList circuit)
         {
             string parentId = circuit.CircuitId;
             List<TreeViewModel> circuitList = new List<TreeViewModel>();
