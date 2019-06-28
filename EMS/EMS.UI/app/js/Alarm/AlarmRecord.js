@@ -6,7 +6,6 @@ var AlarmRecord = (function(){
 			initDateTime();
             initButton();
 			var url = "/api/MeterAlarmLog";
-
 			getDataFromServer(url,"");
         };
         
@@ -19,7 +18,8 @@ var AlarmRecord = (function(){
 				var url = "/api/MeterAlarmLog";
 
 				var params = "buildID="+$("#buildinglist").val()+"&beginDate="+
-				$("#StartdaycalendarBox").val()+"&endDate="+$("#EnddaycalendarBox").val();
+                $("#StartdaycalendarBox").val()+"&endDate="+$("#EnddaycalendarBox").val()+
+                "&alarmType="+$("#alarmTypeList").val()+"&pageIndex="+1+"&pageSize="+50;
 
 				getDataFromServer(url,params);
 			});
@@ -28,8 +28,9 @@ var AlarmRecord = (function(){
 			EMS.Loading.show();
 			$.getJSON(url,params, function(data) {
 				try{
-					showBuilds(data);
-					showTable(data);
+                    showBuilds(data);
+                    showalarmType(data)
+                    showTable(data);
 				}catch(exception){
 
 				}finally{
@@ -46,9 +47,26 @@ var AlarmRecord = (function(){
 			if(!data.hasOwnProperty('builds'))
 				return;
 
-			EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+            EMS.DOM.initSelect(data.builds,$("#buildinglist"),"buildName","buildID");
+            
+            $("#buildinglist").change(function(event) {
+				var buildId = $("#buildinglist").val();
+                getDataFromServer("/api/MeterAlarmLog","buildID="+buildId+"&alarmType="+$("#alarmTypeList").val()+
+                "&beginDate="+$("#StartdaycalendarBox").val()+"&endDate="+$("#EnddaycalendarBox").val()+"&pageIndex="+1+"&pageSize="+50);
+			});
         }
+        function showalarmType(data){
+            if(!data.hasOwnProperty('alarmType'))
+				return;
 
+            EMS.DOM.initSelect(data.alarmType,$("#alarmTypeList"),"typeName","id");
+            
+            $("#alarmTypeList").change(function(event) {
+				var buildId = $("#buildinglist").val();
+                getDataFromServer("/api/MeterAlarmLog","buildID="+buildId+"&alarmType="+$("#alarmTypeList").val()+
+                "&beginDate="+$("#StartdaycalendarBox").val()+"&endDate="+$("#EnddaycalendarBox").val()+"&pageIndex="+1+"&pageSize="+50);
+			});
+        }
         function showTable(data){
 
             var columns=[
@@ -93,8 +111,12 @@ var AlarmRecord = (function(){
                 count:10,
                 callback: function(current) {
                     var url = "/api/MeterAlarmLog";
+                    var buildID = $("#buildinglist").val();
+                    var alarmType =$("#alarmTypeList").val();
+                    var beginDate = $("#StartdaycalendarBox").val();
+                    var endDate = $("#EnddaycalendarBox").val();
                     var pageIndex = current;
-                    var params =  "&pageIndex="+pageIndex+"&pageSize="+100;
+                    var params ="buildID="+buildID+"&alarmType="+alarmType+"&beginDate="+beginDate+"&endDate="+endDate+"&pageIndex="+pageIndex+"&pageSize="+50;
                     $.ajax({
                         type :"GET",
                         url :url,
