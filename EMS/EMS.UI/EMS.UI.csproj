@@ -766,6 +766,7 @@
     <Content Include="Views\Setting\SvgSetting.cshtml" />
     <Content Include="Views\Circuit\MultiRate.cshtml" />
     <Content Include="Views\Alarm\AlarmRecord.cshtml" />
+    <Content Include="Views\Circuit\NoWorkDay.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
