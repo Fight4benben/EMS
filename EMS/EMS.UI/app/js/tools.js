@@ -131,6 +131,9 @@ var EMS = {
 				case "THREEDAYAGO":
 					getTypeDate=EMS.Tool.dateFormat(new Date(year,month,dateOfMonth-2));
 				break;
+				case "FIRSTDAY":
+					getTypeDate =year +"-"+EMS.Tool.appendZero(month+1) +"-"+ '01';
+				break;
 				case "YEARMONTH":
 					getTypeDate =year +"-"+EMS.Tool.appendZero(month+1);
 				break;

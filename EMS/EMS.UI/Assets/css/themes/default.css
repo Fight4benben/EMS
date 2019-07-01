@@ -230,7 +230,7 @@ Footer
   color: #999999;
 }
 .footer .footer-tools .go-top {
-  background-color: #4f4f4f;
+  /* background-color: #4f4f4f; */
 }
 .footer .footer-tools .go-top:hover {
   opacity: 0.7;

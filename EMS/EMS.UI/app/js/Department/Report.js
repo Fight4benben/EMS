@@ -248,6 +248,12 @@ var DeptReport = (function(){
 					case "13000":
 						$("#de_countBtns").append('<acronym title="光伏"><button id="'+val.energyItemCode+'" class="btn btn-solar" value="'+val.energyItemCode+'" type="button"></button></acronym>');
 					break;
+					case "03000":
+						$("#de_countBtns").append('<acronym title="燃气"><button id="'+val.energyItemCode+'" class="btn btn-gas" value="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
+					case "40000":
+						$("#de_countBtns").append('<acronym title="蒸汽"><button id="'+val.energyItemCode+'" class="btn btn-steam" value="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
 					default:
 						$("#de_countBtns").append('<acronym title="'+val.energyItemName+'"><button id="'+val.energyItemCode+'" class="btn btn-empty" value="'+val.energyItemCode+'" type="button">'+
 							val.energyItemName.substring(0,1)+'</button></acronym>');

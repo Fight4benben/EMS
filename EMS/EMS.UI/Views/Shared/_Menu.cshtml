@@ -35,7 +35,7 @@
                 </li>
             }
 
-            @if (menu.Menus.ToUpper().Contains("7P") || menu.Menus.Contains("all"))
+            @*@if (menu.Menus.ToUpper().Contains("7P") || menu.Menus.Contains("all"))
             {
                 <li id="overAll" class="">
                     <a href="/Home/OverAll" id="btn-map">
@@ -43,7 +43,7 @@
                         <span class="title">综合查询</span>
                     </a>
                 </li>
-            }
+            }*@
 
             @if (menu.Menus.ToUpper().Contains("3P") || menu.Menus.Contains("all"))
             {
@@ -89,7 +89,7 @@
                         }
                         @if (menu.Menus.Contains("3.9") || menu.Menus.Contains("all"))
                         {
-                            <li id="cir_multi" class=""><a href="/Circuit/NoWorkDay"><i class="fa fa-caret-right"></i>非工作日用能报表</a></li>
+                            <li id="cir_work" class=""><a href="/Circuit/NoWorkDay"><i class="fa fa-caret-right"></i>非工作日用能报表</a></li>
                         }
                         <!-- <li id="" class=""><a href="javascript:;"> <span style="color:#b1b0b0">趋势曲线</span></a></li> -->
                         <!-- <li id="te_loss" class=""><a href="rest/tela"><i class="fa fa-caret-right"></i>损耗分析</a></li> -->

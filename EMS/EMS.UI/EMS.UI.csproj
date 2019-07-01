@@ -286,6 +286,7 @@
     <Content Include="app\img\excel3.png" />
     <Content Include="app\img\excel4.png" />
     <Content Include="app\img\favicon.ico" />
+    <Content Include="app\img\gas.png" />
     <Content Include="app\img\gongzong.jpg" />
     <Content Include="app\img\Hand Up-48.png" />
     <Content Include="app\img\icon.jpg" />
@@ -347,6 +348,7 @@
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\CircuitPayRate.js" />
     <Content Include="app\js\Circuit\Collect.js" />
+    <Content Include="app\js\Circuit\NoWorkDay.js" />
     <Content Include="app\js\Circuit\RingRatio.js" />
     <Content Include="app\js\Department\Average.js" />
     <Content Include="app\js\Department\Check.js" />

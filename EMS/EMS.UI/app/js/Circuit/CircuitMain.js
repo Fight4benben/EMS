@@ -90,6 +90,12 @@ var CircuitMain = (function(){
 					case "13000":
 						$("#te_surveyBtns").append('<acronym title="光伏"><button class="btn btn-solar" code="'+val.energyItemCode+'" type="button"></button></acronym>');
 					break;
+					case "03000":
+						$("#te_surveyBtns").append('<acronym title="燃气"><button class="btn btn-gas" code="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
+					case "40000":
+						$("#te_surveyBtns").append('<acronym title="蒸汽"><button class="btn btn-steam" code="'+val.energyItemCode+'" type="button"></button></acronym>');
+					break;
 					default:
 						$("#te_surveyBtns").append('<acronym title="'+val.energyItemName+'"><button class="btn btn-empty" code="'+val.energyItemCode+'" type="button">'+
 							val.energyItemName.substring(0,1)+'</button></acronym>');

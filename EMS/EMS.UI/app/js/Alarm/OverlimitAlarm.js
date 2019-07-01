@@ -141,7 +141,8 @@ var OverAlarm = (function(){
                if(data.state == 0){
                    for(var i=0;i<ids.length;i++){
                     $('#'+ids[i]).text("已确认")
-                   }  
+                    }
+                    $("#AlarmImgID").attr('src','/Assets/img/jing.png');
                }
             })
         })
@@ -166,14 +167,13 @@ jQuery(document).ready(function($) {
 
     var overAlarm = new OverAlarm();
      //定时任务
-     setTimeout(checkAlarm,1000);
-     function checkAlarm(){
-        var url = '/api/MeterAlarmConfirm';
+     setTimeout(function checkAlarm(){
+        var url = '/api/MeterAlarming';
         $.getJSON(url,"",function(data){
             if(data==='IsAlarming:true')
                 $("#AlarmImgID").attr('src','/Assets/img/dong.gif');
             else
                 $("#AlarmImgID").attr('src','/Assets/img/jing.png');
         })
-     }
+     },1000);
 });

@@ -210,7 +210,31 @@ var CircuitPay = (function(){
 
 			return true;
         }
-        
+		
+		//树状结构级联选择，采用递归方法。需要传入两个参数，一个当前的node一个是tree的div
+		function checkChildren(node,$Tree){
+			var str =JSON.stringify(node);
+			var pattern = new RegExp('nodes');
+			if(pattern.test(str)){
+				$.each(node.nodes,function(key,val){
+					$Tree.treeview('checkNode',[val.nodeId]);
+					checkChildren(val,$Tree);
+				});
+			}
+		};
+
+		//级联方式取消树状结构的选中状态
+		function unCheckChildren(node,$Tree){
+			var str =JSON.stringify(node);
+			var pattern = new RegExp('nodes');
+			if(pattern.test(str)){
+				$.each(node.nodes,function(key,val){
+					$Tree.treeview('uncheckNode',[val.nodeId]);
+					unCheckChildren(val,$Tree);
+				});
+			};
+		}
+
         function initSearchButton(){
 			//查询数据
 			$("#daySearch").click(function(event) {
