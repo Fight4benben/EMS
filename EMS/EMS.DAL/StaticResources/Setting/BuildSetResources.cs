@@ -27,7 +27,7 @@ namespace EMS.DAL.StaticResources
 		                                            ,F_StruType StruType,F_WallMatType WallMatType,F_WallWarmType WallWarmType,F_WallWinType WallWinType,F_GlassType GlassType
 		                                            ,F_WinFrameType WinFrameType,F_IsStandard IsStandard,F_DesignDept DesignDept,F_WorkDept WorkDept,F_CreateTime CreateTime
 		                                            ,F_CreateUser CreateUser,F_MonitorDate MonitorDate,F_AcceptDate AcceptDate,F_NumberOfPeople NumberOfPeople ,F_SPArea SPArea
-		                                            ,F_Image 'Image',F_TransCount TransCount,F_InstallCapacity InstallCapacity,F_OperateCapacity OperateCapacity,F_DesignMeters DesignMeters
+		                                            ,NULL 'Image',F_TransCount TransCount,F_InstallCapacity InstallCapacity,F_OperateCapacity OperateCapacity,F_DesignMeters DesignMeters
 		                                            ,F_Mobiles Mobiles,F_ModelID ModelID
                                               FROM T_BD_BuildBaseInfo WHERE F_BuildID=@BuildID
                                             ";

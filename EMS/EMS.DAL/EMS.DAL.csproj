@@ -135,6 +135,7 @@
     <Compile Include="IRepository\Department\IDepartmentReportDbContext.cs" />
     <Compile Include="IRepository\Alarm\IAlarmDeviceOverLimitDbContext.cs" />
     <Compile Include="IRepository\INoWorkDayDbContext.cs" />
+    <Compile Include="IRepository\IPlatformDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemCompareDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemOverviewDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemReportDbContext.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="RepositoryImp\Home\OverAllSearchDbContext.cs" />
     <Compile Include="RepositoryImp\MeterAlarmDbContext.cs" />
     <Compile Include="RepositoryImp\NoWorkDayDbContext.cs" />
+    <Compile Include="RepositoryImp\PlatformDbContext.cs" />
     <Compile Include="RepositoryImp\Region\PriceDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionCompareDbContext.cs" />
     <Compile Include="RepositoryImp\Region\RegionMainDbContext.cs" />
