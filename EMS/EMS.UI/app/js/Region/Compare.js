@@ -128,6 +128,12 @@ var Compare = (function(){
 					case "13000":
 						$("#se_CompareBtns").append('<acronym title="光伏"><button id="'+val.energyItemCode+'" class="btn btn-solar" value="13000" style="width: 20px; height: 20px;" unit="'+val.energyItemUnit+'" type="button"></button></acronym>')
 					break;
+					case "03000":
+						$("#se_CompareBtns").append('<acronym title="燃气"><button id="'+val.energyItemCode+'" class="btn btn-gas" value="03000" style="width: 20px; height: 20px;" unit="'+val.energyItemUnit+'" type="button"></button></acronym>')
+					break;
+					case "40000":
+						$("#se_CompareBtns").append('<acronym title="蒸汽"><button id="'+val.energyItemCode+'" class="btn btn-steam" value="40000" style="width: 20px; height: 20px;" unit="'+val.energyItemUnit+'" type="button"></button></acronym>')
+					break;
 					default:
 						$("#se_countBtns").append('<acronym title="'+val.energyItemName+'"><button id="'+val.energyItemCode+'" class="btn btn-empty" value="'+val.energyItemCode+'" type="button">'+
 							val.energyItemName.substring(0,1)+'</button></acronym>');

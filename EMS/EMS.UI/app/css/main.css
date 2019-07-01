@@ -1843,6 +1843,40 @@ to {top:-7px;}
 .btn-water-selected{
     background-color:#F08500;
 }
+
+.btn-gas{
+    width: 45px!important;
+    height: 45px!important;
+    background: url(../img/gas.png) no-repeat center center;
+    background-color:#969696;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    background-size: 22px;
+}
+.btn-gas:hover{
+    background-color:#F08500;
+}
+.btn-gas-selected{
+    background-color:#F08500;
+}
+
+.btn-steam{
+    width: 45px!important;
+    height: 45px!important;
+    background: url(../img/steam.png) no-repeat center center;
+    background-color:#969696;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    background-size: 22px;
+}
+.btn-steam:hover{
+    background-color:#F08500;
+}
+.btn-steam-selected{
+    background-color:#F08500;
+}
+
+
 .btn-solar{
     width: 45px!important;
     height: 45px!important;

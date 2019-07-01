@@ -197,9 +197,12 @@ var Home = (function(){
 					    break;
 					case "13000":
 						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="光伏"><button class="btn btn-solar" value="13000" type="button"></button></acronym></div>');
-                        break;
+						break;
+					case "40000":
+						$("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="蒸汽"><button class="btn btn-steam" value="40000" type="button"></button></acronym></div>');
+						break;
                     case "05000":
-                        $("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="集中供冷"><button class="btn btn-empty" value="05000" type="button">冷量</button></acronym></div>');
+                        $("#btngroup").append('<div class="col-sm-1 col-xs-2"><acronym title="冷量"><button class="btn btn-empty" value="05000" type="button">冷量</button></acronym></div>');
                         break;
 				}
 

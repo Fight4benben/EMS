@@ -120,15 +120,17 @@
 
   <!--绑定模态框-->
     <div class="modal fade bs-example-modal-sm" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h5 class="modal-title" id="myModalLabel">绑定</h5>
           </div>
-          <div class="modal-body">
-            <div id="meter" style="height:150px"></div>
-            <div id="params" style="height:150px"></div>
+          <div class="modal-body" style="height:420px">
+            <div class="childBD">
+              <div id="meter" style="height:400px;float: left;width: 49%"></div>
+              <div id="params" style="height:400px;float: left;width: 49%;margin-left:1% "></div>
+            </div>
           </div>
           <div class="modal-footer">
             <button id="bindBtn" type="button" class="btn btn-primary">确定</button>
