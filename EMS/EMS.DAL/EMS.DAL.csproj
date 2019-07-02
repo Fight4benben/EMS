@@ -81,6 +81,7 @@
     <Compile Include="Entities\ConnectState.cs" />
     <Compile Include="Entities\DeptAreaAvgRank.cs" />
     <Compile Include="Entities\DeptCompletionRate.cs" />
+    <Compile Include="Entities\DeviceCount.cs" />
     <Compile Include="Entities\EMSValue.cs" />
     <Compile Include="Entities\EnergyAlarm.cs" />
     <Compile Include="Entities\EnergyAverage.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Entities\NoWorkDay.cs" />
     <Compile Include="Entities\PageInfo.cs" />
     <Compile Include="Entities\ParamClassify.cs" />
+    <Compile Include="Entities\PlatformItemValue.cs" />
     <Compile Include="Entities\Price.cs" />
     <Compile Include="Entities\RankValue.cs" />
     <Compile Include="Entities\ReportValue.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Services\Home\OverAllSearchService.cs" />
     <Compile Include="Services\MeterAlarmService.cs" />
     <Compile Include="Services\NoWorkDayService.cs" />
+    <Compile Include="Services\PlatformService.cs" />
     <Compile Include="Services\Region\PriceService.cs" />
     <Compile Include="Services\Region\RegionCompareService.cs" />
     <Compile Include="Services\Region\RegionMainService.cs" />
@@ -275,6 +278,7 @@
     <Compile Include="StaticResources\Home\OverAllSearchResources.cs" />
     <Compile Include="StaticResources\MeterAlarmResources.cs" />
     <Compile Include="StaticResources\NoWorkDayResources.cs" />
+    <Compile Include="StaticResources\PlatformResource.cs" />
     <Compile Include="StaticResources\Region\PriceResouces.cs" />
     <Compile Include="StaticResources\Region\RegionCompareResources.cs" />
     <Compile Include="StaticResources\Region\RegionMainResources.cs" />
@@ -321,6 +325,7 @@
     <Compile Include="ViewModels\Home\OverAllSearchViewModel.cs" />
     <Compile Include="ViewModels\MeterAlarmViewModel.cs" />
     <Compile Include="ViewModels\NoWorkDayViewModel.cs" />
+    <Compile Include="ViewModels\PlatformViewModel.cs" />
     <Compile Include="ViewModels\Region\PriceViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionCompareViewModel.cs" />
     <Compile Include="ViewModels\Region\RegionMainViewModel.cs" />

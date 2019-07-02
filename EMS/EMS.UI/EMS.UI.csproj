@@ -202,6 +202,8 @@
     <Compile Include="Controllers\MeterAlarmLogController.cs" />
     <Compile Include="Controllers\NoWorkDayController.cs" />
     <Compile Include="Controllers\OverAllSearchController.cs" />
+    <Compile Include="Controllers\PlatformController.cs" />
+    <Compile Include="Controllers\PlatformViewController.cs" />
     <Compile Include="Controllers\Region\PriceController.cs" />
     <Compile Include="Controllers\Region\RegionCompareController.cs" />
     <Compile Include="Controllers\Region\RegionController.cs" />
@@ -769,6 +771,7 @@
     <Content Include="Views\Circuit\MultiRate.cshtml" />
     <Content Include="Views\Alarm\AlarmRecord.cshtml" />
     <Content Include="Views\Circuit\NoWorkDay.cshtml" />
+    <Content Include="Views\PlatformView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
