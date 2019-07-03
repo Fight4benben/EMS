@@ -1494,7 +1494,10 @@ to {top:-7px;}
         width: 100%;
 	}
 }
+/*2019/7/1修改*/
 .build-info{
+    /* height: 500px; */
+
     border: 1px solid #B4B4B5;
     margin-bottom: 15px;      /*右边各版块的距离*/
     overflow: hidden;         /*清除浮动*/
