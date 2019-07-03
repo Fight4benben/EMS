@@ -35,8 +35,14 @@ namespace EMS.DAL.StaticResources
         /// 修改一个用户
         /// </summary>
         public static string UpdateUser = @"
+                                            IF EXISTS (SELECT 1 FROM T_SYS_Users WHERE F_UserID = @UserID AND F_Password=@OldPassword ) 
+	                                                UPDATE T_SYS_Users SET F_UserName = @UserName,F_Password=@Password,F_UserGroupID=@UserGroupID
+		                                            WHERE F_UserID = @UserID
+                                            ";
+
+        public static string UpdateUserByName = @"
                                             IF EXISTS (SELECT 1 FROM T_SYS_Users WHERE F_UserName = @UserName AND F_Password=@OldPassword ) 
-	                                                UPDATE T_SYS_Users set F_Password=@Password,F_UserGroupID=@UserGroupID
+	                                                UPDATE T_SYS_Users SET F_Password=@Password
 		                                                WHERE F_UserName = @UserName
                                             ";
 
@@ -46,6 +52,19 @@ namespace EMS.DAL.StaticResources
         public static string DeleteUser = @"
                                             DELETE FROM T_SYS_User_Buildings WHERE F_UserName = @UserName
                                             DELETE FROM T_SYS_Users WHERE F_UserName = @UserName
+                                           ";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string CheckOldPassword = @"
+                                            SELECT  F_UserID AS UserID
+                                                FROM T_SYS_Users WHERE F_UserID = @UserID AND F_Password=@OldPassword 
+                                           ";
+
+        public static string CheckOldPasswordByName = @"
+                                            SELECT  F_UserID AS UserID
+                                                FROM T_SYS_Users WHERE F_UserName = @UserName AND F_Password=@OldPassword 
                                            ";
     }
 }

@@ -25,6 +25,20 @@ namespace EMS.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public object UpdataUser(string password, string oldPassword)
+        {
+            try
+            {
+                string userName = User.Identity.Name;
+                return service.UpdateUserSelf(userName, password, oldPassword);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         [HttpPost]
         public object AddUser([FromBody] JObject obj)
         {
@@ -46,11 +60,13 @@ namespace EMS.UI.Controllers
         {
             try
             {
+                string userID = obj["userID"].ToString();
                 string userName = obj["userName"].ToString();
                 string password = obj["password"].ToString();
+                string repassword = obj["password"].ToString();
                 string oldPassword = obj["oldPassword"].ToString();
                 string userGroupID = obj["userGroupID"].ToString();
-                return service.UpdateUser(userName, password, oldPassword, userGroupID);
+                return service.UpdateUser(userID, userName, password, repassword, oldPassword, userGroupID);
             }
             catch (Exception e)
             {

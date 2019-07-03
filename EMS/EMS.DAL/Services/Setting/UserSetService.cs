@@ -60,16 +60,68 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public UserSetViewModel UpdateUser(string userName, string password, string oldPassword, string userGroupID)
+        public UserSetViewModel UpdateUserSelf(string userName, string password, string oldPassword)
         {
             UserSetViewModel viewModel = new UserSetViewModel();
             viewModel.ResultState = new ResultState();
+
+            List<UserSet> userPassword = context.GetCheckOldPasswordByName(userName, oldPassword);
+
+            if (!(userPassword.Count > 0))
+            {
+                viewModel.ResultState.State = 1;
+                viewModel.ResultState.Details = "NG ：原密码错误";
+                return viewModel;
+            }
+
+            //当密码为空的情况下，默认转化为空字符串对应的MD5
+            //if (string.IsNullOrEmpty(password))
+            //    password = "d41d8cd98f00b204e9800998ecf8427e";
+
+            int result = context.UpdataUserByName( userName, password, oldPassword);
+            if (result > 0)
+            {
+                viewModel.ResultState.State = 0;
+                viewModel.ResultState.Details = "OK";
+            }
+            else
+            {
+                viewModel.ResultState.State = 1;
+                viewModel.ResultState.Details = "NG ：用户名或密码错误";
+            }
+
+            return viewModel;
+        }
+
+        public UserSetViewModel UpdateUser(string userID, string userName, string password, string repassword, string oldPassword, string userGroupID)
+        {
+            UserSetViewModel viewModel = new UserSetViewModel();
+            viewModel.ResultState = new ResultState();
+
+            if (!password.Equals(repassword))
+            {
+                viewModel.ResultState.State = 1;
+                viewModel.ResultState.Details = "NG ：密码与确认不一致";
+                return viewModel;
+            }
+
+            List<UserSet> userPassword = context.GetCheckOldPassword(Convert.ToInt32(userID), oldPassword);
+
+            if (!(userPassword.Count > 0))
+            {
+                viewModel.ResultState.State = 1;
+                viewModel.ResultState.Details = "NG ：原密码错误";
+                return viewModel;
+            }
+
             //当密码为空的情况下，默认转化为空字符串对应的MD5
             if (string.IsNullOrEmpty(password))
                 password = "d41d8cd98f00b204e9800998ecf8427e";
 
-            int result = context.UpdataUser(userName, password, oldPassword, userGroupID);
-            if (result == 1)
+
+
+            int result = context.UpdataUser(userID, userName, password, oldPassword, userGroupID);
+            if (result > 0)
             {
                 viewModel.ResultState.State = 0;
             }

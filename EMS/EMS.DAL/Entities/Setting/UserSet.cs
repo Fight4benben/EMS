@@ -11,7 +11,7 @@ namespace EMS.DAL.Entities
     
     public class UserSet
     {
-        public int UserId { get; set; }
+        public int UserID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public int UserGroupID { get; set; }
