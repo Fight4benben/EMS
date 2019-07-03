@@ -66,14 +66,14 @@ namespace EMS.UI.Controllers
         /// <param name="designMeters"></param>
         /// <returns></returns>
         public object UpdatePartBuildInfo(string buildID, string buildName, string buildAddr,
-            decimal buildLong, decimal buildLat, decimal totalArea, int numberOfPeople,
-            int transCount, int installCapacity, int operateCapacity, int designMeters)
+            string buildLong, string buildLat, string totalArea, string numberOfPeople,
+            string transCount, string installCapacity, string operateCapacity, string designMeters)
         {
             try
             {
                 return service.UpdatePartBuildInfo(buildID, buildName, buildAddr,
-                    buildLong, buildLat, totalArea, numberOfPeople,
-                    transCount, installCapacity, operateCapacity, designMeters);
+                    Convert.ToDecimal(buildLong), Convert.ToDecimal(buildLat), Convert.ToDecimal(totalArea), Convert.ToInt32(numberOfPeople),
+                    Convert.ToInt32(transCount), Convert.ToInt32(installCapacity), Convert.ToInt32(operateCapacity), Convert.ToInt32(designMeters));
             }
             catch (Exception e)
             {
