@@ -53,79 +53,36 @@ namespace EMS.UI.Controllers
         /// <summary>
         /// 修改建筑信息
         /// </summary>
-        /// <param name="buildID"></param>
-        /// <param name="buildName"></param>
-        /// <param name="buildAddr"></param>
-        /// <param name="buildLong"></param>
-        /// <param name="buildLat"></param>
-        /// <param name="totalArea"></param>
-        /// <param name="numberOfPeople"></param>
-        /// <param name="transCount"></param>
-        /// <param name="installCapacity"></param>
-        /// <param name="operateCapacity"></param>
-        /// <param name="designMeters"></param>
-        /// <returns></returns>
-        public object UpdatePartBuildInfo(string buildID, string buildName, string buildAddr,
-            string buildLong, string buildLat, string totalArea, string numberOfPeople,
-            string transCount, string installCapacity, string operateCapacity, string designMeters)
-        {
-            try
-            {
-                return service.UpdatePartBuildInfo(buildID, buildName, buildAddr,
-                    Convert.ToDecimal(buildLong), Convert.ToDecimal(buildLat), Convert.ToDecimal(totalArea), Convert.ToInt32(numberOfPeople),
-                    Convert.ToInt32(transCount), Convert.ToInt32(installCapacity), Convert.ToInt32(operateCapacity), Convert.ToInt32(designMeters));
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
-
-        /// <summary>
-        /// 新增建筑
-        /// </summary>
-        /// <param name="obj">
-        /// 至少输入 BuildName一个参数
-        /// </param>
         /// <returns></returns>
         [HttpPost]
-        public object Add([FromBody] JObject obj)
+        public object Update([FromBody] JObject obj)
         {
             try
             {
-                BuildInfoSet inputBuildInfoSet = new BuildInfoSet();
+                string buildID = obj["buildID"].ToString();
+                string buildName = obj["buildName"].ToString();
+                string buildAddr = obj["buildAddr"].ToString();
+                decimal buildLong = Convert.ToDecimal(obj["buildLong"].ToString());
+                decimal buildLat = Convert.ToDecimal(obj["buildLat"].ToString());
 
-                inputBuildInfoSet.BuildName = obj["BuildName"].ToString();
-                inputBuildInfoSet.AliasName = obj["AliasName"].ToString();
-                inputBuildInfoSet.BuildOwner = obj["BuildOwner"].ToString();
-                inputBuildInfoSet.BuildAddr = obj["BuildAddr"].ToString();
-                inputBuildInfoSet.BuildLong = Convert.ToDecimal(obj["BuildLong"].ToString());
-
-                inputBuildInfoSet.BuildLat = Convert.ToDecimal(obj["BuildLat"].ToString());
-                inputBuildInfoSet.UpFloor = Convert.ToInt32(obj["UpFloor"].ToString());
-                inputBuildInfoSet.DownFloor = Convert.ToInt32(obj["DownFloor"].ToString());
-                inputBuildInfoSet.TotalArea = Convert.ToDecimal(obj["TotalArea"].ToString());
-                inputBuildInfoSet.AirArea = Convert.ToDecimal(obj["AirArea"].ToString());
-
-                inputBuildInfoSet.DesignDept = obj["DesignDept"].ToString();
-                inputBuildInfoSet.WorkDept = obj["WorkDept"].ToString();
-                inputBuildInfoSet.CreateUser = User.Identity.Name;
-                inputBuildInfoSet.NumberOfPeople = Convert.ToInt32(obj["NumberOfPeople"].ToString());
-                inputBuildInfoSet.TransCount = Convert.ToInt32(obj["TransCount"].ToString());
+                decimal totalArea = Convert.ToDecimal(obj["totalArea"].ToString());
+                int numberOfPeople = Convert.ToInt32(obj["numberOfPeople"].ToString());
+                int transCount = Convert.ToInt32(obj["transCount"].ToString());
                 //安装变压器容量，运行容量，监控仪表数量，联系电话
-                inputBuildInfoSet.InstallCapacity = Convert.ToInt32(obj["InstallCapacity"].ToString());
-                inputBuildInfoSet.OperateCapacity = Convert.ToInt32(obj["OperateCapacity"].ToString());
-                inputBuildInfoSet.DesignMeters = Convert.ToInt32(obj["DesignMeters"].ToString());
-                inputBuildInfoSet.Mobiles = obj["Mobiles"].ToString();
+                int installCapacity = Convert.ToInt32(obj["installCapacity"].ToString());
+                int operateCapacity = Convert.ToInt32(obj["operateCapacity"].ToString());
+                int designMeters = Convert.ToInt32(obj["designMeters"].ToString());
 
-                return service.AddBuild(inputBuildInfoSet);
+                return service.UpdatePartBuildInfo(buildID, buildName, buildAddr,
+                    buildLong, buildLat, totalArea, numberOfPeople,
+                    transCount, installCapacity, operateCapacity, designMeters);
             }
             catch (Exception e)
             {
                 return e.Message;
             }
         }
+
 
         /// <summary>
         /// 修改建筑信息
