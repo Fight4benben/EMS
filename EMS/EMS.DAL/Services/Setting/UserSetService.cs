@@ -49,10 +49,12 @@ namespace EMS.DAL.Services
             if (result == 1)
             {
                 viewModel.ResultState.State = 0;
+                viewModel.ResultState.Details = "OK";
             }
             else
             {
                 viewModel.ResultState.State = 1;
+                viewModel.ResultState.Details = "NG";
             }
 
             return viewModel;

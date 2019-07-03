@@ -27,7 +27,7 @@ namespace EMS.DAL.StaticResources
         /// <summary>
         ///获取建筑信息
         /// </summary>
-        public static string GetBuildInfo = @"
+        public static string GetBuildInfoOne = @"
                                              SELECT F_BuildID BuildID,F_DataCenterID DataCenterID,F_BuildName BuildName,F_AliasName AliasName,F_BuildOwner BuildOwner
 		                                            ,F_State 'State',F_DistrictCode DistrictCode,F_BuildAddr BuildAddr,F_BuildLong BuildLong,F_BuildLat BuildLat
 		                                            ,F_BuildYear BuildYear,F_UpFloor UpFloor,F_DownFloor DownFloor,F_BuildFunc BuildFunc,F_TotalArea TotalArea
@@ -38,6 +38,24 @@ namespace EMS.DAL.StaticResources
 		                                            ,NULL 'Image',F_TransCount TransCount,F_InstallCapacity InstallCapacity,F_OperateCapacity OperateCapacity,F_DesignMeters DesignMeters
 		                                            ,F_Mobiles Mobiles,F_ModelID ModelID
                                               FROM T_BD_BuildBaseInfo WHERE F_BuildID=@BuildID
+                                            ";
+
+
+
+        public static string GetBuildInfoAll = @"
+                                             SELECT T_BD_BuildBaseInfo.F_BuildID BuildID,F_DataCenterID DataCenterID,F_BuildName BuildName,F_AliasName AliasName,F_BuildOwner BuildOwner
+		                                            ,F_State 'State',F_DistrictCode DistrictCode,F_BuildAddr BuildAddr,F_BuildLong BuildLong,F_BuildLat BuildLat
+		                                            ,F_BuildYear BuildYear,F_UpFloor UpFloor,F_DownFloor DownFloor,F_BuildFunc BuildFunc,F_TotalArea TotalArea
+		                                            ,F_AirArea AirArea,F_HeatArea HeatArea,F_AirType AirType,F_HeatType HeatType,F_BodyCoef BodyCoef
+		                                            ,F_StruType StruType,F_WallMatType WallMatType,F_WallWarmType WallWarmType,F_WallWinType WallWinType,F_GlassType GlassType
+		                                            ,F_WinFrameType WinFrameType,F_IsStandard IsStandard,F_DesignDept DesignDept,F_WorkDept WorkDept,F_CreateTime CreateTime
+		                                            ,F_CreateUser CreateUser,F_MonitorDate MonitorDate,F_AcceptDate AcceptDate,F_NumberOfPeople NumberOfPeople ,F_SPArea SPArea
+		                                            ,NULL 'Image',F_TransCount TransCount,F_InstallCapacity InstallCapacity,F_OperateCapacity OperateCapacity,F_DesignMeters DesignMeters
+		                                            ,F_Mobiles Mobiles,F_ModelID ModelID
+                                                FROM T_BD_BuildBaseInfo 
+	                                            INNER JOIN T_SYS_User_Buildings ON T_BD_BuildBaseInfo.F_BuildID=T_SYS_User_Buildings.F_BuildID
+	                                            INNER JOIN T_SYS_Users ON T_SYS_User_Buildings.F_UserName=T_SYS_Users.F_UserName
+                                                WHERE T_SYS_Users.F_UserName=@UserName
                                             ";
 
         /// <summary>

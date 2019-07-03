@@ -39,17 +39,11 @@ namespace EMS.DAL.Services
         /// <returns></returns>
         public BuildSetViewModel GetViewModelByUserName(string userName)
         {
-            List<BuildViewModel> builds = context.GetBuildsByUserName(userName);
-            string buildId;
-            if (builds.Count > 0)
-                buildId = builds.First().BuildID;
-            else
-                buildId = "";
-
-            List<BuildInfoSet> buildInfo = context.GetBuildInfoList(buildId);
+            List<BuildInfoSet> buildInfoList = context.GetBuildInfoAll(userName);
+            
             BuildSetViewModel viewModel = new BuildSetViewModel();
-            viewModel.Builds = builds;
-            viewModel.BuildInfo = buildInfo;
+            
+            viewModel.BuildInfo = buildInfoList;
 
             return viewModel;
         }

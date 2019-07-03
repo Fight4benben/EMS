@@ -26,7 +26,12 @@ namespace EMS.DAL.RepositoryImp
 
         public List<BuildInfoSet> GetBuildInfoList(string buildID)
         {
-            return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildInfo, new SqlParameter("@BuildID", buildID)).ToList();
+            return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildInfoOne, new SqlParameter("@BuildID", buildID)).ToList();
+        }
+
+        public List<BuildInfoSet> GetBuildInfoAll(string userName)
+        {
+            return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildInfoAll, new SqlParameter("@UserName", userName)).ToList();
         }
 
         public int AddBuildInfo(BuildInfoSet buildInfoSet)

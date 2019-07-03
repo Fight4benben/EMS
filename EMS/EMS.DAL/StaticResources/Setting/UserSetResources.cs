@@ -12,14 +12,14 @@ namespace EMS.DAL.StaticResources
         ///获取所有用户
         /// </summary>
         public static string GetAllUsers = @"
-                                            SELECT F_UserID AS UserID,F_UserName AS UserName,F_Password AS 'Password',F_UserGroupID AS UserGroupID
+                                            SELECT F_UserID AS UserID,F_UserName AS UserName,NULL AS 'Password',F_UserGroupID AS UserGroupID
                                                 FROM T_SYS_Users
                                             ";
         /// <summary>
         ///获取所有用户
         /// </summary>
         public static string GetUserByUserName = @"
-                                            SELECT F_UserID AS UserID,F_UserName AS UserName,F_Password AS 'Password',F_UserGroupID AS UserGroupID
+                                            SELECT F_UserID AS UserID,F_UserName AS UserName,NULL AS 'Password',F_UserGroupID AS UserGroupID
                                                 FROM T_SYS_Users
                                                 WHERE F_UserName = @UserName
                                             ";
