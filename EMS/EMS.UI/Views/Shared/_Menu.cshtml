@@ -277,6 +277,10 @@
                         {
                             <li id="menu_svg_setting" class=""><a href="~/Setting/SvgSetting"><i class="fa fa-caret-right"></i>一次图设置</a></li>
                         }
+                        @if (menu.Menus.Contains("9.6") || menu.Menus.Contains("all"))
+                        {
+                            <li id="menu_build_setting" class=""><a href="~/Setting/Build"><i class="fa fa-caret-right"></i>客户信息</a></li>
+                        }
                     </ul>
                 </li>
             }
