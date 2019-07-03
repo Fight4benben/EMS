@@ -200,6 +200,39 @@ namespace EMS.Tests.Services
         }
 
         [TestMethod]
+        public void TestUpdataBuild_OK2()
+        {
+            BuildSetService service = new BuildSetService();
+
+            BuildSetViewModel ViewModel = service.GetAllBuilds();
+            BuildViewModel lasstbuild = ViewModel.Builds.Last();
+
+
+            string buildID= "000001G008";
+            string buildName="test8";
+            string buildAddr = "test addr 8";
+            decimal buildLong =123;
+            decimal buildLat=45;
+            decimal totalArea=789;
+            int numberOfPeople=1234;
+            int transCount=45;
+            int installCapacity=78;
+            int operateCapacity=90;
+            int designMeters=100;
+
+
+
+            
+
+            ViewModel = service.UpdatePartBuildInfo( buildID,  buildName,  buildAddr,
+             buildLong,  buildLat,  totalArea,  numberOfPeople,
+             transCount,  installCapacity,  operateCapacity,  designMeters
+                );
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
+
+        [TestMethod]
         public void TestDeleteBuild()
         {
             BuildSetService service = new BuildSetService();

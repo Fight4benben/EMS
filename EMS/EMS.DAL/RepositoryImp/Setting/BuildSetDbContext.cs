@@ -19,6 +19,11 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<BuildViewModel>(BuildSetResources.GetBuildList).ToList();
         }
 
+        public List<BuildInfoSet> GetBuildByNmaeList(string buildID, string name)
+        {
+            return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildByNameList, new SqlParameter("@BuildID", buildID), new SqlParameter("@Name", name)).ToList();
+        }
+
         public List<BuildInfoSet> GetBuildInfoList(string buildID)
         {
             return _db.Database.SqlQuery<BuildInfoSet>(BuildSetResources.GetBuildInfo, new SqlParameter("@BuildID", buildID)).ToList();
@@ -102,6 +107,25 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@Mobiles",buildInfoSet.Mobiles)
             };
             return _db.Database.ExecuteSqlCommand(BuildSetResources.UpdateBuildInfo, sqlParameters);
+        }
+
+        public int UpdatePartBuildInfo(BuildInfoSet buildInfoSet)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildInfoSet.BuildID),
+                new SqlParameter("@BuildName",buildInfoSet.BuildName),
+                new SqlParameter("@BuildAddr",buildInfoSet.BuildAddr),
+                new SqlParameter("@BuildLong",buildInfoSet.BuildLong),
+                new SqlParameter("@BuildLat",buildInfoSet.BuildLat),
+
+                new SqlParameter("@TotalArea",buildInfoSet.TotalArea),
+                new SqlParameter("@NumberOfPeople",buildInfoSet.NumberOfPeople),
+                new SqlParameter("@TransCount",buildInfoSet.TransCount),
+                new SqlParameter("@InstallCapacity",buildInfoSet.InstallCapacity),
+                new SqlParameter("@OperateCapacity",buildInfoSet.OperateCapacity),
+                new SqlParameter("@DesignMeters",buildInfoSet.DesignMeters)
+            };
+            return _db.Database.ExecuteSqlCommand(BuildSetResources.UpdatePartBuildInfo, sqlParameters);
         }
 
         public int DeleteBuild(string buildId)

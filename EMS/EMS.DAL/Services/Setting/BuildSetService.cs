@@ -241,6 +241,81 @@ namespace EMS.DAL.Services
         }
 
         /// <summary>
+        /// 更新建筑信息
+        /// </summary>
+        /// <param name="buildID"></param>
+        /// <param name="buildName"></param>
+        /// <param name="buildAddr"></param>
+        /// <param name="buildLong"></param>
+        /// <param name="buildLat"></param>
+        /// <param name="totalArea"></param>
+        /// <param name="numberOfPeople"></param>
+        /// <param name="transCount"></param>
+        /// <param name="installCapacity"></param>
+        /// <param name="operateCapacity"></param>
+        /// <param name="designMeters"></param>
+        /// <returns></returns>
+        public BuildSetViewModel UpdatePartBuildInfo(string buildID, string buildName, string buildAddr,
+            decimal buildLong, decimal buildLat, decimal totalArea, int numberOfPeople,
+            int transCount, int installCapacity, int operateCapacity, int designMeters)
+        {
+            BuildSetViewModel viewModel = new BuildSetViewModel();
+            ResultState resultState = new ResultState();
+
+            BuildInfoSet buildInfoSet = new BuildInfoSet();
+
+            if (string.IsNullOrEmpty(buildID))
+            {
+                resultState.State = 1;
+                resultState.Details = "建筑ID不能为空，请输入正确的建筑ID。";
+                viewModel.ResultState = resultState;
+                return viewModel;
+            }
+
+            List<BuildInfoSet> buildInfo = context.GetBuildByNmaeList(buildID, buildName);
+            if (buildInfo.Count > 0)
+            {
+                resultState.State = 1;
+                resultState.Details = "建筑名称重复，请输入其他名称。";
+                viewModel.ResultState = resultState;
+                return viewModel;
+            }
+
+
+            buildInfoSet.BuildID = buildID;
+            buildInfoSet.BuildName = buildName;
+
+            buildInfoSet.BuildAddr = string.IsNullOrEmpty(buildAddr) ? "无" : buildAddr;
+            buildInfoSet.BuildLong = buildLong > 0 ? buildLong : 121.5062m;
+            //默认上海市坐标121.506267,31.243709
+            buildInfoSet.BuildLat = buildLat > 0 ? buildLat : 31.2437m;
+            buildInfoSet.TotalArea = totalArea > 0 ? totalArea : 0;
+            buildInfoSet.NumberOfPeople = numberOfPeople > 0 ? numberOfPeople : 0;
+
+            //变压器数量，安装变压器容量，运行容量，监控仪表数量
+            buildInfoSet.TransCount = transCount > 0 ? transCount : 0;
+            buildInfoSet.InstallCapacity = installCapacity > 0 ? installCapacity : 0;
+            buildInfoSet.OperateCapacity = operateCapacity > 0 ? operateCapacity : 0;
+            buildInfoSet.DesignMeters = designMeters > 0 ? designMeters : 0;
+
+            int result = context.UpdatePartBuildInfo(buildInfoSet);
+            if (result == 1)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK";
+                viewModel.ResultState = resultState;
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG";
+                viewModel.ResultState = resultState;
+            }
+
+            return viewModel;
+        }
+
+        /// <summary>
         /// 删除建筑，删除建筑前，须先删除与建筑关联的仪表和支路；
         /// </summary>
         /// <param name="buildId"></param>

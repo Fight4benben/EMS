@@ -48,6 +48,40 @@ namespace EMS.UI.Controllers
                 return e.Message;
             }
         }
+
+
+        /// <summary>
+        /// 修改建筑信息
+        /// </summary>
+        /// <param name="buildID"></param>
+        /// <param name="buildName"></param>
+        /// <param name="buildAddr"></param>
+        /// <param name="buildLong"></param>
+        /// <param name="buildLat"></param>
+        /// <param name="totalArea"></param>
+        /// <param name="numberOfPeople"></param>
+        /// <param name="transCount"></param>
+        /// <param name="installCapacity"></param>
+        /// <param name="operateCapacity"></param>
+        /// <param name="designMeters"></param>
+        /// <returns></returns>
+        public object UpdatePartBuildInfo(string buildID, string buildName, string buildAddr,
+            decimal buildLong, decimal buildLat, decimal totalArea, int numberOfPeople,
+            int transCount, int installCapacity, int operateCapacity, int designMeters)
+        {
+            try
+            {
+                return service.UpdatePartBuildInfo(buildID, buildName, buildAddr,
+                    buildLong, buildLat, totalArea, numberOfPeople,
+                    transCount, installCapacity, operateCapacity, designMeters);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
         /// <summary>
         /// 新增建筑
         /// </summary>
