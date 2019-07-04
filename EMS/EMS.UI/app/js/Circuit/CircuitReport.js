@@ -3,6 +3,10 @@ var CircuitReport = (function(){
 
 	function _circuitReport(){
 
+		var energys;
+		var unit;
+
+
 		function initEnergyBtns(){
 			$("#te_countBtns").html("");
 		}
@@ -260,6 +264,26 @@ var CircuitReport = (function(){
 			if(!data.hasOwnProperty('energys'))
 				return;
 
+			energys = data.energys;
+
+			unit = energys[0].energyItemUnit;
+			switch (unit) {
+				case '千瓦时':
+					unit = 'kW·h'
+					break;
+				case '吨':
+					unit = 'T'
+					break;
+				case '立方米':
+					unit = 'm³'
+					break;
+				case '兆焦':
+					unit = 'MJ'
+					break;
+				default:
+					break;
+			}
+
 			initEnergyBtns();
 
 			$.each(data.energys, function(key, val) {
@@ -285,14 +309,32 @@ var CircuitReport = (function(){
 							val.energyItemName.substring(0,1)+'</button></acronym>');
 				}
 			});
-
+			$("#CodeName").html('(单位：kW.h)');
 			$("#te_countBtns button").eq(0).addClass('btn-solar-selected')
 
 			$("#te_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
 				var $current = $(this);
-
 				var isNotRepeat = setEnergyBtnStyle($current);
-
+				switch ($current.attr('value')) {
+					case '01000':
+					case '13000':
+						$("#CodeName").html('(单位：kW.h)');
+						break;
+					case '02000':
+							$("#CodeName").html('(单位：T)');
+						break;
+					case '03000':
+					case '40000':
+					case '20000':
+							$("#CodeName").html('(单位：m³)');
+						break;
+					case '04000':
+					case '05000':
+							$("#CodeName").html('(单位：MJ)');
+						break;
+					default:
+						break;
+				}
 				if(isNotRepeat){
 					//发送请求
 					getDataFromServer("/api/CircuitReport/report","buildId="+$("#buildinglist").val()+"&energyCode="+

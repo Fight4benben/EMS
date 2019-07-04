@@ -2,6 +2,9 @@ var DeptReport = (function(){
 
 	function _deptReport(){
 
+		var energys;
+		var unit;
+
 		this.show=function(){
 			var url ="/api/DeptReport";
 
@@ -233,7 +236,25 @@ var DeptReport = (function(){
 			
 			if(!data.hasOwnProperty('energys'))
 				return;
+				energys = data.energys;
 
+				unit = energys[0].energyItemUnit;
+				switch (unit) {
+					case '千瓦时':
+						unit = 'kW·h'
+						break;
+					case '吨':
+						unit = 'T'
+						break;
+					case '立方米':
+						unit = 'm³'
+						break;
+					case '兆焦':
+						unit = 'MJ'
+						break;
+					default:
+						break;
+				}
 			initEnergyBtns();
 
 			$.each(data.energys, function(key, val) {
@@ -260,12 +281,31 @@ var DeptReport = (function(){
 
 				}
 			});
-
+			$("#CodeName").html('(单位：kW.h)');
 			$("#de_countBtns button").eq(0).addClass('btn-solar-selected');	
 
 			$("#de_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
 				var $current = $(this);
-
+				switch ($current.attr('value')) {
+					case '01000':
+					case '13000':
+						$("#CodeName").html('(单位：kW.h)');
+						break;
+					case '02000':
+							$("#CodeName").html('(单位：T)');
+						break;
+					case '03000':
+					case '40000':
+					case '20000':
+							$("#CodeName").html('(单位：m³)');
+						break;
+					case '04000':
+					case '05000':
+							$("#CodeName").html('(单位：MJ)');
+						break;
+					default:
+						break;
+				}
 				var isNotRepeat = setEnergyBtnStyle($current);
 
 				if(isNotRepeat){

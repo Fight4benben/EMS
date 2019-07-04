@@ -19,7 +19,10 @@ var Collect = (function(){
 		function clearData(){
 			$("#tableData").html("");
 		}
-
+		//导出
+		$("#dayExport").click(function(event){
+			$('#mainTable').tableExport({type:'excel',escape:'false',fileName: '数据集抄报表报表'});
+		 })
 		function initLoad(){
 			$("#BtnExec").click(function(){
 				var buildId = $("#buildinglist").val();
@@ -313,6 +316,8 @@ var Collect = (function(){
 		};
 
 		function showTable(data){
+			var startTotal = 0;
+			var endTotal = 0;
 			var columns = [
 				{field:'name',title:'回路名称'},
 				{field:'startValue',title:'起始数值'},
@@ -329,11 +334,16 @@ var Collect = (function(){
 				return;
 
 			$.each(data.data, function(key, val) {
+				if(parseInt(val.startValue) != -9999 && parseInt(val.endValue) != -9999){
+					startTotal +=val.startValue;
+					endTotal +=val.endValue;
+ 				}
 				rows.push({name:val.name,startValue:val.startValue.toFixed(2),
 					endValue:val.endValue.toFixed(2),diffValue:val.diffValue.toFixed(2)});
 			});
+			rows.push({name:'合计',startValue:startTotal.toFixed(2),endValue:endTotal.toFixed(2),diffValue:(endTotal-startTotal).toFixed(2)});
 
-			$("#tableData").html("<table></table>");
+			$("#tableData").html("<table id='mainTable'></table>");
 			$("#tableData>table").attr('data-height',$("#tableData").height());
 
 			$("#tableData>table").bootstrapTable({

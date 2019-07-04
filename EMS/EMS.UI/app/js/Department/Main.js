@@ -19,8 +19,25 @@ var DepartmentMain = (function(){
 					return item.energyItemCode == $("#energylist").val();
 				});
 
-				if(filter.length>0)
+				if(filter.length>0){
 					unit = filter[0].energyItemUnit;
+					switch (unit) {
+						case '千瓦时':
+							unit = 'kW·h'
+							break;
+						case '吨':
+							unit = 'T'
+							break;
+						case '立方米':
+							unit = 'm³'
+							break;
+						case '兆焦':
+							unit = 'MJ'
+							break;
+						default:
+							break;
+					}
+				}
 				else 
 					unit = "";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val()+
@@ -83,6 +100,22 @@ var DepartmentMain = (function(){
 			energys = data.energys;
 
 			unit = energys[0].energyItemUnit;
+			switch (unit) {
+				case '千瓦时':
+					unit = 'kW·h'
+					break;
+				case '吨':
+					unit = 'T'
+					break;
+				case '立方米':
+					unit = 'm³'
+					break;
+				case '兆焦':
+					unit = 'MJ'
+					break;
+				default:
+					break;
+			}
 
 			EMS.DOM.initSelect(data.energys,$("#energylist"),"energyItemName","energyItemCode");
 		}
