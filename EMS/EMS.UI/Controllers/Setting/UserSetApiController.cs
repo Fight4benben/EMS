@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace EMS.UI.Controllers
 {
+    [Authorize]
     public class UserSetApiController : ApiController
     {
         public UserSetService service = new UserSetService();
@@ -25,19 +26,6 @@ namespace EMS.UI.Controllers
             }
         }
 
-        [HttpGet]
-        public object UpdataUser(string password, string oldPassword)
-        {
-            try
-            {
-                string userName = User.Identity.Name;
-                return service.UpdateUserSelf(userName, password, oldPassword);
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
 
         [HttpPost]
         public object AddUser([FromBody] JObject obj)

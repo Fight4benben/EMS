@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Setting\UserBuildingApiController.cs" />
     <Compile Include="Controllers\Setting\UserMenuApiController.cs" />
     <Compile Include="Controllers\Setting\UserSetApiController.cs" />
+    <Compile Include="Controllers\Setting\UpdateUserPasswordController.cs" />
     <Compile Include="Filters\ActionLogAttribute.cs" />
     <Compile Include="Filters\AntiSqlInjectAttribute.cs" />
     <Compile Include="Filters\NoCacheAttribute.cs" />
