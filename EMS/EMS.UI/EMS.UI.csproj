@@ -376,8 +376,10 @@
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />
     <Content Include="app\js\Region\Report.js" />
+    <Content Include="app\js\Setting\Build.js" />
     <Content Include="app\js\Setting\DepartmentLimitSetting.js" />
     <Content Include="app\js\Setting\DeviceAlarmLimitSetting.js" />
+    <Content Include="app\js\Setting\Password.js" />
     <Content Include="app\js\Setting\SvgSetting.js" />
     <Content Include="app\js\Setting\UserBuilding.js" />
     <Content Include="app\js\Setting\UserMenu.js" />

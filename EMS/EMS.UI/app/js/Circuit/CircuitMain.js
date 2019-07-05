@@ -117,6 +117,26 @@ var CircuitMain = (function(){
 					$("#today span").html('当日能耗')
 					$("#curMonth span").html("当月能耗")
 				}
+				switch ($this.attr('code')) {
+					case '01000':
+					case '13000':
+						$("#CodeName").html('环比(单位：kW.h)');
+						break;
+					case '02000':
+							$("#CodeName").html('环比(单位：T)');
+						break;
+					case '03000':
+					case '40000':
+					case '20000':
+							$("#CodeName").html('环比(单位：m³)');
+						break;
+					case '04000':
+					case '05000':
+							$("#CodeName").html('环比(单位：MJ)');
+						break;
+					default:
+						break;
+				}
 				var url = "/api/circuitoverview";
 				getDataFromServer(url,"buildId="+$("#buildinglist").val()+"&energyCode="+$this.attr('code'))
 			});

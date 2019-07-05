@@ -403,7 +403,9 @@ var EMS = {
 			    yAxis : [
 			        {
 			            type : 'value',
-			            name:unit
+						name:unit,
+						nameLocation:"end",
+						nameGap:10,
 			        }
 			    ],
 			    series :series,

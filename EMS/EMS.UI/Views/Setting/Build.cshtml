@@ -1,1 +1,51 @@
 ﻿
+<div class="container-fluid main-top equipAlarm">
+    
+    <div id="table-user-menus" class="col-xs-12 R-Columnar" style="height:836px">
+
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-ms" role="document" style="width:400px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">修改</h5>
+          </div>
+          <div class="modal-body" style="height:420px">
+            <div class="childBD">
+                <div class="row">
+                    <input class="com-md-8 updateInput" id="buildid" style="display:none" type="text"/>
+                    <span class="col-md-4 updateSpan">建筑名称：</span><input class="com-md-8 updateInput" id="buildName" readonly type="text"/>
+                    <span class="col-md-4 updateSpan">地址：</span><input class="com-md-8 updateInput" id="buildAddr" type="text"/>
+                    <span class="col-md-4 updateSpan">经度：</span><input class="com-md-8 updateInput" id="buildLong" type="text"/>
+                    <span class="col-md-4 updateSpan">纬度：</span><input class="com-md-8 updateInput" id="buildLat" type="text"/>
+                    <span class="col-md-4 updateSpan">总面积：</span><input class="com-md-8 updateInput" id="totalArea" type="text"/>
+                    <span class="col-md-4 updateSpan">变压器数量：</span><input class="com-md-8 updateInput" id="transCount" type="text"/>
+                    <span class="col-md-4 updateSpan">安装容量：</span><input class="com-md-8 updateInput" id="installCapacity" type="text"/>
+                    <span class="col-md-4 updateSpan">运行容量：</span><input class="com-md-8 updateInput" id="operateCapacity" type="text"/>
+                    <span class="col-md-4 updateSpan">仪表数量：</span><input class="com-md-8 updateInput" id="designMeters" type="text"/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="bindBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<style>
+    .updateSpan{
+        font-size: 17px;
+        margin-top: 5px;
+    }
+    .updateInput{
+        width: 220px;
+        line-height: 25px;
+        margin-top: 5px;
+    }
+</style>
+<script src="~/app/js/Setting/Build.js"></script>

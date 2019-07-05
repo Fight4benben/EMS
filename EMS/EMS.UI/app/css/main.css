@@ -1074,7 +1074,7 @@ to {top:-7px;}
     color: #F08500;
 }
 .btn-count2{
-    background-image: url(../img/excel.png);
+    background-image: url(../img/excel.png)!important;
     border: 1px solid #F08500;
     color: #F08500;
 }
