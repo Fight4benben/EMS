@@ -34,7 +34,7 @@ namespace EMS.Tests.Services
         public void TestGetViewModelBy_userName_Pages()
         {
             MeterAlarmService service = new MeterAlarmService();
-            var viewModel = service.GetAlarmingViewModel("Admin",3,50);
+            var viewModel = service.GetAlarmingViewModel("Admin",1,500);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
@@ -75,7 +75,7 @@ namespace EMS.Tests.Services
         {
             MeterAlarmService service = new MeterAlarmService();
 
-            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2019-06-22", "2019-06-26", 1, 50);
+            var viewModel = service.GetAlarmLogViewModel("Admin", "000001G001", "2019-07-01", "2019-07-26", 1, 100);
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }

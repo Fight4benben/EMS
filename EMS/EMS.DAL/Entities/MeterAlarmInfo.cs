@@ -16,6 +16,7 @@ namespace EMS.DAL.Entities
         public string MeterParamName { get; set; }
         public string ParamUnit { get; set; }
         public string NormalRange { get; set; }
+        public int TypeCode { get; set; }
         public string TypeName { get; set; }
         public decimal SetValue { get; set; }
         public decimal AlarmValue { get; set; }
