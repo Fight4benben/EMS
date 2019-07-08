@@ -113,6 +113,7 @@
     <Compile Include="Entities\Setting\BuildInfoSet.cs" />
     <Compile Include="Entities\Setting\LogInfo.cs" />
     <Compile Include="Entities\Setting\MenuInfo.cs" />
+    <Compile Include="Entities\Setting\MeterAlarmSet.cs" />
     <Compile Include="Entities\Setting\ResultState.cs" />
     <Compile Include="Entities\Setting\Svg.cs" />
     <Compile Include="Entities\Setting\SvgBinding.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="IRepository\Department\IDepartmentOverviewDbContext.cs" />
     <Compile Include="IRepository\Department\IDepartmentReportDbContext.cs" />
     <Compile Include="IRepository\Alarm\IAlarmDeviceOverLimitDbContext.cs" />
+    <Compile Include="IRepository\IMeterAlarmSetDbContext.cs" />
     <Compile Include="IRepository\INoWorkDayDbContext.cs" />
     <Compile Include="IRepository\IPlatformDbContext.cs" />
     <Compile Include="IRepository\Item\IEnergyItemCompareDbContext.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="RepositoryImp\MenuDbContext.cs" />
     <Compile Include="RepositoryImp\Home\OverAllSearchDbContext.cs" />
     <Compile Include="RepositoryImp\MeterAlarmDbContext.cs" />
+    <Compile Include="RepositoryImp\MeterAlarmSetDbContext.cs" />
     <Compile Include="RepositoryImp\NoWorkDayDbContext.cs" />
     <Compile Include="RepositoryImp\PlatformDbContext.cs" />
     <Compile Include="RepositoryImp\Region\PriceDbContext.cs" />
@@ -235,6 +238,7 @@
     <Compile Include="Services\Home\MapService.cs" />
     <Compile Include="Services\Home\OverAllSearchService.cs" />
     <Compile Include="Services\MeterAlarmService.cs" />
+    <Compile Include="Services\MeterAlarmSetService.cs" />
     <Compile Include="Services\NoWorkDayService.cs" />
     <Compile Include="Services\PlatformService.cs" />
     <Compile Include="Services\Region\PriceService.cs" />
@@ -277,6 +281,7 @@
     <Compile Include="StaticResources\Home\MapResources.cs" />
     <Compile Include="StaticResources\Home\OverAllSearchResources.cs" />
     <Compile Include="StaticResources\MeterAlarmResources.cs" />
+    <Compile Include="StaticResources\MeterAlarmSetResources.cs" />
     <Compile Include="StaticResources\NoWorkDayResources.cs" />
     <Compile Include="StaticResources\PlatformResource.cs" />
     <Compile Include="StaticResources\Region\PriceResouces.cs" />
@@ -323,6 +328,7 @@
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
     <Compile Include="ViewModels\Home\MapViewModel.cs" />
     <Compile Include="ViewModels\Home\OverAllSearchViewModel.cs" />
+    <Compile Include="ViewModels\MeterAlarmSetViewModel.cs" />
     <Compile Include="ViewModels\MeterAlarmViewModel.cs" />
     <Compile Include="ViewModels\NoWorkDayViewModel.cs" />
     <Compile Include="ViewModels\PlatformViewModel.cs" />

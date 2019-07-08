@@ -154,6 +154,7 @@
     <Compile Include="Services\RegionReportServiceTest.cs" />
     <Compile Include="Services\RegionServiceTest.cs" />
     <Compile Include="Services\Setting\BuildSetServiceTest.cs" />
+    <Compile Include="Services\Setting\MeterAlarmSetTest.cs" />
     <Compile Include="Services\Setting\SystemLogServiceTest.cs" />
     <Compile Include="Services\Setting\UserMenuServiceTest.cs" />
     <Compile Include="Services\Setting\UserSetServiceTest.cs" />
