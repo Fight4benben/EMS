@@ -233,6 +233,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\css\dashboard.css" />
     <Content Include="app\css\main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -278,6 +279,7 @@
     <Content Include="app\img\count-searchb.png" />
     <Content Include="app\img\count-searchg.png" />
     <Content Include="app\img\count3.png" />
+    <Content Include="app\img\dashboard-02.jpg" />
     <Content Include="app\img\demo2.png" />
     <Content Include="app\img\down.ico" />
     <Content Include="app\img\down.png" />
@@ -288,6 +290,7 @@
     <Content Include="app\img\excel2.png" />
     <Content Include="app\img\excel3.png" />
     <Content Include="app\img\excel4.png" />
+    <Content Include="app\img\fanhui.png" />
     <Content Include="app\img\favicon.ico" />
     <Content Include="app\img\gas.png" />
     <Content Include="app\img\gongzong.jpg" />
@@ -322,6 +325,13 @@
     <Content Include="app\img\pic8.png" />
     <Content Include="app\img\pic9.png" />
     <Content Include="app\img\pica.png" />
+    <Content Include="app\img\Rig1.png" />
+    <Content Include="app\img\Rig2.png" />
+    <Content Include="app\img\Rig3.png" />
+    <Content Include="app\img\Rig4.png" />
+    <Content Include="app\img\Rig5.png" />
+    <Content Include="app\img\Rig6.png" />
+    <Content Include="app\img\Rig7.png" />
     <Content Include="app\img\search.png" />
     <Content Include="app\img\search2.png" />
     <Content Include="app\img\search3.png" />
@@ -330,6 +340,15 @@
     <Content Include="app\img\solar2.png" />
     <Content Include="app\img\steam.png" />
     <Content Include="app\img\survey-down.png" />
+    <Content Include="app\img\survey-img1.gif" />
+    <Content Include="app\img\survey-img1.png" />
+    <Content Include="app\img\survey-img1b.png" />
+    <Content Include="app\img\survey-img2.gif" />
+    <Content Include="app\img\survey-img2.png" />
+    <Content Include="app\img\survey-img2c.png" />
+    <Content Include="app\img\survey-img3.gif" />
+    <Content Include="app\img\survey-img3.png" />
+    <Content Include="app\img\survey-img3c.png" />
     <Content Include="app\img\survey-right.png" />
     <Content Include="app\img\survey-up.png" />
     <Content Include="app\img\up.ico" />
@@ -372,6 +391,7 @@
     <Content Include="app\js\Item\Statistic.js" />
     <Content Include="app\js\map.js" />
     <Content Include="app\js\overallsearch.js" />
+    <Content Include="app\js\Plantform.js" />
     <Content Include="app\js\Region\Compare.js" />
     <Content Include="app\js\Region\Cost.js" />
     <Content Include="app\js\Region\Main.js" />

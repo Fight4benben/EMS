@@ -3,15 +3,201 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/app/css/dashboard.css">
+    <title>能源管理系统</title>
+    <script type="text/javascript">
+      // JavaScript Document
+      (function flexible (window, document) {
+        var docEl = document.documentElement;     //获取文档根节点并保存到变量docEl中(相当于获取到html对象)
+        var dpr = window.devicePixelRatio || 1;   //获取像素比，如果window.devicePixelRatio为false是dpr为1，如果window.devicePixelRatio大于1，那么dpr赋值取大的数
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
+        function setBodyFontSize () {
+          if (document.body) { //获取到body对象是否存在，个人觉得啰嗦
+            document.body.style.fontSize = (12 * dpr) + 'px';
+          }   
+          else {
+            document.addEventListener('DOMContentLoaded', setBodyFontSize);
+          }
+        }
+        setBodyFontSize();
+
+        // set 1rem = viewWidth / 10
+        function setRemUnit () {
+          var rem = docEl.clientWidth / 10
+          docEl.style.fontSize = rem + 'px'
+        }
+
+        setRemUnit()
+
+        // reset rem unit on page resize
+        window.addEventListener('resize', setRemUnit)
+        window.addEventListener('pageshow', function (e) {
+          if (e.persisted) {
+            setRemUnit()
+          }
+        })
+
+        // detect 0.5px supports
+        if (dpr >= 2) {
+          var fakeBody = document.createElement('body')
+          var testElement = document.createElement('div')
+          testElement.style.border = '.5px solid transparent'
+          fakeBody.appendChild(testElement)
+          docEl.appendChild(fakeBody)
+          if (testElement.offsetHeight === 1) {
+            docEl.classList.add('hairlines')
+          }
+          docEl.removeChild(fakeBody)
+        }
+      }(window, document))
+    </script>
+  </head>
+  <body>
+    <header>
+      <buttom type="button" class="fanhui"><a :href="javascript:history.back(-1)"></a></buttom>
+      <h1>能源管理平台</h1>
+    </header>
+    <div class="leftSide">
+      <div class="D-survey">
+        <h1>平台概况</h1>
+        <div class="D-survey1">
+          <div class="survey-img"></div>
+          <p>企业数量</p>
+          <h3>-</h3>
+          <p>个</p>
+        </div>
+        <div class="D-survey2">
+          <div class="survey-img"></div>
+          <p>网关数量</p>
+          <h3>-</h3>
+          <p>个</p>
+        </div>
+        <div class="D-survey3">
+          <div class="survey-img"></div>
+          <p>仪表数量</p>
+          <h3>-</h3>
+          <p>个</p>
+        </div>
+      </div>
+      <div class="D-survey D-run">
+        <h1>能源占比情况<span>（单位:tce）</span></h1> 
+        <div class="D-run1" id="pei">
+
+        </div>
+      </div>
     </div>
-</body>
+    <div class="MiddleSide">
+      <div class="D-time">
+        <p>累积运行<span>258</span>天</p>
+      </div>
+      <div class="D-map" id="map">
+        
+      </div>
+    </div>
+    <div class="D-survey RightSide">
+      <section>
+        <div class="date">
+          <span class="select" id="day">日</span><label>|</label><span id="month">月</span><label>|</label><span id="year">年</span>
+        </div>
+        <h1>能耗对比</h1>
+        <ul>
+          <li>
+            <span class="Rig1"></span>
+            <span class="title">电<br/>(kW.h)</span>
+            <div class="yesterday">
+              <p id="yesPower"></p>
+              <h3 id="yespowerValue">--</h3>
+            </div>
+            <div class="today">
+              <p id="dayPower"></p>
+              <h3 id="dayPowerValue">--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig2"></span>
+            <span class="title">水<br/>(㎡)</span>
+            <div class="yesterday">
+              <p id="yesWater"></p>
+              <h3 id="yesWaterValue">--</h3>
+            </div>
+            <div class="today">
+              <p id="dayWater"></p>
+              <h3 id="dayWaterValue">--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig3"></span>
+            <span class="title">燃气<br/>(㎡)</span>
+            <div class="yesterday">
+              <p id="yesGas"></p>
+              <h3 id="yesGasValue">--</h3>
+            </div>
+            <div class="today">
+              <p id="dayGas"></p>
+              <h3 id="dayGasValue">--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig4"></span>
+            <span class="title">蒸汽<br/>(㎡)</span>
+            <div class="yesterday">
+              <p id="yesWgas"></p>
+              <h3 id="yesWgasValue">--</h3>
+            </div>
+            <div class="today">
+              <p id="dayWgas"></p>
+              <h3 id="dayWgasValue">--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig5"></span>
+            <span class="title">压缩气体<br/>(㎡)</span>
+            <div class="yesterday">
+              <p></p>
+              <h3>--</h3>
+            </div>
+            <div class="today">
+              <p></p>
+              <h3>--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig6"></span>
+            <span class="title">冷<br/>(MJ)</span>
+            <div class="yesterday">
+              <p></p>
+              <h3>--</h3>
+            </div>
+            <div class="today">
+              <p></p>
+              <h3>--</h3>
+            </div>
+          </li>
+          <li>
+            <span class="Rig1 Rig7"></span>
+            <span class="title">热<br/>(MJ)</span>
+            <div class="yesterday">
+              <p></p>
+              <h3>--</h3>
+            </div>
+            <div class="today">
+              <p></p>
+              <h3>--</h3>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
 </html>
+<script src="/Assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="~/app/js/tools.js" type="text/javascript"></script>
+<script src="/Assets/plugins/echarts3/echarts.min.js"></script>
+<script src="/Assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=b2wLNebNNNs5rhY2ywCaX1mjrUSb1yGK"></script>
+<script type="text/javascript" src="/app/js/Plantform.js"></script>

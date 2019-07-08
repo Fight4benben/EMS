@@ -212,7 +212,6 @@ var EMS = {
 	Chart:{
 		//绘制echarts饼图
 		showPie:function(charts,$Pie,names,values,seriesName,legendFlag){
-
 			option = {
 				tooltip : {
 			        trigger: 'item',
@@ -238,6 +237,48 @@ var EMS = {
 			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
 			                }
 			            }
+			        }
+			    ],
+			    color:['#FF0000','#FF8C00', '#1E90FF', '#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+			};
+
+			$Pie.removeAttr('_echarts_instance_');
+			charts.init($Pie.get(0),'macarons').setOption(option);
+		},
+		showPieOver:function(charts,$Pie,names,values,seriesName,legendFlag){
+			option = {
+				tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+					right: '68%',  //图例距离左的距离
+					y: 'center',  //图例上下居中
+			        data: names,
+			        show:legendFlag
+			    },
+			    series : [
+			        {
+			            name: seriesName,
+			            type: 'pie',
+			            radius : '75%',
+			            center: ['50%', '50%'],
+			            data:values,
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+						},
+						// label:{
+						// 	normal:{
+						// 		textStyle:{
+						// 			color:'#ffff'
+						// 		}
+						// 	}
+						// }
 			        }
 			    ],
 			    color:['#FF0000','#FF8C00', '#1E90FF', '#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
