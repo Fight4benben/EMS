@@ -253,17 +253,20 @@ var EMS = {
 			    },
 			    legend: {
 			        orient: 'vertical',
-					right: '68%',  //图例距离左的距离
+					left: '70%',  //图例距离左的距离
 					y: 'center',  //图例上下居中
 			        data: names,
-			        show:legendFlag
+					show:legendFlag,
+					textStyle:{
+						color:'#ffff'
+					}
 			    },
 			    series : [
 			        {
 			            name: seriesName,
 			            type: 'pie',
-			            radius : '75%',
-			            center: ['50%', '50%'],
+			            radius : '80%',
+			            center: ['35%', '50%'],
 			            data:values,
 			            itemStyle: {
 			                emphasis: {
@@ -272,13 +275,6 @@ var EMS = {
 			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
 			                }
 						},
-						// label:{
-						// 	normal:{
-						// 		textStyle:{
-						// 			color:'#ffff'
-						// 		}
-						// 	}
-						// }
 			        }
 			    ],
 			    color:['#FF0000','#FF8C00', '#1E90FF', '#9ACD32', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']

@@ -51,7 +51,7 @@ var Plantform = (function(){
 			});
 
 			var labelArr=[];
-			bmap.centerAndZoom(pointArr[0],10);
+			bmap.centerAndZoom(pointArr[0],4);
 			bmap.enableScrollWheelZoom(true);
             var styleJson = [
                 {
@@ -178,28 +178,28 @@ var Plantform = (function(){
             $.each(dayData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        $("#yesPower").text('昨日用电');
-                        $("#yespowerValue").text(val.lastValue);
-                        $("#dayPower").text('当日用电');
-                        $("#dayPowerValue").text(val.value);
+                        $("#yesPower").text('今日用电');
+                        $("#yespowerValue").text(val.lastValue.toFixed(2));
+                        $("#dayPower").text('昨日用电');
+                        $("#dayPowerValue").text(val.value.toFixed(2));
                         break;
                     case "02000":
-                        $("#yesWater").text('昨日用水');
-                        $("#yesWaterValue").text(val.lastValue);
-                        $("#dayWater").text('当日用水');
-                        $("#dayWaterValue").text(val.value);
+                        $("#yesWater").text('今日用水');
+                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
+                        $("#dayWater").text('昨日用水');
+                        $("#dayWaterValue").text(val.value.toFixed(2));
                         break;
                     case "03000":
-                        $("#yesGas").text('昨日燃气');
-                        $("#yesGasValue").text(val.lastValue);
-                        $("#dayGas").text('当日燃气');
-                        $("#dayGasValue").text(val.value);
+                        $("#yesGas").text('今日燃气');
+                        $("#yesGasValue").text(val.lastValue.toFixed(2));
+                        $("#dayGas").text('昨日燃气');
+                        $("#dayGasValue").text(val.value.toFixed(2));
                         break;
                     case "40000":
-                        $("#yesWgas").text('昨日蒸汽');
-                        $("#yesWgasValue").text(val.lastValue);
-                        $("#dayWgas").text('当日蒸汽');
-                        $("#dayWgasValue").text(val.value);
+                        $("#yesWgas").text('今日蒸汽');
+                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
+                        $("#dayWgas").text('昨日蒸汽');
+                        $("#dayWgasValue").text(val.value.toFixed(2));
                         break;
                     default:
                         break;
@@ -207,34 +207,37 @@ var Plantform = (function(){
             })
         };
         $("#day").click(function(){
+            initDom();
             $("#day").attr("class",'select');
             $("#month").removeAttr("class",'select');
             $("#year").removeAttr("class",'select');
+
             $.each(dayData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        $("#yesPower").text('昨日用电');
-                        $("#yespowerValue").text(val.lastValue);
-                        $("#dayPower").text('当日用电');
-                        $("#dayPowerValue").text(val.value);
+                        $("#Unit").html('电'+'<br/>(kW.h)')
+                        $("#yesPower").text('今日用电');
+                        $("#yespowerValue").text(val.lastValue.toFixed(2));
+                        $("#dayPower").text('昨日用电');
+                        $("#dayPowerValue").text(val.value.toFixed(2));
                         break;
                     case "02000":
-                        $("#yesWater").text('昨日用水');
-                        $("#yesWaterValue").text(val.lastValue);
-                        $("#dayWater").text('当日用水');
-                        $("#dayWaterValue").text(val.value);
+                        $("#yesWater").text('今日用水');
+                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
+                        $("#dayWater").text('昨日用水');
+                        $("#dayWaterValue").text(val.value.toFixed(2));
                         break;
                     case "03000":
-                        $("#yesGas").text('昨日燃气');
-                        $("#yesGasValue").text(val.lastValue);
-                        $("#dayGas").text('当日燃气');
-                        $("#dayGasValue").text(val.value);
+                        $("#yesGas").text('今日燃气');
+                        $("#yesGasValue").text(val.lastValue.toFixed(2));
+                        $("#dayGas").text('昨日燃气');
+                        $("#dayGasValue").text(val.value.toFixed(2));
                         break;
                     case "40000":
-                        $("#yesWgas").text('昨日蒸汽');
-                        $("#yesWgasValue").text(val.lastValue);
-                        $("#dayWgas").text('当日蒸汽');
-                        $("#dayWgasValue").text(val.value);
+                        $("#yesWgas").text('今日蒸汽');
+                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
+                        $("#dayWgas").text('昨日蒸汽');
+                        $("#dayWgasValue").text(val.value.toFixed(2));
                         break;
                     default:
                         break;
@@ -242,34 +245,36 @@ var Plantform = (function(){
             })
         });
         $("#month").click(function(){
+            initDom();
             $("#month").attr("class",'select');
             $("#day").removeAttr("class",'select');
             $("#year").removeAttr("class",'select');
             $.each(monthData,function(key,val){
                 switch (val.id) {
                     case "01000":
+                        $("#Unit").html('电'+'<br/>(kW.h)')
                         $("#yesPower").text('上月用电');
-                        $("#yespowerValue").text(val.lastValue);
+                        $("#yespowerValue").text(val.lastValue.toFixed(2));
                         $("#dayPower").text('当月用电');
-                        $("#dayPowerValue").text(val.value);
+                        $("#dayPowerValue").text(val.value.toFixed(2));
                         break;
                     case "02000":
                         $("#yesWater").text('上月用水');
-                        $("#yesWaterValue").text(val.lastValue);
+                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('当月用水');
-                        $("#dayWaterValue").text(val.value);
+                        $("#dayWaterValue").text(val.value.toFixed(2));
                         break;
                     case "03000":
                         $("#yesGas").text('上月燃气');
-                        $("#yesGasValue").text(val.lastValue);
+                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('当月燃气');
-                        $("#dayGasValue").text(val.value);
+                        $("#dayGasValue").text(val.value.toFixed(2));
                         break;
                     case "40000":
                         $("#yesWgas").text('上月蒸汽');
-                        $("#yesWgasValue").text(val.lastValue);
+                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('当月蒸汽');
-                        $("#dayWgasValue").text(val.value);
+                        $("#dayWgasValue").text(val.value.toFixed(2));
                         break;
                     default:
                         break;
@@ -277,40 +282,63 @@ var Plantform = (function(){
             })
         });
         $("#year").click(function(){
+            initDom();
             $("#year").attr("class",'select');
             $("#day").removeAttr("class",'select');
             $("#month").removeAttr("class",'select');
-            $.each(monthData,function(key,val){
+            $.each(yearData,function(key,val){
                 switch (val.id) {
                     case "01000":
+                        $("#Unit").html('电'+'<br/>(MW.h)')
                         $("#yesPower").text('去年用电');
-                        $("#yespowerValue").text(val.lastValue);
+                        $("#yespowerValue").text((val.lastValue/1000).toFixed(2));
                         $("#dayPower").text('今年用电');
-                        $("#dayPowerValue").text(val.value);
+                        $("#dayPowerValue").text((val.value/1000).toFixed(2));
                         break;
                     case "02000":
                         $("#yesWater").text('去年用水');
-                        $("#yesWaterValue").text(val.lastValue);
+                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('今年用水');
-                        $("#dayWaterValue").text(val.value);
+                        $("#dayWaterValue").text(val.value.toFixed(2));
                         break;
                     case "03000":
                         $("#yesGas").text('去年燃气');
-                        $("#yesGasValue").text(val.lastValue);
+                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('今年燃气');
-                        $("#dayGasValue").text(val.value);
+                        $("#dayGasValue").text(val.value.toFixed(2));
                         break;
                     case "40000":
                         $("#yesWgas").text('去年蒸汽');
-                        $("#yesWgasValue").text(val.lastValue);
+                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('今年蒸汽');
-                        $("#dayWgasValue").text(val.value);
+                        $("#dayWgasValue").text(val.value.toFixed(2));
                         break;
                     default:
                         break;
                 }
             })
         });
+        function initDom(){
+            $("#yesPower").text('');
+            $("#yespowerValue").text('--');
+            $("#dayPower").text('');
+            $("#dayPowerValue").text('--');
+
+            $("#yesWater").text('');
+            $("#yesWaterValue").text('--');
+            $("#dayWater").text('');
+            $("#dayWaterValue").text('--');
+
+            $("#yesGas").text('');
+            $("#yesGasValue").text('--');
+            $("#dayGas").text('');
+            $("#dayGasValue").text('--');
+
+            $("#yesWgas").text('');
+            $("#yesWgasValue").text('--');
+            $("#dayWgas").text('');
+            $("#dayWgasValue").text('--');
+        }
     }
 
 	return _plantform;
