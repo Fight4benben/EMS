@@ -48,7 +48,7 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public MeterAlarmSetViewModel GetViewModel(string userName,string buildID)
+        public MeterAlarmSetViewModel GetViewModel(string userName, string buildID)
         {
             MeterAlarmSetViewModel viewModel = new MeterAlarmSetViewModel();
 
@@ -93,6 +93,123 @@ namespace EMS.DAL.Services
             viewModel.Data = data;
 
             return viewModel;
+        }
+
+        public object SetAlarmInfo(MeterAlarmSet setInfo)
+        {
+            ResultState resultState = new ResultState();
+            if (string.IsNullOrEmpty(setInfo.BuildID))
+            {
+                resultState.State = 1;
+                resultState.Details = "建筑ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            if (string.IsNullOrEmpty(setInfo.MeterID))
+            {
+                resultState.State = 1;
+                resultState.Details = "仪表ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            if (string.IsNullOrEmpty(setInfo.ParamID))
+            {
+                resultState.State = 1;
+                resultState.Details = "参数ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            int result = context.SetAlarmInfo(setInfo);
+
+            if (result > 0)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK";
+
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG";
+
+            }
+
+            return resultState;
+        }
+
+
+        public object DeleteParam(MeterAlarmSet setInfo)
+        {
+            ResultState resultState = new ResultState();
+            if (string.IsNullOrEmpty(setInfo.BuildID))
+            {
+                resultState.State = 1;
+                resultState.Details = "建筑ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            if (string.IsNullOrEmpty(setInfo.MeterID))
+            {
+                resultState.State = 1;
+                resultState.Details = "仪表ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            if (string.IsNullOrEmpty(setInfo.ParamID))
+            {
+                resultState.State = 1;
+                resultState.Details = "参数ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            int result = context.DeleteParam(setInfo);
+
+            if (result > 0)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK";
+
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG";
+
+            }
+
+            return resultState;
+        }
+
+        public object DeleteMeter(MeterAlarmSet setInfo)
+        {
+            ResultState resultState = new ResultState();
+            if (string.IsNullOrEmpty(setInfo.BuildID))
+            {
+                resultState.State = 1;
+                resultState.Details = "建筑ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            if (string.IsNullOrEmpty(setInfo.MeterID))
+            {
+                resultState.State = 1;
+                resultState.Details = "仪表ID不能为空，请输入正确的建筑ID。";
+                return resultState;
+            }
+
+            int result = context.DeleteMeter(setInfo);
+            if (result > 0)
+            {
+                resultState.State = 0;
+                resultState.Details = "OK";
+            }
+            else
+            {
+                resultState.State = 1;
+                resultState.Details = "NG";
+            }
+
+            return resultState;
         }
     }
 }

@@ -10,5 +10,8 @@ namespace EMS.DAL.IRepository
     public interface IMeterAlarmSetDbContext
     {
         List<MeterAlarmSet> GetMeterParamList(string buildID, string circuitID);
+        int SetAlarmInfo(MeterAlarmSet setInfo);
+        int DeleteParam(MeterAlarmSet setInfo);
+        int DeleteMeter(MeterAlarmSet setInfo);
     }
 }
