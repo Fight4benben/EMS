@@ -1,0 +1,247 @@
+/*浅蓝色*/
+/*白色*/
+html {
+  height: 100%;
+}
+body {
+  width: 100%;
+  background: url(../img/dashboard-02.jpg) no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  margin: 0;
+  height: 100%;
+  font-size: 0.085rem!important;
+}
+h1,
+section h2 {
+  color: #8bf7f5;
+}
+.leftSide,
+.MiddleSide,
+.RightSide,
+.num1,
+.num2,
+.num3 {
+  float: left;
+  display: inline;
+}
+.leftSide section {
+  width: 100%;
+}
+header h1 {
+  font-size: 0.25rem;
+  margin-top: 1%;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.fanhui {
+  width: 10%;
+  height: 10%;
+  display: block;
+  position: absolute;
+  background: url(../img/fanhui.png) no-repeat;
+  background-size: 16%;
+  left: 1%;
+  cursor: pointer;
+}
+.D-survey1 p,
+.D-survey2 p,
+.D-survey3 p {
+  margin: 0;
+}
+.D-survey1 h3,
+.D-survey2 h3,
+.D-survey3 h3 {
+  margin: 0.03rem 0;
+}
+.D-survey h1 {
+  text-align: left;
+  font-size: 0.12rem;
+}
+.leftSide,
+.MiddleSide,
+.RightSide {
+  color: #fff;
+}
+.leftSide,
+.RightSide {
+  width: 20%;
+}
+.MiddleSide {
+  width: 60%;
+}
+.D-survey {
+  top: 17%;
+  left: 4%;
+  width: 23.5%;
+  height: 32%;
+  position: absolute;
+}
+.D-survey h3 {
+  font-size: 0.116rem;
+  font-family: SourceHanSansCN-Bold;
+  color: #8bf7f5;
+}
+.D-survey > div {
+  float: left;
+  width: 32%;
+}
+.D-survey1 .survey-img {
+  background: url(../img/survey-img1.png) no-repeat 50% 58%;
+  background-size: 48%;
+}
+.D-survey1 div,
+.D-survey2 div,
+.D-survey3 div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: 50%;
+}
+.D-survey1,
+.D-survey2,
+.D-survey3,
+.D-run1 {
+  top: 22%;
+  height: 78%;
+  background-color: rgba(255, 255, 255, 0.18);
+  position: absolute;
+}
+.D-survey2 {
+  left: 34%;
+}
+.leftSide .D-survey2 .survey-img {
+  background: url(../img/survey-img2.png) no-repeat 50% 50%;
+  background-size: 45%;
+}
+.D-survey3 {
+  left: 67.8%;
+}
+.leftSide .D-survey3 .survey-img {
+  background: url(../img/survey-img3.png) no-repeat 50% 60%;
+  background-size: 34%;
+}
+.D-survey1 p {
+  font-size: 0.09rem;
+  color: #fff;
+}
+.D-run {
+  top: 59%;
+}
+.leftSide .D-run1 {
+  width: 100%;
+}
+.D-time {
+  position: absolute;
+  top: 14.2%;
+  left: 45.8%;
+  font-size: 0.12rem;
+  color: #8bf7f5;
+}
+.D-time span {
+  font-size: 0.18rem;
+  padding: 0 0.05rem;
+}
+.D-map {
+  position: absolute;
+  -webkit-clip-path: ellipse(43% 57% at 49% 50%);
+  left: 28%;
+  top: 25%;
+  width: 45.8%;
+  height: 65%;
+  overflow: hidden;
+}
+.RightSide {
+  left: 72.5%;
+  position: absolute;
+  height: 73.5%;
+}
+.D-survey {
+  text-align: center;
+}
+.date {
+  float: left;
+  padding-left: 0.2rem;
+  cursor: pointer;
+}
+.date span {
+  padding: 0.03rem 0.09rem;
+  display: block;
+  color: #fff;
+  float: left;
+  display: inline;
+}
+.date label {
+  padding: 0.03rem 0.05rem;
+  display: block;
+  float: left;
+  display: inline;
+}
+.date .select {
+  border-radius: 5px;
+  background: #8bf7f5;
+  color: #132260;
+}
+.RightSide h1 {
+  text-align: right;
+}
+.RightSide li {
+  box-sizing: border-box;
+  height: 11.7%;
+  line-height: 11.7%;
+  display: block;
+  margin-bottom: 0.05rem;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+.RightSide section,
+.RightSide section ul {
+  height: 100%;
+}
+.Rig1 {
+  width: 20%;
+  height: 100%;
+  display: block;
+  float: left;
+  display: inline;
+  background: url(../img/Rig1.png) no-repeat 50% 50%;
+}
+.Rig2 {
+  background: url(../img/Rig2.png) no-repeat 50% 50%;
+}
+.Rig2 {
+  background: url(../img/Rig2.png) no-repeat 50% 50%;
+}
+.Rig3 {
+  background: url(../img/Rig3.png) no-repeat 50% 50%;
+}
+.Rig4 {
+  background: url(../img/Rig4.png) no-repeat 50% 50%;
+}
+.Rig5 {
+  background: url(../img/Rig5.png) no-repeat 50% 50%;
+}
+.Rig6 {
+  background: url(../img/Rig6.png) no-repeat 50% 50%;
+}
+.Rig7 {
+  background: url(../img/Rig7.png) no-repeat 50% 50%;
+}
+.today,
+.yesterday {
+  padding-top: 0.05rem;
+  float: right;
+  display: inline;
+}
+.today {
+  margin-right: 0.2rem;
+}
+.yesterday {
+  margin-right: 0.1rem;
+}
+.title {
+  display: block;
+  float: left;
+  display: inline;
+  line-height: 0.1rem;
+  padding-top: 0.12rem;
+}
