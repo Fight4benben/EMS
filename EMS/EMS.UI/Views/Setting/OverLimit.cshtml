@@ -1,0 +1,114 @@
+﻿
+<div class="container-fluid main-top equipAlarm">
+    <div class="col-xs-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                建筑名称：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="buildinglist"></select>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="filter-width">
+                分类能耗：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="codelist"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="selected" class="col-xs-12 R-Columnar">
+
+        <div class=""  style="margin-top: 7px; float:left;width:20%;height:100%">
+            <div class="treeview">
+                <div id="treeview"></div>
+            </div>
+        </div>
+
+        <div class="content">
+
+        </div>
+    </div>
+
+     <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-ms" role="document" style="width:400px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title" id="myModalLabel">修改</h5>
+          </div>
+          <div class="modal-body" style="height:470px">
+            <div class="childBD">
+                <div class="row">
+                    <input class="com-md-8 updateInput" id="BuildID" style="display:none" type="text"/>
+                    <span class="col-md-4 updateSpan">建筑名称:</span><input class="com-md-8 updateInput" id="BuildName" readonly type="text"/>
+
+                    <span class="col-md-4 updateSpan">仪表名称：</span><input class="com-md-8 updateInput" id="MeterName" readonly type="text"/>
+                    <input class="com-md-8 updateInput" id="MeterID" style="display:none" type="text"/>
+
+                    <span class="col-md-4 updateSpan">参数名称：</span><input class="com-md-8 updateInput" id="ParamName" readonly type="text"/>
+                    <input class="com-md-8 updateInput" id="ParamID" style="display:none" type="text"/>
+
+                    <span class="col-md-4 updateSpan">参数代码：</span><input class="com-md-8 updateInput" id="ParamCode" type="text"/>
+                    <span class="col-md-4 updateSpan">报警等级：</span><input class="com-md-8 updateInput" id="Level" type="text"/>
+                    <span class="col-md-4 updateSpan">延时时间：</span><input class="com-md-8 updateInput" id="Delay" type="text"/>
+                    <span class="col-md-4 updateSpan">低低限：</span><input class="com-md-8 updateInput" id="Lowest" type="text"/>
+                    <span class="col-md-4 updateSpan">低限：</span><input class="com-md-8 updateInput" id="Low" type="text"/>
+                    <span class="col-md-4 updateSpan">高限：</span><input class="com-md-8 updateInput" id="High" type="text"/>
+                    <span class="col-md-4 updateSpan">高高限：</span><input class="com-md-8 updateInput" id="Highest" type="text"/>
+                    <span class="col-md-4 updateSpan">是否启用：</span>
+                    <!-- <input class="com-md-8 updateInput" id="State" type="text"/> -->
+                    <select id="State" class="selState">
+                        <option value="1">启用</option>
+                        <option value="0">不启用</option>
+                    </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="bindBtn" type="button" class="btn btn-primary">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<script src="~/app/js/Alarm/OverLAlarm.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+
+<style>
+    .treeview {
+        height: 100%!important;
+    }
+    .content {
+        width: calc(79%);
+        float: right;
+        height: 100%;
+        margin-top: 7px;
+    }
+     .updateSpan{
+        font-size: 17px;
+        margin-top: 5px;
+    }
+    .updateInput{
+        width: 220px;
+        line-height: 25px;
+        margin-top: 5px;
+    }
+    .selState{
+        width: 220px;
+        line-height: 45px;
+        margin-top: 5px;
+        height:30px;
+    }
+</style>

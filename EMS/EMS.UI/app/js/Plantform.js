@@ -51,7 +51,7 @@ var Plantform = (function(){
 			});
 
 			var labelArr=[];
-			bmap.centerAndZoom(pointArr[0],4);
+			bmap.centerAndZoom(pointArr[0],5);
 			bmap.enableScrollWheelZoom(true);
             var styleJson = [
                 {
@@ -128,6 +128,30 @@ var Plantform = (function(){
                     "stylers": {
                         "visibility": "off"
                     }
+                },{
+                    "featureType": "city",
+                    "elementType": "labels.icon",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                }, {
+                    "featureType": "city",
+                    "elementType": "labels",
+                    "stylers": {
+                        "visibility": "on"
+                    }
+                },{
+                    "featureType": "city",
+                    "elementType": "labels.text.fill",
+                    "stylers": {
+                        "color": "#2dc4bbff"
+                    }
+                }, {
+                    "featureType": "city",
+                    "elementType": "labels.text.stroke",
+                    "stylers": {
+                        "color": "#ffffff00"
+                    }
                 },
             ];
             bmap.setMapStyle({styleJson:styleJson});
@@ -179,27 +203,47 @@ var Plantform = (function(){
                 switch (val.id) {
                     case "01000":
                         $("#yesPower").text('今日用电');
-                        $("#yespowerValue").text(val.lastValue.toFixed(2));
                         $("#dayPower").text('昨日用电');
-                        $("#dayPowerValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "02000":
                         $("#yesWater").text('今日用水');
-                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('昨日用水');
-                        $("#dayWaterValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "03000":
                         $("#yesGas").text('今日燃气');
-                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('昨日燃气');
-                        $("#dayGasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "40000":
                         $("#yesWgas").text('今日蒸汽');
-                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('昨日蒸汽');
-                        $("#dayWgasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     default:
                         break;
@@ -215,29 +259,49 @@ var Plantform = (function(){
             $.each(dayData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        $("#Unit").html('电'+'<br/>(kW.h)')
+                        //$("#Unit").html('电'+'<br/>(kW.h)')
                         $("#yesPower").text('今日用电');
-                        $("#yespowerValue").text(val.lastValue.toFixed(2));
                         $("#dayPower").text('昨日用电');
-                        $("#dayPowerValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "02000":
                         $("#yesWater").text('今日用水');
-                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('昨日用水');
-                        $("#dayWaterValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "03000":
                         $("#yesGas").text('今日燃气');
-                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('昨日燃气');
-                        $("#dayGasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "40000":
                         $("#yesWgas").text('今日蒸汽');
-                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('昨日蒸汽');
-                        $("#dayWgasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     default:
                         break;
@@ -252,29 +316,49 @@ var Plantform = (function(){
             $.each(monthData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        $("#Unit").html('电'+'<br/>(kW.h)')
+                        //$("#Unit").html('电'+'<br/>(kW.h)')
                         $("#yesPower").text('上月用电');
-                        $("#yespowerValue").text(val.lastValue.toFixed(2));
                         $("#dayPower").text('当月用电');
-                        $("#dayPowerValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "02000":
                         $("#yesWater").text('上月用水');
-                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('当月用水');
-                        $("#dayWaterValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "03000":
                         $("#yesGas").text('上月燃气');
-                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('当月燃气');
-                        $("#dayGasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "40000":
                         $("#yesWgas").text('上月蒸汽');
-                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('当月蒸汽');
-                        $("#dayWgasValue").text(val.value.toFixed(2));
+                        if(val.lastValue >=10000 || val.value >= 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }else{
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     default:
                         break;
@@ -289,29 +373,166 @@ var Plantform = (function(){
             $.each(yearData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        $("#Unit").html('电'+'<br/>(MW.h)')
+                        //$("#Unit").html('电'+'<br/>(MW.h)')
                         $("#yesPower").text('去年用电');
-                        $("#yespowerValue").text((val.lastValue/1000).toFixed(2));
                         $("#dayPower").text('今年用电');
-                        $("#dayPowerValue").text((val.value/1000).toFixed(2));
+                        if(val.lastValue === undefined && val.value === undefined){
+                            $("#yespowerValue").text('--');
+                            $("#dayPowerValue").text('--');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value >= 10000){
+                            $("#yespowerValue").text('--');
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value < 10000){
+                            $("#yespowerValue").text('--');
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue < 10000){
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue >= 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value >= 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value < 10000){
+                            $("#yespowerValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value >= 10000){
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value < 10000){
+                            $("#yespowerValue").text((val.lastValue).toFixed(1));
+                            $("#dayPowerValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "02000":
                         $("#yesWater").text('去年用水');
-                        $("#yesWaterValue").text(val.lastValue.toFixed(2));
                         $("#dayWater").text('今年用水');
-                        $("#dayWaterValue").text(val.value.toFixed(2));
+                        if(val.lastValue === undefined && val.value === undefined){
+                            $("#yesWaterValue").text('--');
+                            $("#dayWaterValue").text('--');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value >= 10000){
+                            $("#yesWaterValue").text('--');
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value < 10000){
+                            $("#yesWaterValue").text('--');
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue < 10000){
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue >= 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value >= 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value < 10000){
+                            $("#yesWaterValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value >= 10000){
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value < 10000){
+                            $("#yesWaterValue").text((val.lastValue).toFixed(1));
+                            $("#dayWaterValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "03000":
                         $("#yesGas").text('去年燃气');
-                        $("#yesGasValue").text(val.lastValue.toFixed(2));
                         $("#dayGas").text('今年燃气');
-                        $("#dayGasValue").text(val.value.toFixed(2));
+                        if(val.lastValue === undefined && val.value === undefined){
+                            $("#yesGasValue").text('--');
+                            $("#dayGasValue").text('--');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value >= 10000){
+                            $("#yesGasValue").text('--');
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value < 10000){
+                            $("#yesGasValue").text('--');
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue < 10000){
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue >= 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value >= 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value < 10000){
+                            $("#yesGasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value >= 10000){
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value < 10000){
+                            $("#yesGasValue").text((val.lastValue).toFixed(1));
+                            $("#dayGasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     case "40000":
                         $("#yesWgas").text('去年蒸汽');
-                        $("#yesWgasValue").text(val.lastValue.toFixed(2));
                         $("#dayWgas").text('今年蒸汽');
-                        $("#dayWgasValue").text(val.value.toFixed(2));
+
+                        if(val.lastValue === undefined && val.value === undefined){
+                            $("#yesWgasValue").text('--');
+                            $("#dayWgasValue").text('--');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value >= 10000){
+                            $("#yesWgasValue").text('--');
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue === undefined && val.value !== undefined && val.value < 10000){
+                            $("#yesWgasValue").text('--');
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue < 10000){
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value === undefined && val.lastValue >= 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text('--');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value >= 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue >= 10000 && val.value < 10000){
+                            $("#yesWgasValue").text((val.lastValue/10000).toFixed(2)+'万');
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value >= 10000){
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text((val.value/10000).toFixed(2)+'万');
+                        }
+                        if(val.lastValue !== undefined && val.value !== undefined && val.lastValue < 10000 && val.value < 10000){
+                            $("#yesWgasValue").text((val.lastValue).toFixed(1));
+                            $("#dayWgasValue").text((val.value).toFixed(1));
+                        }
                         break;
                     default:
                         break;
@@ -338,6 +559,11 @@ var Plantform = (function(){
             $("#yesWgasValue").text('--');
             $("#dayWgas").text('');
             $("#dayWgasValue").text('--');
+        };
+        setTimeout(refresh,300000);
+        function refresh(){
+            getDataFromServer(baseUrl,"");
+            setTimeout(refresh,300000)
         }
     }
 
