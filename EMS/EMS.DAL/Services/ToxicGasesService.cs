@@ -44,7 +44,7 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public object GetViewModel(string userName,string buildID)
+        public object GetViewModel(string userName, string buildID)
         {
             ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
 
@@ -60,7 +60,16 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public object GetViewModel(string userName, string buildID,string meterID)
+        public object GetViewModel(string userName, string buildID, string meterID)
+        {
+            ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
+
+            viewModel.Data = context.GetOneMeterValue(meterID);
+
+            return viewModel;
+        }
+
+        public object GetHistoryDataViewModel(string userName, string buildID, string meterID, string date)
         {
             ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
 
