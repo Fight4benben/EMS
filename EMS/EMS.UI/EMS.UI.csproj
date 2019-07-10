@@ -366,6 +366,7 @@
     <Content Include="app\js\Alarm\DeviceAlarm.js" />
     <Content Include="app\js\Alarm\DeviceLimitValueAlarm.js" />
     <Content Include="app\js\Alarm\OutOfWork.js" />
+    <Content Include="app\js\Alarm\OverLAlarm.js" />
     <Content Include="app\js\Alarm\OverlimitAlarm.js" />
     <Content Include="app\js\Circuit\CircuitCompare.js" />
     <Content Include="app\js\Circuit\CircuitMain.js" />
@@ -796,6 +797,7 @@
     <Content Include="Views\Circuit\NoWorkDay.cshtml" />
     <Content Include="Views\PlatformView\Index.cshtml" />
     <Content Include="Views\Setting\Build.cshtml" />
+    <Content Include="Views\Setting\OverLimit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

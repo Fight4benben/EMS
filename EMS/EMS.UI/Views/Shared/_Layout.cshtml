@@ -74,6 +74,8 @@
     <script src="/Assets/plugins/jqx/js/jqxpivotgrid.js"></script>
     <script src="/Assets/plugins/jqx/js/jqxscrollbar.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.13/lodash.min.js"></script>
+
     <script src="/Assets/scripts/bootstrap-pagination.min.js" type="text/javascript"></script>
     <script src="/Assets/plugins/jqueryPagination/jquery.pagination.min.js"></script>
     @RenderPage("~/Views/Shared/_Header.cshtml")
@@ -112,8 +114,8 @@
             <button type="button" class="close" style="color:black" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <!-- <h5 class="modal-title" id="myModalLabel">事件</h5> -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active" data-id="tabContent1"><a href="#">参数越限</a></li>
-                <li role="presentation" data-id="tabContent2"><a href="#">仪表断线</a></li>
+                <li role="presentation" class="active" data-id="tabContent1"><a href="#">报警列表</a></li>
+                <!-- <li role="presentation" data-id="tabContent2"><a href="#">仪表断线</a></li> -->
             </ul>
           </div>
           <div class="modal-body" style="height:520px">

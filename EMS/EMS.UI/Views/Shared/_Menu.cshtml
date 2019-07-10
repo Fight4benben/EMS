@@ -281,6 +281,10 @@
                         {
                             <li id="menu_build_setting" class=""><a href="~/Setting/Build"><i class="fa fa-caret-right"></i>客户信息</a></li>
                         }
+                        @if (menu.Menus.Contains("9.7") || menu.Menus.Contains("all"))
+                        {
+                            <li id="menu_overlimit_setting" class=""><a href="~/Setting/OverLimit"><i class="fa fa-caret-right"></i>参数越限设置</a></li>
+                        }
                     </ul>
                 </li>
             }
