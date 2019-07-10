@@ -100,8 +100,10 @@
     <Compile Include="Entities\AlarmLimitValue.cs" />
     <Compile Include="Entities\MeterAlarmInfo.cs" />
     <Compile Include="Entities\MeterAlarmLog.cs" />
+    <Compile Include="Entities\MeterList.cs" />
     <Compile Include="Entities\MeterParam.cs" />
     <Compile Include="Entities\MeterParamInfo.cs" />
+    <Compile Include="Entities\MeterValue.cs" />
     <Compile Include="Entities\MultiRateData.cs" />
     <Compile Include="Entities\NoWorkDay.cs" />
     <Compile Include="Entities\PageInfo.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="IRepository\Home\IMapDbContext.cs" />
     <Compile Include="IRepository\Home\IOverAllSearchDbContext.cs" />
     <Compile Include="IRepository\IMeterAlarmDbContext.cs" />
+    <Compile Include="IRepository\IToxicGasesDbContext.cs" />
     <Compile Include="IRepository\Region\IPriceDbContext.cs" />
     <Compile Include="IRepository\Region\IRegionCompareDbContext.cs" />
     <Compile Include="IRepository\Region\IRegionMainDbContext.cs" />
@@ -203,6 +206,7 @@
     <Compile Include="RepositoryImp\Setting\SystemLogDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserSetDbContext.cs" />
     <Compile Include="RepositoryImp\Setting\UserBuildingDbContext.cs" />
+    <Compile Include="RepositoryImp\ToxicGasesDbContext.cs" />
     <Compile Include="RepositoryImp\TreeViewDbContext.cs" />
     <Compile Include="RepositoryImp\UserContext.cs" />
     <Compile Include="Services\Alarm\AlarmDepartmentCompletionRateService.cs" />
@@ -251,6 +255,7 @@
     <Compile Include="Services\Setting\UserMenuService.cs" />
     <Compile Include="Services\Setting\UserSetService.cs" />
     <Compile Include="Services\Setting\UserBuildingService.cs" />
+    <Compile Include="Services\ToxicGasesService.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentCompletionRateResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentFreeTimeResources.cs" />
     <Compile Include="StaticResources\Alarm\AlarmDepartmentOverLimitResources.cs" />
@@ -295,6 +300,7 @@
     <Compile Include="StaticResources\Setting\UserSetResources.cs" />
     <Compile Include="StaticResources\Setting\UserBuildingResources.cs" />
     <Compile Include="StaticResources\SharedResources.cs" />
+    <Compile Include="StaticResources\ToxicGasesResources.cs" />
     <Compile Include="StaticResources\TreeViewResources.cs" />
     <Compile Include="Utils\BinaryToDouble.cs" />
     <Compile Include="Utils\Util.cs" />
@@ -342,6 +348,7 @@
     <Compile Include="ViewModels\Setting\UserMenuViewModel.cs" />
     <Compile Include="ViewModels\Setting\UserSetViewModel.cs" />
     <Compile Include="ViewModels\Setting\UserBuildingViewModel.cs" />
+    <Compile Include="ViewModels\ToxicGasesViewModel.cs" />
     <Compile Include="ViewModels\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

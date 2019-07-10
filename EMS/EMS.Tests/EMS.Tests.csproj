@@ -159,6 +159,7 @@
     <Compile Include="Services\Setting\UserMenuServiceTest.cs" />
     <Compile Include="Services\Setting\UserSetServiceTest.cs" />
     <Compile Include="Services\THParamServiceTest.cs" />
+    <Compile Include="Services\ToxicGasesServiceTest.cs" />
     <Compile Include="Utils\UtilTest.cs" />
   </ItemGroup>
   <ItemGroup>

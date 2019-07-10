@@ -136,6 +136,7 @@ namespace EMS.DAL.RepositoryImp
             };
             return _EMSdb.Database.SqlQuery<ParamClassify>(HistoryParamResources.ParamClassifySQL, sqlParameters).ToList();
         }
+
         /// <summary>
         /// 获取仪表所有参数信息
         /// </summary>
