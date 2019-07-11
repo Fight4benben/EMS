@@ -63,6 +63,50 @@ namespace EMS.DAL.RepositoryImp
             return historyValueList;
         }
 
+        /// <summary>
+        /// 根据仪表ID，获取仪表所有的参数的值
+        /// </summary>
+        /// <param name="meterID"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        public List<HistoryParameterValue> GetParamByMeterIDValue(string meterID, string dateTime, int step)
+        {
+            Acrel.HisDB.GetData getData = new Acrel.HisDB.GetData();
+            List<HistoryParameterValue> historyValueList = new List<HistoryParameterValue>();
+            DateTime nowTime = DateTime.Now;
+            DateTime endTime;
+
+            DateTime startTime = Util.ConvertString2DateTime(dateTime, "yyyy-MM-dd");
+
+            //如果查询是的时间是今天，则结束时间为小于当前时间的为5的倍数的时间
+            if (nowTime.Day == startTime.Day && nowTime.Month == startTime.Month && nowTime.Year == startTime.Year)
+            {
+                endTime = startTime.AddHours(nowTime.Hour).AddMinutes(nowTime.Minute - nowTime.Minute % 5 - 5);
+            }
+            else
+            {
+                //获取某天的23:55:00
+                endTime = startTime.AddDays(1).AddMinutes(-5);
+            }
+
+            List<HistoryBinarys> historyBinarys = GetHistoryBinaryStringByMeterID(meterID, startTime);
+
+            foreach (HistoryBinarys item in historyBinarys)
+            {
+                HistoryParameterValue historyValue = new HistoryParameterValue();
+                historyValue.ID = item.CircuitID;
+                historyValue.Name = item.CircuitName;
+                historyValue.ParamCode = item.ParamCode;
+                historyValue.ParamName = item.ParamName;
+                historyValue.Values = ConvertDicToList(getData.GetContinueBytesOfFive(item.Value, startTime, endTime, step));
+
+                historyValueList.Add(historyValue);
+            }
+
+            return historyValueList;
+        }
+
         public List<TimeValue> ConvertDicToList(Dictionary<DateTime, double> dic)
         {
             List<TimeValue> resultList = new List<TimeValue>();
@@ -105,12 +149,42 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
         }
 
+        public List<HistoryBinarys> GetHistoryBinaryStringByMeterID(string meterID, string[] meterParamIds, DateTime time)
+        {
+            string month = time.Month.ToString("00");
+            string meterparams = "('" + string.Join("','", meterParamIds) + "')";
+            string sql = "";
+
+            sql = @"SELECT Meter.F_MeterID AS CircuitID, Meter.F_MeterName AS CircuitName
+                                , ParamInfo.F_MeterParamName AS ParamName,ParamInfo.F_MeterParaCode ParamCode
+                                , F_Month" + month +
+                                @" AS Value FROM HistoryData WITH(NOLOCK)
+                                INNER JOIN EMS.dbo.T_ST_MeterUserInfo Meter ON Meter.F_MeterID=HistoryData.F_MeterID
+	                            INNER JOIN EMS.dbo.T_ST_MeterParamInfo ParamInfo ON ParamInfo.F_MeterParamID= HistoryData.F_MeterParamID
+                                WHERE F_Year = " + time.Year +
+                                " AND HistoryData.F_MeterID = '" + meterID + "' " +
+                                " AND HistoryData.F_MeterParamID in" + meterparams + " ORDER BY CircuitID ASC";
+
+
+
+            return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
+        }
+
         public List<HistoryBinarys> GetHistoryBinaryStringByMeterID(string meterID, DateTime time)
         {
             string month = time.Month.ToString("00");
+          
             string sql = "";
 
-
+            sql = @"SELECT Meter.F_MeterID AS CircuitID, Meter.F_MeterName AS CircuitName
+                                , ParamInfo.F_MeterParamName AS ParamName,ParamInfo.F_MeterParaCode ParamCode
+                                , F_Month" + month +
+                                @" AS Value FROM HistoryData WITH(NOLOCK)
+                                INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID=HistoryData.F_MeterID
+	                            INNER JOIN EMS.dbo.T_ST_MeterParamInfo ParamInfo ON ParamInfo.F_MeterParamID= HistoryData.F_MeterParamID
+                                WHERE F_Year = " + time.Year +
+                                " AND HistoryData.F_MeterID = '" + meterID + "' " +
+                                " ORDER BY CircuitID ASC";
 
 
 
@@ -149,6 +223,7 @@ namespace EMS.DAL.RepositoryImp
             return _EMSdb.Database.SqlQuery<ParamClassify>(HistoryParamResources.ParamClassifySQL, sqlParameters).ToList();
         }
 
+
         /// <summary>
         /// 获取仪表所有参数信息
         /// </summary>
@@ -162,6 +237,15 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@CircuitID",circuitID)
             };
             return _EMSdb.Database.SqlQuery<MeterParam>(HistoryParamResources.MeterParamSQL, sqlParameters).ToList();
+        }
+
+        public List<MeterParam> GetMeterParamByMeterID(string buildId, string meterID)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId),
+                new SqlParameter("@MeterID",meterID)
+            };
+            return _EMSdb.Database.SqlQuery<MeterParam>(HistoryParamResources.MeterParamByMeterIDSQL, sqlParameters).ToList();
         }
 
         public List<BuildViewModel> GetBuildsByUserName(string userName)

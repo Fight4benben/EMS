@@ -36,6 +36,20 @@ namespace EMS.DAL.StaticResources
                                                     ORDER BY F_Order ASC";
 
         /// <summary>
+        /// 查询仪表对应仪表的参数信息
+        /// </summary>
+        public static string MeterParamByMeterIDSQL = 
+            @"SELECT ParamInfo.F_MeterParamID AS ParamID,ParamInfo.F_MeterParaCode AS ParamCode
+	                , ParamInfo.F_MeterParamName AS ParamName,F_Order AS ParamOrder
+                    ,F_ParamType AS ParamType,ParamInfo.F_ParamUnit AS ParamUnit
+                    FROM T_ST_MeterUseInfo Meter
+                    INNER JOIN T_ST_MeterParamInfo ParamInfo ON Meter.F_MeterProdID = ParamInfo.F_MeterProdID
+                    INNER JOIN T_DT_Param ParamDict ON ParamDict.F_ParamCode = ParamInfo.F_MeterParaCode
+                    WHERE Meter.F_BuildID=@BuildID
+                    AND F_MeterID = @MeterID
+                    ORDER BY F_Order ASC ";
+
+        /// <summary>
         /// 获取参数查询的支路列表
         /// </summary>
         public static string TreeViewInfoSQL = @" SELECT F_CircuitID AS ID, F_ParentID AS ParentID,F_CircuitName AS Name

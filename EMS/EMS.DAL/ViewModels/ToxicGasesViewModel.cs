@@ -11,7 +11,8 @@ namespace EMS.DAL.ViewModels
     {
         public List<BuildViewModel> Builds { get; set; }
         public List<MeterList> Devices { get; set; }
-        public List<MeterValue> Data { get; set; }
+        public List<MeterValue> CurrentData { get; set; }
+        public object HistoryData { get; set; }
 
     }
 }

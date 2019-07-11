@@ -13,11 +13,13 @@ namespace EMS.DAL.Services
     {
         private IToxicGasesDbContext context;
         private ITreeViewDbContext tvContext;
+        private IHistoryParamDbContext historyContext;
 
         public ToxicGasesService()
         {
             context = new ToxicGasesDbContext();
             tvContext = new TreeViewDbContext();
+            historyContext = new HistoryParamDbContext();
         }
 
         public object GetViewModel(string userName)
@@ -39,7 +41,7 @@ namespace EMS.DAL.Services
                 meterID = viewModel.Devices.First().ID;
             }
 
-            viewModel.Data = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID);
 
             return viewModel;
         }
@@ -55,7 +57,7 @@ namespace EMS.DAL.Services
                 meterID = viewModel.Devices.First().ID;
             }
 
-            viewModel.Data = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID);
 
             return viewModel;
         }
@@ -64,7 +66,7 @@ namespace EMS.DAL.Services
         {
             ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
 
-            viewModel.Data = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID);
 
             return viewModel;
         }
@@ -73,7 +75,7 @@ namespace EMS.DAL.Services
         {
             ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
 
-            viewModel.Data = context.GetOneMeterValue(meterID);
+            viewModel.HistoryData = historyContext.GetParamByMeterIDValue(meterID, date,5);
 
             return viewModel;
         }

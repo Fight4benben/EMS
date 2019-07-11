@@ -21,5 +21,15 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }
+
+        [TestMethod]
+        public void TestGetHistoryViewModel_userName()
+        {
+            ToxicGasesService service = new ToxicGasesService();
+            DateTime today =  DateTime.Now;
+            var viewModel = service.GetHistoryDataViewModel("Admin","000001G001", "000001G0010001", today.ToString("yyyy-MM-dd"));
+
+            Console.WriteLine(UtilTest.GetJson(viewModel));
+        }
     }
 }
