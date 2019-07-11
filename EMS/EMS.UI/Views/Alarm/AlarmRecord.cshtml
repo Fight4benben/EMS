@@ -1,5 +1,5 @@
 ﻿<div class="container-fluid main-top">
-    <div class="col-xs-12">
+    <div class="col-xs-12 .col-md-6 .col-md-3">
       <div class="equip-row">
         <div class="filter-width">
             建筑名称：
@@ -14,29 +14,29 @@
        </div>
        <div class="equip-row">
         <label class="equip-width" style="width:77px">开始日期：</label>
-        <div id="StartdayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+        <div id="StartdayCalendar" class="input-group date form_date count-data" style="width:150px" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
             <input id="StartdaycalendarBox" class="form-control" size="16" type="text" value="" readonly>
             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
        </div>
        <div class="equip-row">
         <label class="equip-width" style="width:77px">结束日期：</label>
-        <div id="EnddayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+        <div id="EnddayCalendar" class="input-group date form_date count-data" style="width:150px" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
             <input id="EnddaycalendarBox" class="form-control" size="16" type="text" value="" readonly>
             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
        </div>
-       <div class="filter-width">
-            报警类型：
-        </div>
-        <div class="se-right equip-right">
-            <form role="form">
-                <div class="form-group">
-                    <select class="form-control" id="alarmTypeList">
-                        <option value="0">无</option>
-                    </select>
-                </div>
-            </form>
+       <div class="equip-row">
+            <label class="equip-width" style="width:77px">报警类型：</label>
+            <div class="se-right equip-right" style="width:120px">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="alarmTypeList">
+                            <option value="0">无</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
         </div>
         <button id="Load" type="button" class="btn-equip">查询</button>
     </div>
