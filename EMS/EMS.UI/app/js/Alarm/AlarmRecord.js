@@ -92,7 +92,8 @@ var AlarmRecord = (function(){
 
             var columns=[
 				{field:'buildName',title:'建筑名称'},
-				{field:'meterName',title:'仪表名称'},
+                {field:'meterName',title:'仪表名称'},
+                {field:'collectionName',title:'网关名称'},
                 {field:'meterParamName',title:'参数名称'},
                 {field:'typeName',title:'报警类型'},
                 {field:'normalRange',title:'正常值范围'},
@@ -105,9 +106,14 @@ var AlarmRecord = (function(){
                      var row = {};
                      row.id = val.id;
                      row.buildName = val.buildName;
-                     row.meterName = val.meterName;
+                     row.collectionName = val.collectionName;
                      row.meterParamName = val.meterParamName;
                      row.typeName = val.typeName;
+                     if(row.typeName == '网关离线'){
+                        row.meterName = '-';
+                     }else{
+                        row.meterName = val.meterName;
+                     }
                      row.normalRange = val.normalRange;
                      row.alarmTime = val.alarmTime;
                      row.alarmValue = val.alarmValue
