@@ -13,6 +13,7 @@ namespace EMS.DAL.Entities
         public string BuildName { get; set; }
         public string MeterID { get; set; }
         public string MeterName { get; set; }
+        public string CollectionName { get; set; }
         public string MeterParamName { get; set; }
         public string ParamUnit { get; set; }
         public string NormalRange { get; set; }

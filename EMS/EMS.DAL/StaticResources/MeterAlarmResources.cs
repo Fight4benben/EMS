@@ -23,7 +23,7 @@ namespace EMS.DAL.StaticResources
 	            WHERE T_SYS_Users.F_UserName=@UserName ";
 
         public static string SELECT_AlarmingMeter =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
 					CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 					F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 					CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -40,6 +40,7 @@ namespace EMS.DAL.StaticResources
 						AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 						AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 					LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+	                LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 					LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 					INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE 
@@ -56,7 +57,7 @@ namespace EMS.DAL.StaticResources
 
 
         public static string SELECT_AlarmLogByUser =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
                 CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -78,6 +79,7 @@ namespace EMS.DAL.StaticResources
 		            AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 		            AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 	            LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+	            LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 	            LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
@@ -93,7 +95,7 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByBuildID =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
                 CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -116,6 +118,7 @@ namespace EMS.DAL.StaticResources
 		            AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 		            AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 	            LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+                LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 	            LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
@@ -133,7 +136,7 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByAlarmType =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
                 CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -156,6 +159,7 @@ namespace EMS.DAL.StaticResources
 		            AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 		            AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 	            LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+                LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 	            LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
@@ -175,7 +179,7 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByBuildIDAlarmType =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
                 CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -199,6 +203,7 @@ namespace EMS.DAL.StaticResources
 		            AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 		            AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 	            LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+                LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 	            LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
@@ -218,7 +223,7 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByMeterID =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
                 CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
@@ -242,6 +247,7 @@ namespace EMS.DAL.StaticResources
 		            AND tempA.F_MeterID=T_MA_MeterALarmInfo.F_MeterID
 		            AND tempA.F_MeterParamID=T_MA_MeterALarmInfo.F_MeterParamID
 	            LEFT JOIN T_ST_MeterUseInfo on tempA.F_MeterID=T_ST_MeterUseInfo.F_MeterID
+                LEFT JOIN T_ST_DataCollectionInfo on T_ST_MeterUseInfo.F_CollectionID=T_ST_DataCollectionInfo.F_CollectionID
 	            LEFT JOIN T_ST_MeterParamInfo on tempA.F_MeterParamID=T_ST_MeterParamInfo.F_MeterParamID
 	            INNER JOIN T_BD_BuildBaseInfo on tempA.F_BuildID=T_BD_BuildBaseInfo.F_BuildID
 	            WHERE pageID BETWEEN (@PageIndex-1) * @PageSize+1 and @PageSize*@PageIndex ";
