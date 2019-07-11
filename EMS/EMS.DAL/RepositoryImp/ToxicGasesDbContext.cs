@@ -33,5 +33,14 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<MeterValue>(ToxicGasesResources.SELECT_MeterValue, sqlParameters).ToList();
         }
 
+        public List<MeterValue> GetMeterParamByMeterID(string meterID)
+        {
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@MeterID",meterID)
+            };
+
+            return _db.Database.SqlQuery<MeterValue>(ToxicGasesResources.SELECT_MeterValue, sqlParameters).ToList();
+        }
+
     }
 }

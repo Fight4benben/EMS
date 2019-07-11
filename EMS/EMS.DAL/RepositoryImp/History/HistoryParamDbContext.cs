@@ -105,6 +105,18 @@ namespace EMS.DAL.RepositoryImp
             return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
         }
 
+        public List<HistoryBinarys> GetHistoryBinaryStringByMeterID(string meterID, DateTime time)
+        {
+            string month = time.Month.ToString("00");
+            string sql = "";
+
+
+
+
+
+            return _db.Database.SqlQuery<HistoryBinarys>(sql).ToList();
+        }
+
         /// <summary>
         /// 获取支路列表
         /// </summary>

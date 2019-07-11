@@ -23,8 +23,9 @@ namespace EMS.DAL.StaticResources
 	            WHERE T_SYS_Users.F_UserName=@UserName ";
 
         public static string SELECT_AlarmingMeter =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-					CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                    CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                    CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 					F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 					CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 					F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
@@ -57,8 +58,9 @@ namespace EMS.DAL.StaticResources
 
 
         public static string SELECT_AlarmLogByUser =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-                CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 	            F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
@@ -95,8 +97,9 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByBuildID =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-                CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 	            F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
@@ -136,8 +139,9 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByAlarmType =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-                CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 	            F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
@@ -179,8 +183,9 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByBuildIDAlarmType =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-                CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 	            F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
@@ -223,8 +228,9 @@ namespace EMS.DAL.StaticResources
                 AND T_MA_MeterAlarmLog.F_AlarmTime BETWEEN @BeginDate AND @EndDate ";
 
         public static string SELECT_AlarmLogByMeterID =
-           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,F_CollectionName CollectionName,
-                CASE WHEN F_MeterName IS NULL THEN  tempA.F_MeterParamID  ELSE F_MeterName END MeterName,
+           @"SELECT F_ID ID,tempA.F_BuildID BuildID,F_BuildName BuildName,tempA.F_MeterID MeterID,
+                CASE WHEN F_CollectionName IS NULL THEN TempA.F_MeterParamID ELSE  F_CollectionName END CollectionName,
+                CASE WHEN F_MeterName IS NULL AND F_CollectionName IS NOT NULL THEN NULL  ELSE F_MeterName END MeterName,
 	            F_MeterParamName MeterParamName,F_ParamUnit ParamUnit,
 	            CONVERT(varchar,F_Low) +'~'+CONVERT(varchar,F_High) AS NormalRange ,tempA.F_Type TypeCode ,
 	            F_Name TypeName,F_SetValue SetValue,F_AlarmValue AlarmValue,F_AlarmTime AlarmTime,F_IsConfirm IsConfirm
