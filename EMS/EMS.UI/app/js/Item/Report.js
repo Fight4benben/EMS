@@ -238,7 +238,7 @@ var ItemReport = (function(){
 			energys = data.energys;
 			unit = energys[0].energyItemUnit;
 			initEnergyBtns();
-			$("#CodeName").html('(单位：kW.h)');
+			$("#CodeName").html('(单位：kW·h)');
 			$.each(data.energys, function(key, val) {
 
 				switch(val.energyItemCode){

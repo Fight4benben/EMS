@@ -1,1 +1,52 @@
 ﻿
+
+
+<div class="container-fluid main-top equipAlarm">
+    <div class="col-xs-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                建筑名称：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="buildinglist"></select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="equip-row">
+        <label class="equip-width" style="width:77px">日期：</label>
+        <div id="dayCalendar" class="input-group date form_date count-data" style="width:150px" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+            <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+       </div> -->
+       <!-- <button id="Load" type="button" class="btn-equip">查询</button> -->
+    </div>
+
+    <div id="selected" class="col-xs-12 R-Columnar">
+        <div class=""  style="margin-top: 7px; margin-left: 7px; float:left;width:10%;height:100%">
+            <div class="treeview">
+                <div id="treeview"></div>
+            </div>
+        </div>
+        <div class="content" id="content"></div>
+    </div>
+</div>
+
+
+
+<script src="~/app/js/Circuit/Toxic.js"></script>
+
+<style>
+    .treeview {
+        height: 100%!important;
+    }
+    .content {
+        width: calc(88%)!important;
+        float: right;
+        height: 100%;
+        margin-top: 7px;
+    }
+</style>

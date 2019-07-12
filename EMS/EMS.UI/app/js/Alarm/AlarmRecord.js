@@ -46,7 +46,7 @@ var AlarmRecord = (function(){
 				EMS.Loading.hide();
 			});
         };
-
+        // kW·h
         function showBuilds(data){
 			if(!data.hasOwnProperty('builds'))
 				return;

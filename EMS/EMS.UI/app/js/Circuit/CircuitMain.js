@@ -120,7 +120,7 @@ var CircuitMain = (function(){
 				switch ($this.attr('code')) {
 					case '01000':
 					case '13000':
-						$("#CodeName").html('环比(单位：kW.h)');
+						$("#CodeName").html('环比(单位：kW·h)');
 						break;
 					case '02000':
 							$("#CodeName").html('环比(单位：T)');

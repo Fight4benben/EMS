@@ -283,7 +283,7 @@ var RegionReport = (function(){
 
 				}
 			});
-			$("#CodeName").html('(单位：kW.h)');
+			$("#CodeName").html('(单位：kW·h)');
 			$("#de_countBtns button").eq(0).addClass('btn-solar-selected');	
 
 			$("#de_countBtns button").click(function(event) {//为能源按钮绑定click事件，进行数据加载
@@ -291,7 +291,7 @@ var RegionReport = (function(){
 				switch ($current.attr('value')) {
 					case '01000':
 					case '13000':
-						$("#CodeName").html('(单位：kW.h)');
+						$("#CodeName").html('(单位：kW·h)');
 						break;
 					case '02000':
 							$("#CodeName").html('(单位：T)');

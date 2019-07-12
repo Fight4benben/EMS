@@ -142,7 +142,7 @@ var OverLAlarm = (function(){
             });
             var height = $(".content").height();
 				$(".content").html('<table id="mainTable"></table>');
-				$(".content>table").attr('data-height',height);
+				$(".content>table").attr('data-height',height-7);
 
 			EMS.DOM.showTable($(".content>table"),columns,rows,{striped:true,classes:'table table-border'});
             

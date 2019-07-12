@@ -259,7 +259,7 @@ var Plantform = (function(){
             $.each(dayData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        //$("#Unit").html('电'+'<br/>(kW.h)')
+                        //$("#Unit").html('电'+'<br/>(kW·h)')
                         $("#yesPower").text('今日用电');
                         $("#dayPower").text('昨日用电');
                         if(val.lastValue >=10000 || val.value >= 10000){
@@ -316,7 +316,7 @@ var Plantform = (function(){
             $.each(monthData,function(key,val){
                 switch (val.id) {
                     case "01000":
-                        //$("#Unit").html('电'+'<br/>(kW.h)')
+                        //$("#Unit").html('电'+'<br/>(kW·h)')
                         $("#yesPower").text('上月用电');
                         $("#dayPower").text('当月用电');
                         if(val.lastValue >=10000 || val.value >= 10000){

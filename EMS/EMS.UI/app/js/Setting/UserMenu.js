@@ -8,11 +8,11 @@ var UserMenu=(function(){
 		var currentUserMenus = [];
 
 		function initDom(){
-			$("#userlist").change(function(){
-				var userId = $(this).val();
+			// $("#userlist").change(function(){
+			// 	var userId = $(this).val();
 
-				getDataFromServer(baseUrl,"userID="+userId);
-			});
+			// 	getDataFromServer(baseUrl,"userID="+userId);
+			// });
 
 			$("#searchButton").click(function(event) {
 				
@@ -83,7 +83,14 @@ var UserMenu=(function(){
 			if(!data.hasOwnProperty('users'))
 				return;
 
-			EMS.DOM.initSelect(data.users,$("#userlist"),"userName","userId");
+			EMS.DOM.initSelect(data.users,$("#userlist"),"userName","userID");
+
+			$("#userlist").change(function(){
+				debugger
+				var userId = $(this).val();
+
+				getDataFromServer(baseUrl,"userID="+userId);
+			});
 		}
 
 		function appendTotalMenu(data){
