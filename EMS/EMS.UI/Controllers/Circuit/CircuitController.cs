@@ -56,6 +56,11 @@ namespace EMS.UI.Controllers
             return View();
         }
 
+        public ActionResult Toxic()
+        {
+            return View();
+        }
+
         public FileResult GetExcel(string buildId, string energyCode, string type, string circuits,string date)
         {
             string[] circuitArray = circuits.Split(',');
