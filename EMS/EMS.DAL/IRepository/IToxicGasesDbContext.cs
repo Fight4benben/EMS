@@ -10,7 +10,7 @@ namespace EMS.DAL.IRepository
     public interface IToxicGasesDbContext
     {
         List<MeterList> GetMeterList(string buildID);
-        List<MeterValue> GetOneMeterValue(string meterID);
+        List<MeterValue> GetOneMeterValue(string meterID, string buildID);
 
     }
 }

@@ -27,7 +27,7 @@ namespace EMS.Tests.Services
         {
             ToxicGasesService service = new ToxicGasesService();
             DateTime today =  DateTime.Now;
-            var viewModel = service.GetHistoryDataViewModel("Admin","000001G001", "000001G0010001", today.ToString("yyyy-MM-dd"));
+            var viewModel = service.GetHistoryDataViewModel("Admin","000001G001", "000001G0010005", today.ToString("yyyy-MM-dd"));
 
             Console.WriteLine(UtilTest.GetJson(viewModel));
         }

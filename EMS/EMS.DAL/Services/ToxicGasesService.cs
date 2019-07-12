@@ -41,7 +41,7 @@ namespace EMS.DAL.Services
                 meterID = viewModel.Devices.First().ID;
             }
 
-            viewModel.CurrentData = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID, buildID);
 
             return viewModel;
         }
@@ -57,7 +57,7 @@ namespace EMS.DAL.Services
                 meterID = viewModel.Devices.First().ID;
             }
 
-            viewModel.CurrentData = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID, buildID);
 
             return viewModel;
         }
@@ -66,7 +66,7 @@ namespace EMS.DAL.Services
         {
             ToxicGasesViewModel viewModel = new ToxicGasesViewModel();
 
-            viewModel.CurrentData = context.GetOneMeterValue(meterID);
+            viewModel.CurrentData = context.GetOneMeterValue(meterID, buildID);
 
             return viewModel;
         }
