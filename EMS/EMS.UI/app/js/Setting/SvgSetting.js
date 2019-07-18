@@ -1,4 +1,4 @@
-var test = {
+var tool = {
     download:function(svgId){
         console.log(svgId);
         var url = '/api/SvgFile';
@@ -79,12 +79,13 @@ var SvgSetting=(function(){
                      row.svgName = val.svgName;
                      row.path = val.path;
                      row.upload = '<button class="btn btn-warning upload" value="'+ val.svgId +'" data-toggle="modal">上传</button>';
-                     row.download = '<button class="btn btn-warning download" value="'+ val.svgId +'" onClick="test.download(\''+val.svgId+'\')">下载</button>';
+                     row.download = '<button class="btn btn-warning download" value="'+ val.svgId +'" onclick="tool.download(\''+val.svgId+'\')">下载</button>';
                      row.setting = '<button class="btn btn-warning setting" data-toggle="modal">绑定</button>';
                      tableRows.push(row)
                 });
                 
             }
+
             var height = $("#selectedSvg").height();
 				$("#selectedSvg").html('<table id="mainTable"></table>');
 				$("#selectedSvg>table").attr('data-height',height);
@@ -144,11 +145,11 @@ var SvgSetting=(function(){
         //修改
         $("#myModal2").on('shown.bs.modal',function (e) { 
             var selectRow = selectedInfo;
-            $("#svgid").val(selectRow.svgId)
+            $("#svgID").val(selectRow.svgId)
             $("#svgname").val(selectRow.svgName)
         });
         $("#edtBtn").click(function(){
-            var svgid = $("#svgid").val();
+            var svgid = $("#svgID").val();
             var svgname = $("svgname").val();
             var buildId = $("#buildinglist").val();
             var data = "svgid="+svgid+"&svgname="+svgname
