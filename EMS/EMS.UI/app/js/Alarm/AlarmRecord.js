@@ -91,17 +91,45 @@ var AlarmRecord = (function(){
         function showTable(data){
 
             var columns=[
-				{field:'buildName',title:'建筑名称'},
-                {field:'meterName',title:'仪表名称'},
+                {field:'buildName',title:'建筑名称'},
                 {field:'collectionName',title:'网关名称'},
+                {field:'meterName',title:'仪表名称'},
                 {field:'meterParamName',title:'参数名称'},
                 {field:'typeName',title:'报警类型'},
                 {field:'normalRange',title:'正常值范围'},
                 {field:'alarmTime',title:'报警时间'},
+
+                {field:'readyTime',title:'报警持续时间'},
+                {field:'recoverTime',title:'恢复时间'},
+                {field:'confirmTime',title:'确认时间'},
+
                 {field:'alarmValue',title:'报警值'},
+                {field:'state',title:'恢复类型'},
             ];
             var tableRows = [];
             if(data.alarmLogs!=null && data.alarmLogs.length>0){
+                
+                $.each(data.alarmLogs,function(index,value){
+                    if(value.hasOwnProperty('confirmTime')){
+                        var t = new Date(Date.parse(value.confirmTime.replace(/-/g, '/'))).getTime()
+                        
+                        var alarmTimes = new Date(Date.parse(value.alarmTime.replace(/-/g, '/'))).getTime()
+                        //时间间隔
+                        var t_t = parseFloat(t-alarmTimes)/60000;
+                        value.readyTime = t_t;
+                    }
+                    else if(value.hasOwnProperty('recoverTime')){
+                        var time = new Date(Date.parse(value.recoverTime.replace(/-/g, '/'))).getTime()
+                        
+                        var Timestt = new Date(Date.parse(value.alarmTime.replace(/-/g, '/'))).getTime()
+                        //时间间隔
+                        var t_tt = parseFloat(time-Timestt)/60000;
+                        value.readyTime = t_tt;
+                    }else if(!value.hasOwnProperty('confirmTime') && !value.hasOwnProperty('recoverTime')){
+                        value.readyTime = '-';
+                    }
+                });
+            
                 $.each(data.alarmLogs, function (index, val) { 
                      var row = {};
                      row.id = val.id;
@@ -116,8 +144,21 @@ var AlarmRecord = (function(){
                      }
                      row.normalRange = val.normalRange;
                      row.alarmTime = val.alarmTime;
-                     row.alarmValue = val.alarmValue
-                     
+                     row.alarmValue = val.alarmValue;
+                     row.readyTime = val.readyTime =='-'?val.readyTime:val.readyTime+'分钟';
+
+                     if(!val.hasOwnProperty('confirmTime') && !val.hasOwnProperty('recoverTime'))
+                     {
+                        row.state= '未确认(未恢复)';
+                     }else{
+                        val.isConfirm==0?row.state = '自动恢复':row.state = '手动确认';
+                     }
+                     if(!val.hasOwnProperty('confirmTime') && val.hasOwnProperty('recoverTime')){
+                        row.recoverTime = val.recoverTime
+                     }
+                     if(val.hasOwnProperty('confirmTime') && !val.hasOwnProperty('recoverTime')){
+                        row.confirmTime = val.confirmTime
+                     }
                      tableRows.push(row)
                 });
                 

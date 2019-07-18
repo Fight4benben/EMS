@@ -29,7 +29,10 @@ var CircuitReport = (function(){
 			$("#dayExport").click(function(event) {
 				var circuitsArray=[];
 				$.each(getCheckedTreeIdArray(), function(key, val) {
-					circuitsArray.push(val.substr(-4));
+					if(val.length == 14)
+						circuitsArray.push(val.substr(-4));
+					else if(val.length == 13)
+						circuitsArray.push(val.substr(-3));
 				});
 				
 				window.location = "/Circuit/GetExcel?buildId="+$("#buildinglist").val()+

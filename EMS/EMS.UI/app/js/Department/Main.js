@@ -324,40 +324,42 @@ var DepartmentMain = (function(){
 			var dataArray = [];
 			var names=[];
 
-			for (var i=0; i<=31; i++) {
-
-				startDate.setDate(startDate.getDate()+i);
+			//先生成时间数组
+			for (var i=0; i<=30; i++) {
+				i==0?1+1:startDate.setDate(startDate.getDate()+1);
+				
 				var tempDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),0,0,0);
 
 				times.push((tempDate.getMonth()+1)+"-"+(tempDate.getDate()));
+			}
 
-				var array = data.last31Day.filter(function(item){
-					var inDate = new Date(item.time);
-					return (tempDate.getFullYear() == inDate.getFullYear()) && 
-						(tempDate.getMonth() == inDate.getMonth())
-					&& (tempDate.getDate() == inDate.getDate());
-				});
-
-				//console.log(array);
-				if(array.length >0 ){
-					$.each(array, function(key, val) {
-
-						var outArray = dataArray.filter(function(itemData,index) {
-							return itemData.name == val.name; 
-						});
-
-						if(outArray.length <= 0){
-							dataArray.push({name:val.name,type:'bar',stack:'itemStack',data:[val.value.toFixed(1)]});
-						}else{
-							$.each(dataArray, function(index, value) {
-								if(value.name == val.name)
-									value.data.push(val.value.toFixed(1));
-							});
-						}
+			//遍历数据，根据时间填充数据
+			if(data.last31Day.length >0 ){
+				$.each(data.last31Day, function(key, val) {
+					var outArray = dataArray.filter(function(itemData,index) {
+						return itemData.name == val.name; 
 					});
-				}
 
-				startDate.setDate(startDate.getDate()-i);
+					//判断当前时间在time数组中的位置
+					var locationTime = new Date(val.time);
+					var locationX = (locationTime.getMonth()+1)+'-'+locationTime.getDate();
+					var locationIndex = $.inArray(locationX,times);
+
+					if(outArray.length <= 0){
+						if(locationIndex!=-1){
+							var tempObj = {name:val.name,type:'bar',stack:'itemStack',data:[]};
+							tempObj.data[locationIndex] = val.value.toFixed(1);
+							dataArray.push(tempObj);
+
+						}
+					}else{
+						$.each(dataArray, function(index, value) {
+							if(value.name == val.name){
+								value.data[locationIndex]=val.value.toFixed(1);
+							}
+						});
+					}
+				});
 			}
 
 			$.each(dataArray, function(index, val) {
