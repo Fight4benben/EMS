@@ -409,6 +409,7 @@
     <Content Include="app\js\Setting\UserMenu.js" />
     <Content Include="app\js\tools.js" />
     <Content Include="app\js\topology.js" />
+    <Content Include="App_Data\SvgFiles\000001G0010003.svg" />
     <Content Include="App_Data\SvgFiles\000001G003-01.svg" />
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\base.css" />
