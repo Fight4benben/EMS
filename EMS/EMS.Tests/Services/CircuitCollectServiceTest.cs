@@ -44,5 +44,19 @@ namespace EMS.Tests.Services
 
             Console.WriteLine(UtilTest.GetJson(ViewModel));
         }
+
+        [TestMethod]
+        public void GetMultiRateCollectViewModel()
+        {
+            CircuitCollectService service = new CircuitCollectService();
+            string circuitIDs = "000001G0010001,000001G0010002,000001G0010003,000001G0010004,000001G0010005";
+
+            string[] ids = circuitIDs.Split(',');
+            DateTime endTime = DateTime.Now;
+            DateTime startTime = endTime.Date;
+            CircuitCollectViewModel ViewModel = service.GetMultiRateViewModel("000001G001", "01000", ids, startTime.ToString("yyyy-MM-dd 00:00:00"), endTime.ToString("yyyy-MM-dd HH:00:00"));
+
+            Console.WriteLine(UtilTest.GetJson(ViewModel));
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace EMS.DAL.Entities
         public string CircuitName { get; set; }
         public string MeterID { get; set; }
         public string MeterParamID { get; set; }
+        public string MeterParamName { get; set; }
     }
 }

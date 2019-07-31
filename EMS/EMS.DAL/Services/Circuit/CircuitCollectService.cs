@@ -45,7 +45,7 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
-        public CircuitCollectViewModel GetViewModelByBuild(string userName,string buildId)
+        public CircuitCollectViewModel GetViewModelByBuild(string userName, string buildId)
         {
             CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
             DateTime endTime = DateTime.Now;
@@ -72,7 +72,7 @@ namespace EMS.DAL.Services
         public CircuitCollectViewModel GetViewModel(string buildId)
         {
             CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
-         
+
             List<EnergyItemDict> energys = context.GetEnergyItemDictByBuild(buildId);
             string energyCode;
             if (energys.Count > 0)
@@ -93,7 +93,7 @@ namespace EMS.DAL.Services
         {
             CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
             List<TreeViewModel> treeView = GetTreeListViewModel(buildId, energyCode);
-          
+
             viewModel.TreeView = treeView;
 
             return viewModel;
@@ -125,6 +125,37 @@ namespace EMS.DAL.Services
 
             return viewModel;
         }
+
+        public CircuitCollectViewModel GetMultiRateViewModel(string buildId, string energyCode, string[] circuitIDs, string startDate, string endDate)
+        {
+            CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
+            DateTime startTime = Util.ConvertString2DateTime(startDate, "yyyy-MM-dd HH:mm:ss");
+            DateTime endTime = Util.ConvertString2DateTime(endDate, "yyyy-MM-dd HH:mm:ss");
+
+            List<CircuitMeterInfo> circuitMeterInfos = context.GetMultiRateMeterInfoList(buildId, circuitIDs);
+            string[] meterIDs = GetMeterIDs(circuitMeterInfos);
+            string[] meterParamIDs = GetMeterParamIDs(circuitMeterInfos);
+            List<HistoryValue> startValue = context.GetHistoryValues(meterIDs, meterParamIDs, startTime);
+            List<HistoryValue> endValue = context.GetHistoryValues(meterIDs, meterParamIDs, endTime);
+            List<CollectValue> data = new List<CollectValue>();
+            foreach (var meterID in startValue)
+            {
+                CollectValue collect = new CollectValue();
+                collect.Name = circuitMeterInfos.Find(x => x.MeterID.Equals(meterID.MeterID)).CircuitName;
+                collect.ParamName = circuitMeterInfos.Find(x => x.MeterID.Equals(meterID.MeterID) && x.MeterParamID.Equals(meterID.MeterParamID)).MeterParamName;
+                collect.StartValue = meterID.Value;
+                collect.EndValue = endValue.Find(x => x.MeterID.Equals(meterID.MeterID) && x.MeterParamID.Equals(meterID.MeterParamID)).Value;
+                collect.DiffValue = collect.EndValue - collect.StartValue;
+
+                data.Add(collect);
+            }
+            viewModel.Data = data;
+
+            return viewModel;
+        }
+
+
+
 
         /*-------------------------------------------------------------------------------------------------*/
         /// <summary>
@@ -212,6 +243,6 @@ namespace EMS.DAL.Services
             return list.ToArray();
         }
 
-       
+
     }
 }

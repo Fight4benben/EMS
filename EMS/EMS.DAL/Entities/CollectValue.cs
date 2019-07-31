@@ -9,6 +9,7 @@ namespace EMS.DAL.Entities
     public class CollectValue
     {
         public string Name { get; set; }
+        public string ParamName { get; set; }
         public double StartValue { get; set; }
         public double EndValue { get; set; }
         public double DiffValue { get; set; }
