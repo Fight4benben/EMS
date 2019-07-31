@@ -95,6 +95,10 @@
                         {
                             <li id="cir_toxic" class=""><a href="/Circuit/Toxic"><i class="fa fa-caret-right"></i>有毒气体分析</a></li>
                         }
+                        @if (menu.Menus.Contains("3.11") || menu.Menus.Contains("all"))
+                        {
+                            <li id="cir_multi_collect" class=""><a href="/Circuit/MultiCollect"><i class="fa fa-caret-right"></i>复费率集抄</a></li>
+                        }
                         <!-- <li id="" class=""><a href="javascript:;"> <span style="color:#b1b0b0">趋势曲线</span></a></li> -->
                         <!-- <li id="te_loss" class=""><a href="rest/tela"><i class="fa fa-caret-right"></i>损耗分析</a></li> -->
                         <!-- <li id="te_env" class=""><a href="rest/tandh"><i class="fa fa-caret-right"></i>环境参数</a></li> -->
