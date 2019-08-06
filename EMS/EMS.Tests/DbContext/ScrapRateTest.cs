@@ -16,6 +16,8 @@ namespace EMS.Tests.DbContext
 
 
         EnergyDB _db = new EnergyDB();
+
+        private static List<DataValue> resultDataList = new List<DataValue>();
         [TestMethod]
         public void TestMethod1()
         {
@@ -35,30 +37,47 @@ namespace EMS.Tests.DbContext
 	                AND F_StartDay BETWEEN CONVERT(VARCHAR(7),@EndDate,120)+'-01 00:00' AND DATEADD(DAY,-DAY(@EndDate),DATEADD(MM,1,@EndDate))
 	                GROUP BY Circuit.F_CircuitID,Circuit.F_CircuitName ";
 
+            string sqlTest = @"SELECT Max( CASE WHEN  ParentCircuit.F_CircuitID IS NULL THEN '-1' ELSE ParentCircuit.F_CircuitID END) ParentID,
+	                Circuit.F_CircuitID AS ID ,Max(DayResult.F_StartDay) 'Time', SUM( F_Value) Value
+                    FROM T_ST_CircuitMeterInfo Circuit
+                    INNER JOIN T_DT_EnergyItemDict ItemDict ON Circuit.F_EnergyItemCode = ItemDict.F_EnergyItemCode
+                    INNER JOIN T_ST_MeterUseInfo Meter ON Circuit.F_MeterID = Meter.F_MeterID
+	                INNER JOIN T_OV_ScrapRate DayResult ON Meter.F_MeterID = DayResult.F_MeterID
+	                LEFT JOIN T_ST_CircuitMeterInfo ParentCircuit ON Circuit.F_ParentID=ParentCircuit.F_CircuitID 
+                    WHERE Circuit.F_BuildID = '000001G001'
+                    AND Circuit.F_EnergyItemCode = '01000'
+	                AND F_StartDay BETWEEN CONVERT(VARCHAR(7),@EndDate,120)+'-01 00:00' AND DATEADD(DAY,-DAY(@EndDate),DATEADD(MM,1,@EndDate))
+	                GROUP BY Circuit.F_CircuitID,Circuit.F_CircuitName 
+	                order by ID ";
+
             SqlParameter[] parameters ={
-                new SqlParameter("@EndDate","2019-07-01")
+                new SqlParameter("@EndDate","2019-08-01")
 
             };
 
-            List<DataValue> DataList = _db.Database.SqlQuery<DataValue>(sql, parameters).ToList();
+            List<DataValue> DataList = _db.Database.SqlQuery<DataValue>(sqlTest, parameters).ToList();
 
-            var parantNode = DataList.Where(x => x.ParentID == "-1");
-            List<DataValue> RealDataList = new List<DataValue>();
+            var realDataList = ChirldNode(DataList);
+            Console.WriteLine(UtilTest.GetJson(realDataList));
 
-            foreach (var node in parantNode)
-            {
-                var realDataList = ChirldNode(DataList, node);
 
-                Console.WriteLine(UtilTest.GetJson(realDataList));
-            }
+            //var parantNode = DataList.Where(x => x.ParentID == "-1");
+            //List<DataValue> RealDataList = new List<DataValue>();
+
+            //foreach (var node in parantNode)
+            //{
+            //    var realDataList = ChirldNode(DataList, node);
+
+            //    Console.WriteLine(UtilTest.GetJson(realDataList));
+            //}
 
             //Console.WriteLine(UtilTest.GetJson(parantNode));
         }
 
-     
 
 
-        public List<DataValue> ChirldNode(List<DataValue> orignDatas, DataValue parentNode)
+
+        public List<DataValue> ChirldNode(List<DataValue> orignDatas)
         {
 
             //如果父级id为-1，则查询该父级下子节点 求和   求差    分摊值   损耗率   真实值  
@@ -68,7 +87,7 @@ namespace EMS.Tests.DbContext
                 //根据判断条件查找到根（root）节点
                 if (node.ParentID == "-1")
                 {
-                    NewMethod(orignDatas, node);
+                    Console.WriteLine(UtilTest.GetJson(NewMethod(orignDatas, node)));
 
                 }
             }
@@ -79,8 +98,10 @@ namespace EMS.Tests.DbContext
 
         }
 
-        private static void NewMethod(List<DataValue> orignDatas, DataValue node)
+        private static List<DataValue> NewMethod(List<DataValue> orignDatas, DataValue node)
         {
+
+            //List<DataValue> resultDataList = new List<DataValue>();
             decimal sum = 0;
             //求下级节点 获得一个集合  
 
@@ -94,53 +115,61 @@ namespace EMS.Tests.DbContext
                 }
             }
 
-
-            decimal djshvalue = (node.Value - sum);
-
-            Console.WriteLine("节点ID：" + node.ID + "   子级节点 总和：" + sum);
-
-            Console.WriteLine("节点ID：" + node.ID + "   父级与子级 差：" + djshvalue);
+            //与 子级节点 差(损耗值)
+            decimal nodeScarpValue = ((node.RealValue == 0 ? node.Value : node.RealValue) - sum);
 
             foreach (var item in orignDatas)//原始数据
             {
                 //根据root节点id=item的父级，则查找到  回路A(root)下面的回路B1 回路b2
                 if (node.ID == item.ParentID)
                 {
-                    //chirlNode.Add(item);
-                    //sum = sum + item.Value;
+                    //子级节点 总和
+                    Console.WriteLine("节点ID：" + node.ID + "  的子级节点 总和：" + sum);
+
+                    //损耗值
+                    Console.WriteLine("节点ID：" + node.ID + "  与 子级节点 差(损耗值)：" + nodeScarpValue);
 
                     //分摊损耗值
-
+                    decimal ftScrapValue = (nodeScarpValue) * (item.Value / (sum));
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  分摊损耗值：" + ftScrapValue);
 
                     //分摊损耗率
-                    decimal ftsunhaoValue = (djshvalue) * (item.Value / (sum)) / node.Value;
-
+                    decimal ftScrapRate = (nodeScarpValue) * (item.Value / (sum)) / node.Value;
 
                     //真实值
-                    decimal zhenshiValue = item.Value + (djshvalue) * (item.Value / (sum));
+                    decimal chirldRealValue = item.Value + (nodeScarpValue) * (item.Value / (sum));
 
-                    Console.WriteLine("节点ID：" + item.ID + "   分摊损耗值：" + (djshvalue) * (item.Value / (sum)));
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  分摊损耗率：" + ftScrapRate);
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  真实值：" + chirldRealValue);
 
-                    Console.WriteLine("节点ID：" + item.ID + "   分摊损耗率：" + ftsunhaoValue);
-                    Console.WriteLine("节点ID：" + item.ID + "   真实值：" + zhenshiValue);
-
+                    item.ScrapValue = ftScrapValue;
+                    item.ScrapRate = ftScrapRate;
+                    item.RealValue = chirldRealValue;
+                    
+                    resultDataList.Add(item);
                     Console.WriteLine("===============================================================================");
 
                     NewMethod(orignDatas, item);
                 }
 
             }
+           return resultDataList;
         }
+
+
+
     }
 
     public class DataValue
     {
         public string ParentID { get; set; }
         public string ID { get; set; }
+        public DateTime Time { get; set; }
         //表示值
         public decimal Value { get; set; }
         //真实值
         public decimal RealValue { get; set; }
+        public decimal ScrapValue { get; set; }
         public decimal ScrapRate { get; set; }
 
     }
