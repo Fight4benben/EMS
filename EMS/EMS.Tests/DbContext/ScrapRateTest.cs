@@ -58,6 +58,7 @@ namespace EMS.Tests.DbContext
             List<DataValue> DataList = _db.Database.SqlQuery<DataValue>(sqlTest, parameters).ToList();
 
             var realDataList = ChirldNode(DataList);
+
             Console.WriteLine(UtilTest.GetJson(realDataList));
 
 
@@ -87,7 +88,7 @@ namespace EMS.Tests.DbContext
                 //根据判断条件查找到根（root）节点
                 if (node.ParentID == "-1")
                 {
-                    Console.WriteLine(UtilTest.GetJson(NewMethod(orignDatas, node)));
+                    Console.WriteLine(UtilTest.GetJson(GetScrapData(orignDatas, node)));
 
                 }
             }
@@ -98,7 +99,13 @@ namespace EMS.Tests.DbContext
 
         }
 
-        private static List<DataValue> NewMethod(List<DataValue> orignDatas, DataValue node)
+        /// <summary>
+        /// 获取 损耗率、真实值 （相邻两级损耗率）
+        /// </summary>
+        /// <param name="orignDatas"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        private static List<DataValue> GetScrapData(List<DataValue> orignDatas, DataValue node)
         {
 
             //List<DataValue> resultDataList = new List<DataValue>();
@@ -145,15 +152,79 @@ namespace EMS.Tests.DbContext
                     item.ScrapValue = ftScrapValue;
                     item.ScrapRate = ftScrapRate;
                     item.RealValue = chirldRealValue;
-                    
+
                     resultDataList.Add(item);
                     Console.WriteLine("===============================================================================");
 
-                    NewMethod(orignDatas, item);
+                    GetScrapData(orignDatas, item);
                 }
 
             }
-           return resultDataList;
+            return resultDataList;
+        }
+
+        /// <summary>
+        /// 获取 损耗率、真实值（与根节点损耗率）
+        /// </summary>
+        /// <param name="orignDatas">原始数据</param>
+        /// <param name="node">节点</param>
+        /// <param name="rootNodeValue">根节点表示值</param>
+        /// <returns></returns>
+        private static List<DataValue> GetScrapData(List<DataValue> orignDatas, DataValue node, decimal rootNodeValue)
+        {
+
+            decimal sum = 0;
+            //求下级节点 获得一个集合  
+
+            foreach (var item in orignDatas)//原始数据
+            {
+                //根据root节点id=item的父级，则查找到  回路A(root)下面的回路B1 回路b2
+
+                if (node.ID == item.ParentID)
+                {
+                    sum = sum + item.Value;
+                }
+            }
+
+            //与 子级节点 差(损耗值)
+            decimal nodeScarpValue = ((node.RealValue == 0 ? node.Value : node.RealValue) - sum);
+
+            foreach (var item in orignDatas)//原始数据
+            {
+                //根据root节点id=item的父级，则查找到  回路A(root)下面的回路B1 回路b2
+                if (node.ID == item.ParentID)
+                {
+                    //子级节点 总和
+                    Console.WriteLine("节点ID：" + node.ID + "  的子级节点 总和：" + sum);
+
+                    //损耗值
+                    Console.WriteLine("节点ID：" + node.ID + "  与 子级节点 差(损耗值)：" + nodeScarpValue);
+
+                    //分摊损耗值
+                    decimal ftScrapValue = (nodeScarpValue) * (item.Value / (sum));
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  分摊损耗值：" + ftScrapValue);
+
+                    //分摊损耗率
+                    decimal ftScrapRate = (nodeScarpValue) * (item.Value / (sum)) / rootNodeValue;
+
+                    //真实值
+                    decimal chirldRealValue = item.Value + (nodeScarpValue) * (item.Value / (sum));
+
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  分摊损耗率：" + ftScrapRate);
+                    Console.WriteLine("节点ID：" + node.ID + "  的子节点ID：" + item.ID + "  真实值：" + chirldRealValue);
+
+                    item.ScrapValue = ftScrapValue;
+                    item.ScrapRate = ftScrapRate;
+                    item.RealValue = chirldRealValue;
+
+                    resultDataList.Add(item);
+                    Console.WriteLine("===============================================================================");
+
+                    GetScrapData(orignDatas, item, rootNodeValue);
+                }
+
+            }
+            return resultDataList;
         }
 
 
