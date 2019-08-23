@@ -107,8 +107,6 @@ namespace EMS.Tests.DbContext
         /// <returns></returns>
         private static List<DataValue> GetScrapData(List<DataValue> orignDatas, DataValue node)
         {
-
-            //List<DataValue> resultDataList = new List<DataValue>();
             decimal sum = 0;
             //求下级节点 获得一个集合  
 
