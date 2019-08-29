@@ -803,6 +803,7 @@
     <Content Include="Views\Setting\Build.cshtml" />
     <Content Include="Views\Setting\OverLimit.cshtml" />
     <Content Include="Views\Circuit\Toxic.cshtml" />
+    <Content Include="Views\Circuit\MultiCollect.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
