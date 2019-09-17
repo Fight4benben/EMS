@@ -111,6 +111,7 @@
     <Compile Include="DbContext\HistoryParamDbContextTest.cs" />
     <Compile Include="DbContext\PriceDbContextTest.cs" />
     <Compile Include="DbContext\RegionReportDbContextTest.cs" />
+    <Compile Include="DbContext\ScrapRateTest.cs" />
     <Compile Include="DbContext\TreeViewDbContextTest.cs" />
     <Compile Include="DbContext\UnitTest1.cs" />
     <Compile Include="DbContext\HomeContextTest.cs" />
