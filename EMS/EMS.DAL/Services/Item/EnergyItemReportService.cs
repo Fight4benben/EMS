@@ -219,6 +219,16 @@ namespace EMS.DAL.Services
             //string[] circuitIds = circuits.Split(',');
 
             List<ReportValue> data = context.GetReportValueList(formulaIDs, now.ToShortDateString(), type);
+            var totalList = data.GroupBy(d => new { d.Time })
+                   .Select(group => new ReportValue
+                   {
+                       Id = "Total",
+                       Name = "总计",
+                       Time = group.Key.Time,
+                       Value = group.Sum(p => p.Value)
+                   }).ToList();
+
+            data.AddRange(totalList);
 
             //设置Excel标题
             sheet.GetRow(0).GetCell(0).SetCellValue(build.BuildName + "分项用能" + reportType);
@@ -230,10 +240,16 @@ namespace EMS.DAL.Services
 
             //根据传入circuitIds填充excel
             int rowId = 0;
-            for (int i = 0; i < formulaIDs.Length; i++)
+            for (int i = 0; i < formulaIDs.Length+1; i++)
             {
                 //使用lamda表达式筛选List中Id与传入的Id对应的仪表：一次填充一行Excel
-                List<ReportValue> current = data.FindAll(p => p.Id == formulaIDs[i]);
+                //List<ReportValue> current = data.FindAll(p => p.Id == formulaIDs[i]);
+
+                List<ReportValue> current;
+                if (i == formulaIDs.Length)
+                    current = data.FindAll(p => p.Id == "Total");
+                else
+                    current = data.FindAll(p => p.Id == formulaIDs[i]);
                 if (current.Count > 0)
                 {
                     IRow row = sheet.CreateRow(rowId + 3);

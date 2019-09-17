@@ -58,7 +58,7 @@ namespace EMS.DAL.StaticResources
                                                 AND Right(EnergyItem.F_EnergyItemCode,3)<>'000'
                                                 AND RIGHT(EnergyItem.F_EnergyItemCode,2) = '00'
                                                 AND F_StartDay BETWEEN DATEADD(DD,-DAY(@EndDate)+1,@EndDate) AND @EndDate
-                                                GROUP BY Formula.F_EnergyItemCode,Formula.F_BuildID,Circuit.F_EnergyItemCode
+                                                GROUP BY Formula.F_EnergyItemCode,Formula.F_BuildID,Formula.F_EnergyItemCode
                                                 ORDER BY Formula.F_EnergyItemCode ASC";
         /// <summary>
         /// 查询某一天用能报表，小时为分组；传入参数EndDate格式为“yyyy-MM-dd HH:mm:ss”
