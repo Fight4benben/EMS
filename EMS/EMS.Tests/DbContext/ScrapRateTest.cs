@@ -17,7 +17,7 @@ namespace EMS.Tests.DbContext
 
         EnergyDB _db = new EnergyDB();
 
-        private static List<DataValue> resultDataList = new List<DataValue>();
+        private static List<ScrapData> resultDataList = new List<ScrapData>();
         [TestMethod]
         public void TestMethod1()
         {
@@ -55,7 +55,7 @@ namespace EMS.Tests.DbContext
 
             };
 
-            List<DataValue> DataList = _db.Database.SqlQuery<DataValue>(sqlTest, parameters).ToList();
+            List<ScrapData> DataList = _db.Database.SqlQuery<ScrapData>(sqlTest, parameters).ToList();
 
             var realDataList = ChirldNode(DataList);
 
@@ -78,7 +78,7 @@ namespace EMS.Tests.DbContext
 
 
 
-        public List<DataValue> ChirldNode(List<DataValue> orignDatas)
+        public List<ScrapData> ChirldNode(List<ScrapData> orignDatas)
         {
 
             //如果父级id为-1，则查询该父级下子节点 求和   求差    分摊值   损耗率   真实值  
@@ -88,7 +88,7 @@ namespace EMS.Tests.DbContext
                 //根据判断条件查找到根（root）节点
                 if (node.ParentID == "-1")
                 {
-                    Console.WriteLine(UtilTest.GetJson(GetScrapData(orignDatas, node)));
+                    Console.WriteLine(UtilTest.GetJson(GetScrapData(orignDatas, node, node.Value)));
 
                 }
             }
@@ -105,7 +105,7 @@ namespace EMS.Tests.DbContext
         /// <param name="orignDatas"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        private static List<DataValue> GetScrapData(List<DataValue> orignDatas, DataValue node)
+        private static List<ScrapData> GetScrapData(List<ScrapData> orignDatas, ScrapData node)
         {
             decimal sum = 0;
             //求下级节点 获得一个集合  
@@ -168,7 +168,7 @@ namespace EMS.Tests.DbContext
         /// <param name="node">节点</param>
         /// <param name="rootNodeValue">根节点表示值</param>
         /// <returns></returns>
-        private static List<DataValue> GetScrapData(List<DataValue> orignDatas, DataValue node, decimal rootNodeValue)
+        private static List<ScrapData> GetScrapData(List<ScrapData> orignDatas, ScrapData node, decimal rootNodeValue)
         {
 
             decimal sum = 0;
@@ -229,7 +229,7 @@ namespace EMS.Tests.DbContext
 
     }
 
-    public class DataValue
+    public class ScrapData
     {
         public string ParentID { get; set; }
         public string ID { get; set; }
