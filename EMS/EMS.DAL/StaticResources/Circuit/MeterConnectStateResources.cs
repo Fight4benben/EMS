@@ -33,7 +33,7 @@ namespace EMS.DAL.StaticResources
         /// </summary>
         public static string MeterOfflineStateSQL =
             @"
-           SELECT  MeterUseInfo.F_MeterID AS ID, F_MeterName AS Name
+            SELECT  MeterUseInfo.F_MeterID AS ID, F_MeterName AS Name
             ,DataCollectionInfo.F_CollectionName AS CollectionName
             ,CASE WHEN  DATEDIFF(MINUTE,DataCollectionInfo.F_LastUpTime,GETDATE()) > 20 
 			    OR (  DATEDIFF(MINUTE,F_DisConnectTime,GETDATE())>20 ) THEN '通讯中断' ELSE '通讯正常' END AS States
