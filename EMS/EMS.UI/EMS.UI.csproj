@@ -167,6 +167,7 @@
     <Compile Include="Controllers\Circuit\MultiRateController.cs" />
     <Compile Include="Controllers\Common\AuthController.cs" />
     <Compile Include="Controllers\Department\DepartmentAreaAvgRankController.cs" />
+    <Compile Include="Controllers\Circuit\EPECollectController.cs" />
     <Compile Include="Controllers\History\THParamController.cs" />
     <Compile Include="Controllers\Home\SvgController.cs" />
     <Compile Include="Controllers\Infomation\InfomationController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Controllers\MeterAlarmingController.cs" />
     <Compile Include="Controllers\MeterAlarmLogController.cs" />
     <Compile Include="Controllers\Circuit\MultiRateCollectController.cs" />
+    <Compile Include="Controllers\Purify\PurifyController.cs" />
     <Compile Include="Controllers\Setting\MeterAlarmSetApiController.cs" />
     <Compile Include="Controllers\NoWorkDayController.cs" />
     <Compile Include="Controllers\OverAllSearchController.cs" />
@@ -269,6 +271,7 @@
     <Content Include="app\img\99.png" />
     <Content Include="app\img\99b.png" />
     <Content Include="app\img\address.png" />
+    <Content Include="app\img\aircondition.svg" />
     <Content Include="app\img\alarm.png" />
     <Content Include="app\img\area.png" />
     <Content Include="app\img\cloud.png" />
@@ -374,6 +377,7 @@
     <Content Include="app\js\Circuit\CircuitMain.js" />
     <Content Include="app\js\Circuit\CircuitPayRate.js" />
     <Content Include="app\js\Circuit\Collect.js" />
+    <Content Include="app\js\Circuit\EPECollect.js" />
     <Content Include="app\js\Circuit\NoWorkDay.js" />
     <Content Include="app\js\Circuit\RingRatio.js" />
     <Content Include="app\js\Circuit\Toxic.js" />
@@ -804,6 +808,8 @@
     <Content Include="Views\Setting\OverLimit.cshtml" />
     <Content Include="Views\Circuit\Toxic.cshtml" />
     <Content Include="Views\Circuit\MultiCollect.cshtml" />
+    <Content Include="Views\Purify\Index.cshtml" />
+    <Content Include="Views\Circuit\EPECollect.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

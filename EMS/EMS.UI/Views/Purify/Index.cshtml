@@ -1,0 +1,294 @@
+﻿<div id="svgcontainer">
+
+</div>
+<script type="text/javascript">
+    var Air = (function(){
+      function _Air(){
+        var count = 1;//风向运行的路径动画计数器
+        this.init = function(){
+          var components = [
+            "jinfeng",'chuxiao','quefeng','zhongxiao','heater1','heater2','heater3',
+            'heaterAlarm','step1','step2','step3','step4','step5','step6','step7','step8',
+            'paifeng','localcontrol','remotecontrol','summer','winter','xiaodu','paifengrunning',
+            'fengjirunning','zhiban','heaterrunning'
+          ];
+
+          hideComponent(components);
+        };
+
+        this.refresh=function(){
+          reloading();
+
+
+        }
+
+        function reloading(){
+          songfengjirunning(true);
+          airflowRunning(true,count);
+          autoRun(0);
+          seasonState(1);
+          sterilizeState(1);
+          dutyState(1);
+          middleState(0);
+          heaterState({heater1:0,heater2:0,heater3:0});
+          highTempAlarm(0);
+          exhaustStarter(1);
+          showData({temp:21.7,humi:53.0,settingtemp:25.0,settingHumi:50,coldwaterdegree:34.2,hotwaterdegree:0.00});
+          count ++;
+          if(count ==9)
+            count =1;
+
+          setTimeout(reloading,300)
+        }
+
+        //送风机启动状态
+        function songfengjirunning(running){
+          if(!running){
+            $("#fengjirunning").hide();
+            return;
+          }
+
+          $("#fengjirunning").show();
+
+          var show =$("#jinfeng").css('display');
+
+          if(show =='none')
+            $("#jinfeng").css('display','block');
+          else
+            $("#jinfeng").css('display','none');
+        }
+
+
+        //风机状态
+        function airflowRunning(running,count){
+
+          hideComponent(['step1','step2','step3','step4','step5','step6','step7','step8']);
+          if(!running){
+            return;
+          }
+
+          $("#step"+count).show();
+        }
+
+        //自动运行 0->本地控制 1->远程控制
+        function autoRun(state){
+          if(state == undefined){
+            $("#localcontrol").hide();
+            $("#remotecontrol").hide();
+            return;
+          }
+          var value =parseInt(state);
+          if(value==0){
+            $("#localcontrol").show();
+            $("#remotecontrol").hide();
+          }else{
+            $("#localcontrol").hide();
+            $("#remotecontrol").show();
+          }
+        }
+
+        function seasonState(state){
+          if(state == undefined){
+            $("#summer").hide();
+            $("#winter").hide();
+            return;
+          }
+          var value =parseInt(state);
+          if(value==0){
+            $("#summer").hide();
+            $("#winter").show();
+          }else{
+            $("#summer").show();
+            $("#winter").hide();
+          }
+        }
+
+        //灭菌设备状态
+        function sterilizeState(state){
+          if(state == undefined){
+            $("#xiaodu").hide();
+            return;
+          }
+
+          var value = parseInt(state);
+
+          if(state ==0){
+            $("#xiaodu").hide();
+          }else{
+            $("#xiaodu").show();
+          }
+        }
+
+        //值班运行状态
+        function dutyState(state){
+          if(state == undefined){
+            $("#zhiban").hide();
+            return;
+          }
+
+          var value = parseInt(state);
+
+          if(state ==0){
+            $("#zhiban").hide();
+          }else{
+            $("#zhiban").show();
+          }
+        }
+
+        //中效阻塞报警
+        function middleState(state){
+          if(state == undefined){
+            $("#zhongxiao").hide();
+            return;
+          }
+
+          var value = parseInt(state);
+
+          if(state ==0){
+            $("#zhongxiao").hide();
+          }else{
+            $("#zhongxiao").show();
+          }
+        }
+        //电加热状态
+        function heaterState(heaters){
+          var heater1 = heaters.heater1;
+          var heater2 = heaters.heater2;
+          var heater3 = heaters.heater3;
+
+          parseInt(heater1)==0?$("#heater1").hide():$("#heater1").show();
+          parseInt(heater2)==0?$("#heater2").hide():$("#heater2").show();
+          parseInt(heater3)==0?$("#heater3").hide():$("#heater3").show();
+
+          if(parseInt(heater1)==0 && parseInt(heater2) ==0 && parseInt(heater3)==0){
+            $("#heaterrunning").hide();
+          }else{
+            $("#heaterrunning").show();
+          }
+        }
+
+        //高温报警
+        function highTempAlarm(state){
+          if(state == undefined){
+            $("#heaterAlarm").hide();
+            return;
+          }
+
+          var value = parseInt(state);
+
+          if(state ==0){
+            $("#heaterAlarm").hide();
+          }else{
+            $("#heaterAlarm").show();
+          }
+        }
+
+        //排风机状态
+        function exhaustStarter(state){
+          if(state == undefined){
+            $("#paifengrunning").hide();
+            return;
+          }
+
+          var value = parseInt(state);
+
+          if(state ==0){
+            $("#paifengrunning").hide();
+
+          }else{
+            $("#paifengrunning").show();
+            var show =$("#paifeng").css('display');
+
+            if(show =='none')
+              $("#paifeng").css('display','block');
+            else
+              $("#paifeng").css('display','none');
+            }
+        }
+
+        //显示数据
+        function showData(data){
+
+          if(data.hasOwnProperty('temp')){
+            $("#temp").text(data.temp+'℃')
+          }else{
+            $("#temp").text(' - '+'℃')
+          }
+
+          if(data.hasOwnProperty('humi')){
+            $("#humi").text(data.humi+'RH');
+          }else{
+            $("#humi").text(' - '+'RH')
+          }
+
+          if(data.hasOwnProperty('settingtemp')){
+            $("#settingtemp").text(data.settingtemp+'℃')
+          }else{
+            $("#settingtemp").text(' - '+'℃')
+          }
+
+          if(data.hasOwnProperty('settingHumi')){
+            $("#settingHumi").text(data.settingHumi+'RH');
+          }else{
+            $("#settingHumi").text(' - '+'RH')
+          }
+
+          if(data.hasOwnProperty('coldwaterdegree')){
+            $("#coldwaterdegree").text(data.coldwaterdegree+'%');
+          }else{
+            $("#coldwaterdegree").text(' - '+'%')
+          }
+
+          if(data.hasOwnProperty('hotwaterdegree')){
+            $("#hotwaterdegree").text(data.hotwaterdegree+'%');
+          }else{
+            $("#hotwaterdegree").text(' - '+'%')
+          }
+
+        }
+
+        function hideComponent(components){
+          $.each(components, function(key, val) {
+            $("#"+val).hide();
+          });
+        }
+      }
+      return _Air;
+    })();
+    jQuery(document).ready(function ($) {
+        var height = window.screen.availHeight - 200;
+        var width = (height * 16) / 9;
+        $("#purifyview").attr("class", "start active");
+        $("#purifyview").attr("class", "active");
+        EMS.Loading.show($("#main-content").parent('div'));
+        if (localStorage.getItem("svgView") != null && localStorage.getItem("svgView") != 'null' && localStorage.getItem("svgView") != undefined &&
+            localStorage.getItem("svgView").trim() != '') {
+            $("#svgcontainer").append(localStorage.getItem("svgView"));
+            $("#svg8").height(height);
+            $("#svg8").width(width);
+            $("#svg8").css('display', 'block')
+            EMS.Loading.hide($("#main-content").parent('div'));
+        } else {
+            $.getJSON("/api/SvgFile", { name: "123", type: "" }, function (data) {
+                $("#svgcontainer").append(data);
+
+                localStorage.setItem("svgView", data);
+                $("#svg8").height(height);
+                $("#svg8").width(width);
+                $("#svg8").css('display', 'block')
+                EMS.Loading.hide($("#main-content").parent('div'));
+            });
+        }
+        
+
+        
+        //$("#svgcontainer").height(height);
+        //$("#svgcontainer").height(height);
+        console.log(height, width);
+        
+        var air = new Air();
+        air.init();
+
+        air.refresh();
+    });
+</script>

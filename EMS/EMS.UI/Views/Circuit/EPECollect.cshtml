@@ -1,0 +1,155 @@
+﻿<div class="container-fluid main-top">
+    <div class="count-info-te report-add">
+        <div class=" build-info count-info">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-paste"></i>筛选
+            </div>
+            <div class="row">
+                <div class="select-width">建筑名称：</div>
+                <div class="filter-calc">
+                    <form role="form">
+                        <select class="form-control" id="buildinglist"></select>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="select-width" style="margin-top: 5px;">能耗类别：</div>
+                <div id="te_CollectBtns" class="filter-calc">
+                    <acronym title="电">
+                        <button class="btn btn-elc"
+                                style="width: 20px; height: 20px;" type="button"></button>
+                    </acronym> <acronym title="水">
+                        <button class="btn btn-water"
+                                style="width: 20px; height: 20px;" type="button"></button>
+                    </acronym> <acronym title="光伏"><button class="btn btn-solar" type="button"></button></acronym>
+                </div>
+            </div>
+            <div class="row dis-tree">
+                <div class="count-list" style="margin-top: 7px;">
+                    <p>
+                        <img src="/app/img/count3.png">支路名称：
+                        <label>
+                            <input id="selectall" type="checkbox" value=""><span style="padding-left:5px;cursor:pointer;">全部选中</span>
+                        </label>
+                        <label>
+                            <input id="related" type="checkbox" value=""><span style="padding-left:5px;cursor:pointer;">级联选择</span>
+                        </label>
+                    </p>
+                    <input id="search-input" class="Reaport-input" type="text" />
+                    <button id="treeSearch" class="Report-search" type="button">搜索</button>
+                    <div>
+                        <div id="treeview" class="collect-tree"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="count-info-te-calc">
+        <div id="content">
+            <div class="collect-top">
+                <div class="c-t-left">
+                    <label class="data-start">起始日期：</label>
+                    <div id="StartDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="StartBox" class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
+                    </div>
+                    <select id="StartHour" class="d-s-select">
+                        <option value="0">00</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select><label class="d-s-hour">时</label>
+                    <select id="StartMinute" class="d-s-select">
+                        <option value="0">00</option>
+                        <option value="5">05</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="55">55</option>
+                    </select> <label class="d-s-hour">分</label>
+                </div>
+                <div class="c-t-right">
+                    <label class="data-start data-end">截止日期：</label>
+                    <div id="EndDate" class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        <input id="EndBox" class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar" /></span>
+                    </div>
+                    <select id="EndHour" class="d-s-select">
+                        <option value="0">00</option>
+                        <option value="1">01</option>
+                        <option value="2">02</option>
+                        <option value="3">03</option>
+                        <option value="4">04</option>
+                        <option value="5">05</option>
+                        <option value="6">06</option>
+                        <option value="7">07</option>
+                        <option value="8">08</option>
+                        <option value="9">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                    </select><label class="d-s-hour">时</label>
+                    <select id="EndMinute" class="d-s-select">
+                        <option value="0">00</option>
+                        <option value="5">05</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="35">35</option>
+                        <option value="40">40</option>
+                        <option value="45">45</option>
+                        <option value="50">50</option>
+                        <option value="55">55</option>
+                    </select><label class="d-s-hour">分</label>
+                </div>
+                <button type="button" id="BtnExec" class="btn-count5"><span>查 询</span></button>
+                <button id="dayExport" type="button" class="btn-count2"><span>导出</span></button>
+            </div>
+            <div id="tableData" class="cp-compareanalysis cp-collect">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/app/js/Circuit/EPECollect.js" type="text/javascript"></script>
+

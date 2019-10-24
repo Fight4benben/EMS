@@ -48,6 +48,21 @@ namespace EMS.DAL.RepositoryImp
         }
 
         /// <summary>
+        /// 获取指定EPE参数
+        /// </summary>
+        /// <param name="buildId"></param>
+        /// <param name="circuitIDs"></param>
+        /// <returns></returns>
+        public List<CircuitMeterInfo> GetCircuitMeterInfoListEPE(string buildId, string[] circuitIDs)
+        {
+            string sql = string.Format(CircuitCollectResources.CircuitEPEInfo, "'" + string.Join("','", circuitIDs) + "'");
+            SqlParameter[] sqlParameters ={
+                new SqlParameter("@BuildID",buildId)
+            };
+            return _EMSdb.Database.SqlQuery<CircuitMeterInfo>(sql, sqlParameters).ToList();
+        }
+
+        /// <summary>
         /// 获取指定复费率参数
         /// </summary>
         /// <param name="buildId"></param>

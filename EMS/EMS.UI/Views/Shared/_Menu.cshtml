@@ -36,14 +36,14 @@
             }
 
             @*@if (menu.Menus.ToUpper().Contains("7P") || menu.Menus.Contains("all"))
-            {
-                <li id="overAll" class="">
-                    <a href="/Home/OverAll" id="btn-map">
-                        <i class="fa fa-search"></i>
-                        <span class="title">综合查询</span>
-                    </a>
-                </li>
-            }*@
+        {
+            <li id="overAll" class="">
+                <a href="/Home/OverAll" id="btn-map">
+                    <i class="fa fa-search"></i>
+                    <span class="title">综合查询</span>
+                </a>
+            </li>
+        }*@
 
             @if (menu.Menus.ToUpper().Contains("3P") || menu.Menus.Contains("all"))
             {
@@ -98,6 +98,9 @@
                         @if (menu.Menus.Contains("3.XI") || menu.Menus.Contains("all"))
                         {
                             <li id="cir_multi_collect" class=""><a href="/Circuit/MultiCollect"><i class="fa fa-caret-right"></i>复费率集抄</a></li>
+                        }@if (menu.Menus.Contains("3.XII") || menu.Menus.Contains("all"))
+                        {
+                            <li id="cir_epe_collect" class=""><a href="/Circuit/EPECollect"><i class="fa fa-caret-right"></i>反向电能集抄</a></li>
                         }
                         <!-- <li id="" class=""><a href="javascript:;"> <span style="color:#b1b0b0">趋势曲线</span></a></li> -->
                         <!-- <li id="te_loss" class=""><a href="rest/tela"><i class="fa fa-caret-right"></i>损耗分析</a></li> -->
@@ -257,6 +260,15 @@
                     </a>
                 </li>
             }
+            @if (menu.Menus.ToUpper().Contains("XIIP") || menu.Menus.Contains("all"))
+            {
+                <li id="purifyview" class="">
+                    <a href="/Purify/Index">
+                        <i class="fa fa-code-fork"></i>
+                        <span class="title">机组监控</span>
+                    </a>
+                </li>
+            }
 
             @if (menu.Menus.ToUpper().Contains("9P") || menu.Menus.Contains("all"))
             {
@@ -266,13 +278,13 @@
                     </a>
                     <ul class="sub-menu" id="">
                         @*@if (menu.Menus.Contains("9.1") || menu.Menus.Contains("all"))
-        {
-            <li id="deviceLimit" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
-        }
-        @if (menu.Menus.Contains("9.2") || menu.Menus.Contains("all"))
-        {
-            <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>办公室报警设置</a></li>
-        }*@
+                    {
+                        <li id="deviceLimit" class=""><a href="~/Setting/OutOfWork"><i class="fa fa-caret-right"></i>重点设备报警设置</a></li>
+                    }
+                    @if (menu.Menus.Contains("9.2") || menu.Menus.Contains("all"))
+                    {
+                        <li id="departmentLimit" class=""><a href="~/Setting/DepartmentOutOfWork"><i class="fa fa-caret-right"></i>办公室报警设置</a></li>
+                    }*@
                         @if (menu.Menus.Contains("9.3") || menu.Menus.Contains("all"))
                         {
                             <li id="menu_user_building" class=""><a href="~/Setting/UserBuilding"><i class="fa fa-caret-right"></i>用户建筑关联</a></li>

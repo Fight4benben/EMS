@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using System.Web.Http;
 
@@ -61,6 +62,20 @@ namespace EMS.UI.Controllers.Setting
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
             }
+        }
+
+        public string Get(string name,string type)
+        {
+            string filePath = HttpContext.Current.Server.MapPath("~/app/img/");
+            string fileName = "aircondition.svg";
+            string svgview = "";
+
+            string path = Path.Combine(filePath, fileName);
+
+
+            svgview = File.ReadAllText(path, Encoding.UTF8);
+
+            return svgview;
         }
     }
 }

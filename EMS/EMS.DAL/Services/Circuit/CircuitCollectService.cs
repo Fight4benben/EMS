@@ -126,6 +126,33 @@ namespace EMS.DAL.Services
             return viewModel;
         }
 
+        public CircuitCollectViewModel GetEPEViewModel(string buildId, string energyCode, string[] circuitIDs, string startDate, string endDate)
+        {
+            CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
+            DateTime startTime = Util.ConvertString2DateTime(startDate, "yyyy-MM-dd HH:mm:ss");
+            DateTime endTime = Util.ConvertString2DateTime(endDate, "yyyy-MM-dd HH:mm:ss");
+
+            List<CircuitMeterInfo> circuitMeterInfos = context.GetCircuitMeterInfoListEPE(buildId, circuitIDs);
+            string[] meterIDs = GetMeterIDs(circuitMeterInfos);
+            string[] meterParamIDs = GetMeterParamIDs(circuitMeterInfos);
+            List<HistoryValue> startValue = context.GetHistoryValues(meterIDs, meterParamIDs, startTime);
+            List<HistoryValue> endValue = context.GetHistoryValues(meterIDs, meterParamIDs, endTime);
+            List<CollectValue> data = new List<CollectValue>();
+            foreach (var meterID in startValue)
+            {
+                CollectValue collect = new CollectValue();
+                collect.Name = circuitMeterInfos.Find(x => x.MeterID.Equals(meterID.MeterID)).CircuitName;
+                collect.StartValue = meterID.Value;
+                collect.EndValue = endValue.Find(x => x.MeterID.Equals(meterID.MeterID)).Value;
+                collect.DiffValue = collect.EndValue - collect.StartValue;
+
+                data.Add(collect);
+            }
+            viewModel.Data = data;
+
+            return viewModel;
+        }
+
         public CircuitCollectViewModel GetMultiRateViewModel(string buildId, string energyCode, string[] circuitIDs, string startDate, string endDate)
         {
             CircuitCollectViewModel viewModel = new CircuitCollectViewModel();
