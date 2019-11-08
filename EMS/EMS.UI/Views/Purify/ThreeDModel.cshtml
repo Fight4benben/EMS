@@ -1,0 +1,171 @@
+﻿<div id="canvas-frame" class="container-fluid main-top">
+
+</div>
+<script type="text/javascript" src="~/Assets/plugins/threejs/three.js"></script>
+<script type="text/javascript" src="~/Assets/plugins/threejs/FBXLoader.js"></script>
+<script type="text/javascript" src="~/Assets/plugins/threejs/OrbitControls.js"></script>
+<script type="text/javascript" src="~/Assets/plugins/threejs/inflate.min.js"></script>
+<script type="text/javascript">
+        var height = window.screen.availHeight - 200;
+        var width = $("#main-content").width()-20;
+		var operator={
+			data:{
+				renderer:null,
+				camera:null,
+				scene:null,
+				light:null,
+				cube:null,
+				controls:null,
+				raycaster:null,//光投射器
+				mouse:null
+			},
+			init:function (){
+
+                $("#canvas-frame").height(height);
+                width = width;
+                height = height;
+				this.data.renderer = new THREE.WebGLRenderer({
+					antialias:true
+				});
+				this.data.renderer.setPixelRatio(window.devicePixelRatio);
+				this.data.renderer.setSize(width,height);
+				this.data.renderer.shadowMap.enabled = true;
+				document.getElementById('canvas-frame').appendChild(this.data.renderer.domElement);
+				this.data.renderer.setClearColor(0xFFFFFF,1.0);
+
+				this.data.camera = new THREE.PerspectiveCamera( 45, width/height, 1, 20000 );
+				this.data.camera.position.x = 0;
+				this.data.camera.position.y = 1200;
+				this.data.camera.position.z = 1600;
+				this.data.camera.up.x = 0;
+				this.data.camera.up.y = 1;
+				this.data.camera.up.z = 0;
+				//this.data.camera.lookAt(0,1000,0);
+
+				this.data.controls = new THREE.OrbitControls(this.data.camera);
+		      	this.data.controls.target.set(0, 100, 0);
+		      	this.data.controls.update();
+
+				this.data.scene = new THREE.Scene();
+				this.data.scene.background = new THREE.Color(0xa0a0a0);
+
+				// this.data.light = new THREE.AmbientLight( 0xffffff )
+				// this.data.light.position.set(2000,2000,2000);
+				// this.data.scene.add(this.data.light);
+
+				this.data.light = new THREE.HemisphereLight( 0xffffff,0x444444 )
+				this.data.light.position.set(0,200,0);
+				this.data.scene.add(this.data.light);
+
+
+				// this.data.light = new THREE.PointLight( 0xffffff);
+				// this.data.light.position.set(0,20000,0);
+				// this.data.scene.add(this.data.light);
+
+
+				this.data.light = new THREE.DirectionalLight( 0xffffff);
+				this.data.light.position.set(0,200,100);
+				this.data.light.castShadow = true;
+				this.data.light.shadow.camera.top = 180;
+		      	this.data.light.shadow.camera.bottom = -100;
+		      	this.data.light.shadow.camera.left = -120;
+		      	this.data.light.shadow.camera.right = 120;
+				this.data.scene.add(this.data.light);
+
+				var grid = new THREE.GridHelper(2000,20,0x000000,0x000000);
+				grid.material.opacity = 0.2;
+				grid.material.transparent = true;
+				this.data.scene.add(grid);
+
+				var loader = new THREE.FBXLoader();
+				loader.load('/app/models/Multi.fbx',function(object){
+					object.traverse(function(child){
+						if(child.isMesh){
+							child.castShadow = true;
+            				child.receiveShadow = true;
+						}
+					});
+
+					operator.data.scene.add(object);
+				})
+
+
+				this.data.raycaster = new THREE.Raycaster();
+				this.data.mouse = new THREE.Vector2();
+
+			},
+
+			render:function(){
+				var _this = this;
+				operator.data.renderer.clear();
+
+				operator.data.renderer.render(operator.data.scene,operator.data.camera);
+
+
+				requestAnimationFrame(operator.render);
+			},
+			animation:function(){
+				operator.data.camera.position.x = operator.data.camera.position.x+1;
+				operator.data.renderer.render(operator.data.scene,operator.data.camera);
+				requestAnimationFrame(operator.animation);
+			},
+			start:function(){
+				this.init();
+				this.render();
+			}
+		};
+
+		var currentSelectValue = "";
+
+		function onMouseMove(event){
+
+			operator.data.mouse.x = (event.clientX / window.innerWidth) *2 -1;
+			operator.data.mouse.y = -(event.clientY / window.innerHeight ) *2 +1;
+
+			var vector = new THREE.Vector3( operator.data.mouse.x, operator.data.mouse.y, 1 ).unproject(operator.data.camera);
+
+			operator.data.raycaster.set(operator.data.camera.position,vector.sub(operator.data.camera.position).normalize());
+
+			var intersects = operator.data.raycaster.intersectObjects( operator.data.scene.children,true );
+
+			if(intersects.length>0){
+				currentSelectValue =  intersects[0].object.name;
+				$("#myModal").modal('show');
+
+			}
+
+		}
+
+		window.addEventListener( 'mouseup', onMouseMove, false );
+
+    jQuery(document).ready(function ($) {
+
+        $("#purify_three").attr("class", "start active");
+        $("#purify_three").attr("class", "active");
+
+			operator.start();
+
+			$("#myModal").on('show.bs.modal',function(){
+				$.getJSON('http://116.236.149.162:9900/api/MeterData', function(data) {
+
+					if(data.length >0){
+						var meterId = currentSelectValue;
+						if(data[0].hasOwnProperty('MeterName'))
+							$("#meterName").html(currentSelectValue);
+						var newArr = data.filter(function(item,index,arr){
+							return item.MeterId == meterId
+						});
+
+						$.each(newArr, function(key, val) {
+							if(val.ParamCode=="Ua")
+								$("#Ua").html(val.Value+"V");
+							if(val.ParamCode=="Ub")
+								$("#Ub").html(val.Value+"V");
+							if(val.ParamCode=="Uc")
+								$("#Uc").html(val.Value+"V");
+						});
+					}
+				});
+			});
+		});
+</script>

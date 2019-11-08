@@ -60,6 +60,22 @@ namespace EMS.DAL.StaticResources
                                                 AND F_StartDay BETWEEN DATEADD(DD,-DAY(@EndDate)+1,@EndDate) AND @EndDate
                                                 GROUP BY Formula.F_EnergyItemCode,Formula.F_BuildID,Formula.F_EnergyItemCode
                                                 ORDER BY Formula.F_EnergyItemCode ASC";
+
+        public static string EnergyRegionSQL = @"SELECT 
+                                    T_ST_Region.F_BuildID BuildID,T_ST_Region.F_RegionID EnergyItemCode,MAX(T_ST_Region.F_RegionName) EnergyItemName,
+                                    SUM((CASE WHEN T_ST_RegionMeter.F_Operator='加' THEN 1 ELSE -1 END)*T_ST_RegionMeter.F_Rate*T_MC_MeterDayResult.F_Value/100) Value 
+                                    FROM T_ST_Region INNER JOIN T_ST_RegionMeter ON T_ST_Region.F_RegionID = T_ST_RegionMeter.F_RegionID 
+                                    INNER JOIN T_ST_MeterUseInfo ON T_ST_RegionMeter.F_MeterID = T_ST_MeterUseInfo.F_MeterID 
+                                    INNER JOIN T_MC_MeterDayResult ON T_ST_MeterUseInfo.F_MeterID = T_MC_MeterDayResult.F_MeterID 
+                                    INNER JOIN T_ST_MeterParamInfo ON T_MC_MeterDayResult.F_MeterParamID = T_ST_MeterParamInfo.F_MeterParamID 
+                                    INNER JOIN T_ST_CircuitMeterInfo ON T_ST_MeterUseInfo.F_MeterID = T_ST_CircuitMeterInfo.F_MeterID                                                           
+                                    INNER JOIN T_DT_EnergyItemDict ON T_ST_CircuitMeterInfo.F_EnergyItemCode = T_DT_EnergyItemDict.F_EnergyItemCode 
+                                    LEFT JOIN T_ST_Region ParentRegion ON ParentRegion.F_RegionID=T_ST_Region.F_RegionParentID  
+                                    WHERE (T_MC_MeterDayResult.F_StartDay BETWEEN DATEADD(DAY,-DAY(@EndDate)+1,@EndDate) AND @EndDate) 
+                                    AND (T_ST_Region.F_BuildID=@BuildId) 
+                                    AND (T_ST_MeterParamInfo.F_IsEnergyValue = 1) 
+                                    AND (T_DT_EnergyItemDict.F_EnergyItemCode='01000')
+                                    GROUP BY T_ST_Region.F_RegionID ,T_ST_Region.F_BuildID ";
         /// <summary>
         /// 查询某一天用能报表，小时为分组；传入参数EndDate格式为“yyyy-MM-dd HH:mm:ss”
         /// </summary>

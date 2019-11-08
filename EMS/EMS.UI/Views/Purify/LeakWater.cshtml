@@ -1,0 +1,150 @@
+﻿<div class="container-fluid main-top">
+    <div class="col-lg-12">
+        <div class="equip-row">
+            <div class="filter-width">
+                建筑名称：
+            </div>
+            <div class="se-right equip-right">
+                <form role="form">
+                    <div class="form-group">
+                        <select class="form-control" id="buildinglist">
+                            <option>安科瑞电气股份有限公司A楼</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="leak_container" class="col-lg-12">
+
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="filter">
+                        <label class="equip-width">日期：</label>
+                        <div id="dayCalendar" class="input-group date form_date count-data" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input id="daycalendarBox" class="form-control" size="16" type="text" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="table-content">
+                        <div id="leak-table"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">提交更改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+<style type="text/css">
+    .leak_panel {
+        height: 120px;
+        padding: 15px;
+        margin: 15px;
+        border: 1px solid #F4E9E0;
+    }
+    .leak_panel .btn-info {
+        float:right;
+        margin-top:10px;
+    }
+    .leak_panel_alarm {
+        border: 1px solid red;
+    }
+    .table-content {
+        height:300px;
+    }
+    #leak-table {
+        height:100%;
+    }
+</style>
+<script type="text/javascript">
+    var LeakWater = (function () {
+        function _LeakWater() {
+            //var list = [];
+            var currentName;
+           
+            this.init = function () {
+                
+                EMS.DOM.initDateTimePicker('CURRENTDATE', new Date(), $("#dayCalendar"), $("#daycalendarBox"));
+                var arr = [true, false];
+                for (var i = 0; i < 16; i++) {
+                    var state = arr[Math.floor(Math.random() * arr.length)];
+                    var stateString = '<img src="~/app/img/leakwater-off.png" />';
+                    var leakClass = "";
+                    if (state) {
+                        stateString = '<img src="/app/img/leakwater-on.png" />';
+                        leakClass = "leak_panel_alarm";
+                    }
+                    else {
+                        stateString = '<img src="/app/img/leakwater-off.png" />';
+                    }
+                        
+
+                    //list.push({ id: "meter_" + (i + 1), name: "机组" + (i + 1), state: arr[Math.floor(Math.random() * arr.length)] });
+                    var leakPanel = '<div id="' + "meter_" + (i + 1) + '"class="col-lg-2 col-md-3 leak_panel ' + leakClass + '">' +
+                        '<p>' + "机组" + (i + 1) + '</p>' + stateString + '<button class="btn btn-info btn-detail">历史记录</button></div>';
+
+
+                    $("#leak_container").append(leakPanel);
+
+                }
+
+                $(".btn-detail").click(function () {
+                    currentName = $(this).parent('div').children('p').text();
+                    $("#myModal").modal('show');
+                    console.log(currentName);
+                });
+
+                $("#myModal").on('shown.bs.modal', function () {
+                    $("#myModalLabel").text(currentName);
+                    $("#leak-table").html('<table></table>');
+                    $("#leak-table>table").attr('data-height', $("#leak-table").height() - 50);
+                    var columns = [
+                        { field: 'time', title: '发生时间' },
+                        { field: 'changeType', title: '状态' }
+                    ];
+                    var rows = [
+                        { time: $("#daycalendarBox").val() + " 00:35:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 08:00:00", changeType: "恢复正常" },
+                        { time: $("#daycalendarBox").val() + " 10:05:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 11:20:00", changeType: "恢复正常" },
+                        { time: $("#daycalendarBox").val() + " 00:35:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 08:00:00", changeType: "恢复正常" },
+                        { time: $("#daycalendarBox").val() + " 10:05:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 11:20:00", changeType: "恢复正常" },
+                        { time: $("#daycalendarBox").val() + " 00:35:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 08:00:00", changeType: "恢复正常" },
+                        { time: $("#daycalendarBox").val() + " 10:05:00", changeType: "发生漏水" },
+                        { time: $("#daycalendarBox").val() + " 11:20:00", changeType: "恢复正常" }
+                    ];
+
+                    EMS.DOM.showTable($("#leak-table>table"), columns, rows, { striped: true, classes: 'table table-border' });
+                });
+
+                $("#myModal").on('hiden.bs.modal', function () {
+                    $("#myModalLabel").text("");
+                    $("#leak-table").html('');
+                    
+                });
+
+            }
+        };
+
+        return _LeakWater;
+    })();
+    jQuery(document).ready(function ($) {
+        $("#purify_leakwater").attr("class", "start active");
+        $("#purify_leakwater").attr("class", "active");
+        var gas = new LeakWater();
+        gas.init();
+    });
+</script>

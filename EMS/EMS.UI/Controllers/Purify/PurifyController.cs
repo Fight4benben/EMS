@@ -13,5 +13,20 @@ namespace EMS.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Gas()
+        {
+            return View();
+        }
+
+        public ActionResult LeakWater()
+        {
+            return View();
+        }
+
+        public ActionResult ThreeDModel()
+        {
+            return View();
+        }
     }
 }
