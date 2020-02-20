@@ -77,12 +77,24 @@ namespace EMS.DAL.StaticResources
                                             GROUP BY EnergyItem.F_EnergyItemCode,F_StartHour
                                             ORDER BY EnergyItemCode ASC,ValueTime ASC";
 
-        public static string MDSQL = @"SELECT Meter.F_MeterName Name,F_RecentTime 'Time',F_RecentData  Value
-                                        FROM HistoryData
-                                        INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID = HistoryData.F_MeterID
-                                        WHERE HistoryData.F_BuildID = @BuildID
-                                        AND F_TagName LIKE '%_MD'
-                                        AND F_Year = YEAR(GETDATE())";
+        public static string MDSQL = 
+            @"SELECT Meter.F_MeterName Name,F_RecentTime 'Time',F_RecentData  Value
+            FROM HistoryData
+            INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID = HistoryData.F_MeterID
+            INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID = HistoryData.F_MeterID
+            WHERE HistoryData.F_BuildID = @BuildID
+            AND Circuit.F_MainCircuit=1
+            AND F_TagName LIKE '%_MD'
+            AND F_Year = YEAR(GETDATE())
+            union all
+            SELECT '需量总计' Name, Max(F_RecentTime) 'Time',SUM( F_RecentData)  Value
+            FROM HistoryData
+            INNER JOIN EMS.dbo.T_ST_MeterUseInfo Meter ON Meter.F_MeterID = HistoryData.F_MeterID
+            INNER JOIN EMS.dbo.T_ST_CircuitMeterInfo Circuit ON Circuit.F_MeterID = HistoryData.F_MeterID
+            WHERE HistoryData.F_BuildID = @BuildID
+            AND Circuit.F_MainCircuit=1
+            AND F_TagName LIKE '%_MD'
+            AND F_Year = YEAR(GETDATE())";
 
     }
 }
