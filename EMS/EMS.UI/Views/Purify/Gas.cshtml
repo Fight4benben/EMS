@@ -1,0 +1,171 @@
+﻿<div class="container-fluid main-top">
+    <div class="count-info-te compare-add">
+        <div class=" build-info count-info">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-paste"></i>筛选
+            </div>
+            <div class="row">
+                <div class="select-width">建筑名称：</div>
+                <div class="filter-calc">
+                    <form role="form">
+                        <div class="form-group">
+                            <select class="form-control" id="buildinglist">
+                                <option>安科瑞电气股份有限公司A楼</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row dis-tree">
+                <div class="count-list" style="margin-top: 7px;">
+                    <p>
+                        <img src="/app/img/count3.png">监测点列表：
+                    </p>
+                    
+                    <div class="treeview-Compare">
+                        <div id="treeview">
+                            <ul>
+                                <li class="current_point">5#1层UPS间监测点</li>
+                                <li>5#2层UPS间监测点</li>
+                                <li>5#3层UPS间监测点</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="realtime" class="build-info" style="height:100px!important;">
+            <div style="margin-left:50px;margin-top:5px;margin-right:10px;margin-bottom:5px;width:200px;height:88px;float:left;border:1px solid gray;">
+                <p style="padding:5px;margin-bottom:0px;">H<sub>2</sub>浓度实时状态</p>
+                <p style="padding:5px;margin-bottom:0px;">浓度：3000 <span>ppm</span></p>
+                <div style="padding:5px;margin-bottom:0px;"><div style="float:left;">状态：正常&nbsp;&nbsp;&nbsp;</div> <div style="margin-top:3px;float:left;width:12px;height:12px;border-radius:50%!important;background-color:green;"></div></div>
+            </div>
+            <div style="margin-left:50px;margin-top:5px;margin-right:10px;margin-bottom:5px;width:200px;height:88px;float:left;border:1px solid gray;">
+                <p style="padding:5px;margin-bottom:0px;">CO<sub>2</sub>浓度实时状态</p>
+                <p style="padding:5px;margin-bottom:0px;">浓度：900 <span>ppm</span></p>
+                <div style="padding:5px;margin-bottom:0px;"><div style="float:left;">状态：报警&nbsp;&nbsp;&nbsp;</div> <div style="margin-top:3px;float:left;width:12px;height:12px;border-radius:50%!important;background-color:red;"></div></div>
+            </div>
+        </div>
+        <div class="build-info Envir-w"style="height:350px!important;">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-sun-o"></i>氢气当日浓度趋势(单位：ppm)
+            </div>
+            <div id="temperature" class="se-yet">
+
+            </div>
+        </div>
+
+        <div class="build-info" style="height:350px!important;">
+            <div class="main-menu">
+                <hr>
+                <i class="fa fa-tint"></i>二氧化碳当日浓度趋势(单位：ppm)
+            </div>
+            <div id="humidity" class="se-yet">
+
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+<style type="text/css">
+    #treeview ul li {
+        list-style:none;
+        line-height:30px;
+        font-size:20px;
+    }
+    .current_point {
+        background-color:dodgerblue;
+        color:white;
+    }
+
+    #treeview ul {
+        margin-left:10px;
+        margin-right:10px;
+        padding:0px;
+    }
+</style>
+<script type="text/javascript">
+    var Gas = (function () {
+        function _Gas() {
+            var times = [];
+            var H2Value = [];
+            var CO2Value = [];
+
+            this.init = function () {
+                generateValues();
+            }
+
+            function generateRandom(min, max) {
+                return parseInt(Math.random() * (max - min + 1) + min, 10); 
+            }
+
+            function generateValues() {
+                var startTime = new Date();
+                var currentTime = new Date();
+                startTime.setHours(0);
+                startTime.setMinutes(0);
+                startTime.setSeconds(0);
+                while (startTime.getTime() < currentTime.getTime()) {
+                    var tempTime = /*startTime.getFullYear() + "/" + EMS.Tool.appendZero(startTime.getMonth() + 1) + "/" + EMS.Tool.appendZero(startTime.getDate()) + " " +*/ EMS.Tool.appendZero(startTime.getHours()) + ":" + EMS.Tool.appendZero(startTime.getMinutes()) + ":00"
+                    times.push(tempTime);
+                    H2Value.push(generateRandom(2000, 3000));
+                    CO2Value.push(generateRandom(200, 1000));
+
+                    startTime.setTime(startTime.getTime()+300000);
+                }
+
+                showChartline();
+            }
+
+            function showChartline() {
+                var hseries = {
+                    type: 'line',
+                    data: H2Value,
+                    markLine: {
+                        silent: true,
+                        lineStyle: {
+                            normal: {
+                                type: 'dashed',
+                                color: '#ccc'
+                            }
+                        },
+                        data: [
+                            { yAxis: 3000 }
+                        ]
+                    }
+                }
+                var cseries = {
+                    type: 'line',
+                    data: CO2Value,
+                    markLine: {
+                        silent: true,
+                        lineStyle: {
+                            normal: {
+                                type: 'dashed',
+                                color: '#ccc'
+                            }
+                        },
+                        data: [
+                            {yAxis:700}
+                        ]
+                        
+                    }
+                }
+                EMS.Chart.showLine(echarts, $("#temperature"), undefined, times, hseries, { bottom: 10, right: 10, pieces: [{ gt: 0, lte: 3000, color: "#74B000" }], outOfRange: {color:'red'}});
+                EMS.Chart.showLine(echarts, $("#humidity"), undefined, times, cseries, { bottom: 10, right: 10, pieces: [{ gt: 0, lte: 700, color: "#74B000" }], outOfRange: { color: 'red' } });
+            }
+        };
+        return _Gas;
+    })();
+    jQuery(document).ready(function ($) {
+        $("#purifygas").attr("class", "start active");
+        $("#purifygas").attr("class", "active");
+        var gas = new Gas();
+        gas.init();
+    });
+</script>

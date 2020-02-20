@@ -304,6 +304,8 @@
     <Content Include="app\img\icon.jpg" />
     <Content Include="app\img\icons8-trash-27.png" />
     <Content Include="app\img\icons8-user-groups-filled-35.png" />
+    <Content Include="app\img\leakwater-off.png" />
+    <Content Include="app\img\leakwater-on.png" />
     <Content Include="app\img\load-1.png" />
     <Content Include="app\img\load-2.png" />
     <Content Include="app\img\load-3.png" />
@@ -631,6 +633,14 @@
     <Content Include="Assets\plugins\tableExport\tableExport.min.js" />
     <Content Include="Assets\plugins\tableExport\xlsx.core.min.js" />
     <Content Include="Assets\plugins\templatemo_script.js" />
+    <Content Include="Assets\plugins\threejs\FBXLoader.js" />
+    <Content Include="Assets\plugins\threejs\inflate.min.js" />
+    <Content Include="Assets\plugins\threejs\MTLLoader.js" />
+    <Content Include="Assets\plugins\threejs\OBJLoader.js" />
+    <Content Include="Assets\plugins\threejs\OrbitControls.js" />
+    <Content Include="Assets\plugins\threejs\three.js" />
+    <Content Include="Assets\plugins\threejs\three.min.js" />
+    <Content Include="Assets\plugins\threejs\tween.js" />
     <Content Include="Assets\plugins\uniform\css\uniform.default.css" />
     <Content Include="Assets\plugins\uniform\images\bg-input-focus.png" />
     <Content Include="Assets\plugins\uniform\images\bg-input.png" />
@@ -733,6 +743,18 @@
     <Content Include="Assets\plugins\jquery-busyLoading\src\sass\_pump.scss" />
     <Content Include="Assets\plugins\jquery-busyLoading\src\sass\_utils.scss" />
     <Content Include="Assets\plugins\jquery-busyLoading\src\template\index.ejs" />
+    <Content Include="App_Data\ThreeModels\Multi.fbx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\ThreeModels\Panels3.FBX">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app\models\Multi.fbx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app\models\Panels3.FBX">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -754,7 +776,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -810,6 +834,9 @@
     <Content Include="Views\Circuit\MultiCollect.cshtml" />
     <Content Include="Views\Purify\Index.cshtml" />
     <Content Include="Views\Circuit\EPECollect.cshtml" />
+    <Content Include="Views\Purify\Gas.cshtml" />
+    <Content Include="Views\Purify\LeakWater.cshtml" />
+    <Content Include="Views\Purify\ThreeDModel.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

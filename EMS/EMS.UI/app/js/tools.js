@@ -283,7 +283,7 @@ var EMS = {
 			$Pie.removeAttr('_echarts_instance_');
 			charts.init($Pie.get(0),'macarons').setOption(option);
 		},
-		showLine:function(charts,$Line,legendData,xData,series){
+		showLine:function(charts,$Line,legendData,xData,series,visualMap){
 			var option = {
 			            tooltip: {
 			                trigger: 'axis'
@@ -294,8 +294,8 @@ var EMS = {
 			            },*/
 			            grid: {
 			                left: 50,
-			                right: 10,
-			                top:5,
+			                right: 50,
+			                top:20,
 			                bottom:'20%'
 			            },
 			            xAxis: {
@@ -318,7 +318,10 @@ var EMS = {
         					type:'scroll',
 			                data: legendData,
 			                bottom:'bottom'
-			            };
+                };
+
+            if (visualMap != undefined)
+                option.visualMap = visualMap;
 
 			$Line.removeAttr('_echarts_instance_');
 

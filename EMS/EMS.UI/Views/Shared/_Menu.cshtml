@@ -91,14 +91,14 @@
                         {
                             <li id="cir_work" class=""><a href="/Circuit/NoWorkDay"><i class="fa fa-caret-right"></i>非工作日用能报表</a></li>
                         }
-                        @if (menu.Menus.Contains("3.10") || menu.Menus.Contains("all"))
+                        @if (menu.Menus.Contains("3.10P") || menu.Menus.Contains("all"))
                         {
                             <li id="cir_toxic" class=""><a href="/Circuit/Toxic"><i class="fa fa-caret-right"></i>有毒气体分析</a></li>
                         }
-                        @if (menu.Menus.Contains("3.XI") || menu.Menus.Contains("all"))
+                        @if (menu.Menus.Contains("3.11P") || menu.Menus.Contains("all"))
                         {
                             <li id="cir_multi_collect" class=""><a href="/Circuit/MultiCollect"><i class="fa fa-caret-right"></i>复费率集抄</a></li>
-                        }@if (menu.Menus.Contains("3.XII") || menu.Menus.Contains("all"))
+                        }@if (menu.Menus.Contains("3.12P") || menu.Menus.Contains("all"))
                         {
                             <li id="cir_epe_collect" class=""><a href="/Circuit/EPECollect"><i class="fa fa-caret-right"></i>反向电能集抄</a></li>
                         }
@@ -264,8 +264,35 @@
             {
                 <li id="purifyview" class="">
                     <a href="/Purify/Index">
-                        <i class="fa fa-code-fork"></i>
+                        <i class="fa fa-cubes"></i>
                         <span class="title">机组监控</span>
+                    </a>
+                </li>
+            }
+            @if (menu.Menus.ToUpper().Contains("XIIIP") || menu.Menus.Contains("all"))
+            {
+                <li id="purifygas" class="">
+                    <a href="/Purify/Gas">
+                        <i class="fa fa-asterisk"></i>
+                        <span class="title">气体监测</span>
+                    </a>
+                </li>
+            }
+            @if (menu.Menus.ToUpper().Contains("XVP") || menu.Menus.Contains("all"))
+            {
+                <li id="purify_leakwater" class="">
+                    <a href="/Purify/LeakWater">
+                        <i class="fa fa-tint"></i>
+                        <span class="title">漏水监测</span>
+                    </a>
+                </li>
+            }
+            @if (menu.Menus.ToUpper().Contains("XIVP") || menu.Menus.Contains("all"))
+            {
+                <li id="purify_three" class="">
+                    <a href="/Purify/ThreeDModel">
+                        <i class="fa fa-photo"></i>
+                        <span class="title">模型展示</span>
                     </a>
                 </li>
             }

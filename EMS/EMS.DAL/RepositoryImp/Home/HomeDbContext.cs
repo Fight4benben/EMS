@@ -76,8 +76,10 @@ namespace EMS.DAL.RepositoryImp
                 new SqlParameter("@BuildId",buildId),
                 new SqlParameter("@EndDate",date)
             };
-
+            //分项
             return _db.Database.SqlQuery<EnergyItem>(HomeResources.EnergyItemSQL, sqlParameters).ToList() ;
+            //区域
+            //return _db.Database.SqlQuery<EnergyItem>(HomeResources.EnergyRegionSQL, sqlParameters).ToList();
         }
 
         /// <summary>
